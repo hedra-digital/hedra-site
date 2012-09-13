@@ -1,11 +1,11 @@
 body {
-  margin: 100px auto 0;
+  margin: 100px 0;
   padding: 0;
-  width: 960px;
   background-color: #f0f0f0;
   font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
   font-size: 16px;
   color: #333;
+  text-align: center;
 }
 
 a {
@@ -19,7 +19,7 @@ a:hover {
 }
 
 address {
-  margin: 100px 0 0 0;
+  margin: 40px 0 0 0;
   text-align: center;
   font-style: normal;
 }
@@ -27,4 +27,15 @@ address {
 address p {
   margin: 0;
   padding: 0;
+}
+
+#notice {
+  margin: 100px 0 0 0;
+  padding: 15px 0;
+  background-color: white;
+  text-align: center;
+  p {
+    margin: auto;
+    width: 960px;
+  }
 }
