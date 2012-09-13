@@ -13,3 +13,24 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+=======
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+/config/database.yml
+/config/config.yml
+.env
+.DS_Store
+/public/assets
