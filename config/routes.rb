@@ -3,4 +3,6 @@ HedraSite::Application.routes.draw do
 
   root :to => "pages#index"
 
+  match "*path" => "pages#index"
+
 end
