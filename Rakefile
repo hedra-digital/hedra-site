@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-HedraSite2::Application.load_tasks
+HedraSite::Application.load_tasks
