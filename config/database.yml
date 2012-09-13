@@ -51,5 +51,5 @@ production:
   encoding: unicode
   database: hedra-site_production
   pool: 5
-  username: postgres
-  password: postgres
+  username: livrodaclasse
+  password: 09delqut
