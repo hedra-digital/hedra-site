@@ -1,46 +1,128 @@
+$margin: 20px;
+
 body {
-  margin: 100px 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;;
   font-size: 16px;
-  color: #333;
-  text-align: center;
+  color: #222;
+  background: url("/assets/bg-pattern-craft.jpg") repeat;
 }
 
-a {
-  color: #03c
+header {
+  height: 174px;
+  background: url("/assets/topo.jpg");
+  text-indent: -9999px;
 }
 
-a:hover {
-  background-color: #03c;
-  color: white;
-  text-decoration: none;
-}
-
-address {
-  margin: 40px 0 0 0;
-  text-align: center;
-  font-style: normal;
-}
-
-address p {
+h1 {
   margin: 0;
+}
+
+section {
+  margin-top: $margin;
+  padding-top: 60px;
+  background: white;
+}
+
+h2 {
+  position: relative;
+  margin: -50px -10px 0 -10px;
+  padding-left: 23px;
+  height: 50px;
+  background: url("/assets/ribbon-pattern.png") repeat-x;
+  font-size: 22px;
+  line-height: 50px;
+  color: white;
+
+  &:before, &:after {
+    content: " ";
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -10px;
+    z-index: -1;
+  }
+
+  &:before {
+    left: 0;
+    background: url("/assets/ribbon-left.png");
+  }
+
+  &:after {
+    right: 0;
+    background: url("/assets/ribbon-right.png");
+  }
+}
+
+h3 {
+  margin: 10px 20px 0 20px;
   padding: 0;
+  color: black;
+  font-size: 22px;
+  border-bottom: 1px solid #C1272D;
 }
 
-p {
-  text-shadow: 1px 1px 1px white;
-}
+.livro {
+  padding: 20px 0;
+  border-bottom: 1px dashed #b3b3b3;
 
-#notice {
-  margin: 100px 0 0 0;
-  padding: 15px 0;
-  background-color: white;
-  text-align: center;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  .capa {
+    img {
+      margin-left: 20px;
+      border: 1px solid black;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0;
+    color: #C1272D;
+    font-size: 20px;
+    line-height: 1;
+  }
+
   p {
-    margin: auto;
-    width: 960px;
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .ficha {
+    dl {
+      margin: 0 20px 0 0;
+      font-size: 14px;
+      dt {
+        display: inline;
+        font-weight: bold;
+      }
+      dt:before {
+        content: "• ";
+        color: #C1272D;
+      }
+      dt:after {
+        content:":";
+      }
+      dd {
+        display: inline;
+        margin-left: 0;
+      }
+      dd:after {
+        content: "\A";
+        white-space: pre-wrap;
+      }
+    }
+  }
+}
+
+footer {
+  height: 132px;
+  margin-top: $margin;
+  background: url("/assets/footer.jpg");
+  address {
+    float: right;
+    color: white;
+    margin: 32px 0 0 0;
+    padding: 0 13px 0 0;
+    line-height: 16px;
   }
 }
