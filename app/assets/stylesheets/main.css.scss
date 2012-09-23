@@ -67,6 +67,9 @@ h3 {
   padding: 20px 0;
   border-bottom: 1px dashed #b3b3b3;
 
+  &:last-child {
+    border-bottom: none;
+  }
   .capa {
     img {
       margin-left: 20px;
