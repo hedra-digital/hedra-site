@@ -9,5 +9,5 @@ class Book < ActiveRecord::Base
   has_one :binding_type
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :description, :edition, :height, :name, :pages, :released_at, :weight, :width
+  attr_accessible :description, :edition, :height, :title, :pages, :released_at, :weight, :width
 end
