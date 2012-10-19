@@ -7,5 +7,5 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :books, :foreign_key => :illustrator_id
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :name
+  attr_accessible :name, :book_id
 end
