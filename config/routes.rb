@@ -1,7 +1,13 @@
 HedraSite::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :people
 
   resources :books
+
+  root :to => "books#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
