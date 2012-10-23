@@ -1,4 +1,8 @@
 HedraSite::Application.routes.draw do
+  resources :people
+
+  resources :books
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
