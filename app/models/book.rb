@@ -12,5 +12,5 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for :authors, :translators, :organizers, :editors, :illustrators
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :description, :edition, :height, :title, :pages, :released_at, :weight, :width, :author_ids
+  attr_accessible :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :author_ids
 end
