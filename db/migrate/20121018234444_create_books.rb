@@ -10,8 +10,10 @@ class CreateBooks < ActiveRecord::Migration
       t.float :weight
       t.integer :edition
       t.datetime :released_at
+      t.references :binding_type
 
       t.timestamps
     end
+    add_index :books, :binding_type_id
   end
 end

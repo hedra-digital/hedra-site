@@ -10,6 +10,7 @@
     <%= f.input :edition %>
     <%= f.input :pages %>
     <%= f.association :authors, :as => :check_boxes %>
+    <%= f.input :binding_type, :collection => BindingType.all %>
   </div>
 
   <div class="form-actions">

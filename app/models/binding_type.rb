@@ -1,6 +1,6 @@
 class BindingType < ActiveRecord::Base
   # Relationships
-  has_and_belongs_to_many :books
+  has_many :books, :inverse_of => :binding_type
 
   # Specify fields that can be accessible through mass assignment
   attr_accessible :name
