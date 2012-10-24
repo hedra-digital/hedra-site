@@ -8,7 +8,6 @@ class CreateBooks < ActiveRecord::Migration
       t.float :width
       t.float :height
       t.float :weight
-      t.integer :edition
       t.datetime :released_at
       t.references :binding_type
 
