@@ -9,7 +9,7 @@
     <%= f.input :weight %>
     <%= f.input :edition %>
     <%= f.input :pages %>
-    <%= f.association :authors, :as => :check_boxes %>
+    <%= f.association :people, :as => :check_boxes %>
     <%= f.input :binding_type, :collection => BindingType.all %>
   </div>
 

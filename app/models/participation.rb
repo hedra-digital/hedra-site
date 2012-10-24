@@ -5,5 +5,5 @@ class Participation < ActiveRecord::Base
   belongs_to :role
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :name
+  attr_accessible :book_id, :person_id, :role_id
 end

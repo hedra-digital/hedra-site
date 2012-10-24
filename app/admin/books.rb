@@ -21,12 +21,9 @@ ActiveAdmin.register Book do
         f.input :height
         f.input :weight
       end
-      f.inputs "Equipe" do
-        f.input :authors
-        f.input :editors
-        f.input :translators
-        f.input :organizers
-        f.input :illustrators
+      f.has_many :participations do |association|
+        association.input :role
+        association.input :person
       end
       f.inputs "Idiomas" do
         f.input :languages
