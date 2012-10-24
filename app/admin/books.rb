@@ -16,14 +16,14 @@ ActiveAdmin.register Book do
       f.input :pages
       f.input :description
       f.input :binding_type
+      f.has_many :participations do |association|
+        association.input :role
+        association.input :person
+      end
       f.inputs "Medidas" do
         f.input :width
         f.input :height
         f.input :weight
-      end
-      f.has_many :participations do |association|
-        association.input :role
-        association.input :person
       end
       f.inputs "Idiomas" do
         f.input :languages
