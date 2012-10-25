@@ -1,0 +1,131 @@
+
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+
+/*
+ * Fonts
+ */
+
+/*
+ * Base tags
+ */
+
+body {
+  background: #f7f7f9;
+  border-left: 5px solid #6ea1b6;
+  border-right: 5px solid #6ea1b6;
+  color: #343436;
+}
+
+a {
+  color: #d5662e;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #3b9fc1;
+  border-bottom: 1px solid #ccccce;
+}
+
+footer {
+  background: #ededef;
+}
+
+.book-list-item {
+  h4 {
+    color: #999;
+  }
+}
+
+/* ==========================================================================
+   Sticky footer
+   ========================================================================== */
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -190px;
+}
+
+#push, footer {
+  height: 190px;
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow:none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
