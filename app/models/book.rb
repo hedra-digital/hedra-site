@@ -15,4 +15,7 @@ class Book < ActiveRecord::Base
 
   # Specify fields that can be accessible through mass assignment
   attr_accessible :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes
+
+  # Validations
+  validates_presence_of :title, :isbn, :pages
 end
