@@ -5,6 +5,7 @@ class Book < ActiveRecord::Base
   has_many :roles, :through => :participations
   has_and_belongs_to_many :languages
   belongs_to :binding_type, :inverse_of => :books
+  has_many :features, :inverse_of => :book
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for :people, :roles, :participations, :binding_type, :languages
