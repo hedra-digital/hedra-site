@@ -37,4 +37,5 @@ class Book < ActiveRecord::Base
 
   # Validations
   validates_presence_of :title, :isbn, :pages
+  validates_uniqueness_of :slug
 end
