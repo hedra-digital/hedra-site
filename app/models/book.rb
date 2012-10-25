@@ -1,4 +1,7 @@
 class Book < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
+
   # Relationships
   has_many :participations
   has_many :people, :through => :participations
