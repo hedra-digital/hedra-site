@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    @features = Feature.includes(:book).all
+    @featured_books = Feature.includes(:book).all.map { |e| e.book  }
   end
 
   def about

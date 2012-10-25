@@ -1,15 +1,15 @@
 <h2>Indicação nossa</h2>
 
-<% @features.each do |f| %>
+<% @featured_books.each do |f| %>
   <article class="book-list-item row">
     <div class="span2">
       <img src="/assets/l-a-volta-do-parafuso.jpg">
     </div>
     <div class="span10">
-      <h3><%= link_to f.book.title, book_path(f.book) %></h3>
-      <h4><%= f.book.people.first.name %></h4>
+      <h3><%= link_to f.title, f %></h3>
+      <h4><%= f.people.first.name %></h4>
       <div class="book-description">
-        <p><%= f.book.description %></p>
+        <p><%= f.description %></p>
       </div>
     </div>
   </article>
