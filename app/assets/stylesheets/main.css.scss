@@ -1,4 +1,5 @@
-
+$font-stack-title: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif;
 
 /* ==========================================================================
    Base styles
@@ -7,6 +8,37 @@
 /*
  * Fonts
  */
+
+@font-face {
+    font-family: 'CallunaSansRegular';
+    src: url('CallunaSansRegular-webfont.eot');
+    src: url('CallunaSansRegular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('CallunaSansRegular-webfont.svg#CallunaSansRegular') format('svg'),
+         url('CallunaSansRegular-webfont.woff') format('woff'),
+         url('CallunaSansRegular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('Calluna-Regular-webfont.eot');
+    src: url('Calluna-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Calluna-Regular-webfont.svg#CallunaRegular') format('svg'),
+         url('Calluna-Regular-webfont.woff') format('woff'),
+         url('Calluna-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: $font-stack-body;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-stack-title;
+  text-transform: uppercase;
+}
 
 /*
  * Base tags
