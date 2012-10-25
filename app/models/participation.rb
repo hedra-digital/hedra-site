@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: participations
+#
+#  id        :integer          not null, primary key
+#  role_id   :integer
+#  book_id   :integer
+#  person_id :integer
+#
+
 class Participation < ActiveRecord::Base
   # Relationships
   belongs_to :book

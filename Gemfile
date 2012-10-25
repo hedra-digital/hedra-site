@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'simple_form'
 gem 'activeadmin'
 gem 'friendly_id', '~> 4.0.1'
+gem 'annotate', ">=2.5.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
