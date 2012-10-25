@@ -6,7 +6,7 @@
       <img src="/assets/l-a-volta-do-parafuso.jpg">
     </div>
     <div class="span10">
-      <h3><%= f.book.title %></h3>
+      <h3><%= link_to f.book.title, book_path(f.book) %></h3>
       <h4><%= f.book.people.first.name %></h4>
       <div class="book-description">
         <p><%= f.book.description %></p>
