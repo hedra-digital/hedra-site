@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   def show
-    @book = Book.find(params[:id])
+    @book = Book.includes(:people).find(params[:id])
+    @author = @book.people.first
   end
 end
