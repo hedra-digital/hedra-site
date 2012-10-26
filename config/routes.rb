@@ -4,7 +4,7 @@ HedraSite::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  get "books/:id", :to => "books#show", :as => :book
+  get "livros/:id", :to => "books#show", :as => :book
 
   root :to => "pages#home"
 
