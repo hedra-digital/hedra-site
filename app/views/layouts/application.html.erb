@@ -30,14 +30,17 @@
     <footer role="contentinfo">
       <div class="container">
         <div class="row">
-          <nav id="secondary-nav" class="span12">
-            <ul class="nav nav-pills">
-              <li><%= link_to 'Catálogo', '#' %></li>
-              <li class="active"><%= link_to 'Sobre', '#' %></li>
-            </ul>
-          </nav>
+          <div class="span12">
+            <nav id="secondary-nav">
+              <ul class="nav nav-pills">
+                <li><%= link_to 'Catálogo', '#' %></li>
+                <li><%= link_to 'Sobre', '#' %></li>
+              </ul>
+            </nav>
+            <p class="company-copyright">Copyright &copy; 2012, Hedra Editora.</p>
+          </div>
         </div>
-        <div class="row">
+        <div id="company-address" class="row">
           <address class="span12">
             Rua Fradique Coutinho 1139, Subsolo
             CEP 05416-011 - São Paulo - SP

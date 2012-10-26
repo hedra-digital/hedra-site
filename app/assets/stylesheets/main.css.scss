@@ -38,7 +38,8 @@ body {
 }
 
 h1, h2, h3, h4,
-header {
+#main-nav,
+#secondary-nav {
   font-family: $font-stack-title;
   text-transform: uppercase;
 }
@@ -58,7 +59,12 @@ footer {
   background: #ededef;
 }
 
+h1, h2, h3, h4 {
+  line-height: 1;
+}
+
 h2 {
+  margin: 12px 0;
   font-size: 18px;
   color: #519fc0;
 }
@@ -79,20 +85,25 @@ header {
   }
 }
 
-#main-nav {
+#main {
+  a:link, a:active, a:visited {
+    color: #d5662e;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #3b9fc1;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+#main-nav, #secondary-nav {
   ul {
-    background: -webkit-linear-gradient(rgba(255,255,255,0), #ebebec);
-    border-left: 1px solid #e6e6e7;
-    border-right: 1px solid #e6e6e7;
-    border-bottom: 1px solid #c4c4c5;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px #e6e6e7;
     li {
-      text-shadow: white 1px 1px 0;
       font-size: 18px;
       a {
         margin: 0;
-        padding: 30px 10px 20px 20px;
+        padding: 30px 10px 15px 20px;
         line-height: 1;
       }
       a:link, a:active, a:visited {
@@ -106,26 +117,37 @@ header {
   }
 }
 
-#main {
-  a:link, a:active, a:visited {
-    color: #d5662e;
-    text-decoration: none;
+#main-nav {
+  ul {
+    background: -webkit-linear-gradient(rgba(255,255,255,0), #ebebec);
+    border-left: 1px solid #e6e6e7;
+    border-right: 1px solid #e6e6e7;
+    border-bottom: 1px solid #c4c4c5;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px #e6e6e7;
+    li {
+      text-shadow: white 1px 1px 0;
+    }
   }
-  a:hover {
-    color: #3b9fc1;
-    text-decoration: none;
-    border-bottom: 1px solid #3b9fc1;
+}
+
+#secondary-nav {
+  ul {
+    margin-bottom: 0;
+  }
+  li:first-child a {
+    padding-left: 0;
   }
 }
 
 .book-list-item {
   h3 {
-    margin: 0 0 5px 0;
+    margin: 0 0 9px 0;
     font-size: 22px;
     color: #cc6633;
   }
   h4 {
-    margin: 0 0 20px 0;
+    margin: 0 0 13px 0;
     font-size: 16px;
     color: #999;
   }
@@ -143,6 +165,16 @@ header {
   .book-info {
     background: #ededef;
   }
+}
+
+#company-address address {
+  padding-top: 30px;
+  border-top: 1px solid #dadadc;
+}
+
+.company-copyright {
+  line-height: 1;
+  margin-bottom: 30px;
 }
 
 /*
@@ -214,6 +246,7 @@ html, body {
 
 #push, footer {
   height: 190px;
+  overflow: hidden;
 }
 
 /* ==========================================================================
