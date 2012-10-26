@@ -174,11 +174,13 @@ header {
 
 article {
   .book-list-item {
+    display: table;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #e3e3e5;
     &>div {
-
+      display: table-cell;
+      vertical-align: middle;
     }
     h3 {
       margin: 0 0 9px 0;
@@ -267,12 +269,12 @@ textarea {
 }
 
 ::-moz-selection {
-  background: #fdfcea;
+  background: #fffdc9;
   text-shadow: none;
 }
 
 ::selection {
-  background: #fdfcea;
+  background: #fffdc9;
   text-shadow: none;
 }
 
