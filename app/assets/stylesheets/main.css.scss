@@ -35,6 +35,7 @@ body {
   font-family: $font-stack-body;
   font-size: 18px;
   line-height: 30px;
+  font-weight: normal;
 }
 
 h1, h2, h3, h4,
@@ -43,6 +44,7 @@ h1, h2, h3, h4,
 .book-info {
   font-family: $font-stack-title;
   text-transform: uppercase;
+  font-weight: normal;
 }
 
 /*
@@ -51,8 +53,6 @@ h1, h2, h3, h4,
 
 body {
   background: #f7f7f9;
-  border-left: 15px solid #6ea1b6;
-  border-right: 15px solid #6ea1b6;
   color: #343436;
 }
 
@@ -84,6 +84,14 @@ header {
     background: url('/assets/hedra-logo.png') no-repeat;
     background-size: 100%;
   }
+  .logo {
+    margin: 0;
+  }
+}
+
+#wrap, footer {
+  border-left: 15px solid #6ea1b6;
+  border-right: 15px solid #6ea1b6;
 }
 
 #main {
@@ -120,7 +128,12 @@ header {
 
 #main-nav {
   ul {
-    background: -webkit-linear-gradient(rgba(255,255,255,0), #ebebec);
+    margin-bottom: 30px;
+    background: -linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
+    background: -webkit-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
+    background: -moz-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
+    background: -ms-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
+    background: -o-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
     border-left: 1px solid #e6e6e7;
     border-right: 1px solid #e6e6e7;
     border-bottom: 1px solid #c4c4c5;
@@ -154,21 +167,30 @@ header {
   }
 }
 
-.book-list-item {
-  h3 {
-    margin: 0 0 9px 0;
-    font-size: 22px;
-    color: #cc6633;
+article {
+  .book-list-item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e3e3e5;
+    h3 {
+      margin: 0 0 9px 0;
+      font-size: 22px;
+      color: #cc6633;
+    }
+    h4 {
+      margin: 0 0 13px 0;
+      font-size: 16px;
+      color: #999;
+    }
+    img {
+      box-shadow: 3px 4px 5px rgba(0,0,0,0.3);
+    }
   }
-  h4 {
-    margin: 0 0 13px 0;
-    font-size: 16px;
-    color: #999;
-  }
-  img {
-    box-shadow: 3px 4px 5px rgba(0,0,0,0.3);
+  &:last-child .book-list-item {
+    border-bottom: none;
   }
 }
+
 
 .book-page {
   h1 {
