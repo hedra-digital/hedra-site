@@ -33,9 +33,12 @@ $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif
 
 body {
   font-family: $font-stack-body;
+  font-size: 18px;
+  line-height: 30px;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4,
+header {
   font-family: $font-stack-title;
   text-transform: uppercase;
 }
@@ -46,8 +49,8 @@ h1, h2, h3, h4 {
 
 body {
   background: #f7f7f9;
-  border-left: 5px solid #6ea1b6;
-  border-right: 5px solid #6ea1b6;
+  border-left: 15px solid #6ea1b6;
+  border-right: 15px solid #6ea1b6;
   color: #343436;
 }
 
@@ -55,9 +58,53 @@ footer {
   background: #ededef;
 }
 
+h2 {
+  font-size: 18px;
+  color: #519fc0;
+}
+
 /*
  * Pages
  */
+
+header {
+  padding-top: 30px;
+  h1.logo, p.logo a {
+    display: block;
+    margin: 0;
+    width: 153px;
+    height: 51px;
+    background: url('/assets/hedra-logo.png') no-repeat;
+    background-size: 100%;
+  }
+}
+
+#main-nav {
+  ul {
+    background: -webkit-linear-gradient(rgba(255,255,255,0), #ebebec);
+    border-left: 1px solid #e6e6e7;
+    border-right: 1px solid #e6e6e7;
+    border-bottom: 1px solid #c4c4c5;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px #e6e6e7;
+    li {
+      text-shadow: white 1px 1px 0;
+      font-size: 18px;
+      a {
+        margin: 0;
+        padding: 30px 10px 20px 20px;
+        line-height: 1;
+      }
+      a:link, a:active, a:visited {
+        color: #666;
+      }
+      &.active a, a:hover {
+        color: #3b9fc1;
+        background: none;
+      }
+    }
+  }
+}
 
 #main {
   a:link, a:active, a:visited {
@@ -67,13 +114,34 @@ footer {
   a:hover {
     color: #3b9fc1;
     text-decoration: none;
-    border-bottom: 1px solid #ccccce;
+    border-bottom: 1px solid #3b9fc1;
   }
 }
 
 .book-list-item {
+  h3 {
+    margin: 0 0 5px 0;
+    font-size: 22px;
+    color: #cc6633;
+  }
   h4 {
+    margin: 0 0 20px 0;
+    font-size: 16px;
     color: #999;
+  }
+}
+
+.book-page {
+  h1 {
+    font-size: 51px;
+    color: #515151;
+  }
+  h2 {
+    font-size: 16px;
+    color: #999;
+  }
+  .book-info {
+    background: #ededef;
   }
 }
 

@@ -1,10 +1,11 @@
-<nav id="main-nav" class="navbar" role="navigation">
-  <div class="navbar-inner">
-    <a class="brand" href="#">Hedra</a>
-    <ul class="nav">
-      <li class="active"><a href="#">Página inicial</a></li>
-      <li><a href="#">Catálogo</a></li>
-      <li><a href="#">Sobre</a></li>
-    </ul>
-  </div>
+<% if current_page? root_path %>
+  <h1 class="logo hide-text">Hedra</h1>
+<% else %>
+  <p class="logo hide-text"><%= link_to 'Hedra', root_path %></p>
+<% end %>
+<nav id="main-nav" role="navigation">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#">Catálogo</a></li>
+    <li><a href="#">Sobre</a></li>
+  </ul>
 </nav>
