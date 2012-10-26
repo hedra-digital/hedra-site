@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap-2.1.1
+ *= require bootstrap-responsive-2.1.1
  *= require main
  *= require_self
  */
