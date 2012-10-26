@@ -1,17 +1,15 @@
 <h2>Indicação nossa</h2>
 
 <% @featured_books.each do |f| %>
-  <article class="row">
-    <div class="book-list-item clearfix">
-      <div class="span2">
-        <img src="http://placehold.it/170x250">
-      </div>
-      <div class="span10">
-        <h3><%= link_to f.title, f %></h3>
-        <h4><%= f.people.first.name %></h4>
-        <div class="book-description">
-          <p><%= f.description %></p>
-        </div>
+  <article class="book-list-item row">
+    <div class="book-list-cover span2">
+      <img src="http://placehold.it/170x250">
+    </div>
+    <div class="book-list-info span10">
+      <h3><%= link_to f.title, f %></h3>
+      <h4><%= f.people.first.name %></h4>
+      <div class="book-description">
+        <p><%= f.description %></p>
       </div>
     </div>
   </article>

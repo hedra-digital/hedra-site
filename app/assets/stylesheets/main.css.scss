@@ -172,16 +172,20 @@ header {
   }
 }
 
-article {
-  .book-list-item {
-    display: table;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #e3e3e5;
-    &>div {
-      display: table-cell;
-      vertical-align: middle;
+.book-list-item {
+  display: table;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e3e3e5;
+  .book-list-cover {
+    display: table-cell;
+    img {
+      box-shadow: 3px 4px 5px rgba(0,0,0,0.3);
     }
+  }
+  .book-list-info {
+    display: table-cell;
+    vertical-align: middle;
     h3 {
       margin: 0 0 9px 0;
       font-size: 22px;
@@ -192,15 +196,11 @@ article {
       font-size: 16px;
       color: #999;
     }
-    img {
-      box-shadow: 3px 4px 5px rgba(0,0,0,0.3);
-    }
   }
-  &:last-child .book-list-item {
+  &:last-child {
     border-bottom: none;
   }
 }
-
 
 .book-page {
   h1 {
