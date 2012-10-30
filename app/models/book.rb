@@ -15,6 +15,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  slug            :string(255)
+#  cover           :string(255)
 #
 
 class Book < ActiveRecord::Base
@@ -33,9 +34,12 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for :people, :roles, :participations, :binding_type, :languages
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes
+  attr_accessible :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover
 
   # Validations
   validates_presence_of :title, :isbn, :pages
   validates_uniqueness_of :slug
+
+  # CarrierWave uploader
+  mount_uploader :cover, CoverUploader
 end
