@@ -9,12 +9,13 @@ ActiveAdmin.register Book do
     default_actions
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
       f.input :title
       f.input :isbn
       f.input :pages
       f.input :description
+      f.input :cover, :as => :file, :hint => f.template.image_tag(f.object.cover.url(:thumb))
       f.input :binding_type
       f.has_many :participations do |association|
         association.input :role
