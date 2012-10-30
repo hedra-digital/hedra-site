@@ -7,7 +7,7 @@
     </div>
     <div class="book-list-info span10">
       <h3><%= link_to f.title, f %></h3>
-      <h4><%= f.people.first.name %></h4>
+      <h4><%= book_authors(f) %></h4>
       <div class="book-description">
         <p><%= f.description %></p>
       </div>

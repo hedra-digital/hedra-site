@@ -5,14 +5,16 @@
     </div>
     <div class="book-info-data">
       <dl>
-        <dt>Organização</dt>
-        <dd>Fernando Meirelles</dd>
+        <% book_team(@book).each do |role, person| %>
+          <%= content_tag :dt, role %>
+          <%= content_tag :dd, person %>
+        <% end %>
       </dl>
     </div>
   </aside>
   <div class="span9">
     <h1><%= @book.title %></h1>
-    <h2><%= @author.name %></h2>
+    <h2><%= book_authors(@book) %></h2>
     <p><%= @book.description %></p>
   </div>
 </div>
