@@ -3,7 +3,7 @@
 <% @featured_books.each do |f| %>
   <article class="book-list-item row">
     <div class="book-list-cover span2">
-      <img src="http://placehold.it/170x250">
+      <%= image_tag f.cover_url.to_s %>
     </div>
     <div class="book-list-info span10">
       <h3><%= link_to f.title, f %></h3>
