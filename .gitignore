@@ -27,5 +27,6 @@
 
 /.bundle
 /Gemfile.local
+/public/uploads/
 
 .DS_Store
