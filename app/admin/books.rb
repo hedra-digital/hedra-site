@@ -15,7 +15,7 @@ ActiveAdmin.register Book do
       f.input :isbn
       f.input :pages
       f.input :description
-      f.input :cover, :as => :file, :hint => f.template.image_tag(f.object.cover.url(:thumb))
+      f.input :cover, :as => :file, :hint => (( f.object.new_record? || f.object.cover.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.cover.url(:thumb)))
       f.input :binding_type
       f.has_many :participations do |association|
         association.input :role
