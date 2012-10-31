@@ -249,13 +249,13 @@ header {
     margin-bottom: 0;
   }
   dt {
-    display: inline-block;
+    display: inline;
     &:after {
       content: ": ";
     }
   }
   dd {
-    display: inline-block;
+    display: inline;
     margin-left: 0;
     &:after {
       content: "\a";
