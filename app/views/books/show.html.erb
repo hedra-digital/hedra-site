@@ -12,11 +12,22 @@
       </dl>
     </div>
   </aside>
-  <div class="span9">
+  <div class="book-text span9">
     <h1><%= @book.title %></h1>
     <h2><%= book_authors(@book) %></h2>
     <p><%= @book.description %></p>
   </div>
 </div>
-
-
+<div class="book-supplementary-info row">
+  <div class="span3">
+    <h3>Especificações</h3>
+    <dl>
+      <dt>Idioma</dt>
+      <dd>Português</dd>
+      <dt>Encadernação</dt>
+      <dd>Brochura</dd>
+    </dl>
+  </div>
+  <div class="span9">
+  </div>
+</div>

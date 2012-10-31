@@ -203,18 +203,18 @@ header {
 }
 
 .book-page {
-  margin-bottom: 30px;
+  padding-bottom: 30px;
   h1 {
-    font-size: 51px;
+    font-size: 2.32em;
     color: #515151;
     letter-spacing: -2px;
   }
   h2 {
-    font-size: 16px;
+    font-size: 0.73em;
     color: #999;
   }
   .book-info {
-    font-size: 18px;
+    font-size: 0.82em;
     background: #ededef;
     .book-info-cover {
       margin: 40px;
@@ -232,6 +232,31 @@ header {
         margin-bottom: 15px;
       }
     }
+  }
+}
+
+.book-supplementary-info {
+  margin-bottom: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #dadadc;
+  font-size: 0.82em;
+  h3 {
+    margin-top: 0;
+    font-size: 1em;
+  }
+  dl {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  dt {
+    display: inline-block;
+    &:after {
+      content: ": ";
+    }
+  }
+  dd {
+    display: inline-block;
+    margin-left: 0;
   }
 }
 
