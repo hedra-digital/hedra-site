@@ -247,8 +247,10 @@ header {
   dl {
     margin-top: 10px;
     margin-bottom: 0;
+    margin-left: 15px;
   }
   dt {
+    margin-left: -15px;
     display: inline;
     &:after {
       content: ": ";
