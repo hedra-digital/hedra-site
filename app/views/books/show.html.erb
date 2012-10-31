@@ -24,9 +24,9 @@
     <dl>
       <dt>Número de páginas</dt>
       <dd><%= @book.pages %></dd>
-      <% if @book.languages.present? %>
+      <% if @book.languages.present? && @book.languages.count > 1 %>
         <dt>Idioma</dt>
-        <dd><%= @book.languages.first.name %></dd>
+        <dd><%= @book.languages.map { |x| x.name }.join(", ") %></dd>
       <% end %>
       <% if @book.binding_type.present? %>
         <dt>Encadernação</dt>
