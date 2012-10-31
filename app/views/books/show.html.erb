@@ -22,28 +22,7 @@
   <div class="span3">
     <h3>Especificações</h3>
     <dl>
-      <dt>Número de páginas</dt>
-      <dd><%= @book.pages %></dd>
-      <% if @book.languages.present? && @book.languages.count > 1 %>
-        <dt>Idioma</dt>
-        <dd><%= @book.languages.map { |x| x.name }.join(", ") %></dd>
-      <% end %>
-      <% if @book.binding_type.present? %>
-        <dt>Encadernação</dt>
-        <dd><%= @book.binding_type.name %></dd>
-      <% end %>
-      <% if @book.width.present? && @book.height.present? %>
-        <dt>Dimensões</dt>
-        <dd><%= raw("#{@book.width} &times; #{@book.height} cm") %></dd>
-      <% end %>
-      <% if @book.weight.present? %>
-        <dt>Peso</dt>
-        <dd><%= @book.weight %></dd>
-      <% end %>
-      <% if @book.released_at.present? %>
-        <dt>Ano de lançamento</dt>
-        <dd><%= @book.released_at.year %></dd>
-      <% end %>
+      <%= book_supplementary_info(@book) %>
     </dl>
   </div>
   <div class="span9">
