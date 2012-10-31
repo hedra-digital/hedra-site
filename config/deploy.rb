@@ -9,6 +9,7 @@ set :user, 'deploy'
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "livrodaclasse_rsa")]
 
 set :use_sudo, false
+set :keep_releases, 3
 
 set :deploy_to, "/home/deploy/apps/staging"
 set :deploy_via, 'copy'
@@ -34,12 +35,20 @@ role :db,  "hedra.com.br", :primary => true
 #   end
 # end
 
-after 'deploy:update_code', 'deploy:symlink_db'
+after 'deploy:update_code', 'deploy:symlink_db', 'deploy:symlink_uploads'
+after 'deploy:update', 'deploy:cleanup'
 
 namespace :deploy do
   desc "Symlinks the database.yml"
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
+end
+
+namespace :deploy do
+  desc "Symlinks the uploads directory"
+  task :symlink_uploads, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
   end
 end
 
