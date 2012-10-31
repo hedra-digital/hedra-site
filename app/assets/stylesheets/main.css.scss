@@ -257,6 +257,10 @@ header {
   dd {
     display: inline-block;
     margin-left: 0;
+    &:after {
+      content: "\a";
+      white-space: pre;
+    }
   }
 }
 

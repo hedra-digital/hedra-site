@@ -23,9 +23,17 @@
     <h3>Especificações</h3>
     <dl>
       <dt>Idioma</dt>
-      <dd>Português</dd>
+      <dd><%= @book.languages.first.name %></dd>
       <dt>Encadernação</dt>
-      <dd>Brochura</dd>
+      <dd><%= @book.binding_type.name %></dd>
+      <dt>Dimensões</dt>
+      <dd><%= raw("#{@book.width} &times; #{@book.height} cm") %></dd>
+      <dt>Peso</dt>
+      <dd><%= @book.weight %></dd>
+      <dt>Ano de lançamento</dt>
+      <dd><%= @book.released_at.year %></dd>
+      <dt>Número de páginas</dt>
+      <dd><%= @book.pages %></dd>
     </dl>
   </div>
   <div class="span9">
