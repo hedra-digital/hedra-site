@@ -259,7 +259,7 @@ header {
     margin-left: 0;
     &:after {
       content: "\a";
-      white-space: pre;
+      white-space: pre-wrap;
     }
   }
 }
