@@ -7,7 +7,7 @@
       <dl>
         <% book_team(@book).each do |role, person| %>
           <%= content_tag :dt, role %>
-          <%= content_tag :dd, person %>
+          <%= content_tag :dd, person.is_a?(Array) ? person.join(", ") : person %>
         <% end %>
       </dl>
     </div>

@@ -4,12 +4,12 @@ module BooksHelper
 
   def book_team(book)
     parts = book.participations.map { |e| [e.role.name, e.person.name] }
-    parts
+    hash_parts = array_to_hash(parts)
+    return hash_parts
   end
 
   def book_authors(book)
-    authors = book_team(book).select { |role, person| role == 'Autor' }.map { |role, person| person }
-    return authors.join(', ')
+    book_team(book)["Texto"].join(", ")
   end
 
   def book_supplementary_info(book)
@@ -37,6 +37,22 @@ module BooksHelper
       urls = urls << content_tag(:dd, book.released_at.year)
     end
     urls.html_safe
+  end
+
+  private
+
+  def array_to_hash(array)
+    hash = Hash.new
+    array.each do |role, person|
+      if hash[role].present? && hash[role].is_a?(String)
+        hash[role] = [hash[role], person]
+      elsif hash[role].present? && hash[role].is_a?(Array)
+        hash[role] << person
+      else
+        hash[role] = person
+      end
+    end
+    return hash
   end
 
 end
