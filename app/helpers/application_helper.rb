@@ -9,4 +9,9 @@ module ApplicationHelper
     messages
   end
 
+  def title(page_title)
+    content_for(:h1, content_tag(:h1, page_title))
+    content_for(:title, content_tag(:title, page_title << ' | Editora Hedra'))
+  end
+
 end

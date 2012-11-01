@@ -6,6 +6,8 @@ HedraSite::Application.routes.draw do
 
   get "livros/:id", :to => "books#show", :as => :book
 
+  get "sobre", :to => "pages#about", :as => :about
+
   root :to => "pages#home"
 
   # The priority is based upon order of creation:
