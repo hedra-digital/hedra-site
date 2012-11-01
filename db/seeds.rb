@@ -40,7 +40,7 @@ languages = [
 
 roles = [
   {
-    :name => "Autor"
+    :name => "Texto"
   },
   {
     :name => "Organização"
