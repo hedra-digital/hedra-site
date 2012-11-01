@@ -1,15 +1,15 @@
 <h2>Indicação nossa</h2>
 
-<% @featured_books.each do |f| %>
+<% @featured_books.each do |book| %>
   <article class="book-list-item row">
     <div class="book-list-cover span2">
-      <%= link_to(image_tag(f.cover_url.to_s), f) %>
+      <%= link_to(image_tag(book.cover_url.to_s), book) %>
     </div>
     <div class="book-list-info span10">
-      <h3><%= link_to f.title, f %></h3>
-      <h4><%= book_authors(f) %></h4>
+      <h3><%= link_to book.title, book %></h3>
+      <h4><%= book_team(book)["Texto"] %></h4>
       <div class="book-description">
-        <p><%= f.description %></p>
+        <p><%= book.description %></p>
       </div>
     </div>
   </article>

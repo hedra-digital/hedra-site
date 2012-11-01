@@ -5,16 +5,16 @@
     </div>
     <div class="book-info-data">
       <dl>
-        <% book_team(@book).each do |role, person| %>
+        <% book_team(@book).each do |role, people| %>
           <%= content_tag :dt, role %>
-          <%= content_tag :dd, person.is_a?(Array) ? person.join(", ") : person %>
+          <%= content_tag :dd, people %>
         <% end %>
       </dl>
     </div>
   </aside>
   <div class="book-text span9">
     <h1><%= @book.title %></h1>
-    <h2><%= book_authors(@book) %></h2>
+    <h2><%= book_team(@book)["Texto"] %></h2>
     <p><%= @book.description %></p>
   </div>
 </div>
