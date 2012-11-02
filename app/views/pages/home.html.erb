@@ -9,7 +9,7 @@
       <h3><%= link_to book.title, book %></h3>
       <h4><%= book_team(book)["Texto"] %></h4>
       <div class="book-description">
-        <p><%= book.description %></p>
+        <p><%= book.description.html_safe %></p>
       </div>
     </div>
   </article>

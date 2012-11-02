@@ -15,7 +15,7 @@
   <div class="book-text span9">
     <h1><%= @book.title %></h1>
     <h2><%= book_team(@book)["Texto"] %></h2>
-    <p><%= @book.description %></p>
+    <p><%= @book.description.html_safe %></p>
   </div>
 </div>
 <div class="book-supplementary-info row">
