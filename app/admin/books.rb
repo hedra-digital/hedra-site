@@ -14,7 +14,7 @@ ActiveAdmin.register Book do
       f.input :title
       f.input :isbn
       f.input :pages
-      f.input :description
+      f.input :description, :input_html => { :id => 'nicedit-1' }
       f.input :cover, :as => :file, :hint => (( f.object.new_record? || f.object.cover.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.cover.url(:thumb)))
       f.has_many :participations do |association|
         association.input :role
@@ -31,8 +31,8 @@ ActiveAdmin.register Book do
         f.input :languages
       end
     end
-
     f.buttons
   end
+
 
 end
