@@ -11,24 +11,57 @@ $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif
 
 @font-face {
     font-family: 'CallunaSansRegular';
-    src: url('CallunaSansRegular-webfont.eot');
-    src: url('CallunaSansRegular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('CallunaSansRegular-webfont.svg#CallunaSansRegular') format('svg'),
-         url('CallunaSansRegular-webfont.woff') format('woff'),
-         url('CallunaSansRegular-webfont.ttf') format('truetype');
+    src: url('/assets/typography/callunasans-regular.eot');
+    src: url('/assets/typography/callunasans-regular.eot?#iefix') format('embedded-opentype'),
+         url('/assets/typography/callunasans-regular.svg#CallunaSansRegular') format('svg'),
+         url('/assets/typography/callunasans-regular.woff') format('woff'),
+         url('/assets/typography/callunasans-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'CallunaRegular';
-    src: url('Calluna-Regular-webfont.eot');
-    src: url('Calluna-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('Calluna-Regular-webfont.svg#CallunaRegular') format('svg'),
-         url('Calluna-Regular-webfont.woff') format('woff'),
-         url('Calluna-Regular-webfont.ttf') format('truetype');
+    src: url('/assets/typography/calluna-regular.eot');
+    src: url('/assets/typography/calluna-regular.eot?#iefix') format('embedded-opentype'),
+         url('/assets/typography/calluna-regular.svg#CallunaRegular') format('svg'),
+         url('/assets/typography/calluna-regular.woff') format('woff'),
+         url('/assets/typography/calluna-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('/assets/typography/calluna-bold.eot');
+    src: url('/assets/typography/calluna-bold.eot?#iefix') format('embedded-opentype'),
+         url('/assets/typography/calluna-bold.svg#CallunaRegular') format('svg'),
+         url('/assets/typography/calluna-bold.woff') format('woff'),
+         url('/assets/typography/calluna-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('/assets/typography/calluna-it.eot');
+    src: url('/assets/typography/calluna-it.eot?#iefix') format('embedded-opentype'),
+         url('/assets/typography/calluna-it.svg#CallunaRegular') format('svg'),
+         url('/assets/typography/calluna-it.woff') format('woff'),
+         url('/assets/typography/calluna-it.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('/assets/typography/calluna-boldit.eot');
+    src: url('/assets/typography/calluna-boldit.eot?#iefix') format('embedded-opentype'),
+         url('/assets/typography/calluna-boldit.svg#CallunaRegular') format('svg'),
+         url('/assets/typography/calluna-boldit.woff') format('woff'),
+         url('/assets/typography/calluna-boldit.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
 }
 
 body {
