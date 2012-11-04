@@ -7,9 +7,7 @@ module BooksHelper
     book.participations.each do |p|
       role = p.role.name
       person = p.person.name
-      current = credits[role]
-      credits[role].present? ? separator = ", " : separator = ""
-      credits[role] = "#{current}#{separator}#{person}"
+      credits[role].present? ? credits[role].push(person) : credits[role] = Array[person]
     end
     return credits
   end

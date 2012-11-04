@@ -7,14 +7,14 @@
       <dl>
         <% book_team(@book).each do |role, people| %>
           <%= content_tag :dt, role %>
-          <%= content_tag :dd, people %>
+          <%= content_tag :dd, people.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %>
         <% end %>
       </dl>
     </div>
   </aside>
   <div class="book-text span9">
     <h1><%= @book.title %></h1>
-    <h2><%= book_team(@book)["Texto"] %></h2>
+    <h2><%= book_team(@book)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %></h2>
     <p><%= @book.description.html_safe %></p>
   </div>
 </div>
