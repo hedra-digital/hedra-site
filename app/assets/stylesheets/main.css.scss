@@ -166,7 +166,7 @@ header {
   .book-list-cover {
     display: table-cell;
     img {
-      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.4);
+      @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
     }
   }
   .book-list-info {
@@ -207,7 +207,7 @@ header {
     .book-info-cover {
       margin: 40px;
       img {
-        box-shadow: 3px 4px 5px rgba(0,0,0,0.3);
+        @include box-shadow(3px 4px 5px rgba(0,0,0,0.3));
       }
     }
     .book-info-data {
