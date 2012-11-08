@@ -93,16 +93,18 @@ dt {
   font-weight: normal;
 }
 
-.book-list-item {
-  .book-list-info {
-    h3 {
-      font-size: 1em;
-      color: #cc6633;
-    }
-    h4 {
-      font-size: 0.73em;
-      color: $text-subtitle !important;
-    }
+.latest-list-item {
+  text-align: center;
+}
+
+.latest-list-item,
+.recommendation-item-info {
+  h3 {
+    font-size: 1em;
+  }
+  h4 {
+    font-size: 0.73em;
+    color: $text-subtitle !important;
   }
 }
 
@@ -134,7 +136,7 @@ footer {
 }
 
 h2 {
-  margin: 12px 0;
+  margin: 20px 0;
 }
 
 /*
@@ -221,18 +223,34 @@ header {
   }
 }
 
-.book-list-item {
+.latest-list-item,
+.recommendation-item-cover {
+  img {
+    @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
+  }
+}
+
+.latest-list-item {
+  margin: 0 40px;
+  h3, h4 {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 18px;
+  }
+}
+
+.recommendation-list-item {
   display: table;
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #e3e3e5;
-  .book-list-cover {
+  .recommendation-item-cover {
     display: table-cell;
-    img {
-      @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
-    }
   }
-  .book-list-info {
+  .recommendation-item-info {
     display: table-cell;
     vertical-align: middle;
     h3 {

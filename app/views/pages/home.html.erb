@@ -1,14 +1,49 @@
+<h2>Lançamentos</h2>
+
+<% books = [Book.find(1), Book.find(2), Book.find(3), Book.find(4)] %>
+<div class="latest-list row">
+  <div class="span3">
+    <article class="latest-list-item">
+    <%= link_to(image_tag(books[0].cover_url.to_s), books[0]) %>
+    <h3><%= link_to books[0].title, books[0] %></h3>
+    <h4><%= book_team(books[0])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+    </article>
+  </div>
+  <div class="span3">
+    <article class="latest-list-item">
+    <%= link_to(image_tag(books[1].cover_url.to_s), books[1]) %>
+    <h3><%= link_to books[1].title, books[1] %></h3>
+    <h4><%= book_team(books[1])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+    </article>
+  </div>
+  <div class="span3">
+    <article class="latest-list-item">
+    <%= link_to(image_tag(books[2].cover_url.to_s), books[2]) %>
+    <h3><%= link_to books[2].title, books[2] %></h3>
+    <h4><%= book_team(books[2])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+    </article>
+  </div>
+  <div class="span3">
+    <article class="latest-list-item">
+    <%= link_to(image_tag(books[3].cover_url.to_s), books[3]) %>
+    <h3><%= link_to books[3].title, books[3] %></h3>
+    <h4><%= book_team(books[3])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+    </article>
+  </div>
+</div>
+
+
 <h2>Indicação nossa</h2>
 
 <% @featured_books.each do |book| %>
-  <article class="book-list-item row">
-    <div class="book-list-cover span2">
+  <article class="recommendation-list-item row">
+    <div class="recommendation-item-cover span2">
       <%= link_to(image_tag(book.cover_url.to_s), book) %>
     </div>
-    <div class="book-list-info span10">
+    <div class="recommendation-item-info span10">
       <h3><%= link_to book.title, book %></h3>
       <h4><%= book_team(book)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %></h4>
-      <div class="book-description">
+      <div class="recommendation-item-description">
         <p><%= book.description.html_safe %></p>
       </div>
     </div>
