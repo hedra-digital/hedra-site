@@ -2,8 +2,12 @@
 
 $font-stack-title: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif;
-$laranja: #D5662E;
-$link: #3B9FC1;
+$link-main: #E7611D;
+$link-hover: #3B9FC1;
+$text-body: #333;
+$text-title: #515151;
+$text-subtitle: #999;
+$selection: #fffdc9;
 
 /* ==========================================================================
    Base styles
@@ -24,6 +28,7 @@ body {
   font-size: 22px;
   line-height: 1.619;
   font-weight: normal;
+  color: $text-body;
 }
 
 h1, h2, h3, h4,
@@ -46,11 +51,11 @@ h1, h2, h3, h4,
           color: #666;
         }
         &:hover {
-          color: $link;
+          color: $link-hover;
         }
       }
       &.active a {
-        color: $link;
+        color: $link-hover;
       }
     }
   }
@@ -58,11 +63,11 @@ h1, h2, h3, h4,
 
 #main {
   a:link, a:active, a:visited {
-    color: $laranja;
+    color: $link-main;
     text-decoration: none;
   }
   a:hover {
-    color: $link;
+    color: $link-hover;
     text-decoration: none;
   }
 }
@@ -75,14 +80,13 @@ footer {
 #main {
   h1 {
     font-size: 2.32em;
-    color: #515151;
+    color: $text-title;
     letter-spacing: -2px;
   }
-}
-
-h2 {
-  font-size: 0.82em;
-  color: #519fc0;
+  h2 {
+    font-size: 0.82em;
+    color: #519fc0;
+  }
 }
 
 dt {
@@ -97,7 +101,7 @@ dt {
     }
     h4 {
       font-size: 0.73em;
-      color: #999;
+      color: $text-subtitle;
     }
   }
 }
@@ -105,7 +109,7 @@ dt {
 .book-page {
   h2 {
     font-size: 0.73em;
-    color: #999;
+    color: $text-subtitle;
   }
   .book-info {
     font-size: 0.82em;
@@ -114,6 +118,7 @@ dt {
 
 .book-supplementary-info {
   font-size: 0.82em;
+  color: black;
 }
 
 /*
@@ -122,7 +127,6 @@ dt {
 
 body {
   background: #f7f7f9;
-  color: #343436;
 }
 
 footer {
@@ -339,12 +343,12 @@ textarea {
 }
 
 ::-moz-selection {
-  background: #fffdc9;
+  background: $selection;
   text-shadow: none;
 }
 
 ::selection {
-  background: #fffdc9;
+  background: $selection;
   text-shadow: none;
 }
 
