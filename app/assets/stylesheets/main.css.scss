@@ -1,3 +1,5 @@
+@import "bourbon";
+
 $font-stack-title: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif;
 
@@ -9,60 +11,11 @@ $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif
  * Fonts
  */
 
-@font-face {
-    font-family: 'CallunaSansRegular';
-    src: url('/assets/typography/callunasans-regular.eot');
-    src: url('/assets/typography/callunasans-regular.eot?#iefix') format('embedded-opentype'),
-         url('/assets/typography/callunasans-regular.svg#CallunaSansRegular') format('svg'),
-         url('/assets/typography/callunasans-regular.woff') format('woff'),
-         url('/assets/typography/callunasans-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'CallunaRegular';
-    src: url('/assets/typography/calluna-regular.eot');
-    src: url('/assets/typography/calluna-regular.eot?#iefix') format('embedded-opentype'),
-         url('/assets/typography/calluna-regular.svg#CallunaRegular') format('svg'),
-         url('/assets/typography/calluna-regular.woff') format('woff'),
-         url('/assets/typography/calluna-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'CallunaRegular';
-    src: url('/assets/typography/calluna-bold.eot');
-    src: url('/assets/typography/calluna-bold.eot?#iefix') format('embedded-opentype'),
-         url('/assets/typography/calluna-bold.svg#CallunaRegular') format('svg'),
-         url('/assets/typography/calluna-bold.woff') format('woff'),
-         url('/assets/typography/calluna-bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'CallunaRegular';
-    src: url('/assets/typography/calluna-it.eot');
-    src: url('/assets/typography/calluna-it.eot?#iefix') format('embedded-opentype'),
-         url('/assets/typography/calluna-it.svg#CallunaRegular') format('svg'),
-         url('/assets/typography/calluna-it.woff') format('woff'),
-         url('/assets/typography/calluna-it.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'CallunaRegular';
-    src: url('/assets/typography/calluna-boldit.eot');
-    src: url('/assets/typography/calluna-boldit.eot?#iefix') format('embedded-opentype'),
-         url('/assets/typography/calluna-boldit.svg#CallunaRegular') format('svg'),
-         url('/assets/typography/calluna-boldit.woff') format('woff'),
-         url('/assets/typography/calluna-boldit.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
+@include font-face(CallunaSansRegular, 'callunasans-regular', normal, $asset-pipeline: true);
+@include font-face(CallunaRegular, 'calluna-regular', normal, $asset-pipeline: true);
+@include font-face(CallunaRegular, 'calluna-bold', bold, $asset-pipeline: true);
+@include font-face(CallunaRegular, 'calluna-it', normal, italic, $asset-pipeline: true);
+@include font-face(CallunaRegular, 'calluna-boldit', bold, italic, $asset-pipeline: true);
 
 body {
   font-family: $font-stack-body;
@@ -89,6 +42,10 @@ footer {
 h2 {
   font-size: 18px;
   color: #519fc0;
+}
+
+dt {
+  font-weight: normal;
 }
 
 /*
@@ -167,16 +124,12 @@ header {
 #main-nav {
   ul {
     margin-bottom: 30px;
-    background: -linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
-    background: -webkit-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
-    background: -moz-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
-    background: -ms-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
-    background: -o-linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1));
     border-left: 1px solid #e6e6e7;
     border-right: 1px solid #e6e6e7;
     border-bottom: 1px solid #c4c4c5;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px #e6e6e7;
+    @include background-image(linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1)));
+    @include border-radius(3px);
+    @include box-shadow(0 1px 1px #e6e6e7);
     li {
       text-shadow: white 1px 1px 0;
     }
