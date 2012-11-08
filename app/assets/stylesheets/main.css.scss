@@ -2,6 +2,8 @@
 
 $font-stack-title: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif;
+$laranja: #D5662E;
+$link: #3B9FC1;
 
 /* ==========================================================================
    Base styles
@@ -34,18 +36,84 @@ h1, h2, h3, h4,
   line-height: 1;
 }
 
+#main-nav, #secondary-nav {
+  ul {
+    li {
+      font-size: 0.82em;
+      a {
+        line-height: 1;
+        &:link, &:active, &:visited {
+          color: #666;
+        }
+        &:hover {
+          color: $link;
+        }
+      }
+      &.active a {
+        color: $link;
+      }
+    }
+  }
+}
+
+#main {
+  a:link, a:active, a:visited {
+    color: $laranja;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $link;
+    text-decoration: none;
+  }
+}
+
 footer {
-  font-size: 18px;
+  font-size: 0.82em;
   line-height: 1;
 }
 
+#main {
+  h1 {
+    font-size: 2.32em;
+    color: #515151;
+    letter-spacing: -2px;
+  }
+}
+
 h2 {
-  font-size: 18px;
+  font-size: 0.82em;
   color: #519fc0;
 }
 
 dt {
   font-weight: normal;
+}
+
+.book-list-item {
+  .book-list-item {
+    h3 {
+      font-size: 1em;
+      color: #cc6633;
+    }
+    h4 {
+      font-size: 0.73em;
+      color: #999;
+    }
+  }
+}
+
+.book-page {
+  h2 {
+    font-size: 0.73em;
+    color: #999;
+  }
+  .book-info {
+    font-size: 0.82em;
+  }
+}
+
+.book-supplementary-info {
+  font-size: 0.82em;
 }
 
 /*
@@ -90,13 +158,7 @@ header {
 }
 
 #main {
-  a:link, a:active, a:visited {
-    color: #d5662e;
-    text-decoration: none;
-  }
   a:hover {
-    color: #3b9fc1;
-    text-decoration: none;
     border-bottom: 1px solid #ccc;
   }
 }
@@ -104,17 +166,14 @@ header {
 #main-nav, #secondary-nav {
   ul {
     li {
-      font-size: 18px;
       a {
         margin: 0;
         padding: 30px 10px 15px 20px;
-        line-height: 1;
+        &:hover {
+          background: none;
+        }
       }
-      a:link, a:active, a:visited {
-        color: #666;
-      }
-      &.active a, a:hover {
-        color: #3b9fc1;
+      &.active a {
         background: none;
       }
     }
@@ -174,13 +233,9 @@ header {
     vertical-align: middle;
     h3 {
       margin: 0 0 9px 0;
-      font-size: 22px;
-      color: #cc6633;
     }
     h4 {
       margin: 0 0 13px 0;
-      font-size: 16px;
-      color: #999;
     }
   }
   &:last-child {
@@ -192,17 +247,11 @@ header {
   padding-bottom: 30px;
   h1 {
     margin-bottom: 2px;
-    font-size: 2.32em;
-    color: #515151;
-    letter-spacing: -2px;
   }
   h2 {
     margin: 0 0 17px 0;
-    font-size: 0.73em;
-    color: #999;
   }
   .book-info {
-    font-size: 0.82em;
     background: #ededef;
     .book-info-cover {
       margin: 40px;
@@ -227,7 +276,6 @@ header {
   margin-bottom: 30px;
   padding-top: 30px;
   border-top: 1px solid #dadadc;
-  font-size: 0.82em;
   h3 {
     margin-top: 0;
     font-size: 1em;
