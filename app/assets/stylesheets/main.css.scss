@@ -94,14 +94,14 @@ dt {
 }
 
 .book-list-item {
-  .book-list-item {
+  .book-list-info {
     h3 {
       font-size: 1em;
       color: #cc6633;
     }
     h4 {
       font-size: 0.73em;
-      color: $text-subtitle;
+      color: $text-subtitle !important;
     }
   }
 }
