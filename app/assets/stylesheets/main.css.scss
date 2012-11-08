@@ -109,7 +109,7 @@ dt {
 .book-page {
   h2 {
     font-size: 0.73em;
-    color: $text-subtitle;
+    color: $text-subtitle !important;
   }
   .book-info {
     font-size: 0.82em;
