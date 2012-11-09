@@ -1,30 +1,32 @@
-<div class="book-page row">
-  <aside class="book-info span3">
-    <div class="book-info-cover">
-      <%= image_tag @book.cover_url.to_s %>
+<div class="container">
+  <div class="book-page row">
+    <aside class="book-info span3">
+      <div class="book-info-cover">
+        <%= image_tag @book.cover_url.to_s %>
+      </div>
+      <div class="book-info-data">
+        <dl>
+          <% book_team(@book).each do |role, people| %>
+            <%= content_tag :dt, role %>
+            <%= content_tag :dd, people.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %>
+          <% end %>
+        </dl>
+      </div>
+    </aside>
+    <div class="book-text span9">
+      <h1><%= @book.title %></h1>
+      <h2><%= book_team(@book)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %></h2>
+      <p><%= @book.description.html_safe %></p>
     </div>
-    <div class="book-info-data">
+  </div>
+  <div class="book-supplementary-info row">
+    <div class="span3">
+      <h3>Especificações</h3>
       <dl>
-        <% book_team(@book).each do |role, people| %>
-          <%= content_tag :dt, role %>
-          <%= content_tag :dd, people.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %>
-        <% end %>
+        <%= book_supplementary_info(@book) %>
       </dl>
     </div>
-  </aside>
-  <div class="book-text span9">
-    <h1><%= @book.title %></h1>
-    <h2><%= book_team(@book)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') %></h2>
-    <p><%= @book.description.html_safe %></p>
-  </div>
-</div>
-<div class="book-supplementary-info row">
-  <div class="span3">
-    <h3>Especificações</h3>
-    <dl>
-      <%= book_supplementary_info(@book) %>
-    </dl>
-  </div>
-  <div class="span9">
+    <div class="span9">
+    </div>
   </div>
 </div>
