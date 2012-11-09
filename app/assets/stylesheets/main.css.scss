@@ -17,11 +17,49 @@ $selection: #fffdc9;
  * Fonts
  */
 
-@include font-face(CallunaSansRegular, 'callunasans-regular', normal, $asset-pipeline: true);
-@include font-face(CallunaRegular, 'calluna-regular', normal, $asset-pipeline: true);
-@include font-face(CallunaRegular, 'calluna-bold', bold, $asset-pipeline: true);
-@include font-face(CallunaRegular, 'calluna-it', normal, italic, $asset-pipeline: true);
-@include font-face(CallunaRegular, 'calluna-boldit', bold, italic, $asset-pipeline: true);
+@font-face {
+    font-family: 'CallunaSansRegular';
+    src: url('callunasans-regular.eot');
+    src: url('callunasans-regular.svg#CallunaSansRegular') format('svg'),
+         url('callunasans-regular.eot?#iefix') format('embedded-opentype'),
+         url('callunasans-regular.woff') format('woff'),
+         url('callunasans-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('calluna-regular.eot');
+    src: url('calluna-regular.svg#CallunaRegular') format('svg'),
+         url('calluna-regular.eot?#iefix') format('embedded-opentype'),
+         url('calluna-regular.woff') format('woff'),
+         url('calluna-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('calluna-bold.eot');
+    src: url('calluna-bold.svg#CallunaRegular') format('svg'),
+         url('calluna-bold.eot?#iefix') format('embedded-opentype'),
+         url('calluna-bold.woff') format('woff'),
+         url('calluna-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CallunaRegular';
+    src: url('calluna-it.eot');
+    src: url('calluna-it.svg#CallunaRegular') format('svg'),
+         url('calluna-it.eot?#iefix') format('embedded-opentype'),
+         url('calluna-it.woff') format('woff'),
+         url('calluna-it.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
 
 body {
   font-family: $font-stack-body;
@@ -221,6 +259,11 @@ header {
       }
     }
   }
+}
+
+.latest-list {
+  background: #f4f4f6;
+  @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.07));
 }
 
 .latest-list-item,
