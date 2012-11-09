@@ -100,6 +100,15 @@ h1, h2, h3, h4,
 }
 
 #main {
+  h1 {
+    font-size: 2.32em;
+    color: $text-title;
+    letter-spacing: -2px;
+  }
+  h2 {
+    font-size: 0.82em;
+    color: #519fc0;
+  }
   a:link, a:active, a:visited {
     color: $link-main;
     text-decoration: none;
@@ -115,20 +124,19 @@ footer {
   line-height: 1;
 }
 
-#main {
-  h1 {
-    font-size: 2.32em;
-    color: $text-title;
-    letter-spacing: -2px;
-  }
-  h2 {
-    font-size: 0.82em;
-    color: #519fc0;
-  }
-}
-
 dt {
   font-weight: normal;
+}
+
+#features {
+  h2 {
+    font-size: 2.32em;
+    letter-spacing: -2px;
+  }
+  h3 {
+    font-size: 0.73em;
+    color: $text-subtitle;
+  }
 }
 
 .latest-list-item {
@@ -177,9 +185,9 @@ h2 {
   margin: 20px 0;
 }
 
-/*
- * Pages
- */
+/* ==========================================================================
+   General areas
+   ========================================================================== */
 
 header {
   padding-top: 30px;
@@ -202,6 +210,7 @@ header {
 }
 
 #main {
+  position: relative;
   a:hover {
     border-bottom: 1px solid #ccc;
   }
@@ -261,9 +270,46 @@ header {
   }
 }
 
-.latest-list {
-  background: #f4f4f6;
+footer {
+  position: relative;
+  z-index: 5;
+}
+
+/* ==========================================================================
+   Pages
+   ========================================================================== */
+
+/*
+ * Home
+ */
+
+#features, #latest, #recommendations {
+  position: relative;
+  padding-bottom: 70px;
   @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.07));
+}
+
+#features {
+  z-index: 3;
+  background: transparent;
+}
+
+
+#latest {
+  z-index: 2;
+  background: #f4f4f6;
+  h2 {
+    margin: 60px 0 20px 0;
+  }
+}
+
+#recommendations {
+  padding-bottom: 0;
+  z-index: 1;
+  background: #f7f7f9;
+  h2 {
+    margin: 60px 0 20px 0;
+  }
 }
 
 .latest-list-item,
@@ -307,6 +353,10 @@ header {
     border-bottom: none;
   }
 }
+
+/*
+ * Book page
+ */
 
 .book-page {
   padding-bottom: 30px;
@@ -376,9 +426,9 @@ header {
   margin-bottom: 30px;
 }
 
-/*
- * H5BP helpers
- */
+/* ==========================================================================
+   H5BP helpers
+   ========================================================================== */
 
 hr {
   display: block;
