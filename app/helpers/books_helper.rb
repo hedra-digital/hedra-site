@@ -13,30 +13,32 @@ module BooksHelper
   end
 
   def book_supplementary_info(book)
-    urls = ""
-    urls = urls << content_tag(:dt, 'Número de páginas')
-    urls = urls << content_tag(:dd, book.pages)
+    tags = ""
+    tags = tags << content_tag(:dt, 'Número de páginas')
+    tags = tags << content_tag(:dd, book.pages)
+    tags = tags << content_tag(:dt, 'ISBN')
+    tags = tags << content_tag(:dd, book.isbn)
     if book.languages.present? && book.languages.count > 1
-      urls = urls << content_tag(:dt, 'Idiomas')
-      urls = urls << content_tag(:dd, book.languages.map { |x| x.name.downcase }.join(", ").capitalize)
+      tags = tags << content_tag(:dt, 'Idiomas')
+      tags = tags << content_tag(:dd, book.languages.map { |x| x.name.downcase }.join(", ").capitalize)
     end
     if book.binding_type.present?
-      urls = urls << content_tag(:dt, 'Encadernação')
-      urls = urls << content_tag(:dd, book.binding_type.name)
+      tags = tags << content_tag(:dt, 'Encadernação')
+      tags = tags << content_tag(:dd, book.binding_type.name)
     end
     if book.width.present? && book.height.present?
-      urls = urls << content_tag(:dt, 'Dimensões')
-      urls = urls << content_tag(:dd, "#{book.width} &times; #{book.height} cm".html_safe)
+      tags = tags << content_tag(:dt, 'Dimensões')
+      tags = tags << content_tag(:dd, "#{book.width} &times; #{book.height} cm".html_safe)
     end
     if book.weight.present?
-      urls = urls << content_tag(:dt, 'Peso')
-      urls = urls << content_tag(:dd, book.weight)
+      tags = tags << content_tag(:dt, 'Peso')
+      tags = tags << content_tag(:dd, book.weight)
     end
     if book.released_at.present?
-      urls = urls << content_tag(:dt, 'Ano de lançamento')
-      urls = urls << content_tag(:dd, book.released_at.year)
+      tags = tags << content_tag(:dt, 'Ano de lançamento')
+      tags = tags << content_tag(:dd, book.released_at.year)
     end
-    urls.html_safe
+    tags.html_safe
   end
 
 end
