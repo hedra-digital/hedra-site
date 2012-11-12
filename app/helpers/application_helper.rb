@@ -14,4 +14,8 @@ module ApplicationHelper
     content_for(:title, content_tag(:title, page_title << ' | Editora Hedra'))
   end
 
+  def formatted_list(array)
+    array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ')
+  end
+
 end
