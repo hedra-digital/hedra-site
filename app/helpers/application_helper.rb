@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def formatted_list(array)
-    array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ')
+    array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
 
 end
