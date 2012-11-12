@@ -20,26 +20,27 @@
 
 class Book < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, :use => :slugged
+  friendly_id                         :title, :use => :slugged
 
   # Relationships
-  has_many :participations
-  has_many :people, :through => :participations
-  has_many :roles, :through => :participations
-  has_and_belongs_to_many :languages
-  belongs_to :binding_type, :inverse_of => :books
-  has_many :features, :inverse_of => :book
+  has_many                            :participations
+  has_many                            :people, :through => :participations
+  has_many                            :roles, :through => :participations
+  has_and_belongs_to_many             :languages
+  belongs_to                          :binding_type, :inverse_of => :books
+  has_many                            :features, :inverse_of => :book
 
   # Allow other models to be nested within this one
-  accepts_nested_attributes_for :people, :roles, :participations, :binding_type, :languages
+  accepts_nested_attributes_for       :participations, :allow_destroy => true
+  accepts_nested_attributes_for       :binding_type, :languages
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover
 
   # Validations
-  validates_presence_of :title, :isbn, :pages
-  validates_uniqueness_of :slug
+  validates_presence_of               :title, :isbn, :pages
+  validates_uniqueness_of             :slug
 
   # CarrierWave uploader
-  mount_uploader :cover, CoverUploader
+  mount_uploader                      :cover, CoverUploader
 end
