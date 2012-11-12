@@ -7,7 +7,7 @@
       </div>
       <div class="span7">
         <h2><%= link_to feature.title, feature %></h2>
-        <h3><%= book_team(feature)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h3>
+        <h3><%= formatted_list(book_team(feature)["Texto"]) rescue "" %></h3>
         <p><%= feature.description.html_safe %></p>
       </div>
     </article>
@@ -23,28 +23,28 @@
         <article class="latest-list-item">
         <%= link_to(image_tag(books[0].cover_url.to_s), books[0]) %>
         <h3><%= link_to books[0].title, books[0] %></h3>
-        <h4><%= book_team(books[0])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+        <h4><%= formatted_list(book_team(books[0])["Texto"]) rescue "" %></h4>
         </article>
       </div>
       <div class="span3">
         <article class="latest-list-item">
         <%= link_to(image_tag(books[1].cover_url.to_s), books[1]) %>
         <h3><%= link_to books[1].title, books[1] %></h3>
-        <h4><%= book_team(books[1])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+        <h4><%= formatted_list(book_team(books[1])["Texto"]) rescue "" %></h4>
         </article>
       </div>
       <div class="span3">
         <article class="latest-list-item">
         <%= link_to(image_tag(books[2].cover_url.to_s), books[2]) %>
         <h3><%= link_to books[2].title, books[2] %></h3>
-        <h4><%= book_team(books[2])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+        <h4><%= formatted_list(book_team(books[2])["Texto"]) rescue "" %></h4>
         </article>
       </div>
       <div class="span3">
         <article class="latest-list-item">
         <%= link_to(image_tag(books[3].cover_url.to_s), books[3]) %>
         <h3><%= link_to books[3].title, books[3] %></h3>
-        <h4><%= book_team(books[3])["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+        <h4><%= formatted_list(book_team(books[3])["Texto"]) rescue "" %></h4>
         </article>
       </div>
     </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="recommendation-item-info span10">
           <h3><%= link_to book.title, book %></h3>
-          <h4><%= book_team(book)["Texto"].to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue "" %></h4>
+          <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
           <div class="recommendation-item-description">
             <p><%= book.description.html_safe %></p>
           </div>
