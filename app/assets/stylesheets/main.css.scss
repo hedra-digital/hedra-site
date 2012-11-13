@@ -273,6 +273,14 @@ header {
 footer {
   position: relative;
   z-index: 5;
+  #company-address address {
+    padding-top: 30px;
+    border-top: 1px solid #dadadc;
+  }
+
+  .company-copyright {
+    margin-bottom: 30px;
+  }
 }
 
 /* ==========================================================================
@@ -425,13 +433,12 @@ footer {
   }
 }
 
-#company-address address {
-  padding-top: 30px;
-  border-top: 1px solid #dadadc;
-}
+/*
+ * Contact
+ */
 
-.company-copyright {
-  margin-bottom: 30px;
+#contact-form {
+  background: #ededef;
 }
 
 /* ==========================================================================

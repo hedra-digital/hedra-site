@@ -7,6 +7,7 @@ HedraSite::Application.routes.draw do
   get "livros/:id", :to => "books#show", :as => :book
 
   get "sobre", :to => "pages#about", :as => :about
+  get "contato", :to => "pages#contact", :as => :contact
 
   root :to => "pages#home"
 
