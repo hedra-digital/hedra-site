@@ -23,6 +23,8 @@ end
 
 group :development do
   gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
 end
 
 gem 'jquery-rails'
