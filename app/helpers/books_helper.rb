@@ -3,13 +3,11 @@
 module BooksHelper
 
   def book_team(book)
-    credits = {}
-    book.participations.each do |p|
-      role = p.role.name
-      person = p.person.name
-      credits[role].present? ? credits[role].push(person) : credits[role] = Array[person]
+    book.participations.inject({}) do |result, element|
+      result[element.role.name] ||= []
+      result[element.role.name] << element.person.name
+      result
     end
-    return credits
   end
 
   def book_supplementary_info(book)
