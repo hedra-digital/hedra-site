@@ -43,4 +43,27 @@ class Book < ActiveRecord::Base
 
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
+
+  def dimensions
+    "#{self.width} &times; #{self.height} cm".html_safe if self.width.present? && self.height.present?
+  end
+
+  def language_list
+    formatted_list(self.languages.map { |x| x.name.downcase }) if self.languages.count > 1
+  end
+
+  def binding_name
+    self.binding_type.name if binding_type.present?
+  end
+
+  def release_year
+    self.released_at.year if released_at.present?
+  end
+
+  private
+
+  def formatted_list(array)
+    array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ').capitalize
+  end
+
 end
