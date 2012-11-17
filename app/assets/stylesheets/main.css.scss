@@ -139,12 +139,12 @@ dt {
   }
 }
 
-.latest-list-item {
+#new-releases article {
   text-align: center;
 }
 
-.latest-list-item,
-.recommendation-item-info {
+#new-releases article,
+#recommendations article {
   h3 {
     font-size: 1em;
   }
@@ -291,7 +291,7 @@ footer {
  * Home
  */
 
-#features, #latest, #recommendations {
+#features, #new-releases, #recommendations {
   position: relative;
   padding-bottom: 70px;
   @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.07));
@@ -302,8 +302,7 @@ footer {
   background: transparent;
 }
 
-
-#latest {
+#new-releases {
   z-index: 2;
   background: #f4f4f6;
   h2 {
@@ -328,14 +327,13 @@ footer {
   }
 }
 
-.latest-list-item,
-.recommendation-item-cover {
+.cover {
   img {
     @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
   }
 }
 
-.latest-list-item {
+#new-releases article {
   margin: 0 40px;
   h3, h4 {
     margin-left: -40px;
@@ -347,7 +345,7 @@ footer {
   }
 }
 
-.recommendation-list-item {
+#recommendations article {
   display: table;
   padding-bottom: 20px;
   margin-bottom: 20px;

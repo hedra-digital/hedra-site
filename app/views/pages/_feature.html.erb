@@ -1,0 +1,10 @@
+<article class="row">
+  <div class="cover span3">
+    <%= link_to(image_tag(feature.cover_url.to_s), feature) %>
+  </div>
+  <div class="span7">
+    <h2><%= link_to feature.title, feature %></h2>
+    <h3><%= formatted_list(book_team(feature)["Texto"]) rescue "" %></h3>
+    <p><%= feature.description.html_safe %></p>
+  </div>
+</article>

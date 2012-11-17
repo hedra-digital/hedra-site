@@ -1,52 +1,14 @@
 <div id="features">
   <div class="container">
-    <% feature = Book.find(1) %>
-    <article class="row">
-      <div class="span3">
-        <%= link_to(image_tag(feature.cover_url.to_s), feature) %>
-      </div>
-      <div class="span7">
-        <h2><%= link_to feature.title, feature %></h2>
-        <h3><%= formatted_list(book_team(feature)["Texto"]) rescue "" %></h3>
-        <p><%= feature.description.html_safe %></p>
-      </div>
-    </article>
+    <%= render :partial => 'pages/feature', :collection => @features %>
   </div>
 </div>
 
-<div id="latest">
+<div id="new-releases">
   <div class="container">
     <h2>Lançamentos</h2>
-    <% books = [Book.find(1), Book.find(2), Book.find(3), Book.find(4)] %>
     <div class="latest-list row">
-      <div class="span3">
-        <article class="latest-list-item">
-        <%= link_to(image_tag(books[0].cover_url.to_s), books[0]) %>
-        <h3><%= link_to books[0].title, books[0] %></h3>
-        <h4><%= formatted_list(book_team(books[0])["Texto"]) rescue "" %></h4>
-        </article>
-      </div>
-      <div class="span3">
-        <article class="latest-list-item">
-        <%= link_to(image_tag(books[1].cover_url.to_s), books[1]) %>
-        <h3><%= link_to books[1].title, books[1] %></h3>
-        <h4><%= formatted_list(book_team(books[1])["Texto"]) rescue "" %></h4>
-        </article>
-      </div>
-      <div class="span3">
-        <article class="latest-list-item">
-        <%= link_to(image_tag(books[2].cover_url.to_s), books[2]) %>
-        <h3><%= link_to books[2].title, books[2] %></h3>
-        <h4><%= formatted_list(book_team(books[2])["Texto"]) rescue "" %></h4>
-        </article>
-      </div>
-      <div class="span3">
-        <article class="latest-list-item">
-        <%= link_to(image_tag(books[3].cover_url.to_s), books[3]) %>
-        <h3><%= link_to books[3].title, books[3] %></h3>
-        <h4><%= formatted_list(book_team(books[3])["Texto"]) rescue "" %></h4>
-        </article>
-      </div>
+      <%= render :partial => 'pages/new_release', :collection => @new_releases %>
     </div>
   </div>
 </div>
@@ -54,19 +16,6 @@
 <div id="recommendations">
   <div class="container">
     <h2>Indicação nossa</h2>
-    <% @featured_books.each do |book| %>
-      <article class="recommendation-list-item row">
-        <div class="recommendation-item-cover span2">
-          <%= link_to(image_tag(book.cover_url.to_s), book) %>
-        </div>
-        <div class="recommendation-item-info span10">
-          <h3><%= link_to book.title, book %></h3>
-          <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
-          <div class="recommendation-item-description">
-            <p><%= book.description.html_safe %></p>
-          </div>
-        </div>
-      </article>
-    <% end %>
+    <%= render :partial => 'pages/recommendation', :collection => @recommendations %>
   </div>
 </div>
