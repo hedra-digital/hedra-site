@@ -28,7 +28,9 @@ class Book < ActiveRecord::Base
   has_many                            :roles, :through => :participations
   has_and_belongs_to_many             :languages
   belongs_to                          :binding_type, :inverse_of => :books
-  has_many                            :features, :inverse_of => :book
+  has_one                             :feature, :class_name => "HomePage", :association_foreign_key => :home_page_id, :inverse_of => :book
+  has_one                             :new_release, :class_name => "HomePage", :association_foreign_key => :home_page_id, :inverse_of => :book
+  has_one                             :recommendation, :class_name => "HomePage", :association_foreign_key => :home_page_id, :inverse_of => :book
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true
