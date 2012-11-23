@@ -156,6 +156,9 @@ dt {
 
 .recommendation-item-price {
   font-family: $font-stack-title;
+  font-size: 0.95em;
+  letter-spacing: -1px;
+  line-height: 1em;
 }
 
 .book-page {
@@ -373,8 +376,21 @@ footer {
   .recommendation-item-price {
     dl {
       padding: 30px 20px;
+      margin: 0;
       background: #ededef;
-      @include border-radius(3px);
+      @include border-radius(5px);
+      dt {
+        display: inline;
+        text-transform: uppercase;
+      }
+      dd {
+        float: right;
+        margin-left: 0;
+        &:after {
+          content: "\a";
+          white-space: pre-wrap;
+        }
+      }
     }
   }
 }
