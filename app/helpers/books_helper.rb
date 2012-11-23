@@ -22,6 +22,10 @@ module BooksHelper
     ].inject([]) { |sum, obj| obj[1].nil? ? sum : sum << stats_item(obj[0], obj[1]) }.join.html_safe
   end
 
+  def list_price(book)
+    render :partial => 'books/list_price', :locals => { :book => book } if book.has_price?
+  end
+
   private
 
   def stats_item(title, data)

@@ -154,6 +154,10 @@ dt {
   }
 }
 
+.recommendation-item-price {
+  font-family: $font-stack-title;
+}
+
 .book-page {
   h2 {
     font-size: 0.73em;
@@ -365,6 +369,13 @@ footer {
   }
   &:last-child {
     border-bottom: none;
+  }
+  .recommendation-item-price {
+    dl {
+      padding: 30px 20px;
+      background: #ededef;
+      @include border-radius(3px);
+    }
   }
 }
 

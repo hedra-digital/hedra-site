@@ -37,7 +37,7 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for       :binding_type, :languages
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook
 
   # Validations
   validates_presence_of               :title, :isbn, :pages
@@ -64,6 +64,10 @@ class Book < ActiveRecord::Base
 
   def release_year
     self.released_at.year if released_at.present?
+  end
+
+  def has_price?
+    self.price_print.present? || self.price_ebook.present?
   end
 
   private
