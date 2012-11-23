@@ -21,6 +21,7 @@ ActiveAdmin.register Book do
         association.input :role
         association.input :person
       end
+      f.input :price_print
       f.input :released_at
       f.input :binding_type
       f.inputs "Medidas" do
