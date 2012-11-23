@@ -17,7 +17,7 @@ module BooksHelper
       ['Idiomas', book.language_list],
       ['Encadernação', book.binding_name],
       ['Dimensões', book.dimensions],
-      ['Peso', book.weight],
+      ['Peso', book.weight_with_unit],
       ['Ano de lançamento', book.release_year]
     ].inject([]) { |sum, obj| obj[1].nil? ? sum : sum << stats_item(obj[0], obj[1]) }.join.html_safe
   end

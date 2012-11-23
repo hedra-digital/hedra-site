@@ -54,6 +54,10 @@ class Book < ActiveRecord::Base
     formatted_list(self.languages.map { |x| x.name.downcase }) if self.languages.count > 1
   end
 
+  def weight_with_unit
+    self.weight.to_s + " kg"
+  end
+
   def binding_name
     self.binding_type.name if binding_type.present?
   end
