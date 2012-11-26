@@ -203,15 +203,33 @@ pt_br:
     errors:
   activerecord:
     models:
-      book: 'Livro'
-      participation: 'Participação'
-      person: 'Pessoa'
-      binding_type: 'Encadernação'
-      language: 'Idioma'
-      feature: 'Destaque'
-      new_release: 'Lançamento'
-      recommendation: 'Recomendação'
-      user: 'Usuário'
+      book:
+        one: Livro
+        other: Livros
+      participation:
+        one: Participação
+        other: Participações
+      person:
+        one: Pessoa
+        other: Pessoas
+      binding_type:
+        one: Encadernação
+        other: Encadernações
+      language:
+        one: Idioma
+        other: Idiomas
+      feature:
+        one: Destaque
+        other: Destaques
+      new_release:
+        one: Lançamento
+        other: Lançamentos
+      recommendation:
+        one: Recomendação
+        other: Recomendações
+      user:
+        one: Usuário
+        other: Usuários
     successful:
       messages:
         created: "%{model} foi criado com sucesso."
