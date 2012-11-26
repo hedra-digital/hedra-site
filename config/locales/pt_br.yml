@@ -203,47 +203,38 @@ pt_br:
     errors:
   activerecord:
     models:
-      project: 'projeto'
-      proposal: 'proposta'
-      package: 'pacote'
-      extra: 'extra'
-      client: 'cliente'
-      creator: 'criador'
-      category: 'categoria'
+      book: 'Livro'
+      participation: 'Participação'
+      person: 'Pessoa'
+      binding_type: 'Encadernação'
+      language: 'Idioma'
+      feature: 'Destaque'
+      new_release: 'Lançamento'
+      recommendation: 'Recomendação'
+      user: 'Usuário'
     successful:
       messages:
         created: "%{model} foi criado com sucesso."
         updated: "%{model} foi atualizado com sucesso."
     attributes:
-      category:
-        name: 'Nome'
-      client:
-        name: 'Nome completo'
-        cpf: 'CPF'
-        occupation: 'Profissão'
-        state: 'Estado'
-        city: 'Cidade'
-        email: "E-mail"
-      creator:
-        name: 'Nome completo'
-        cpf: 'CPF'
-        occupation: 'Profissão'
-        state: 'Estado'
-        city: 'Cidade'
-        email: "E-mail"
-      extra:
-        name: 'Nome'
-      package:
-        name: 'Nome'
-      project:
-        name: 'Título'
+      book:
+        title: 'Título'
+        isbn: 'ISBN'
+        pages: 'Páginas'
         description: 'Descrição'
-        price: 'Preço'
-        duration: 'Duração'
-        plan: 'Planta'
-        category_id: 'Categoria'
-      proposal:
-        description: 'Descrição'
+        width: 'Largura'
+        height: 'Altura'
+        weight: 'Peso'
+        released_at: 'Data de lançamento'
+        cover: 'Imagem da capa'
+        price_print: 'Preço do impresso'
+        price_ebook: 'Preço do ebook'
+        binding_type: 'Encadernação'
+      participation:
+        role: 'Papel'
+        person: 'Pessoa'
+      person:
+        name: 'Nome'
     errors:
   active_admin:
       dashboard: "Painel Administrativo"
