@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
 
   def home
-    @features = Feature.includes(:book).all.map { |e| e.book  }
-    @new_releases = NewRelease.includes(:book).all.map { |e| e.book }
-    @recommendations = Recommendation.includes(:book).all.map { |e| e.book }
+    @features = Feature.includes(:book).all.map(&:book).first(1)
+    @new_releases = NewRelease.includes(:book).all.map(&:book).first(4)
+    @recommendations = Recommendation.includes(:book).all.map(&:book).first(6)
   end
 
   def about
