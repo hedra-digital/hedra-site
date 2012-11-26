@@ -12,6 +12,7 @@ gem 'friendly_id', '~> 4.0.1'
 gem 'annotate', ">=2.5.0"
 gem 'carrierwave'
 gem 'rmagick'
+gem 'mini_magick'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,6 +30,7 @@ end
 
 gem 'jquery-rails'
 gem 'bourbon'
+gem "ckeditor", "3.7.3"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
