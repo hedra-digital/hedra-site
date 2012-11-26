@@ -154,7 +154,8 @@ dt {
   }
 }
 
-.recommendation-item-price {
+.recommendation-item-price,
+.book-price {
   font-family: $font-stack-title;
   font-size: 0.95em;
   letter-spacing: -1px;
@@ -456,6 +457,65 @@ footer {
       white-space: pre-wrap;
     }
   }
+}
+
+.book-price>div {
+  padding: 30px 20px;
+  background: #ededef;
+  @include border-radius(5px);
+  text-transform: uppercase;
+  ul {
+    margin: 15px 0 0 0;
+    li {
+      list-style: none;
+    }
+  }
+  a {
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    background: #88b2c2;
+    @include border-radius(5px);
+    @include box-shadow(1px 1px 2px #ccc);
+    &:link, &:visited, &:hover, &:active {
+      color: white !important;
+      border: none !important;
+    }
+    span {
+      display: table-cell;
+      padding: 15px 10px;
+      text-transform: uppercase;
+      &.price {
+        width: 42%;
+        background: #39a0c1;
+        text-align: right;
+      }
+    }
+  }
+  // dt {
+  //   display: inline-block;
+  //   width: 50%;
+  //   padding: 15px 10px;
+  //   text-transform: uppercase;
+  //   background: #88b2c2;
+  //   color: white;
+  //   @include border-top-left-radius(5px);
+  //   @include border-bottom-left-radius(5px);
+  // }
+  // dd {
+  //   display: inline-block;
+  //   width: 30%;
+  //   padding: 15px 10px;
+  //   margin-left: 0;
+  //   background: #39a0c1;
+  //   color: white;
+  //   @include border-top-right-radius(5px);
+  //   @include border-bottom-right-radius(5px);
+  //   &:after {
+  //     content: "\a";
+  //     white-space: pre-wrap;
+  //   }
+  // }
 }
 
 /*

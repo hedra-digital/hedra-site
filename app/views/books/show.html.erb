@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="book-page row">
     <aside class="book-info span3">
       <div class="book-info-cover">
@@ -13,12 +14,25 @@
         </dl>
       </div>
     </aside>
-    <div class="book-text span9">
-      <h1><%= @book.title %></h1>
-      <h2><%= formatted_list(book_team(@book)["Texto"]) %></h2>
-      <p><%= @book.description.html_safe %></p>
+    <div class="row">
+      <div class="span9">
+        <h1><%= @book.title %></h1>
+        <h2><%= formatted_list(book_team(@book)["Texto"]) %></h2>
+      </div>
+      <div class="row">
+        <div class="book-text span6">
+          <p><%= @book.description.html_safe %></p>
+        </div>
+        <aside class="book-price span3">
+          <div>
+            Compre:
+            <%= list_price(@book) %>
+          </div>
+        </aside>
+      </div>
     </div>
   </div>
+
   <div class="book-supplementary-info row">
     <div class="span3">
       <h3>Especificações</h3>
@@ -29,4 +43,5 @@
     <div class="span9">
     </div>
   </div>
+
 </div>
