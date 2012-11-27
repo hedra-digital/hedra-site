@@ -24,10 +24,7 @@
           <p><%= @book.description.html_safe %></p>
         </div>
         <aside class="book-price span3">
-          <div>
-            Compre:
-            <%= list_price(@book) %>
-          </div>
+          <%= list_price(@book) %>
         </aside>
       </div>
     </div>
