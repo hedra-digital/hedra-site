@@ -19,14 +19,20 @@
         <h1><%= @book.title %></h1>
         <h2><%= formatted_list(book_team(@book)["Texto"]) %></h2>
       </div>
-      <div class="row">
-        <div class="book-text span6">
+      <% if @book.has_price? %>
+        <div class="row">
+          <div class="book-text span6">
+            <p><%= @book.description.html_safe %></p>
+          </div>
+          <aside class="book-price span3">
+            <%= list_price(@book) %>
+          </aside>
+        </div>
+      <% else %>
+        <div class="book-text span9">
           <p><%= @book.description.html_safe %></p>
         </div>
-        <aside class="book-price span3">
-          <%= list_price(@book) %>
-        </aside>
-      </div>
+      <% end %>
     </div>
   </div>
 
