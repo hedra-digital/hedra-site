@@ -1,5 +1,10 @@
 <div class="list-price">
   <ul>
-    <li><a href="#"><span class="type">Impresso</span><span class="price"><%= number_to_currency(book.price_print) %></span></a></li>
+    <% if book.price_print? %>
+      <li><a href="#"><span class="type">Impresso</span><span class="price"><%= number_to_currency(book.price_print) %></span></a></li>
+    <% end %>
+    <% if book.price_ebook? %>
+      <li><a href="#"><span class="type">Ebook</span><span class="price"><%= number_to_currency(book.price_ebook) %></span></a></li>
+    <% end %>
   </ul>
 </div>

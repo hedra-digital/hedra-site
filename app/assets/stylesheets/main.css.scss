@@ -292,13 +292,14 @@ footer {
 }
 
 .list-price {
-  padding: 30px 20px;
+  padding: 20px;
   background: #ededef;
   @include border-radius(5px);
   ul {
     margin: 0;
     li {
       list-style: none;
+      margin: 10px 0;
       a {
         display: table;
         width: 100%;
@@ -311,6 +312,8 @@ footer {
           padding: 15px 10px;
           &.price {
             text-align: right;
+            width: 85px;
+            white-space: nowrap;
           }
         }
       }
