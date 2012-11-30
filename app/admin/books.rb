@@ -22,7 +22,7 @@ ActiveAdmin.register Book do
         association.input :person
       end
       f.input :price_print
-      f.input :price_ebook
+      # f.input :price_ebook
       f.input :released_at
       f.input :binding_type
       f.inputs "Medidas" do
