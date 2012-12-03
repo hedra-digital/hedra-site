@@ -1,0 +1,20 @@
+<!-- Declaração do formulário -->
+<form class="pagseguro" target="pagseguro" method="post" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
+
+  <!-- Campos obrigatórios -->
+  <input type="hidden" name="receiverEmail" value="jorge@hedra.com.br">
+  <input type="hidden" name="currency" value="BRL">
+
+  <!-- Itens do pagamento (ao menos um item é obrigatório) -->
+  <input type="hidden" name="itemId1" value="0001">
+  <input type="hidden" name="itemDescription1" value="<%= book.title %>">
+  <input type="hidden" name="itemAmount1" value="<%= "%.2f" % book.price_print %>">
+  <input type="hidden" name="itemQuantity1" value="1">
+  <input type="hidden" name="itemWeight1" value="<%= book.weight.*(1000).to_i %>">
+
+  <!-- submit do form (obrigatório) -->
+  <button type="submit" name="button1">
+    <span class="type">Impresso</span><span class="price"><%= number_to_currency(book.price_print) %></span>
+  </button>
+
+</form>

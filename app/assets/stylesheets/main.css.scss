@@ -155,11 +155,13 @@ dt {
 }
 
 .list-price {
-  font-family: $font-stack-title;
-  font-size: 0.95em;
-  letter-spacing: -1px;
-  line-height: 1em;
-  text-transform: uppercase;
+  button {
+    font-family: $font-stack-title;
+    font-size: 0.75em;
+    letter-spacing: -1px;
+    line-height: 1em;
+    text-transform: uppercase;
+  }
 }
 
 .book-page {
@@ -300,19 +302,17 @@ footer {
     li {
       list-style: none;
       margin: 10px 0;
-      a {
-        display: table;
+      button {
         width: 100%;
-        &:link, &:visited, &:hover, &:active {
-          color: $text-body !important;
-          border: none !important;
-        }
+        text-align: left;
         span {
-          display: table-cell;
+          display: inline-block;
           padding: 15px 10px;
+          text-align: left;
           &.price {
+            float: right;
             text-align: right;
-            width: 85px;
+            width: 60px;
             white-space: nowrap;
           }
         }
@@ -322,14 +322,14 @@ footer {
 }
 
 .book-price .list-price {
-  a {
+  button {
+    padding: 0;
     background: #88b2c2;
+    border: none;
+    color: white;
     overflow: hidden;
     @include border-radius(5px);
     @include box-shadow(1px 1px 2px #ccc);
-    &:link, &:visited, &:hover, &:active {
-      color: white !important;
-    }
     span {
       &.price {
         background: #39a0c1;
@@ -484,6 +484,10 @@ footer {
       white-space: pre-wrap;
     }
   }
+}
+
+.pagseguro {
+  margin: 0;
 }
 
 /*
