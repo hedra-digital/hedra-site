@@ -23,7 +23,7 @@ ActiveAdmin.register Book do
       end
       f.input :price_print
       # f.input :price_ebook
-      f.input :released_at
+      f.input :released_at, :as => :date_select, :include_blank => true, :start_year => 1999, :order => [:year, :month, :day]
       f.input :binding_type
       f.inputs "Medidas" do
         f.input :width
