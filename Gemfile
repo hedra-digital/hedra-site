@@ -14,6 +14,9 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'mini_magick'
 gem 'sanitize'
+gem 'truncate_html'
+gem 'nokogiri'
+gem 'htmlentities'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -9,7 +9,7 @@
       <h3><%= link_to recommendation.title, recommendation %></h3>
       <h4><%= formatted_list(book_team(recommendation)["Texto"]) rescue "" %></h4>
       <div class="recommendation-item-description">
-        <p><%= recommendation.description.html_safe %></p>
+        <%= truncate_html(recommendation.description, length: 380) %>
       </div>
     </div>
     <div class="recommendation-item-price span3">
@@ -20,7 +20,7 @@
       <h3><%= link_to recommendation.title, recommendation %></h3>
       <h4><%= formatted_list(book_team(recommendation)["Texto"]) rescue "" %></h4>
       <div class="recommendation-item-description">
-        <p><%= recommendation.description.html_safe %></p>
+        <%= truncate_html(recommendation.description, length: 380) %>
       </div>
     </div>
   <% end %>
