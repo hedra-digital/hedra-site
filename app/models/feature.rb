@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: features
+#
+#  id         :integer          not null, primary key
+#  book_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Feature < ActiveRecord::Base
   # Relationships
   belongs_to                          :book, :inverse_of => :features
