@@ -13,6 +13,7 @@ gem 'annotate', ">=2.5.0"
 gem 'carrierwave'
 gem 'rmagick'
 gem 'mini_magick'
+gem 'sanitize'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -30,7 +30,7 @@
         </div>
       <% else %>
         <div class="book-text span9">
-          <p><%= @book.description.html_safe %></p>
+          <%= @book.description.html_safe %>
         </div>
       <% end %>
     </div>

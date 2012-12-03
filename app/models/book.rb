@@ -22,6 +22,9 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id                         :title, :use => :slugged
 
+  # Callbacks
+  before_save                         :sanitize_description
+
   # Relationships
   has_many                            :participations
   has_many                            :people, :through => :participations
@@ -74,6 +77,10 @@ class Book < ActiveRecord::Base
 
   def formatted_list(array)
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ').capitalize
+  end
+
+  def sanitize_description
+    self.description = Sanitize.clean(self.description, Sanitize::Config::BASIC).html_safe
   end
 
 end

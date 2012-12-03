@@ -105,6 +105,7 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.4.0)
     mysql2 (0.3.11)
+    nokogiri (1.5.5)
     orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -146,6 +147,9 @@ GEM
     responders (0.9.3)
       railties (~> 3.1)
     rmagick (2.13.1)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -192,6 +196,7 @@ DEPENDENCIES
   pry-remote
   rails (= 3.2.9)
   rmagick
+  sanitize
   sass-rails (~> 3.2.3)
   simple_form
   uglifier (>= 1.0.3)
