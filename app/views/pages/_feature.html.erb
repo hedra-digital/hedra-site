@@ -5,6 +5,6 @@
   <div class="span7">
     <h2><%= link_to feature.title, feature %></h2>
     <h3><%= formatted_list(book_team(feature)["Texto"]) rescue "" %></h3>
-    <p><%= feature.description.html_safe %></p>
+    <p><%= truncate_html feature.description, :length => 240 %></p>
   </div>
 </article>
