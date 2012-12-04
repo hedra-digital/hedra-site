@@ -1,3 +1,4 @@
+<% title @book.title %>
 <div class="container">
 
   <div class="book-page row">
@@ -16,7 +17,7 @@
     </aside>
     <div class="row">
       <div class="span9">
-        <h1><%= @book.title %></h1>
+        <%= yield :h1 %>
         <h2><%= formatted_list(book_team(@book)["Texto"]) %></h2>
       </div>
       <% if @book.has_price? %>
