@@ -14,7 +14,7 @@ ActiveAdmin.register Book do
       f.input :title
       f.input :isbn
       f.input :pages
-      f.input :description, :as => :ckeditor, :input_html => { :height => 300 }
+      f.input :description, :as => :ckeditor
       f.input :cover, :as => :file, :hint => (( f.object.new_record? || f.object.cover.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.cover.url(:thumb)))
       f.has_many :participations do |association|
         association.input :_destroy, :as => :boolean, :label => "Apagar?" unless (association.object.new_record? || association.object.nil?)
