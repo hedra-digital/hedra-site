@@ -1,4 +1,5 @@
 <div class="list-price">
+  <%= content_tag(:h4, 'Compre:') if params[:action] == 'show' %>
   <ul>
     <% if book.price_print? %>
       <li>

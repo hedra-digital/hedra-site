@@ -297,6 +297,9 @@ footer {
   padding: 20px;
   background: #ededef;
   @include border-radius(5px);
+  h4 {
+    margin: 0 0 15px 0;
+  }
   ul {
     margin: 0;
     li {
