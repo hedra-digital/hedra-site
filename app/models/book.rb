@@ -28,14 +28,14 @@ class Book < ActiveRecord::Base
   before_save                         :sanitize_description
 
   # Relationships
-  has_many                            :participations
+  has_many                            :participations, :dependent => :destroy
   has_many                            :people, :through => :participations
   has_many                            :roles, :through => :participations
   has_and_belongs_to_many             :languages
   belongs_to                          :binding_type, :inverse_of => :books
-  has_many                            :features, :inverse_of => :book
-  has_many                            :new_releases, :inverse_of => :book
-  has_many                            :recommendations, :inverse_of => :book
+  has_many                            :features, :inverse_of => :book, :dependent => :destroy
+  has_many                            :new_releases, :inverse_of => :book, :dependent => :destroy
+  has_many                            :recommendations, :inverse_of => :book, :dependent => :destroy
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true
