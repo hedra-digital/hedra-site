@@ -27,6 +27,9 @@ group :assets do
 end
 
 group :development do
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
   gem 'better_errors'
 end
 
