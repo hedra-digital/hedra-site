@@ -1,9 +1,15 @@
 require 'bundler/capistrano'
+require 'capistrano/ext/multistage'
+
+set :stages, ["staging", "production"]
+set :default_stage, "staging"
 
 set :application, "Hedra Site"
-set :repository,  "git@github.com:hedra-digital/hedra-site.git"
 
 set :scm, :git
+set :repository,  "git@github.com:hedra-digital/hedra-site.git"
+set :deploy_to, "/home/deploy/apps/staging"
+set :deploy_via, 'copy'
 set :user, 'deploy'
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "livrodaclasse_rsa")]
@@ -11,17 +17,15 @@ ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "livrodaclasse_rsa")]
 set :use_sudo, false
 set :keep_releases, 3
 
-set :deploy_to, "/home/deploy/apps/staging"
-set :deploy_via, 'copy'
-
 default_run_options[:pty] = true
 
 role :web, "hedra.com.br"
 role :app, "hedra.com.br"
 role :db,  "hedra.com.br", :primary => true
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+task :uname do
+  run "uname -a"
+end
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
