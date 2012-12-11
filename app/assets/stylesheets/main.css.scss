@@ -1,5 +1,9 @@
 @import "bourbon";
 
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
 $font-stack-title: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-stack-body: CallunaRegular, TimesNewRoman, "Times New Roman", Times, serif;
 $link-main: #E7611D;
@@ -250,7 +254,7 @@ header {
     border-right: 1px solid #e6e6e7;
     border-bottom: 1px solid #c4c4c5;
     @include background-image(linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1)));
-    @include border-radius(3px);
+    border-radius: 3px;
     @include box-shadow(0 1px 1px #e6e6e7);
     li {
       text-shadow: white 1px 1px 0;
@@ -296,7 +300,7 @@ footer {
 .list-price {
   padding: 20px;
   background: #ededef;
-  @include border-radius(5px);
+  border-radius: 5px;
   h4 {
     margin: 0 0 15px 0;
   }
@@ -332,7 +336,7 @@ footer {
   button {
     background: #88b2c2;
     color: white;
-    @include border-radius(5px);
+    border-radius: 5px;
     @include box-shadow(1px 1px 2px #ccc);
     span {
       &.price {
