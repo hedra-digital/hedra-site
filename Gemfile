@@ -33,6 +33,7 @@ group :development do
   gem 'pry-nav'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'bullet'
 end
 
 gem 'jquery-rails'
