@@ -8,7 +8,7 @@ class ContactController < ApplicationController
 
     if @message.valid?
       NotificationsMailer.new_message(@message).deliver
-      redirect_to(root_path, :notice => "Sua mensagem foi enviada.")
+      redirect_to(contact_path, :notice => "Sua mensagem foi enviada.")
     else
       flash.now.alert = "Por favor, preencha todos os campos."
       render :new

@@ -1,15 +1,8 @@
 <%= simple_form_for(@message, :url => contact_path, :html => { :class => 'form_horizontal' }) do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-      <%= f.input :full_name %>
-      <%= f.input :email %>
-      <%= f.input :subject %>
-      <%= f.input :body %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, 'Enviar mensagem' %>
-  </div>
-
+  <%= f.input :full_name, :label => false, :placeholder => 'Nome completo' %>
+  <%= f.input :email, :label => false, :placeholder => 'E-mail' %>
+  <%= f.input :subject, :label => false, :placeholder => 'Assunto' %>
+  <%= f.input :body, :label => false, :placeholder => 'Mensagem' %>
+  <%= f.button :submit, 'Enviar' %>
 <% end %>
