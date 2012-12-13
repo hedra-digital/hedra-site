@@ -1,6 +1,7 @@
 ActiveAdmin.register Book do
 
   index do
+    selectable_column
     column :title
     column :isbn
     column :pages

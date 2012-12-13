@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 ActiveAdmin.setup do |config|
-  config.before_filter :set_admin_locale
 
   # == Site Title
   #
@@ -149,9 +148,5 @@ ActiveAdmin.setup do |config|
   #
   # Set the CSV builder separator (default is ",")
   # config.csv_column_separator = ','
-
-  def set_admin_locale
-    I18n.locale = I18n.default_locale
-  end
 
 end
