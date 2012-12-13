@@ -26,6 +26,10 @@ module BooksHelper
     render :partial => 'books/list_price', :locals => { :book => book } if book.has_price?
   end
 
+  def description_lead(book)
+    raw(book.description.split('</p>')[0] + '</p>')
+  end
+
   private
 
   def stats_item(title, data)
