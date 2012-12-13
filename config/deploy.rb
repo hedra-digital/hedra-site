@@ -51,22 +51,16 @@ namespace :deploy do
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
   end
-end
 
-namespace :deploy do
   desc "Symlinks the uploads directory"
   task :symlink_uploads, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
   end
-end
 
-namespace :deploy do
   task :copy_old_sitemap do
     run "if [ -e #{previous_release}/public/sitemap_index.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
   end
-end
 
-namespace :deploy do
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
   end
@@ -83,11 +77,3 @@ end
 #     end
 #   end
 # end
-
-desc "Run the super-awesome rake task"
-task :super_awesome do
-  rake = fetch(:rake, 'rake')
-  rails_env = fetch(:rails_env, 'production')
-
-  run "cd '#{current_path}' && #{rake} super_awesome RAILS_ENV=#{rails_env}"
-end

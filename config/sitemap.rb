@@ -2,8 +2,8 @@
 SitemapGenerator::Sitemap.default_host = "http://www.hedra.com.br"
 
 SitemapGenerator::Sitemap.create do
-  add '/sobre'
-  add '/contato'
+  add '/sobre', :changefreq => 'monthly'
+  add '/contato', :changefreq => 'monthly'
   Book.find_each do |book|
     add book_path(book), :lastmod => book.updated_at
   end
