@@ -14,5 +14,4 @@ ActiveAdmin.register Recommendation do
     default_actions
   end
 
-
 end

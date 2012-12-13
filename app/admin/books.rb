@@ -20,7 +20,7 @@ ActiveAdmin.register Book do
       f.has_many :participations do |association|
         association.input :_destroy, :as => :boolean, :label => "Apagar?" unless (association.object.new_record? || association.object.nil?)
         association.input :role
-        association.input :person
+        association.input :person, :collection => Person.order("name ASC").all
       end
       f.input :price_print
       # f.input :price_ebook
