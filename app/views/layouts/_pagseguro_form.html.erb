@@ -11,6 +11,18 @@
   <input type="hidden" name="itemAmount1" value="<%= "%.2f" % book.price_print %>">
   <input type="hidden" name="itemQuantity1" value="1">
   <input type="hidden" name="itemWeight1" value="<%= book.weight.*(1000).to_i %>">
+  <input type="hidden" name="itemShippingCost1" value="0.00">
+
+  <!-- Informações de frete (opcionais) -->
+  <input type="hidden" name="shippingType" value="1">
+  <input type="hidden" name="shippingAddressPostalCode" value="05416011">
+  <input type="hidden" name="shippingAddressStreet" value="R. Fradique Coutinho">
+  <input type="hidden" name="shippingAddressNumber" value="1139">
+  <input type="hidden" name="shippingAddressComplement" value="Subsolo">
+  <input type="hidden" name="shippingAddressDistrict" value="Vila Madalena">
+  <input type="hidden" name="shippingAddressCity" value="Sao Paulo">
+  <input type="hidden" name="shippingAddressState" value="SP">
+  <input type="hidden" name="shippingAddressCountry" value="BRA">
 
   <!-- submit do form (obrigatório) -->
   <button type="submit" name="button1">
