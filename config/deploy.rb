@@ -40,7 +40,7 @@ end
 #   end
 # end
 
-after 'deploy:update_code', 'deploy:symlink_db', 'deploy:symlink_uploads'
+after 'deploy:update_code', 'deploy:symlink_db', 'deploy:symlink_uploads', 'deploy:copy_old_sitemap'
 after 'deploy:update', 'deploy:cleanup'
 # We need to run this after our collector mongrels are up and running
 # This goes out even if the deploy fails, sadly
@@ -57,6 +57,12 @@ namespace :deploy do
   desc "Symlinks the uploads directory"
   task :symlink_uploads, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
+  end
+end
+
+namespace :deploy do
+  task :copy_old_sitemap do
+    run "if [ -e #{previous_release}/public/sitemap_index.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
   end
 end
 
