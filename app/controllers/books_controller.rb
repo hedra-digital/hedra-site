@@ -9,6 +9,6 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search(params[:term], :page => params[:page], :per_page => 5)
+    @books = Book.search(params[:term], :page => params[:page], :per_page => 5, :include => { :participations => [:person, :role] })
   end
 end
