@@ -84,6 +84,7 @@ h1, h2, h3, h4,
 }
 
 #main-nav, #secondary-nav {
+  form { margin: 20px 20px 0 0; }
   ul {
     li {
       font-size: 0.82em;
@@ -430,6 +431,16 @@ footer {
     border-bottom: none;
   }
 }
+
+/*
+ *  Search
+ */
+
+ #search {
+  h3 { margin-bottom: 20px; }
+  em { color:#E7611D; }
+  .row { margin-bottom: 20px; }
+ }
 
 /*
  * Book page

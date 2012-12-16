@@ -1,0 +1,8 @@
+<div id="search">
+  <div class="container">
+    <h3>Resultados da busca por <em><%= params[:term] %></em></h3>
+
+    <%= render :partial => 'pages/recommendation', :collection => @books %>
+    <%= will_paginate @posts %>
+  </div>
+</div>

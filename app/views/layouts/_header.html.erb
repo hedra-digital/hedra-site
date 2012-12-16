@@ -4,9 +4,16 @@
   <p class="logo hide-text"><%= link_to 'Hedra', root_path %></p>
 <% end %>
 <nav id="main-nav" role="navigation">
+  
+  <form class="navbar-search pull-right" action="/livros/busca" method="get">
+    <input type="text" class="search-query" name="term" placeholder="Busca">
+  </form>
+
   <ul class="nav nav-pills">
 <!--     <li class="active"><a href="#">Catálogo</a></li> -->
     <li><%= link_to 'Sobre', about_path %></li>
 <!--     <li><%= link_to 'Contato', contact_path %></li> -->
   </ul>
+
 </nav>
+

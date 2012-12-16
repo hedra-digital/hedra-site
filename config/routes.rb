@@ -6,7 +6,8 @@ HedraSite::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  get "livros/:id", :to => "books#show", :as => :book  
+  get "livros/busca",  :to => "books#search"
+  get "livros/:id",    :to => "books#show", :as => :book  
   get "categoria/:id", :to => "books#by_category", :as => :category_id
 
   get "sobre", :to => "pages#about", :as => :about
