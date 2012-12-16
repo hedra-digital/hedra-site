@@ -33,6 +33,7 @@ class Book < ActiveRecord::Base
   has_many                            :people, :through => :participations
   has_many                            :roles, :through => :participations
   has_and_belongs_to_many             :languages
+  has_and_belongs_to_many             :tags
   belongs_to                          :binding_type, :inverse_of => :books
   has_many                            :features, :inverse_of => :book, :dependent => :destroy
   has_many                            :new_releases, :inverse_of => :book, :dependent => :destroy
@@ -42,9 +43,10 @@ class Book < ActiveRecord::Base
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true
   accepts_nested_attributes_for       :binding_type, :languages
+  accepts_nested_attributes_for       :tags, :allow_destroy => true
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids
 
   # Validations
   validates_presence_of               :title, :isbn, :pages, :category
@@ -53,6 +55,7 @@ class Book < ActiveRecord::Base
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
 
+  # Search
   define_index do
     indexes title
     indexes isbn
