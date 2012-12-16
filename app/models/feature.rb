@@ -13,5 +13,7 @@ class Feature < ActiveRecord::Base
   belongs_to                          :book, :inverse_of => :features
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :book_id
+  attr_accessible                     :book_id, :feature_image
+
+  mount_uploader :feature_image, FeatureImageUploader
 end
