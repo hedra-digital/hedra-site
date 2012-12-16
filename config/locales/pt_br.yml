@@ -233,6 +233,9 @@ pt_br:
       role:
         one: Papel
         other: Papéis
+      category:
+        one: Categoria
+        other: Categorias
     successful:
       messages:
         created: "%{model} foi criado com sucesso."
@@ -251,6 +254,8 @@ pt_br:
         price_print: 'Preço do impresso'
         price_ebook: 'Preço do ebook'
         binding_type: 'Encadernação'
+        languages: 'Idioma'
+        category: 'Categoria'
       participation:
         role: 'Papel'
         person: 'Pessoa'
@@ -337,3 +342,7 @@ pt_br:
       links:
         sign_in: "Entrar"
         forgot_your_password: "Esqueceu sua senha?"
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Próxima &#8594;"
+    page_gap: "&hellip;"
