@@ -7,6 +7,7 @@ ActiveAdmin.register Book do
     column :pages
     column :description
     column :updated_at
+    column :category
     default_actions
   end
 
@@ -33,6 +34,9 @@ ActiveAdmin.register Book do
       end
       f.inputs "Idiomas" do
         f.input :languages
+      end
+      f.inputs "Categoria" do
+        f.input :category, :collection => Category.order("name")
       end
     end
     f.buttons

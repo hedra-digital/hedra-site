@@ -1,0 +1,7 @@
+<div id="recommendations">
+  <div class="container">
+    <h1><%= @category.name %></h1>
+    <%= render :partial => 'pages/recommendation', :collection => @books %>
+    <%= will_paginate @posts %>
+  </div>
+</div>
