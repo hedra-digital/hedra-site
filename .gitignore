@@ -5,6 +5,7 @@
 /config/database.yml
 /config/email.yml
 /config/initializers/session_store.rb
+/config/development.sphinx.conf
 /coverage
 /db/*.db
 /db/*.sqlite3
