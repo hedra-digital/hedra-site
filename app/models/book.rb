@@ -37,20 +37,29 @@ class Book < ActiveRecord::Base
   has_many                            :features, :inverse_of => :book, :dependent => :destroy
   has_many                            :new_releases, :inverse_of => :book, :dependent => :destroy
   has_many                            :recommendations, :inverse_of => :book, :dependent => :destroy
+  belongs_to                          :category
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true
   accepts_nested_attributes_for       :binding_type, :languages
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id
 
   # Validations
-  validates_presence_of               :title, :isbn, :pages
+  validates_presence_of               :title, :isbn, :pages, :category
   validates_uniqueness_of             :slug
 
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
+
+  define_index do
+    indexes title
+    indexes isbn
+    indexes description
+    indexes people(:name), :as => :people
+  end
+
 
   def dimensions
     "#{self.width} &times; #{self.height} cm".html_safe if self.width.present? && self.height.present?

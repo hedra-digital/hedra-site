@@ -19,6 +19,8 @@ gem 'nokogiri'
 gem 'htmlentities'
 gem 'newrelic_rpm'
 gem 'sitemap_generator'
+gem 'will_paginate', '~> 3.0'
+gem 'thinking-sphinx', '2.0.10'
 
 # Gems used only for assets and not required
 # in production environments by default.
