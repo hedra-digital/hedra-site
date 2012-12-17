@@ -88,7 +88,7 @@ h1, h2, h3, h4, #main-nav, #secondary-nav, .book-info {
   text-transform: uppercase;
 }
 
-input[type="submit"].btn, input[type="submit"].btn:hover {
+input[type="submit"], input[type="submit"].btn, input[type="submit"].btn:hover, button {
   text-transform: uppercase;
   text-shadow: none;
   color: white;
@@ -280,14 +280,11 @@ header {
 }
 
 #main-nav, #secondary-nav {
-  form {
-    margin: 20px 20px 0 0;
-  }
   ul {
     li {
       a {
         margin: 0;
-        padding: 30px 10px 15px 20px;
+        padding: 30px 10px 18px 20px;
         &:hover {
           background: none;
         }
@@ -300,6 +297,16 @@ header {
 }
 
 #main-nav {
+  position: relative;
+  .navbar-search {
+    position: absolute;
+    bottom: 14px;
+    right: 20px;
+  }
+  .dropdown-arrow {
+    bottom: 3px;
+    position: relative;
+  }
   ul {
     margin-bottom: 30px;
     border-left: 1px solid #e6e6e7;
@@ -308,6 +315,35 @@ header {
     @include background-image(linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1)));
     border-radius: 3px;
     @include box-shadow(0 1px 1px #e6e6e7);
+    li:hover ul {
+      left: 11px;
+    }
+    ul {
+      position: absolute;
+      top: 56px;
+      left: -9999em;
+      z-index: 5;
+      width: 230px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      background: white;
+      border-top: 3px solid #6d9fb6;
+      border-bottom: none;
+      border-right: none;
+      border-left: none;
+      border-radius: 3px;
+      li {
+        float: left;
+        a {
+          display: block;
+          margin: 0;
+          padding: 10px 20px;
+          width: 190px;
+          color: $link-hover !important;
+        }
+      }
+    }
   }
 }
 
