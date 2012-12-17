@@ -44,7 +44,6 @@ after 'deploy:update_code', 'deploy:symlink_db', 'deploy:symlink_uploads', 'depl
 after 'deploy:update', 'deploy:cleanup'
 # We need to run this after our collector mongrels are up and running
 # This goes out even if the deploy fails, sadly
-after "deploy:update", "newrelic:notice_deployment"
 
 namespace :deploy do
   desc "Symlinks the database.yml"
