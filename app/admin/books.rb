@@ -16,15 +16,14 @@ ActiveAdmin.register Book do
       f.input :title
       f.input :isbn
       f.input :pages
+      f.input :category, :collection => Category.order("name")
       f.input :description, :as => :ckeditor
       f.input :cover, :as => :file, :hint => (( f.object.new_record? || f.object.cover.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.cover.url(:thumb)))
-      
       f.has_many :participations do |association|
         association.input :_destroy, :as => :boolean, :label => "Apagar?" unless (association.object.new_record? || association.object.nil?)
         association.input :role
         association.input :person, :collection => Person.order("name ASC").all
       end
-
       f.input :price_print
       # f.input :price_ebook
       f.input :released_at, :as => :date_select, :include_blank => true, :start_year => 1999, :order => [:year, :month, :day]
@@ -36,9 +35,6 @@ ActiveAdmin.register Book do
       end
       f.inputs "Idiomas" do
         f.input :languages
-      end
-      f.inputs "Categoria" do
-        f.input :category, :collection => Category.order("name")
       end
       f.inputs "Tags" do
         f.input :tags, :as => :check_boxes
