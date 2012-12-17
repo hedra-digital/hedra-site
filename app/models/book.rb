@@ -18,7 +18,6 @@
 #  cover           :string(255)
 #  price_print     :float
 #  price_ebook     :float
-#  category_id     :integer
 #
 
 class Book < ActiveRecord::Base
