@@ -73,21 +73,54 @@ body {
   color: $text-body;
 }
 
-h1, h2, h3, h4,
+h1, h2, h3, h4, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], input[type="submit"], button, select, textarea,
 #main-nav,
 #secondary-nav,
 .book-info {
-  font-family: $font-stack-title;
-  text-transform: uppercase;
+  font-family: $font-stack-title !important;
   font-weight: normal;
   line-height: 1;
+  text-shadow: white 1px 1px 0;
+  color: #666;
+}
+
+h1, h2, h3, h4, #main-nav, #secondary-nav, .book-info {
+  text-transform: uppercase;
+}
+
+input[type="submit"].btn, input[type="submit"].btn:hover {
+  text-transform: uppercase;
+  text-shadow: none;
+  color: white;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  text-transform: uppercase;
+  color: #666;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  text-transform: uppercase;
+  color: #666;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  text-transform: uppercase;
+  color: #666;
+}
+
+.book-info {
+  text-shadow: none;
 }
 
 #main-nav, #secondary-nav {
-  form { margin: 20px 20px 0 0; }
   ul {
     li {
       font-size: 0.82em;
+      text-shadow: white 1px 1px 0;
       a {
         line-height: 1;
         &:link, &:active, &:visited {
@@ -184,6 +217,7 @@ dt {
   color: black;
 }
 
+
 /*
  * Base tags
  */
@@ -198,6 +232,20 @@ footer {
 
 h2 {
   margin: 20px 0;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  padding: 15px 10px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  @include box-shadow(1px 1px 0 #cecece inset);
+}
+
+input[type="submit"].btn, input[type="submit"].btn:hover  {
+  padding: 15px 20px;
+  background: #88b2c2;
+  border: none;
+  @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.25));
 }
 
 /* ==========================================================================
@@ -232,6 +280,9 @@ header {
 }
 
 #main-nav, #secondary-nav {
+  form {
+    margin: 20px 20px 0 0;
+  }
   ul {
     li {
       a {
@@ -257,9 +308,6 @@ header {
     @include background-image(linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1)));
     border-radius: 3px;
     @include box-shadow(0 1px 1px #e6e6e7);
-    li {
-      text-shadow: white 1px 1px 0;
-    }
   }
 }
 
@@ -358,7 +406,7 @@ footer {
 #features, #new-releases, #recommendations {
   position: relative;
   padding-bottom: 70px;
-  @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.07));
+  @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
 }
 
 #features {
@@ -517,10 +565,47 @@ footer {
  * Contact
  */
 
+#contact-area {
+  position: relative;
+  padding-bottom: 70px;
+  @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
+}
+
 #contact-form {
+  padding: 20px 0;
   background: #ededef;
   form {
-    margin: 20px;
+    margin: 0 20px;
+    textarea, input[type="text"], input[type="email"] {
+      width: 100%;
+    }
+    textarea {
+      height: 105px;
+    }
+  }
+  .controls {
+    margin-right: 20px;
+  }
+}
+
+#distributors-area {
+  padding: 70px 0;
+  dl {
+    font-family: $font-stack-title;
+    font-size: 0.725em;
+    font-weight: normal;
+    dt {
+      display: inline;
+      color: #519fc0;
+    }
+    dd {
+      display: inline;
+      margin-left: 0;
+      &:after {
+        content: "\a";
+        white-space: pre-wrap;
+      }
+    }
   }
 }
 
@@ -594,6 +679,17 @@ html, body {
 #push, footer {
   height: 190px;
   overflow: hidden;
+}
+
+/* ==========================================================================
+   Responsive media queries
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  #wrap, footer {
+    border-left: none;
+    border-right: none;
+  }
 }
 
 /* ==========================================================================

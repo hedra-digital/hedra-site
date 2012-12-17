@@ -3,6 +3,6 @@
   <%= f.input :full_name, :label => false, :placeholder => 'Nome completo' %>
   <%= f.input :email, :label => false, :placeholder => 'E-mail' %>
   <%= f.input :subject, :label => false, :placeholder => 'Assunto' %>
-  <%= f.input :body, :label => false, :placeholder => 'Mensagem' %>
+  <%= f.input :body, :as => :text, :label => false, :placeholder => 'Mensagem' %>
   <%= f.button :submit, 'Enviar' %>
 <% end %>
