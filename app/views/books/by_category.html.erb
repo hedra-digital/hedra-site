@@ -1,8 +1,10 @@
 <% title @category.name %>
-<div id="recommendations">
+<div class="container">
+  <%= yield :h1 %>
+</div>
+<div id="category-list">
   <div class="container">
-    <%= yield :h1 %>
-    <%= render :partial => 'pages/recommendation', :collection => @books %>
+    <%= render :partial => 'pages/book', :collection => @books %>
     <%= will_paginate @posts %>
   </div>
 </div>

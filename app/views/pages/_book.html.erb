@@ -1,0 +1,26 @@
+<article class="book-list-item row">
+  <div class="item-cover cover span2">
+    <%= link_to(image_tag(book.cover_url.to_s), book) %>
+  </div>
+
+  <% if book.has_price? %>
+    <div class="item-info span7">
+      <h3><%= link_to book.title, book %></h3>
+      <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
+      <div class="item-description">
+        <%= description_lead book %>
+      </div>
+    </div>
+    <div class="item-price span3">
+      <%= list_price(book) %>
+    </div>
+  <% else %>
+    <div class="item-info span10">
+      <h3><%= link_to book.title, book %></h3>
+      <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
+      <div class="item-description">
+        <%= description_lead book %>
+      </div>
+    </div>
+  <% end %>
+</article>

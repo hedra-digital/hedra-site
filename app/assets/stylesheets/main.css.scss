@@ -84,7 +84,12 @@ h1, h2, h3, h4, input[type="text"], input[type="password"], input[type="datetime
   color: #666;
 }
 
-h1, h2, h3, h4, #main-nav, #secondary-nav, .book-info {
+h1, h2, h3, h4 {
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+#main-nav, #secondary-nav, .book-info {
   text-transform: uppercase;
 }
 
@@ -182,7 +187,8 @@ dt {
 }
 
 #new-releases article,
-#recommendations article {
+#recommendations article,
+#category-list article {
   h3 {
     font-size: 1em;
   }
@@ -371,19 +377,6 @@ header {
   }
 }
 
-footer {
-  position: relative;
-  z-index: 5;
-  #company-address address {
-    padding-top: 30px;
-    border-top: 1px solid #dadadc;
-  }
-
-  .company-copyright {
-    margin-bottom: 30px;
-  }
-}
-
 .list-price {
   padding: 20px;
   background: #ededef;
@@ -434,6 +427,48 @@ footer {
   }
 }
 
+.book-list-item {
+  display: table;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e3e3e5;
+  .item-cover {
+    display: table-cell;
+  }
+  .item-info {
+    display: table-cell;
+    vertical-align: middle;
+    h3 {
+      margin: 0 0 9px 0;
+    }
+    h4 {
+      margin: 0 0 13px 0;
+    }
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.cover {
+  img {
+    @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
+  }
+}
+
+footer {
+  position: relative;
+  z-index: 5;
+  #company-address address {
+    padding-top: 30px;
+    border-top: 1px solid #dadadc;
+  }
+
+  .company-copyright {
+    margin-bottom: 30px;
+  }
+}
+
 /* ==========================================================================
    Pages
    ========================================================================== */
@@ -478,12 +513,6 @@ footer {
   }
 }
 
-.cover {
-  img {
-    @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
-  }
-}
-
 #new-releases article {
   margin: 0 40px;
   h3, h4 {
@@ -493,29 +522,6 @@ footer {
   h3 {
     margin-top: 20px;
     margin-bottom: 18px;
-  }
-}
-
-#recommendations article {
-  display: table;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #e3e3e5;
-  .recommendation-item-cover {
-    display: table-cell;
-  }
-  .recommendation-item-info {
-    display: table-cell;
-    vertical-align: middle;
-    h3 {
-      margin: 0 0 9px 0;
-    }
-    h4 {
-      margin: 0 0 13px 0;
-    }
-  }
-  &:last-child {
-    border-bottom: none;
   }
 }
 
@@ -647,6 +653,15 @@ footer {
     }
   }
 }
+
+/*
+ * Category page
+ */
+
+ #category-list {
+  margin-top: 30px;
+  padding-bottom: 70px;
+ }
 
 /* ==========================================================================
    H5BP helpers
