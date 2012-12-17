@@ -308,6 +308,13 @@ header {
     position: absolute;
     bottom: 14px;
     right: 20px;
+    input {
+      height: 24px;
+      width: 212px;
+      background-image: url('/assets/search-icon.png');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
   }
   .dropdown-arrow {
     bottom: 3px;
