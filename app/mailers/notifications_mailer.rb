@@ -1,6 +1,6 @@
 class NotificationsMailer < ActionMailer::Base
   default :from => "editora@hedra.com.br"
-  default :to => "marcelo.polli@gmail.com"
+  default :to => "editora@hedra.com.br"
 
   def new_message(message)
     @message = message
