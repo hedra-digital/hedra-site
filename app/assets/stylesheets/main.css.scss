@@ -378,7 +378,7 @@ header {
 }
 
 .list-price {
-  padding: 20px;
+  padding: 5px 10px;
   background: #ededef;
   border-radius: 5px;
   h4 {
@@ -414,6 +414,7 @@ header {
 }
 
 .book-price .list-price {
+  padding: 20px;
   button {
     background: #88b2c2;
     color: white;
