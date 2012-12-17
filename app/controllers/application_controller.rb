@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_categories
 
+  protected
+
   def get_categories
-    @categories ||= Category.all
+    @category_list ||= Category.all
   end
 end
