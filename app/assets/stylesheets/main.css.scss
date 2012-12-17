@@ -188,7 +188,7 @@ dt {
 
 #new-releases article,
 #recommendations article,
-#category-list article {
+.book-list-item {
   h3 {
     font-size: 1em;
   }
@@ -527,16 +527,6 @@ footer {
 }
 
 /*
- *  Search
- */
-
- #search {
-  h3 { margin-bottom: 20px; }
-  em { color:#E7611D; }
-  .row { margin-bottom: 20px; }
- }
-
-/*
  * Book page
  */
 
@@ -659,10 +649,42 @@ footer {
  * Category page
  */
 
- #category-list {
+#category-list {
   margin-top: 30px;
   padding-bottom: 70px;
- }
+}
+
+/*
+*  Search
+*/
+
+#search-info h1 {
+  margin: 0;
+  text-transform: none;
+  font-size: 0.9em;
+  line-height: 1;
+  letter-spacing: normal;
+  .search-count {
+    font-size: 2em;
+    font-weight: normal;
+    color: $link-hover;
+  }
+  .search-term {
+    font-family: $font-stack-body;
+    font-weight: normal;
+    font-size: 2.32em;
+    color: $link-hover;
+    &:before {
+      content: "\a";
+      white-space: pre-wrap;
+    }
+  }
+}
+
+#search-results {
+  margin-top: 30px;
+  padding-bottom: 70px;
+}
 
 /* ==========================================================================
    H5BP helpers

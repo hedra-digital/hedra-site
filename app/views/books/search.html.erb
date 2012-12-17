@@ -1,8 +1,10 @@
-<div id="search">
+<% title 'Resultados da busca' %>
+<div id="search-info" class="container">
+  <h1><span class="search-count"><%= @books.total_entries %></span> resultados para <span class="search-term">&ldquo;<%= params[:term] %>&rdquo;</span></h1>
+</div>
+<div id="search-results">
   <div class="container">
-    <h3>Resultados da busca por <em><%= params[:term] %></em></h3>
-
     <%= render :partial => 'pages/book', :collection => @books %>
-    <%= will_paginate @posts %>
+    <%= will_paginate @books %>
   </div>
 </div>
