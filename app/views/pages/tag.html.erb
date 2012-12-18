@@ -1,0 +1,11 @@
+<div id="tag">
+  <div class="container">
+    <h1><%= @page.tag.name %></h1>
+    
+    <div id="extra">
+      <p><%= @page.body %></p>
+    </div>
+
+    <%= render :partial => 'pages/recommendation', :collection => @books %>
+  </div>
+</div>
