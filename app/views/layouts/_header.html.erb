@@ -16,6 +16,12 @@
     <li><%= link_to 'Sobre', about_path %></li>
     <li><%= link_to 'Contato', contact_path %></li>
   </ul>
+  <div class="social-links">
+    <p>Siga-nos</p>
+    <ul>
+      <li class="facebook"><%= link_to 'Facebook', 'http://www.facebook.com/Editorahedra' %></li><li class="twitter"><%= link_to 'Twitter', 'http://www.twitter.com/hedraonline' %></li>
+    </ul>
+  </div>
   <form class="navbar-search" action="/livros/busca" method="get">
     <input type="text" class="search-query" name="term" placeholder="Busca">
   </form>
