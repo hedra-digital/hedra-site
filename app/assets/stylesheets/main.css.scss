@@ -662,6 +662,16 @@ footer {
   text-align: center;
 }
 
+#share {
+  ol {
+    margin: 0;
+    list-style: none;
+    li {
+      margin: 10px 0;
+    }
+  }
+}
+
 /*
  * Contact
  */
