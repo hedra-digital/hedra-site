@@ -1,0 +1,14 @@
+<div id="tag">
+  <div class="container">
+    <h1><%= @page.tag.name %></h1>
+    
+    <% if @page.body.present? && @page.tag_image.present? %>
+      <div id="extra">
+        <div id="image"><%= image_tag(@page.tag_image.to_s) %></div>
+        <p><%= @page.body %></p>
+      </div>
+    <% end %>
+
+    <%= render :partial => 'pages/recommendation', :collection => @books %>
+  </div>
+</div>

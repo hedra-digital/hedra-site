@@ -12,4 +12,8 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def tag
+    @page = Tag.find(params[:id]).page
+    @books = @page.tag.books.includes( :participations => [:person, :role] )
+  end
 end

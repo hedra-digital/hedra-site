@@ -236,6 +236,9 @@ pt_br:
       category:
         one: Categoria
         other: Categorias
+      page:
+        one: Páginas
+        other: Páginas
     successful:
       messages:
         created: "%{model} foi criado com sucesso."

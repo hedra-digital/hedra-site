@@ -15,6 +15,8 @@ HedraSite::Application.routes.draw do
 
   post "contato"   => "contact#create", :as => :contact
 
+  get "pagina/:id"   => "pages#tag", :as => :tag_page
+
   root :to => "pages#home"
 
   # The priority is based upon order of creation:
