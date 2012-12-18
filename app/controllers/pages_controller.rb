@@ -12,4 +12,7 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def tag
+    @page = Tag.find(params[:id]).page
+  end
 end
