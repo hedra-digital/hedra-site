@@ -11,6 +11,8 @@ $link-hover: #3B9FC1;
 $text-body: #333;
 $text-title: #515151;
 $text-subtitle: #999;
+$text-light: #666;
+$text-blue: #519fc0;
 $selection: #fffdc9;
 
 /* ==========================================================================
@@ -80,17 +82,19 @@ h1, h2, h3, h4, input[type="text"], input[type="password"], input[type="datetime
   font-family: $font-stack-title !important;
   font-weight: normal;
   line-height: 1;
-  text-shadow: white 1px 1px 0;
-  color: #666;
+  color: $text-light;
 }
 
 h1, h2, h3, h4 {
   text-transform: uppercase;
-  text-shadow: none;
 }
 
 #main-nav, #secondary-nav, .book-info {
   text-transform: uppercase;
+}
+
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select {
+  font-size: 14px;
 }
 
 input[type="submit"], input[type="submit"]:hover, button {
@@ -102,19 +106,25 @@ input[type="submit"], input[type="submit"]:hover, button {
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   text-transform: uppercase;
-  color: #666;
+  color: $text-light;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
   text-transform: uppercase;
-  color: #666;
+  color: $text-light;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   text-transform: uppercase;
-  color: #666;
+  color: $text-light;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 .book-info {
@@ -122,6 +132,7 @@ textarea:-ms-input-placeholder {
 }
 
 #main-nav, #secondary-nav {
+  text-shadow: white 1px 1px 0;
   ul.nav {
     li {
       font-size: 0.82em;
@@ -129,7 +140,7 @@ textarea:-ms-input-placeholder {
       a {
         line-height: 1;
         &:link, &:active, &:visited {
-          color: #666;
+          color: $text-light;
         }
         &:hover {
           color: $link-hover;
@@ -150,7 +161,7 @@ textarea:-ms-input-placeholder {
   }
   h2 {
     font-size: 0.82em;
-    color: #519fc0;
+    color: $text-blue;
   }
   a:link, a:active, a:visited {
     color: $link-main;
@@ -315,6 +326,21 @@ header {
       background-repeat: no-repeat;
       background-position: 97% 50%;
     }
+    // input::-webkit-input-placeholder,
+    // textarea::-webkit-input-placeholder {
+    //   font-size: 14px;
+    //   line-height: 1.3em;
+    // }
+    // input:-moz-placeholder,
+    // textarea:-moz-placeholder {
+    //   font-size: 0.818em;
+    //   line-height: 24px;
+    // }
+    // input:-ms-input-placeholder,
+    // textarea:-ms-input-placeholder {
+    //   font-size: 0.818em;
+    //   line-height: 24px;
+    // }
   }
   .social-links {
     position: absolute;
@@ -685,7 +711,7 @@ footer {
     font-weight: normal;
     dt {
       display: inline;
-      color: #519fc0;
+      color: $text-blue;
     }
     dd {
       display: inline;
@@ -720,13 +746,13 @@ footer {
   .search-count {
     font-size: 2em;
     font-weight: normal;
-    color: $link-hover;
+    color: $text-blue;
   }
   .search-term {
     font-family: $font-stack-body;
     font-weight: normal;
     font-size: 2.32em;
-    color: $link-hover;
+    color: $text-blue;
     &:before {
       content: "\a";
       white-space: pre-wrap;
