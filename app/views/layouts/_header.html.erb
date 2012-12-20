@@ -6,7 +6,7 @@
 <nav id="main-nav" role="navigation">
   <ul class="nav nav-pills">
     <li>
-      <a class="submenu" href="#">Catálogo</a>
+      <a class="submenu" href="#">Catálogo <i class="dropdown-icon"></i></a>
       <ul>
         <% @category_list.each do |category| %>
           <%= content_tag :li, link_to(category.name, category_path(category)) %>
@@ -23,6 +23,6 @@
     </ul>
   </div>
   <form class="navbar-search" action="/livros/busca" method="get">
-    <input type="text" class="search-query" name="term" placeholder="Busca">
+    <input type="text" class="search-query" name="term">
   </form>
 </nav>

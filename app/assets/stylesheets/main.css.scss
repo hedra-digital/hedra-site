@@ -319,8 +319,19 @@ header {
 #main-nav {
   position: relative;
   .submenu {
-    padding-right: 13px !important;
-    background: url("/assets/dropdown-arrow.png") no-repeat 100% 37px;
+    padding-right: 14px !important;
+    .dropdown-icon {
+      display: inline-block;
+      margin-bottom: 3px;
+      width: 9px;
+      height: 5px;
+      background-image: url("/assets/dropdown-arrow.png");
+      background-repeat: no-repeat;
+      background-position: -9px 0px;
+    }
+    &:hover .dropdown-icon {
+      background-position: 0px 0px;
+    }
   }
   .navbar-search {
     position: absolute;
@@ -328,13 +339,13 @@ header {
     right: 20px;
     input {
       height: 24px;
-      width: 212px;
-      padding-left: 12px;
+      width: 191px;
+      padding-left: 34px;
       font-size: 14px;
       border-radius: 6px;
       background-image: url('/assets/search-icon.png');
       background-repeat: no-repeat;
-      background-position: 97% 50%;
+      background-position: 3% 50%;
     }
   }
   .social-links {
