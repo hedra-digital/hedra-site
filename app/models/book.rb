@@ -48,7 +48,7 @@ class Book < ActiveRecord::Base
   attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids
 
   # Validations
-  validates_presence_of               :title, :isbn, :pages, :category
+  validates_presence_of               :title, :isbn, :pages
   validates_uniqueness_of             :slug
 
   # CarrierWave uploader
