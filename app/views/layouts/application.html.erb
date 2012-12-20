@@ -9,6 +9,7 @@
     <%= yield(:title).presence || content_tag(:title, "Editora Hedra") %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
+    <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
     <meta property="og:title" content="Editora Hedra" />
     <meta property="og:type" content="company" />
