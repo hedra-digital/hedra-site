@@ -6,7 +6,7 @@
 <nav id="main-nav" role="navigation">
   <ul class="nav nav-pills">
     <li>
-      <a href="#">Catálogo <span class="dropdown-arrow">&#x2304;</span></a>
+      <a class="submenu" href="#">Catálogo</a>
       <ul>
         <% @category_list.each do |category| %>
           <%= content_tag :li, link_to(category.name, category_path(category)) %>

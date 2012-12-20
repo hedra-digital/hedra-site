@@ -315,6 +315,10 @@ header {
 
 #main-nav {
   position: relative;
+  .submenu {
+    padding-right: 13px !important;
+    background: url("/assets/dropdown-arrow.png") no-repeat 100% 37px;
+  }
   .navbar-search {
     position: absolute;
     bottom: 20px;
@@ -322,7 +326,9 @@ header {
     input {
       height: 24px;
       width: 212px;
+      padding-left: 12px;
       font-size: 14px;
+      border-radius: 6px;
       background-image: url('/assets/search-icon.png');
       background-repeat: no-repeat;
       background-position: 97% 50%;
@@ -338,8 +344,8 @@ header {
       float: left;
       margin: 0 11px 0 0;
       text-shadow: none;
-      font-size: 0.6em;
-      line-height: 27px;
+      font-size: 14px;
+      line-height: 25px;
     }
     ul {
       display: inline;
@@ -372,12 +378,6 @@ header {
         }
       }
     }
-  }
-  .dropdown-arrow {
-    bottom: 3px;
-    position: relative;
-    font-size: 1.3em;
-    line-height: 0;
   }
   ul.nav {
     margin-bottom: 30px;
