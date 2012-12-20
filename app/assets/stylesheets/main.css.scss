@@ -277,7 +277,7 @@ header {
     width: 153px;
     height: 51px;
     background: url('/assets/hedra-logo.png') no-repeat;
-    background-size: 100%;
+    @include background-size(100% 100%);
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
