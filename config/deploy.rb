@@ -61,7 +61,7 @@ namespace :deploy do
   end
 
   desc "Rebuilds search index"
-  task :symlink_rebuild, :roles => :app do
+  task :rebuild, :roles => :app do
     run "rake ts:rebuild"
   end
 
