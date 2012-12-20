@@ -10,10 +10,12 @@
 #
 
 class Category < ActiveRecord::Base
-  attr_accessible :name
-
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
+  # Relationships
   has_many :books
+
+  # Specify fields that can be accessible through mass assignment
+  attr_accessible :name, :book_ids
 end
