@@ -278,6 +278,9 @@ header {
     height: 51px;
     background: url('/assets/hedra-logo.png') no-repeat;
     background-size: 100%;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .logo {
     margin: 0;
