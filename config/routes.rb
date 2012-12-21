@@ -16,7 +16,8 @@ HedraSite::Application.routes.draw do
 
   get "pagina/:id"   => "pages#tag", :as => :tag_page
 
-  match "home/*other" => :root
+  match "home/*other", :to => redirect("/")
+  match "home", :to => redirect("/")
 
   root :to => "pages#home"
 
