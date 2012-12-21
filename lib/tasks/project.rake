@@ -19,8 +19,8 @@ namespace :server do
     Kernel.exec("ssh -i ~/.ssh/livrodaclasse_rsa deploy@hedra.com.br 'cd ~/apps/hedra-site/current/; rake sitemap:refresh'")
   end
 
-  desc "rebuilds search index"
-  task :rebuild do
-    Kernel.exec("ssh -i ~/.ssh/livrodaclasse_rsa deploy@hedra.com.br 'cd ~/apps/hedra-site/current/; rake ts:rebuild'")
+  desc "remakes search index"
+  task :index do
+    Kernel.exec("ssh -i ~/.ssh/livrodaclasse_rsa deploy@hedra.com.br 'cd ~/apps/hedra-site/current/; rake ts:index'")
   end
 end
