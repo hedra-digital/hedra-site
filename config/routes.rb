@@ -12,10 +12,11 @@ HedraSite::Application.routes.draw do
 
   get "sobre", :to => "pages#about", :as => :about
   get "contato"    => "contact#new", :as => :contact
-
   post "contato"   => "contact#create", :as => :contact
 
   get "pagina/:id"   => "pages#tag", :as => :tag_page
+
+  match "home/*other" => :root
 
   root :to => "pages#home"
 
