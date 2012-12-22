@@ -17,7 +17,8 @@ module ApplicationHelper
       data << tag(:meta, { :property => 'og:url', :content => "#{request.protocol}#{request.host_with_port}#{request.fullpath}"})
       data << tag(:meta, { :property => 'og:description', :content => options[:description] }) if options[:description].present?
       data << tag(:meta, { :property => 'og:image', :content => options[:image] }) if options[:image].present?
-      data << tag(:meta, { :property => 'fb:admins', :content => '694928618,534302953' })
+      data << tag(:meta, { :property => 'fb:admins', :content => '694928618' })
+      data << tag(:meta, { :property => 'fb:admins', :content => '534302953' })
       data << tag(:meta, { :property => 'og:site_name', :content => 'Editora Hedra' })
       raw(data)
     end
