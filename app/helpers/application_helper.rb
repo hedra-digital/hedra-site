@@ -15,6 +15,7 @@ module ApplicationHelper
       data << tag(:meta, { :property => 'og:title', :content => options[:title] }) if options[:title].present?
       data << tag(:meta, { :property => 'og:type', :content => options[:type] }) if options[:type].present?
       data << tag(:meta, { :property => 'og:url', :content => "#{request.protocol}#{request.host_with_port}#{request.fullpath}"})
+      data << tag(:meta, { :property => 'og:description', :content => options[:description] }) if options[:description].present?
       data << tag(:meta, { :property => 'og:image', :content => options[:image] }) if options[:image].present?
       data << tag(:meta, { :property => 'fb:admins', :content => '694928618,534302953' })
       data << tag(:meta, { :property => 'og:site_name', :content => 'Editora Hedra' })
@@ -22,6 +23,7 @@ module ApplicationHelper
     end
     content_for(:h1, content_tag(:h1, options[:title]))
     content_for(:title, content_tag(:title, "#{options[:title]} | Editora Hedra")) if options[:title].present?
+    content_for(:meta_tags, tag(:meta, { :name => 'description', :content => options[:description] })) if options[:description].present?
   end
 
   def formatted_list(array)

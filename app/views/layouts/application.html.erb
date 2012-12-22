@@ -15,7 +15,8 @@
     <%= javascript_include_tag "application" %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
-    <%= yield(:og) %>
+    <%= yield :meta_tags %>
+    <%= yield :og %>
   </head>
   <body>
     <% if controller_name == 'books' && action_name == 'show' %>
