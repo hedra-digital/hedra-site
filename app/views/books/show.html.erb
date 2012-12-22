@@ -1,16 +1,5 @@
 <% title @book.title %>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=137041543061914";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <div class="container">
-
   <div class="book-page row">
     <aside class="book-info span3">
       <div class="book-info-cover">
@@ -61,7 +50,7 @@
       <h3>Compartilhe</h3>
       <ol>
         <li class="facebook">
-          <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+          <fb:like send="false" layout="button_count" width="450" show_faces="false" font="lucida grande"></fb:like>
         </li>
         <li class="twitter">
           <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
