@@ -15,12 +15,7 @@
     <%= javascript_include_tag "application" %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
-    <meta property="og:title" content="Editora Hedra" />
-    <meta property="og:type" content="company" />
-    <meta property="og:url" content="http://www.hedra.com.br" />
-    <meta property="og:image" content="http://www.hedra.com.br/assets/hedra-logo.png" />
-    <meta property="og:site_name" content="Editora Hedra" />
-    <meta property="fb:admins" content="694928618,534302953" />
+    <%= yield(:og) %>
   </head>
   <body>
     <% if controller_name == 'books' && action_name == 'show' %>
@@ -29,7 +24,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=137041543061914";
+        js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=311686698932874";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
     <% end %>

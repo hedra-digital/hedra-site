@@ -1,4 +1,4 @@
-<% title @book.title %>
+<% page_data :title => @book.title, :type => 'book', :image => "#{request.protocol}#{request.host_with_port}#{@book.cover_url.to_s}" %>
 <div class="container">
   <div class="book-page row">
     <aside class="book-info span3">

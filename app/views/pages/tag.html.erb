@@ -1,7 +1,8 @@
+<% page_data :title => @page.tag.name, :type => 'article' %>
 <div id="tag">
   <div class="container">
-    <h1><%= @page.tag.name %></h1>
-    
+    <%= yield :h1 %>
+
     <% if @page.body.present? && @page.tag_image.present? %>
       <div id="extra">
         <div id="image"><%= image_tag(@page.tag_image.to_s) %></div>
