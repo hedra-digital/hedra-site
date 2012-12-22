@@ -29,16 +29,12 @@ $selection: #fffdc9;
 @include font-face(CallunaRegular, '/assets/calluna-it', normal, italic);
 
 body {
-  font-family: $font-stack-body;
+  font-family: $font-stack-title;
   font-size: 22px;
-  line-height: 1.619;
-  font-weight: normal;
   color: $text-body;
 }
 
-h1, h2, h3, h4, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], input[type="submit"], button, select, textarea,
-#main-nav,
-#secondary-nav,
+h1, h2, h3, h4, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], input[type="submit"], button, select, textarea, #secondary-nav,
 .book-info {
   font-family: $font-stack-title !important;
   font-weight: normal;
@@ -50,7 +46,12 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
 }
 
-#main-nav, #secondary-nav, .book-info {
+p {
+  font-family: $font-stack-body;
+  line-height: 1.619;
+}
+
+#secondary-nav, .book-info {
   text-transform: uppercase;
 }
 
@@ -92,7 +93,7 @@ textarea:-ms-input-placeholder {
   text-shadow: none;
 }
 
-#main-nav, #secondary-nav {
+#secondary-nav {
   text-shadow: white 1px 1px 0;
   ul.nav {
     li {
@@ -172,7 +173,6 @@ dt {
 
 .list-price {
   button {
-    font-family: $font-stack-title;
     font-size: 0.75em;
     letter-spacing: -1px;
     line-height: 1em;
@@ -258,7 +258,7 @@ header {
   }
 }
 
-#main-nav, #secondary-nav {
+#secondary-nav {
   ul.nav {
     li {
       a {
@@ -275,123 +275,7 @@ header {
   }
 }
 
-#main-nav {
-  position: relative;
-  .submenu {
-    padding-right: 14px !important;
-    .dropdown-icon {
-      display: inline-block;
-      margin-bottom: 3px;
-      width: 9px;
-      height: 5px;
-      background-image: url("/assets/dropdown-arrow.png");
-      background-repeat: no-repeat;
-      background-position: -9px 0px;
-    }
-    &:hover .dropdown-icon {
-      background-position: 0px 0px;
-    }
-  }
-  .navbar-search {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    input {
-      height: 24px;
-      width: 191px;
-      padding-left: 34px;
-      font-size: 14px;
-      border-radius: 6px;
-      background-image: url('/assets/search-icon.png');
-      background-repeat: no-repeat;
-      background-position: 3% 50%;
-    }
-  }
-  .social-links {
-    position: absolute;
-    bottom: 74px;
-    right: 20px;
-    height: 20px;
-    width: 240px;
-    p {
-      float: left;
-      margin: 0 11px 0 0;
-      text-shadow: none;
-      font-size: 14px;
-      line-height: 25px;
-    }
-    ul {
-      display: inline;
-      margin: 0;
-      list-style: none;
-      li {
-        display: inline-block;
-        height: 20px;
-        margin: 0 11px 0 0;
-        padding-right: 11px;
-        border-right: 1px solid #cecece;
-        a {
-          display: inline-block;
-          text-indent: 100%;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-        &.facebook a {
-          width: 10px;
-          height: 20px;
-          background: transparent url('/assets/facebook-icon.png') center center no-repeat;
-        }
-        &.twitter a {
-          width: 24px;
-          height: 20px;
-          background: transparent url('/assets/twitter-icon.png') center center no-repeat;
-        }
-        &:last-child {
-          border-right: none;
-        }
-      }
-    }
-  }
-  ul.nav {
-    margin-bottom: 30px;
-    border-left: 1px solid #e6e6e7;
-    border-right: 1px solid #e6e6e7;
-    border-bottom: 1px solid #c4c4c5;
-    @include background-image(linear-gradient(rgba(235,235,236,0), rgba(235,235,236,1)));
-    border-radius: 3px;
-    @include box-shadow(0 1px 1px #e6e6e7);
-    li:hover ul {
-      left: 11px;
-    }
-    ul {
-      position: absolute;
-      top: 56px;
-      left: -9999em;
-      z-index: 5;
-      width: 230px;
-      padding: 10px 0;
-      margin: 0;
-      list-style: none;
-      background: white;
-      border-top: 3px solid #6d9fb6;
-      border-bottom: none;
-      border-right: none;
-      border-left: none;
-      border-radius: 3px;
-      @include box-shadow(1px 1px 2px rgba(0,0,0,0.25));
-      li {
-        float: left;
-        a {
-          display: block;
-          margin: 0;
-          padding: 7.5px 20px;
-          width: 190px;
-          color: $link-hover !important;
-        }
-      }
-    }
-  }
-}
+
 
 #secondary-nav {
   ul {
@@ -684,7 +568,6 @@ footer {
 #distributors-area {
   padding: 70px 0;
   dl {
-    font-family: $font-stack-title;
     font-size: 0.725em;
     font-weight: normal;
     dt {
