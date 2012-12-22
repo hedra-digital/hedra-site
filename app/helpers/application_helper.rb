@@ -27,6 +27,10 @@ module ApplicationHelper
     content_for(:meta_tags, tag(:meta, { :name => 'description', :content => options[:description] })) if options[:description].present?
   end
 
+  def meta_cleanup(description)
+    truncate description.gsub(/(<p>|<i>|<\/i>|<b>|<\/b>|<em>|<\/em>|\r\n|\n\r|^\s+)/, ""), :length => 156, :separator => ' '
+  end
+
   def formatted_list(array)
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
