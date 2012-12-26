@@ -30,10 +30,10 @@ $serifFontFamily:                 CallunaRegular, TimesNewRoman, "Times New Roma
 
 $baseFontSize:                    22px;
 $baseFontFamily:                  $sansFontFamily !default;
-$baseLineHeight:                  1;
+$baseLineHeight:                  31.43px;
 $altFontFamily:                   $serifFontFamily !default;
 
-$navbarHeight:                    47px;
+$navbarHeight:                    64px;
 $navbarBackgroundHighlight:       #f7f7f9;
 $navbarBackground:                darken($navbarBackgroundHighlight, 4.5%);
 $navbarBorder:                    darken($navbarBackground, 10%);
