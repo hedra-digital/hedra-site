@@ -547,11 +547,20 @@ footer {
 #features {
   article {
     img {
-      width: 100%;
+      // width: 100%;
     }
   }
 }
 
+.feature-image-container {
+  text-align: center;
+  .feature-image {
+    width: 993px;
+    height: 358px;
+  }
+}
+  
+  
 #new-releases article {
   margin: 0 40px;
   h3, h4 {
