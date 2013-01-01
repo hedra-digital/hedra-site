@@ -34,5 +34,22 @@ module ApplicationHelper
   def formatted_list(array)
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
+  
+  def book_in_cart_for(b)
+    book = Book.find(b)
+    book.title
+  end
 
+  def cart_image
+    cart_empty? ? image_tag('cart.png') : image_tag('cart_full.png')
+  end
+
+  def cart_empty?
+    session['cart'].nil? || session['cart'].empty?
+  end
+
+  def total_cart_items
+    session['cart'] ||= []
+    session['cart'].size unless session['cart'].empty?
+  end
 end
