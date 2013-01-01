@@ -3,10 +3,22 @@
 <% else %>
   <p class="logo"><%= link_to 'Editora Hedra', root_path %></p>
 <% end %>
+
+<div class="cart">
+  <%= cart_image %>
+  <%= total_cart_items %>
+
+  <ul>
+    <% session['cart'].each do |b| %>
+    <li><%= book_in_cart_for(b) %></li>
+    <% end %>
+  </ul>
+</div>
+
 <nav id="main-nav" role="navigation">
   <ul class="nav nav-pills">
     <li>
-      <a class="submenu" href="#">Catálogo <i class="dropdown-icon"></i></a>
+      <a class="f" href="#">Catálogo <i class="dropdown-icon"></i></a>
       <ul>
         <% @category_list.each do |category| %>
           <%= content_tag :li, link_to(category.name, category_path(category)) %>

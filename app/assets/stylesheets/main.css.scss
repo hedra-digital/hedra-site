@@ -244,6 +244,12 @@ header {
   .logo {
     margin: 0;
   }
+  .cart {
+    position: absolute;
+    top: 42px;
+    right: 100px;
+    color: #3FA0BF;
+  }
 }
 
 #wrap, footer {
@@ -427,7 +433,7 @@ header {
     li {
       list-style: none;
       margin: 10px 0;
-      button {
+      .button {
         padding: 0;
         width: 100%;
         text-align: left;
@@ -435,6 +441,7 @@ header {
         border: none;
         background: transparent;
         color: #333;
+        font-size: 18px;
         span {
           display: inline-block;
           padding: 15px 10px;
