@@ -1,40 +1,46 @@
-<% if current_page? root_path %>
-  <h1 class="logo">Editora Hedra</h1>
-<% else %>
-  <p class="logo"><%= link_to 'Editora Hedra', root_path %></p>
-<% end %>
-
-<div class="cart">
-  <%= cart_image %>
-  <%= total_cart_items %>
-
-  <ul>
-    <% session['cart'].each do |b| %>
-    <li><%= book_in_cart_for(b) %></li>
-    <% end %>
-  </ul>
-</div>
-
-<nav id="main-nav" role="navigation">
-  <ul class="nav nav-pills">
-    <li>
-      <a class="f" href="#">Catálogo <i class="dropdown-icon"></i></a>
-      <ul>
-        <% @category_list.each do |category| %>
-          <%= content_tag :li, link_to(category.name, category_path(category)) %>
-        <% end %>
-      </ul>
-    </li>
-    <li><%= link_to 'Sobre', about_path %></li>
-    <li><%= link_to 'Contato', contact_path %></li>
-  </ul>
+<div class="navbar">
+  <%= link_to 'Hedra', root_path, :class => 'logo' %>
   <div class="social-links">
     <p>Siga</p>
     <ul>
       <li class="facebook"><%= link_to 'Facebook', 'http://www.facebook.com/Editorahedra' %></li><li class="twitter"><%= link_to 'Twitter', 'http://www.twitter.com/hedraonline' %></li>
     </ul>
   </div>
-  <form class="navbar-search" action="/livros/busca" method="get">
-    <input type="text" class="search-query" name="term">
-  </form>
-</nav>
+  <div class="navbar-inner">
+    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <div class="nav-collapse collapse navbar-responsive-collapse">
+      <nav id="main-nav" role="navigation">
+        <ul class="nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Catálogo<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% @category_list.each do |category| %>
+                <%= content_tag :li, link_to(category.name, category_path(category)) %>
+              <% end %>
+            </ul>
+          </li>
+          <li><%= link_to 'Sobre', about_path %></li>
+          <li><%= link_to 'Contato', contact_path %></li>
+        </ul>
+      </nav>
+      <form class="navbar-search pull-right" action="/livros/busca" method="get">
+        <input type="text" class="search-query" name="term">
+      </form>
+      <div class="cart">
+        <%= cart_image %>
+        <%= total_cart_items %>
+
+        <ul>
+          <% session['cart'].each do |b| %>
+          <li><%= book_in_cart_for(b) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
