@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  def show
-    @book = Book.includes(:participations => [:person, :role]).find(params[:id])
+  before_filter :resource, :only => [:show, :add_to_cart]
+  def show  
   end
 
   def by_category
@@ -10,5 +10,17 @@ class BooksController < ApplicationController
 
   def search
     @books = Book.search(params[:term], :page => params[:page], :per_page => 5, :include => { :participations => [:person, :role] }, :field_weights => { :title => 10 })
+  end
+
+  def add_to_cart
+    session['cart'] ||= []
+    session['cart'] << @book.id
+    redirect_to :back
+  end
+
+  private
+  
+  def resource
+    @book = Book.includes(:participations => [:person, :role]).find(params[:id])
   end
 end
