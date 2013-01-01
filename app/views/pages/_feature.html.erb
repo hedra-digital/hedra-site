@@ -1,7 +1,7 @@
 <% if feature.feature_image.present? %>
   <article class="row">
     <div class="span12 feature-image-container">
-      <%= link_to(image_tag(feature.feature_image_url, :class => "feature-image"), "#") %>
+      <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), tag_page_path(feature.page.tag.slug)) %>
     </div>
   </article>
 <% else %>
