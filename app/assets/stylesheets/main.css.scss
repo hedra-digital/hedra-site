@@ -211,6 +211,10 @@ header {
       border-style: solid none none;
       border-width: 3px medium medium;
       padding: 20px;
+      ul {
+        margin: 0;
+        list-style: none;
+      }
       li {
         margin-bottom: 10px;
         padding-bottom: 10px;

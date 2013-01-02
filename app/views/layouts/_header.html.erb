@@ -35,11 +35,14 @@
         <div class="cart">
           <%= cart_image %>
           <%= content_tag :span, total_cart_items, :class => 'cart-count' %>
-          <ul class="dropdown-menu" role="menu">
-            <% session['cart'].each do |b| %>
-            <li><%= book_in_cart_for(b) %></li>
-            <% end %>
-          </ul>
+          <div class="dropdown-menu">
+            <ul>
+              <% session['cart'].each do |b| %>
+              <li><%= book_in_cart_for(b) %></li>
+              <% end %>
+            </ul>
+            <button type="submit" name="button1"><span class="type">Finalizar compra</span></button>
+          </div>
         </div>
       </div>
     </div>
