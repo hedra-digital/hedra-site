@@ -159,6 +159,9 @@ header {
       text-transform: uppercase;
       font-size: 0.82em;
     }
+    .nav .dropdown b.caret {
+      margin: 14px 0 0 5px;
+    }
   }
   .navbar-inner {
     border-top: none;
@@ -235,9 +238,10 @@ header {
         }
         .cart-book-title {
           margin-left: 10px;
-          width: 190px;
+          width: 170px;
         }
-        .cart-book-price {
+        .cart-book-price,
+        .cart-book-remove {
           margin-left: 10px;
         }
       }
