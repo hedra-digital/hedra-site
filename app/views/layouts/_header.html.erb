@@ -8,22 +8,20 @@
       <span class="icon-bar"></span>
     </a>
     <div class="nav-collapse collapse navbar-responsive-collapse">
-
-        <nav id="main-nav" role="navigation">
-          <ul class="nav">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Catálogo<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <% @category_list.each do |category| %>
-                  <%= content_tag :li, link_to(category.name, category_path(category)) %>
-                <% end %>
-              </ul>
-            </li>
-            <li><%= link_to 'Sobre', about_path %></li>
-            <li><%= link_to 'Contato', contact_path %></li>
-          </ul>
-        </nav>
-
+      <nav id="main-nav" role="navigation">
+        <ul class="nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Catálogo<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% @category_list.each do |category| %>
+                <%= content_tag :li, link_to(category.name, category_path(category)) %>
+              <% end %>
+            </ul>
+          </li>
+          <li><%= link_to 'Sobre', about_path %></li>
+          <li><%= link_to 'Contato', contact_path %></li>
+        </ul>
+      </nav>
       <div class="navadd">
         <div class="social-links">
           <p>Siga</p>
@@ -36,8 +34,8 @@
         </form>
         <div class="cart">
           <%= cart_image %>
-          <%= total_cart_items %>
-          <ul>
+          <%= content_tag :span, total_cart_items, :class => 'cart-count' %>
+          <ul class="dropdown-menu" role="menu">
             <% session['cart'].each do |b| %>
             <li><%= book_in_cart_for(b) %></li>
             <% end %>

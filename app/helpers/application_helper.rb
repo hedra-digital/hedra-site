@@ -34,14 +34,14 @@ module ApplicationHelper
   def formatted_list(array)
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
-  
+
   def book_in_cart_for(b)
     book = Book.find(b)
     book.title
   end
 
   def cart_image
-    cart_empty? ? image_tag('cart.png') : image_tag('cart_full.png')
+    cart_empty? ? image_tag('cart.png') : link_to(image_tag('cart_full.png'), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
   end
 
   def cart_empty?

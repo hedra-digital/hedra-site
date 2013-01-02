@@ -194,13 +194,29 @@ header {
     width: 191px;
   }
   .cart {
+    position: relative;
     display: inline-block;
-    color: $text-blue;
+    .cart-count {
+      color: $text-blue;
+    }
     img {
       margin-left: 15px;
     }
-    ul {
-      display: none;
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+      border-color: #6D9FB6;
+      border-radius: 3px;
+      border-style: solid none none;
+      border-width: 3px medium medium;
+      padding: 10px;
+      li {
+        font-size: 0.7em;
+        text-transform: uppercase;
+        a {
+          white-space: pre-wrap;
+        }
+      }
     }
   }
 }
