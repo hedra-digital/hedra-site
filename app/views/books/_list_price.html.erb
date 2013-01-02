@@ -1,8 +1,6 @@
 <div class="list-price">
   <%= content_tag(:h4, 'Compre:') if params[:action] == 'show' %>
   <ul>
-    <% if book.price_print? %>
-        <li><div class="button"><span class="type">Livro</span><span class="price"><%= link_to number_to_currency(book.price_print), add_to_cart_path(book), :method => :post %></span></div></li>
-    <% end %>
+    <%= book_buttons(book) %>
   </ul>
 </div>
