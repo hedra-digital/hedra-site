@@ -1,0 +1,7 @@
+<% item_id = pagseguro_form_item_counter + 1 %>
+<input type="hidden" name="itemId<%= item_id %>" value="<%= "%04d" % item_id %>">
+<input type="hidden" name="itemDescription<%= item_id %>" value="<%= pagseguro_form_item.title %>">
+<input type="hidden" name="itemAmount<%= item_id %>" value="<%= "%.2f" % pagseguro_form_item.price_print %>">
+<input type="hidden" name="itemQuantity<%= item_id %>" value="1">
+<input type="hidden" name="itemWeight<%= item_id %>" value="<%= pagseguro_form_item.weight.*(1000).to_i %>">
+<input type="hidden" name="itemShippingCost<%= item_id %>" value="0.00">

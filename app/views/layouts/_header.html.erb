@@ -37,11 +37,11 @@
           <%= content_tag :span, total_cart_items, :class => 'cart-count' %>
           <div class="dropdown-menu">
             <ul>
-              <% session['cart'].each do |b| %>
-              <li><%= book_in_cart_for(b) %></li>
+              <% session['cart'].each do |book_id| %>
+              <li><%= book_in_cart_for(book_id) %></li>
               <% end %>
             </ul>
-            <button type="submit" name="button1"><span class="type">Finalizar compra</span></button>
+            <%= render 'layouts/pagseguro_form_cart' if @cart_books %>
           </div>
         </div>
       </div>

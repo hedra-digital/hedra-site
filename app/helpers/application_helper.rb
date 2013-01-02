@@ -35,8 +35,8 @@ module ApplicationHelper
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
 
-  def book_in_cart_for(b)
-    book = Book.find(b)
+  def book_in_cart_for(book_id)
+    book = Book.find(book_id)
     tags = ""
     tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
     tags << content_tag(:div, book.title, :class => 'cart-book-title')

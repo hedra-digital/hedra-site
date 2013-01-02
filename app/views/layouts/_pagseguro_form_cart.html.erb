@@ -1,0 +1,29 @@
+<!-- Declaração do formulário -->
+<form class="pagseguro" target="pagseguro" method="post" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
+
+  <!-- Campos obrigatórios -->
+  <input type="hidden" name="receiverEmail" value="jorge@hedra.com.br">
+  <input type="hidden" name="currency" value="BRL">
+
+  <!-- Itens do pagamento (ao menos um item é obrigatório) -->
+  <%= render :partial => 'layouts/pagseguro_form_item', :collection => @cart_books %>
+
+  <!-- Informações de frete (opcionais) -->
+  <input type="hidden" name="shippingType" value="1">
+  <input type="hidden" name="shippingAddressPostalCode" value="05416011">
+  <input type="hidden" name="shippingAddressStreet" value="R. Fradique Coutinho">
+  <input type="hidden" name="shippingAddressNumber" value="1139">
+  <input type="hidden" name="shippingAddressComplement" value="Subsolo">
+  <input type="hidden" name="shippingAddressDistrict" value="Vila Madalena">
+  <input type="hidden" name="shippingAddressCity" value="Sao Paulo">
+  <input type="hidden" name="shippingAddressState" value="SP">
+  <input type="hidden" name="shippingAddressCountry" value="BRA">
+
+  <input type="hidden" name="encoding" value="UTF-8">
+
+  <!-- submit do form (obrigatório) -->
+  <button type="submit" name="button1">
+    Finalizar compra
+  </button>
+
+</form>
