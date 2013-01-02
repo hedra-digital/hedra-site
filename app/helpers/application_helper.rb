@@ -37,7 +37,11 @@ module ApplicationHelper
 
   def book_in_cart_for(b)
     book = Book.find(b)
-    book.title
+    tags = ""
+    tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
+    tags << content_tag(:div, book.title, :class => 'cart-book-title')
+    tags << content_tag(:div, number_to_currency(book.price_print), :class => 'cart-book-price')
+    raw(tags)
   end
 
   def cart_image
