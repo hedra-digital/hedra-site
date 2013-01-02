@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_filter :resource, :only => [:show, :add_to_cart]
+  before_filter :resource, :only => [:show, :add_to_cart, :remove_from_cart]
   def show  
   end
 
@@ -15,6 +15,12 @@ class BooksController < ApplicationController
   def add_to_cart
     session['cart'] ||= []
     session['cart'] << @book.id
+    session['cart'].uniq!
+    redirect_to :back
+  end
+
+  def remove_from_cart
+    session['cart'].delete(@book.id)
     redirect_to :back
   end
 

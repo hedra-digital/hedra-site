@@ -17,6 +17,8 @@ HedraSite::Application.routes.draw do
   get "pagina/:id"   => "pages#tag", :as => :tag_page
 
   post "carrinho/:id" => "books#add_to_cart", :as => :add_to_cart
+  post "remover/:id" => "books#remove_from_cart", :as => :remove_from_cart
+  
 
   match "home/*other", :to => redirect("/")
   match "home", :to => redirect("/")

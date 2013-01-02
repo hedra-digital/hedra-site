@@ -41,6 +41,7 @@ module ApplicationHelper
     tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
     tags << content_tag(:div, book.title, :class => 'cart-book-title')
     tags << content_tag(:div, number_to_currency(book.price_print), :class => 'cart-book-price')
+    tags << content_tag(:div, link_to("x", remove_from_cart_path(book.id), :method => :post))
     raw(tags)
   end
 
