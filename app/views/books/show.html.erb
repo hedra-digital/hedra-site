@@ -17,7 +17,7 @@
     <div class="row">
       <div class="span9">
         <%= yield :h1 %>
-        <h2><%= formatted_list(book_team(@book)["Texto"]) %></h2>
+        <h2><%= authors(@book) %></h2>
       </div>
       <% if @book.has_price? %>
         <div class="row">

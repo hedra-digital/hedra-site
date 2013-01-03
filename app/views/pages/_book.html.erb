@@ -6,7 +6,7 @@
   <% if book.has_price? %>
     <div class="item-info span7">
       <h3><%= link_to book.title, book %></h3>
-      <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
+      <h4><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>
       </div>
@@ -17,7 +17,7 @@
   <% else %>
     <div class="item-info span10">
       <h3><%= link_to book.title, book %></h3>
-      <h4><%= formatted_list(book_team(book)["Texto"]) rescue "" %></h4>
+      <h4><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>
       </div>

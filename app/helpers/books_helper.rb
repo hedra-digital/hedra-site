@@ -10,6 +10,10 @@ module BooksHelper
     end
   end
 
+  def authors(book)
+    formatted_list(book_team(book)["Texto"].to_a + book_team(book)["Autoria"].to_a)
+  end
+
   def book_stats(book)
     [
       ['Número de páginas', book.pages],

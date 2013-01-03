@@ -11,7 +11,7 @@
     </div>
     <div class="span7">
       <h2><%= link_to feature.book.title, feature.book %></h2>
-      <h3><%= formatted_list(book_team(feature.book)["Texto"]) rescue "" %></h3>
+      <h3><%= authors(feature.book) %></h3>
       <p><%= description_lead feature.book %></p>
     </div>
   </article>
