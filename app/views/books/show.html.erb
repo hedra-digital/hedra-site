@@ -22,7 +22,7 @@
       <% if @book.has_price? %>
         <div class="row">
           <div class="book-text span6">
-            <p><%= @book.description.html_safe %></p>
+            <%= @book.description.html_safe %>
           </div>
           <aside class="book-price span3">
             <%= list_price(@book) %>

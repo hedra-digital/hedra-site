@@ -72,6 +72,28 @@ $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
  * Base tags
  */
 
+h1, h2, h3, h4 {
+  font-weight: normal;
+  line-height: 1;
+  color: $text-light;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 2.32em;
+  color: $text-title;
+  letter-spacing: -2px;
+}
+
+p {
+  font-family: $serifFontFamily;
+  line-height: 1.619;
+}
+
+dt {
+  font-weight: normal;
+}
+
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, textarea, .uneditable-input {
   padding: 15px 10px;
   background: #f5f5f5;
@@ -105,26 +127,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   }
 }
 
-h1, h2, h3, h4 {
-  font-weight: normal;
-  line-height: 1;
-  color: $text-light;
-  text-transform: uppercase;
-}
-
-h2 {
-  margin: 20px 0;
-}
-
-p {
-  font-family: $serifFontFamily;
-  line-height: 1.619;
-}
-
-dt {
-  font-weight: normal;
-}
-
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   text-transform: uppercase;
@@ -152,37 +154,6 @@ textarea:-ms-input-placeholder {
 /* ==========================================================================
    Components
    ========================================================================== */
-
-header {
-  padding-top: 30px;
-  .navbar {
-    .nav > li > a {
-      text-transform: uppercase;
-      font-size: 0.82em;
-    }
-    .nav .dropdown b.caret {
-      margin: 14px 0 0 5px;
-    }
-  }
-  .navbar-inner {
-    padding-left: 11px;
-    padding-right: 11px;
-    border-top: none;
-    border-right: 1px solid lighten($navbarBorder, 12%);
-    border-bottom: 1px solid $navbarBorder;
-    border-left: 1px solid lighten($navbarBorder, 12%);
-    @include box-shadow(0 1px 1px rgba(0,0,0,.065));
-  }
-  .logo, .logo a {
-    display: block;
-    margin: 0;
-    width: 153px;
-    height: 51px;
-    background: url('/assets/hedra-logo.png') no-repeat;
-    @include background-size(100% 100%);
-    @include hide-text;
-  }
-}
 
 #main-nav {
   .dropdown-menu {
@@ -343,59 +314,26 @@ header {
   }
 }
 
+.heading {
+  margin: 20px 0;
+  font-size: 0.82em;
+  color: $text-blue;
+}
+
+.title {
+  font-size: 1em;
+}
+.authors {
+  font-size: 0.73em;
+  color: $text-subtitle !important;
+}
+
 .book-info {
   font-weight: normal;
   line-height: 1;
   text-transform: uppercase;
   color: $text-light;
   text-shadow: none;
-}
-
-#main {
-  h1 {
-    font-size: 2.32em;
-    color: $text-title;
-    letter-spacing: -2px;
-  }
-  h2 {
-    font-size: 0.82em;
-    color: $text-blue;
-  }
-  a:link, a:active, a:visited {
-    color: $linkColor;
-    text-decoration: none;
-  }
-  a:hover {
-    color: $linkColorHover;
-    text-decoration: none;
-  }
-}
-
-#features {
-  h2 {
-    font-size: 2.32em;
-    letter-spacing: -2px;
-  }
-  h3 {
-    font-size: 0.73em;
-    color: $text-subtitle;
-  }
-}
-
-#new-releases article {
-  text-align: center;
-}
-
-#new-releases article,
-#recommendations article,
-.book-list-item {
-  h3 {
-    font-size: 1em;
-  }
-  h4 {
-    font-size: 0.73em;
-    color: $text-subtitle !important;
-  }
 }
 
 .list-price {
@@ -439,16 +377,6 @@ article .list-price {
       padding: 0;
       background: transparent !important;
     }
-  }
-}
-
-.book-page {
-  h2 {
-    font-size: 0.73em;
-    color: $text-subtitle !important;
-  }
-  .book-info {
-    font-size: 0.82em;
   }
 }
 
@@ -498,6 +426,37 @@ article .list-price {
    General areas
    ========================================================================== */
 
+header {
+  padding-top: 30px;
+  .navbar {
+    .nav > li > a {
+      text-transform: uppercase;
+      font-size: 0.82em;
+    }
+    .nav .dropdown b.caret {
+      margin: 14px 0 0 5px;
+    }
+  }
+  .navbar-inner {
+    padding-left: 11px;
+    padding-right: 11px;
+    border-top: none;
+    border-right: 1px solid lighten($navbarBorder, 12%);
+    border-bottom: 1px solid $navbarBorder;
+    border-left: 1px solid lighten($navbarBorder, 12%);
+    @include box-shadow(0 1px 1px rgba(0,0,0,.065));
+  }
+  .logo, .logo a {
+    display: block;
+    margin: 0;
+    width: 153px;
+    height: 51px;
+    background: url('/assets/hedra-logo.png') no-repeat;
+    @include background-size(100% 100%);
+    @include hide-text;
+  }
+}
+
 #wrap, footer {
   border-left: 15px solid #6ea1b6;
   border-right: 15px solid #6ea1b6;
@@ -505,6 +464,14 @@ article .list-price {
 
 #main {
   position: relative;
+  a:link, a:active, a:visited {
+    color: $linkColor;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $linkColorHover;
+    text-decoration: none;
+  }
   p a:hover {
     border-bottom: 1px solid #ccc;
   }
@@ -567,62 +534,51 @@ footer {
 
 #features, #new-releases, #recommendations {
   position: relative;
-  padding-bottom: 70px;
   @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
 }
 
 #features {
+  padding-bottom: 70px;
   z-index: 3;
   background: transparent;
-}
-
-#new-releases {
-  z-index: 2;
-  background: #f4f4f6;
-  h2 {
-    margin: 60px 0 20px 0;
+  .title {
+    margin: 20px 0 6px 0;
+    @extend h1;
   }
-}
-
-#recommendations {
-  padding-bottom: 0;
-  z-index: 1;
-  background: #f7f7f9;
-  h2 {
-    margin: 60px 0 20px 0;
+  .authors {
+    margin: 0 0 16px;
   }
-}
-
-#features {
-  article {
-    img {
-      // width: 100%;
+  .feature-image-container {
+    text-align: center;
+    .feature-image {
+      width: 993px;
+      height: 358px;
     }
   }
 }
 
-.feature-image-container {
-  text-align: center;
-  .feature-image {
-    width: 993px;
-    height: 358px;
+#new-releases {
+  padding-top: 40px;
+  padding-bottom: 70px;
+  z-index: 2;
+  background: #f4f4f6;
+  article {
+    margin: 0 40px;
+    text-align: center;
+    h3 {
+      margin: 20px -40px 9px;
+    }
+    h4 {
+      margin: 0 -40px;
+    }
   }
 }
 
-
-#new-releases article {
-  margin: 0 40px;
-  h3, h4 {
-    margin-left: -40px;
-    margin-right: -40px;
-  }
-  h3 {
-    margin-top: 20px;
-    margin-bottom: 9px;
-  }
-  h4 {
-    margin-top: 0;
-  }
+#recommendations {
+  padding-top: 40px;
+  padding-bottom: 0;
+  z-index: 1;
+  background: #f7f7f9;
 }
 
 /*
@@ -632,13 +588,17 @@ footer {
 .book-page {
   padding-bottom: 30px;
   h1 {
-    margin-bottom: 2px;
+    margin-bottom: 0;
   }
   h2 {
-    margin: 0 0 17px 0;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-size: 0.73em;
+    color: $text-subtitle !important;
   }
   .book-info {
     background: #ededef;
+    font-size: 0.82em;
     .book-info-cover {
       margin: 40px;
       img {
