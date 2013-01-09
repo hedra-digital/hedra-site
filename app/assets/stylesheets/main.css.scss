@@ -111,6 +111,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   border: none;
   border-radius: 5px;
   @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.25));
+  overflow: hidden;
   text-transform: uppercase;
   text-shadow: none;
   text-align: left;
@@ -335,15 +336,8 @@ textarea:-ms-input-placeholder {
   text-shadow: none;
 }
 
-.list-price {
-  padding: 20px;
-  background: #ededef;
-  border-radius: 5px;
-  h4 {
-    margin: 0 0 15px 0;
-    font-size: 0.82em;
-  }
-  ul {
+.buy {
+  & {
     margin: 0;
     li {
       list-style: none;
@@ -352,7 +346,7 @@ textarea:-ms-input-placeholder {
   }
   .btn {
     padding: 0;
-    width: 100%;
+    width: 200px;
     span {
       display: inline-block;
       padding: 15px 10px;
@@ -363,6 +357,19 @@ textarea:-ms-input-placeholder {
         background: #39a0c1;
       }
     }
+  }
+}
+
+.list-price {
+  padding: 20px;
+  background: #ededef;
+  border-radius: 5px;
+  h4 {
+    margin: 0 0 15px 0;
+    font-size: 0.82em;
+  }
+  .btn {
+    width: 100%;
   }
 }
 

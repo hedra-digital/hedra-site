@@ -36,10 +36,12 @@ module BooksHelper
 
   def book_buttons(book)
     if book.price_print?
-      content_tag :li do
-        link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do
-          concat content_tag(:span, 'Livro', :class => 'type')
-          concat content_tag(:span, number_to_currency(book.price_print), :class => 'price')
+      content_tag :ul, :class => 'buy' do
+        content_tag :li do
+          link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do
+            concat content_tag(:span, 'Livro', :class => 'type')
+            concat content_tag(:span, number_to_currency(book.price_print), :class => 'price')
+          end
         end
       end
     end

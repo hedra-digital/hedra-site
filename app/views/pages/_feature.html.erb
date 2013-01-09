@@ -13,6 +13,7 @@
       <h2 class="title"><%= link_to feature.book.title, feature.book %></h2>
       <h3 class="authors"><%= authors(feature.book) %></h3>
       <%= description_lead feature.book %>
+      <%= book_buttons(feature.book) %>
     </div>
   </article>
 <% end %>
