@@ -3,7 +3,7 @@
   <div class="book-page row">
     <aside class="book-info span3">
       <div class="book-info-cover">
-        <%= image_tag @book.cover_url.to_s %>
+        <%= image_tag @book.cover_url(:big_thumb).to_s %>
       </div>
       <div class="book-info-data">
         <dl>
