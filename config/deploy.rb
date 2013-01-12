@@ -9,7 +9,6 @@ set :application, "Hedra Site"
 
 set :scm, :git
 set :repository,  "git@github.com:hedra-digital/hedra-site.git"
-set :deploy_to, "/home/deploy/apps/staging"
 set :deploy_via, 'copy'
 set :user, 'deploy'
 
@@ -20,9 +19,9 @@ set :keep_releases, 3
 
 default_run_options[:pty] = true
 
-role :web, "hedra.com.br"
-role :app, "hedra.com.br"
-role :db,  "hedra.com.br", :primary => true
+role :web, '96.126.125.185'
+role :app, '96.126.125.185'
+role :db,  '96.126.125.185', :primary => true
 
 task :uname do
   run "uname -a"
