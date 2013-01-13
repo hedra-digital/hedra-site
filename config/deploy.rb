@@ -19,10 +19,6 @@ set :keep_releases, 3
 
 default_run_options[:pty] = true
 
-role :web, '96.126.125.185'
-role :app, '96.126.125.185'
-role :db,  '96.126.125.185', :primary => true
-
 task :uname do
   run "uname -a"
 end
