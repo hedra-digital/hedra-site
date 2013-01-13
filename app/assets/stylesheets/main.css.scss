@@ -11,7 +11,8 @@ $text-subtitle:                   #999;
 $text-light:                      #666;
 $text-blue:                       #519fc0;
 $selection:                       #fffdc9;
-$carouselOffset:                  80px;
+$page-border:                     #6EA1B6;
+$carousel-offset:                 80px;
 
 /*
  * Overwriting Bootstrap variables
@@ -71,6 +72,10 @@ $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
 /*
  * Base tags
  */
+
+body {
+  background-color: $page-border;
+}
 
 h1, h2, h3, h4 {
   font-weight: normal;
@@ -150,6 +155,104 @@ textarea:-ms-input-placeholder {
   color: $text-light;
   font-size: 14px;
   line-height: 1.4;
+}
+
+/* ==========================================================================
+   General areas
+   ========================================================================== */
+
+#wrap {
+  margin: 0 15px;
+  overflow: hidden;
+  background-color: $bodyBackground;
+}
+
+header {
+  padding-top: 30px;
+  .navbar {
+    .nav > li > a {
+      text-transform: uppercase;
+      font-size: 0.82em;
+    }
+    .nav .dropdown b.caret {
+      margin: 14px 0 0 5px;
+    }
+  }
+  .navbar-inner {
+    padding-left: 11px;
+    padding-right: 11px;
+    border-top: none;
+    border-right: 1px solid lighten($navbarBorder, 12%);
+    border-bottom: 1px solid $navbarBorder;
+    border-left: 1px solid lighten($navbarBorder, 12%);
+    @include box-shadow(0 1px 1px rgba(0,0,0,.065));
+  }
+  .logo, .logo a {
+    display: block;
+    margin: 0;
+    width: 153px;
+    height: 51px;
+    background: url('/assets/hedra-logo.png') no-repeat;
+    @include background-size(100% 100%);
+    @include hide-text;
+  }
+}
+
+#main {
+  position: relative;
+  a:link, a:active, a:visited {
+    color: $linkColor;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $linkColorHover;
+    text-decoration: none;
+  }
+  p a:hover {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.book-list-item {
+  display: table;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e3e3e5;
+  .item-cover {
+    display: table-cell;
+  }
+  .item-info {
+    display: table-cell;
+    vertical-align: middle;
+    h3 {
+      margin: 0 0 9px 0;
+    }
+    h4 {
+      margin: 0 0 13px 0;
+    }
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+footer {
+  position: relative;
+  z-index: 5;
+  margin: 0 15px;
+  font-size: 0.82em;
+  line-height: 1;
+  background: #ededef;
+  address {
+    padding-top: 25px;
+    border-top: 1px solid #dadadc;
+    line-height: 20px;
+    font-family: $altFontFamily;
+  }
+
+  .company-copyright {
+    margin-bottom: 25px;
+  }
 }
 
 /* ==========================================================================
@@ -447,102 +550,6 @@ article .list-price {
 }
 
 /* ==========================================================================
-   General areas
-   ========================================================================== */
-
-header {
-  padding-top: 30px;
-  .navbar {
-    .nav > li > a {
-      text-transform: uppercase;
-      font-size: 0.82em;
-    }
-    .nav .dropdown b.caret {
-      margin: 14px 0 0 5px;
-    }
-  }
-  .navbar-inner {
-    padding-left: 11px;
-    padding-right: 11px;
-    border-top: none;
-    border-right: 1px solid lighten($navbarBorder, 12%);
-    border-bottom: 1px solid $navbarBorder;
-    border-left: 1px solid lighten($navbarBorder, 12%);
-    @include box-shadow(0 1px 1px rgba(0,0,0,.065));
-  }
-  .logo, .logo a {
-    display: block;
-    margin: 0;
-    width: 153px;
-    height: 51px;
-    background: url('/assets/hedra-logo.png') no-repeat;
-    @include background-size(100% 100%);
-    @include hide-text;
-  }
-}
-
-#wrap, footer {
-  border-left: 15px solid #6ea1b6;
-  border-right: 15px solid #6ea1b6;
-}
-
-#main {
-  position: relative;
-  a:link, a:active, a:visited {
-    color: $linkColor;
-    text-decoration: none;
-  }
-  a:hover {
-    color: $linkColorHover;
-    text-decoration: none;
-  }
-  p a:hover {
-    border-bottom: 1px solid #ccc;
-  }
-}
-
-.book-list-item {
-  display: table;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #e3e3e5;
-  .item-cover {
-    display: table-cell;
-  }
-  .item-info {
-    display: table-cell;
-    vertical-align: middle;
-    h3 {
-      margin: 0 0 9px 0;
-    }
-    h4 {
-      margin: 0 0 13px 0;
-    }
-  }
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-footer {
-  position: relative;
-  z-index: 5;
-  font-size: 0.82em;
-  line-height: 1;
-  background: #ededef;
-  address {
-    padding-top: 25px;
-    border-top: 1px solid #dadadc;
-    line-height: 20px;
-    font-family: $altFontFamily;
-  }
-
-  .company-copyright {
-    margin-bottom: 25px;
-  }
-}
-
-/* ==========================================================================
    Pages
    ========================================================================== */
 
@@ -559,8 +566,8 @@ footer {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
-  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carouselOffset;
-  left: $carouselOffset / 2;
+  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carousel-offset;
+  left: $carousel-offset / 2;
   a.prev, a.next {
     background: url('/assets/carousel-arrow.png') no-repeat;
     width: 40px;
@@ -939,13 +946,13 @@ html, body {
 
 @media (min-width: 1200px) {
   #carousel-container {
-    width: (($gridColumnWidth1200 * $gridColumns) + ($gridGutterWidth1200 * ($gridColumns - 1))) + $carouselOffset;
+    width: (($gridColumnWidth1200 * $gridColumns) + ($gridGutterWidth1200 * ($gridColumns - 1))) + $carousel-offset;
   }
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
   #carousel-container {
-    width: (($gridColumnWidth768 * $gridColumns) + ($gridGutterWidth768 * ($gridColumns - 1))) + $carouselOffset;
+    width: (($gridColumnWidth768 * $gridColumns) + ($gridGutterWidth768 * ($gridColumns - 1))) + $carousel-offset;
   }
 }
 
@@ -959,10 +966,6 @@ html, body {
     .gradient {
       background: none;
     }
-  }
-  #wrap, footer {
-    border-left: none;
-    border-right: none;
   }
 }
 
