@@ -11,6 +11,7 @@ $text-subtitle:                   #999;
 $text-light:                      #666;
 $text-blue:                       #519fc0;
 $selection:                       #fffdc9;
+$carouselOffset:                  80px;
 
 /*
  * Overwriting Bootstrap variables
@@ -547,6 +548,8 @@ footer {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carouselOffset;
+  left: $carouselOffset / 2;
   a.prev, a.next {
     background: url('/assets/carousel-arrow.png') no-repeat;
     width: 40px;
@@ -557,11 +560,11 @@ footer {
     @include hide-text;
   }
   a.prev {
-    left: 10px;
+    left: 5px;
     background-position: 0 0;
   }
   a.next {
-    right: 10px;
+    right: 85px;
     background-position: -40px 0;
   }
   .pagination {
@@ -579,6 +582,17 @@ footer {
   .pagination a.selected {
     background-position: 0 0;
     cursor: default;
+  }
+  .gradient {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    pointer-events: none;
+    @include linear-gradient(left, rgba($bodyBackground, 0), rgba($bodyBackground, 1));
   }
 }
 
@@ -912,7 +926,29 @@ html, body {
    Responsive media queries
    ========================================================================== */
 
+@media (min-width: 1200px) {
+  #carousel-container {
+    width: (($gridColumnWidth1200 * $gridColumns) + ($gridGutterWidth1200 * ($gridColumns - 1))) + $carouselOffset;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #carousel-container {
+    width: (($gridColumnWidth768 * $gridColumns) + ($gridGutterWidth768 * ($gridColumns - 1))) + $carouselOffset;
+  }
+}
+
 @media (max-width: 767px) {
+  #carousel-container {
+    width: auto;
+    left: 0;
+    a.next {
+      right: 5px;
+    }
+    .gradient {
+      background: none;
+    }
+  }
   #wrap, footer {
     border-left: none;
     border-right: none;
