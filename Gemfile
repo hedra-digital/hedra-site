@@ -7,7 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'simple_form'
-gem "activeadmin", :git => "git://github.com/gregbell/active_admin.git"
+gem "activeadmin"
 gem 'friendly_id', '~> 4.0.1'
 gem 'annotate', ">=2.5.0"
 gem 'carrierwave'
