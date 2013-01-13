@@ -545,8 +545,6 @@ footer {
 
 #carousel-container {
   position: relative;
-  margin: 0 auto;
-  width: 1170px;
   overflow: hidden;
   white-space: nowrap;
   a.prev, a.next {
@@ -566,23 +564,22 @@ footer {
     right: 10px;
     background-position: -40px 0;
   }
-}
-
-.pagination {
-  margin: 10px 0 0 0;
-  text-align: center;
-}
-.pagination a {
-  background: url('/assets/carousel-pagination.png') -12px 0 no-repeat;
-  width: 12px;
-  height: 12px;
-  margin: 0 18px 0 0;
-  display: inline-block;
-  @include hide-text;
-}
-.pagination a.selected {
-  background-position: 0 0;
-  cursor: default;
+  .pagination {
+    margin: 10px 0 0 0;
+    text-align: center;
+  }
+  .pagination a {
+    background: url('/assets/carousel-pagination.png') -12px 0 no-repeat;
+    width: 12px;
+    height: 12px;
+    margin: 0 18px 0 0;
+    display: inline-block;
+    @include hide-text;
+  }
+  .pagination a.selected {
+    background-position: 0 0;
+    cursor: default;
+  }
 }
 
 #features {
