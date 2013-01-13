@@ -433,6 +433,17 @@ article .list-price {
   img {
     @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
   }
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background: url('/assets/cover-gloss.png') no-repeat;
+    background-size: cover;
+  }
 }
 
 /* ==========================================================================
