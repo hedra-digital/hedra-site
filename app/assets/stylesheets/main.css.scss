@@ -608,7 +608,7 @@ article .list-price {
     top: 0;
     bottom: 0;
     width: 200px;
-    @include linear-gradient(left, rgba($bodyBackground, 0), rgba($bodyBackground, 1));
+    @include linear-gradient(left, rgba($bodyBackground, 0) 0%, rgba($bodyBackground, .8) 50%,rgba($bodyBackground, 1) 100%);
   }
 }
 
