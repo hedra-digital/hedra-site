@@ -557,6 +557,7 @@ footer {
     display: block;
     position: absolute;
     top: 135px;
+    z-index: 10;
     @include hide-text;
   }
   a.prev {
@@ -586,12 +587,11 @@ footer {
   .gradient {
     display: block;
     position: absolute;
-    z-index: 100;
+    z-index: 5;
     right: 0;
     top: 0;
     bottom: 0;
     width: 200px;
-    pointer-events: none;
     @include linear-gradient(left, rgba($bodyBackground, 0), rgba($bodyBackground, 1));
   }
 }
@@ -839,24 +839,24 @@ footer {
   * Tag page
   */
 
-  #tag {
-    #extra {
-      overflow: auto;
-      padding: 30px;
-      margin-bottom: 40px;
-      #image {
-        float: left;
-        img {
-          width: 200px;
-          height: 200px;
-          padding: 10px;
-        }
+#tag {
+  #extra {
+    overflow: auto;
+    padding: 30px;
+    margin-bottom: 40px;
+    #image {
+      float: left;
+      img {
+        width: 200px;
+        height: 200px;
+        padding: 10px;
       }
-      p {
-          margin-top: 20px;
-        }
     }
+    p {
+        margin-top: 20px;
+      }
   }
+}
 
 /* ==========================================================================
    H5BP helpers
