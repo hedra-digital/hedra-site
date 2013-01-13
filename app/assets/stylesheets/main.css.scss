@@ -428,6 +428,12 @@ article .list-price {
   }
 }
 
+.cover {
+  img {
+    @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
+  }
+}
+
 /* ==========================================================================
    General areas
    ========================================================================== */
@@ -506,12 +512,6 @@ header {
   }
 }
 
-.cover {
-  img {
-    @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
-  }
-}
-
 footer {
   position: relative;
   z-index: 5;
@@ -543,10 +543,69 @@ footer {
   @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
 }
 
+#carousel-container {
+  position: relative;
+  margin: 0 auto;
+  width: 1170px;
+  overflow: hidden;
+  white-space: nowrap;
+  a.prev, a.next {
+    background: url('/assets/carousel-arrow.png') no-repeat;
+    width: 40px;
+    height: 55px;
+    display: block;
+    position: absolute;
+    top: 135px;
+    @include hide-text;
+  }
+  a.prev {
+    left: 10px;
+    background-position: 0 0;
+  }
+  a.next {
+    right: 10px;
+    background-position: -40px 0;
+  }
+}
+
+.pagination {
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+.pagination a {
+  background: url('/assets/carousel-pagination.png') -12px 0 no-repeat;
+  width: 12px;
+  height: 12px;
+  margin: 0 18px 0 0;
+  display: inline-block;
+  @include hide-text;
+}
+.pagination a.selected {
+  background-position: 0 0;
+  cursor: default;
+}
+
 #features {
   padding-bottom: 70px;
   z-index: 3;
   background: transparent;
+  .feature-item {
+    display: inline-block;
+    margin-right: 40px;
+    white-space: normal;
+    vertical-align: top;
+    .feature-cover {
+      float: left;
+      width: 240px;
+      min-height: 1px;
+    }
+    .feature-data {
+      float: left;
+      margin-left: 40px;
+      width: 510px;
+      min-height: 1px;
+    }
+  }
   .title {
     margin: 20px 0 6px 0;
     @extend h1;
@@ -830,14 +889,6 @@ textarea {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
-}
-
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
 }
 
 /* ==========================================================================

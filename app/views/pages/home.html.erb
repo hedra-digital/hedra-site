@@ -1,8 +1,13 @@
 <% page_data :type => 'website', :image => "#{request.protocol}#{request.host_with_port}/assets/hedra-logo.png" %>
 
 <div id="features">
-  <div class="container">
-    <%= render :partial => 'pages/feature', :collection => @features %>
+  <div id="carousel-container">
+    <div id="carousel-target">
+      <%= render :partial => 'pages/feature', :collection => @features %>
+    </div>
+    <a class="prev" id="carousel-prev" href="#">prev</a>
+    <a class="next" id="carousel-next" href="#">next</a>
+    <div class="pagination" id="carousel-pagination"></div>
   </div>
 </div>
 
@@ -21,3 +26,33 @@
     <%= render :partial => 'pages/book', :collection => @recommendations %>
   </div>
 </div>
+
+<script>
+
+  $(document).ready(function() {
+    $("#carousel-target").carouFredSel({
+      direction       : "left",
+      width           : "100%",
+      height          : "auto",
+      circular        : false,
+      infinite        : false,
+      auto            : false,
+      prev            : {
+        button        : "#carousel-prev",
+        key           : "left"
+                        },
+      next            : {
+        button        : "#carousel-next",
+        key           : "right"
+                        },
+      pagination      : "#carousel-pagination",
+      scroll          : {
+        items         : 1,
+        easing        : "swing",
+        duration      : 1000,
+        pauseOnHover  : true
+                        }
+    });
+  });
+
+</script>

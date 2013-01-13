@@ -1,15 +1,15 @@
 <% if feature.feature_image.present? %>
-  <article class="row">
-    <div class="span12 feature-image-container">
+  <article class="feature-item">
+    <div class="feature-image-container">
       <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), tag_page_path(feature.page.tag.slug)) %>
     </div>
   </article>
 <% else %>
-  <article class="row">
-    <div class="cover span3">
+  <article class="feature-item">
+    <div class="feature-cover cover">
       <%= link_to(image_tag(feature.book.cover_url.to_s), feature.book) %>
     </div>
-    <div class="span7">
+    <div class="feature-data">
       <h2 class="title"><%= link_to feature.book.title, feature.book %></h2>
       <h3 class="authors"><%= authors(feature.book) %></h3>
       <%= description_lead feature.book %>
