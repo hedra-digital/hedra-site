@@ -544,8 +544,10 @@ article .list-price {
     content: "";
     background: url('/assets/cover-gloss.png') no-repeat;
     background-size: 100% 100%;
+    pointer-events: none;
   }
 }
+
 
 /* ==========================================================================
    Pages
@@ -693,9 +695,6 @@ article .list-price {
     font-size: 0.82em;
     .book-info-cover {
       margin: 40px;
-      img {
-        @include box-shadow(3px 4px 5px rgba(0,0,0,0.3));
-      }
     }
     .book-info-data {
       margin: 20px;
