@@ -3,7 +3,8 @@
   <div class="book-page row">
     <aside class="book-info span3">
       <div class="book-info-cover cover">
-        <%= link_to image_tag(@book.cover_url(:big_thumb).to_s), '#myModal', :'data-toggle' => 'modal', :'data-target' => 'myModal' %>
+        <%#= link_to image_tag(@book.cover_url(:big_thumb).to_s), '#myModal', :'data-toggle' => 'modal', :'data-target' => 'myModal' %>
+        <%= image_tag(@book.cover_url(:big_thumb).to_s) %>
       </div>
       <div class="book-info-data">
         <dl>
