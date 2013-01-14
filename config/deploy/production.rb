@@ -1,3 +1,3 @@
-server '96.126.125.185', :app, :web, :db, :primary => true
+server 'hedra.com.br', :app, :web, :db, :primary => true
 set :deploy_to, "/home/deploy/apps/hedra-site"
-# after "deploy:update", "newrelic:notice_deployment"
+after "deploy:update", "newrelic:notice_deployment"
