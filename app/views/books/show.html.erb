@@ -2,8 +2,8 @@
 <div class="container">
   <div class="book-page row">
     <aside class="book-info span3">
-      <div class="book-info-cover">
-        <%= image_tag @book.cover_url(:big_thumb).to_s %>
+      <div class="book-info-cover cover">
+        <%= link_to image_tag(@book.cover_url(:big_thumb).to_s), '#myModal', :'data-toggle' => 'modal', :'data-target' => 'myModal' %>
       </div>
       <div class="book-info-data">
         <dl>
@@ -51,3 +51,22 @@
   </div>
 
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h5 id="myModalLabel"><%= @book.title %></h5>
+  </div>
+  <div class="modal-body">
+    <%= image_tag(@book.cover_url.to_s) %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.cover a').click(function(){
+        $('#myModal').modal('show')
+    });
+  });
+</script>

@@ -548,6 +548,32 @@ article .list-price {
   }
 }
 
+.modal {
+  position: fixed;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  width: 570px;
+  margin: 0 0 0 -285px;
+  .modal-header {
+    h5 {
+      margin: 0;
+      line-height: 35px;
+    }
+  }
+  .modal-body {
+    height: 88%;
+    max-height: none;
+    overflow-y: visible;
+    text-align: center;
+    img {
+      height: 100%;
+    }
+  }
+  &.fade.in {
+    top: 10px;
+  }
+}
 
 /* ==========================================================================
    Pages
