@@ -669,7 +669,9 @@ article .list-price {
   }
   .title {
     margin: 20px 0 6px 0;
-    @extend h1;
+    font-size: 2.22em;
+    color: $text-title;
+    letter-spacing: -2px;
   }
   .authors {
     margin: 0 0 16px;
