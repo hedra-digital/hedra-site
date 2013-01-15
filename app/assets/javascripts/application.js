@@ -16,6 +16,5 @@
 //= require bootstrap-alert
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
-//= require bootstrap-transition
-//= require bootstrap-modal
+//= require jquery.fancybox
 //= require jquery.carouFredSel-6.1.0
