@@ -1,29 +1,23 @@
 HedraSite::Application.routes.draw do
-
   mount Ckeditor::Engine => '/ckeditor'
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  get "livros/busca",  :to => "books#search"
-  get "livros/:id",    :to => "books#show", :as => :book
-  get "categoria/:id", :to => "books#by_category", :as => :category
-
-  get "sobre", :to => "pages#about", :as => :about
-  get "contato"    => "contact#new", :as => :contact
-  post "contato"   => "contact#create", :as => :contact
-
-  get "pagina/:id"   => "pages#tag", :as => :tag_page
-
-  post "carrinho/:id" => "books#add_to_cart", :as => :add_to_cart
-  post "remover/:id" => "books#remove_from_cart", :as => :remove_from_cart
-  
-
-  match "home/*other", :to => redirect("/")
-  match "home", :to => redirect("/")
-
   root :to => "pages#home"
+
+  get "livros/busca"      => "books#search"
+  get "livros/:id"        => "books#show", :as => :book
+  get "categoria/:id"     => "books#by_category", :as => :category
+  get "sobre"             => "pages#about", :as => :about
+  get "contato"           => "contact#new", :as => :contact
+  post "contato"          => "contact#create", :as => :contact
+  get "pagina/:id"        => "pages#tag", :as => :tag_page
+  post "carrinho/:id"     => "books#add_to_cart", :as => :add_to_cart
+  post "remover/:id"      => "books#remove_from_cart", :as => :remove_from_cart
+  get "home/*other"       => redirect("/")
+  get "home"              => redirect("/")
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
