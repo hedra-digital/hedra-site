@@ -550,6 +550,13 @@ article .list-price {
   }
 }
 
+.book-info-cover .cover {
+  &:before {
+    position: static;
+    background: none;
+  }
+}
+
 .modal {
   position: fixed;
   top: 10px;
@@ -907,6 +914,14 @@ article .list-price {
   }
 }
 
+/*
+ * About
+ */
+
+#about {
+  @include column-count(2);
+  @include column-gap(2em);
+}
 
 /* ==========================================================================
    H5BP helpers
