@@ -550,9 +550,9 @@ article .list-price {
   }
 }
 
-.book-info-cover .cover {
+.book-info .cover {
   &:before {
-    position: static;
+    content: none;
     background: none;
   }
 }
