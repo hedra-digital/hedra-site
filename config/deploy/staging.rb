@@ -1,2 +1,2 @@
-server "hedra.com.br", :app, :web, :db, :primary => true
-set :deploy_to, "/home/deploy/apps/staging"
+server "96.126.125.185", :app, :web, :db, :primary => true
+set :deploy_to, "/home/deploy/apps/hedra-site"
