@@ -16,7 +16,7 @@ class BooksController < ApplicationController
     session['cart'] ||= []
     session['cart'] << @book.id
     session['cart'].uniq!
-    flash[:notice] = "O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
+    flash[:info] = "O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
     redirect_to :back
   end
 

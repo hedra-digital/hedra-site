@@ -2,9 +2,10 @@ module ApplicationHelper
 
   def flash_message
     messages = ""
+    types = { :notice => 'success', :alert => 'error', :info => 'info' }
     flash.each do |type, content|
       messages = content_tag :div, :class => 'container' do
-        content_tag :div, :class => "alert alert-#{ type == :notice ? "success" : "error" }" do
+        content_tag :div, :class => "alert alert-#{types[type]}" do
           concat button_tag('&#215;'.html_safe, :type => 'button', :class => 'close', :'data-dismiss' => 'alert', :name => nil)
           concat content.html_safe
         end
