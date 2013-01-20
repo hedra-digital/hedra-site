@@ -15,20 +15,24 @@ module ApplicationHelper
 
   def page_data(options={})
     content_for :og do
-      data = ""
-      data << tag(:meta, { :property => 'og:title', :content => options[:title] }) if options[:title].present?
-      data << tag(:meta, { :property => 'og:type', :content => options[:type] }) if options[:type].present?
-      data << tag(:meta, { :property => 'og:url', :content => "#{request.protocol}#{request.host_with_port}#{request.fullpath}"})
-      data << tag(:meta, { :property => 'og:description', :content => options[:description] }) if options[:description].present?
-      data << tag(:meta, { :property => 'og:image', :content => options[:image] }) if options[:image].present?
-      data << tag(:meta, { :property => 'fb:admins', :content => '694928618' })
-      data << tag(:meta, { :property => 'fb:admins', :content => '534302953' })
-      data << tag(:meta, { :property => 'og:site_name', :content => 'Editora Hedra' })
-      raw(data)
+      [
+        ['og:title', options[:title]],
+        ['og:type', options[:type]],
+        ['og:url', "#{request.protocol}#{request.host_with_port}#{request.fullpath}"],
+        ['og:description', options[:description]],
+        ['og:image', options[:image]],
+        ['fb:admins', '694928618'],
+        ['fb:admins', '534302953'],
+        ['og:site_name', 'Editora Hedra']
+      ].inject([]) { |sum, obj| obj[1].nil? ? sum : sum << tag(:meta, { :property => obj[0], :content => obj[1]}) }.join.html_safe
     end
-    content_for(:h1, content_tag(:h1, options[:title]))
-    content_for(:title, content_tag(:title, "#{options[:title]} | Editora Hedra")) if options[:title].present?
-    content_for(:meta_tags, tag(:meta, { :name => 'description', :content => options[:description] })) if options[:description].present?
+    if options[:title].presence
+      content_for(:h1, content_tag(:h1, options[:title]))
+      content_for(:title, content_tag(:title, "#{options[:title]} | Editora Hedra"))
+    end
+    if options[:description].presence
+      content_for(:meta_tags, tag(:meta, { :name => 'description', :content => options[:description] }))
+    end
   end
 
   def meta_cleanup(description)
@@ -41,12 +45,12 @@ module ApplicationHelper
 
   def book_in_cart_for(book_id)
     book = Book.find(book_id)
-    tags = ""
-    tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
-    tags << content_tag(:div, book.title, :class => 'cart-book-title')
-    tags << content_tag(:div, number_to_currency(book.price_print), :class => 'cart-book-price')
-    tags << content_tag(:div, link_to("x", remove_from_cart_path(book.id), :method => :post), :class => 'cart-book-remove')
-    raw(tags)
+    [
+      [image_tag(book.cover_url.to_s), 'cart-book-cover'],
+      [book.title, 'cart-book-title'],
+      [number_to_currency(book.price_print), 'cart-book-price'],
+      [link_to("x", remove_from_cart_path(book.id), :method => :post), 'cart-book-remove'],
+    ].inject([]) { |sum, obj| sum << content_tag(:div, obj[0], :class => obj[1]) }.join.html_safe
   end
 
   def cart_image
