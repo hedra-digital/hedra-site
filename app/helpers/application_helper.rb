@@ -3,8 +3,12 @@ module ApplicationHelper
   def flash_message
     messages = ""
     flash.each do |type, content|
-      button = button_tag('&#215;'.html_safe, :type => 'button', :class => 'close', :'data-dismiss' => 'alert', :name => nil) + content
-      messages = content_tag(:div, button, :class => "alert alert-#{ type == :notice ? "success" : "error" }")
+      messages = content_tag :div, :class => 'container' do
+        content_tag :div, :class => "alert alert-#{ type == :notice ? "success" : "error" }" do
+          concat button_tag('&#215;'.html_safe, :type => 'button', :class => 'close', :'data-dismiss' => 'alert', :name => nil)
+          concat content.html_safe
+        end
+      end
     end
     messages
   end
