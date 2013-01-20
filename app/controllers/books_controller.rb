@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_filter :resource, :only => [:show, :add_to_cart, :remove_from_cart]
-  def show  
+  def show
   end
 
   def by_category
@@ -16,6 +16,7 @@ class BooksController < ApplicationController
     session['cart'] ||= []
     session['cart'] << @book.id
     session['cart'].uniq!
+    flash[:notice] = "O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
     redirect_to :back
   end
 
@@ -25,7 +26,7 @@ class BooksController < ApplicationController
   end
 
   private
-  
+
   def resource
     @book = Book.includes(:participations => [:person, :role]).find(params[:id])
   end
