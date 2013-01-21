@@ -5,7 +5,7 @@
 
     <% if @page %>
       <div id="extra">
-        <div id="image"><%= image_tag(@page.tag_image.to_s) if @page.tag_image.present? %></div>
+        <%= content_tag(:div, image_tag(@page.tag_image.to_s), :id => 'image') if @page.tag_image.present? %>
         <%= @page.body if @page.body.present? %>
       </div>
     <% end %>
