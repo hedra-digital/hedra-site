@@ -13,7 +13,7 @@ HedraSite::Application.routes.draw do
   get "sobre"             => "pages#about", :as => :about
   get "contato"           => "contact#new", :as => :contact
   post "contato"          => "contact#create", :as => :contact
-  get "pagina/:id"        => "pages#tag", :as => :tag_page
+  get "tag/:id"           => "pages#tag", :as => :tag_page
   post "carrinho/:id"     => "books#add_to_cart", :as => :add_to_cart
   post "remover/:id"      => "books#remove_from_cart", :as => :remove_from_cart
   get "home/*other"       => redirect("/")

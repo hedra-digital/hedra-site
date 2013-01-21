@@ -1,15 +1,17 @@
-<% page_data :title => @page.tag.name, :type => 'article' %>
+<% page_data :title => @tag.name, :type => 'article' %>
 <div id="tag">
   <div class="container">
     <%= yield :h1 %>
 
-    <% if @page.body.present? && @page.tag_image.present? %>
+    <% if @page %>
       <div id="extra">
-        <div id="image"><%= image_tag(@page.tag_image.to_s) %></div>
-        <p><%= @page.body %></p>
+        <div id="image"><%= image_tag(@page.tag_image.to_s) if @page.tag_image.present? %></div>
+        <%= @page.body if @page.body.present? %>
       </div>
     <% end %>
 
-    <%= render :partial => 'pages/book', :collection => @books %>
+    <div id="tag-list">
+      <%= render :partial => 'pages/book', :collection => @books %>
+    </div>
   </div>
 </div>

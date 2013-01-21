@@ -13,7 +13,8 @@ class PagesController < ApplicationController
   end
 
   def tag
-    @page = Tag.find(params[:id]).page
-    @books = @page.tag.books.includes( :participations => [:person, :role] )
+    @tag = Tag.where(:name => params[:id]).first
+    @books = @tag.books.includes(:participations => [:person, :role])
+    @page = @tag.page
   end
 end
