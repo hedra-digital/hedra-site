@@ -36,3 +36,5 @@ zeus.json
 
 /db/sphinx/
 /log/searchd.development.pid
+.vagrant
+Vagrantfile
