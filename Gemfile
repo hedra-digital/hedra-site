@@ -11,7 +11,6 @@ gem "activeadmin"
 gem 'friendly_id', '~> 4.0.1'
 gem 'annotate', ">=2.5.0"
 gem 'carrierwave'
-gem 'rmagick'
 gem 'mini_magick'
 gem 'sanitize'
 gem 'truncate_html'
