@@ -52,7 +52,7 @@ $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
    ========================================================================== */
 
 @import "bootstrap";
-@import "responsive";
+// @import "responsive";
 @import "bourbon";
 
 
@@ -600,9 +600,8 @@ article .list-price {
 }
 
 #carousel-container {
-  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carousel-offset;
+  width: ($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1)) + $carousel-offset;
   position: relative;
-  left: $carousel-offset / 2;
   overflow: hidden;
   white-space: nowrap;
   a.prev, a.next {
@@ -1012,30 +1011,6 @@ html, body {
    Responsive media queries
    ========================================================================== */
 
-@media (min-width: 1200px) {
-  #carousel-container {
-    width: (($gridColumnWidth1200 * $gridColumns) + ($gridGutterWidth1200 * ($gridColumns - 1))) + $carousel-offset;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-  #carousel-container {
-    width: (($gridColumnWidth768 * $gridColumns) + ($gridGutterWidth768 * ($gridColumns - 1))) + $carousel-offset;
-  }
-}
-
-@media (max-width: 767px) {
-  #carousel-container {
-    width: auto;
-    left: 0;
-    a.next {
-      right: 5px;
-    }
-    .gradient {
-      background: none;
-    }
-  }
-}
 
 /* ==========================================================================
    Print styles.

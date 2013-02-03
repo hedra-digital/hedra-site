@@ -1,5 +1,5 @@
 header {
   h1.logo, p.logo a {
-    background: url('/assets/hedra-logo-ie7.png') no-repeat;
+    background: url(asset_path('hedra-logo-ie7.png', image)) no-repeat;
   }
 }
