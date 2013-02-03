@@ -193,7 +193,7 @@ header {
     margin: 0;
     width: 153px;
     height: 51px;
-    background: url('/assets/hedra-logo.png') no-repeat;
+    background: url(asset_path('hedra-logo.png', image)) no-repeat;
     @include background-size(100% 100%);
     @include hide-text;
   }
@@ -307,7 +307,7 @@ footer {
   }
   .navbar-search input {
     border-radius: 6px;
-    background-image: url('/assets/search-icon.png');
+    background-image: url(asset_path('search-icon.png', image));
     background-repeat: no-repeat;
     background-position: 3% 50%;
     height: 24px;
@@ -406,12 +406,12 @@ footer {
       &.facebook a {
         width: 10px;
         height: 20px;
-        background: transparent url('/assets/facebook-icon.png') center center no-repeat;
+        background: transparent url(asset_path('facebook-icon.png', image)) center center no-repeat;
       }
       &.twitter a {
         width: 24px;
         height: 20px;
-        background: transparent url('/assets/twitter-icon.png') center center no-repeat;
+        background: transparent url(asset_path('twitter-icon.png', image)) center center no-repeat;
       }
       &:last-child {
         border-right: none;
@@ -545,7 +545,7 @@ article .list-price {
     height: 100%;
     position: absolute;
     content: "";
-    background: url('/assets/cover-gloss.png') no-repeat;
+    background: url(asset_path('cover-gloss.png', image)) no-repeat;
     background-size: 100% 100%;
     pointer-events: none;
   }
@@ -600,13 +600,13 @@ article .list-price {
 }
 
 #carousel-container {
+  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carousel-offset;
   position: relative;
+  left: $carousel-offset / 2;
   overflow: hidden;
   white-space: nowrap;
-  width: (($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1))) + $carousel-offset;
-  left: $carousel-offset / 2;
   a.prev, a.next {
-    background: url('/assets/carousel-arrow.png') no-repeat;
+    background: url(asset_path('carousel-arrow.png', image)) no-repeat;
     width: 40px;
     height: 55px;
     display: block;
@@ -630,7 +630,7 @@ article .list-price {
     text-align: center;
   }
   .pagination a {
-    background: url('/assets/carousel-pagination.png') -12px 0 no-repeat;
+    background: url(asset_path('carousel-pagination.png', image)) -12px 0 no-repeat;
     width: 12px;
     height: 12px;
     margin: 0 18px 0 0;
