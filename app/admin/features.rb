@@ -30,11 +30,11 @@ ActiveAdmin.register Feature do
 
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
-      
+
       f.inputs "Destaque com livro" do
-        f.input :book
+        f.input :book, :collection => Book.order("title ASC").all
       end
-      
+
       f.inputs "Destaque sem livro" do
         f.input :page, :collection => Page.all.map{|p| [p.tag.name, p.id] }
         f.input :feature_image, :as => :file, :hint => (( f.object.new_record? || f.object.feature_image.nil? ) ? f.template.content_tag(:span, "nenhuma imagem") : f.template.image_tag(f.object.feature_image.url(:thumb)))

@@ -9,7 +9,7 @@ ActiveAdmin.register Recommendation do
   index do
     selectable_column
     column :id
-    column :book
+    column :book, :collection => Book.order("title ASC").all
     column :updated_at
     default_actions
   end
