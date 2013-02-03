@@ -17,4 +17,4 @@
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
 //= require jquery.fancybox
-//= require jquery.carouFredSel-6.1.0
+//= require jquery.carouFredSel-6.2.0
