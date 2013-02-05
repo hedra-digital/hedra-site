@@ -44,13 +44,11 @@ module ApplicationHelper
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
 
-  def book_in_cart_for(book_id)
-    book = Book.find(book_id)
+  def book_in_cart_for(book)
     [
       [image_tag(book.cover_url.to_s), 'cart-book-cover'],
       [book.title, 'cart-book-title'],
-      [number_to_currency(book.price_print), 'cart-book-price'],
-      [link_to("x", remove_from_cart_path(book.id), :method => :post), 'cart-book-remove'],
+      [number_to_currency(book.price_print), 'cart-book-price']
     ].inject([]) { |sum, obj| sum << content_tag(:div, obj[0], :class => obj[1]) }.join.html_safe
   end
 

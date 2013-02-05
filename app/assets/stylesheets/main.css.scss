@@ -366,6 +366,7 @@ footer {
       .btn {
         margin: 0;
         width: 100%;
+        @include box-sizing(border-box);
         text-align: center;
       }
     }
@@ -910,6 +911,7 @@ article .list-price {
   */
 
 #tag {
+  padding-bottom: 70px;
   #extra {
     overflow: auto;
     padding: 30px;
@@ -930,7 +932,39 @@ article .list-price {
 
 #tag-list {
   margin-top: 30px;
-  padding-bottom: 70px;
+}
+
+/*
+ * Cart page
+ */
+
+.cart-page-book-cover {
+  display: inline-block;
+  width: 60px;
+  margin: 20px 5px 20px 20px;
+}
+
+.cart-page-book-data {
+  display: inline-block;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  white-space: pre-wrap;
+  p {
+
+  }
+}
+
+#cart-form-total {
+  background: white;
+  text-align: right;
+}
+
+#cart-form-buttons {
+  text-align: right;
+  button {
+    margin-left: 15px;
+  }
 }
 
 /*

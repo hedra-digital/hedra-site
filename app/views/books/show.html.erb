@@ -4,7 +4,6 @@
     <aside class="book-info span3">
       <div class="book-info-cover cover">
         <%= link_to image_tag(@book.cover_url(:big_thumb).to_s), @book.cover_url.to_s, :class => 'fancybox' %>
-        <%#= image_tag(@book.cover_url(:big_thumb).to_s) %>
       </div>
       <div class="book-info-data">
         <dl>
@@ -56,21 +55,3 @@
   </div>
 
 </div>
-
-<script>
-  $(".fancybox").fancybox({
-    padding: 0,
-    openEffect : 'elastic',
-    openSpeed  : 150,
-    closeEffect : 'elastic',
-    closeSpeed  : 150,
-    closeClick : true,
-    helpers : {
-        overlay : {
-            css : {
-                'background' : 'rgba(255, 255, 255, 0.5)'
-            }
-        }
-    }
-  });
-</script>

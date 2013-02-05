@@ -18,3 +18,20 @@
 //= require bootstrap-collapse
 //= require jquery.fancybox
 //= require jquery.carouFredSel-6.2.0
+//= require_self
+
+$(".fancybox").fancybox({
+  padding: 0,
+  openEffect : 'elastic',
+  openSpeed  : 150,
+  closeEffect : 'elastic',
+  closeSpeed  : 150,
+  closeClick : true,
+  helpers : {
+      overlay : {
+          css : {
+              'background' : 'rgba(255, 255, 255, 0.5)'
+          }
+      }
+  }
+});

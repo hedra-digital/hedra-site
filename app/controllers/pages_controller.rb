@@ -17,4 +17,7 @@ class PagesController < ApplicationController
     @books = @tag.books.includes(:participations => [:person, :role])
     @page = @tag.page
   end
+
+  def cart
+  end
 end

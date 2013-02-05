@@ -22,8 +22,10 @@
   <input type="hidden" name="encoding" value="UTF-8">
 
   <!-- submit do form (obrigatório) -->
-  <button type="submit" name="button1" class="btn btn-primary">
-    Finalizar compra
-  </button>
-
+  <div id="cart-form-buttons">
+    <%= image_tag '/assets/logo_pagseguro.png' %>
+    <button type="submit" name="button1" class="btn btn-primary">
+      Finalizar compra
+    </button>
+  </div>
 </form>

@@ -10,14 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   def cart_books
-    @cart_books = []
-    if session['cart']
-      session['cart'].each do |book_id|
-        @cart_books << Book.find(book_id)
-      end
+    @cart_books = if session['cart']
+      session['cart'].map { |book_id| Book.includes(:participations => [:person, :role]).find(book_id) }
     else
-      @cart_books = nil
+      []
     end
-    @cart_books
   end
 end
