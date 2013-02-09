@@ -1,33 +1,26 @@
 <% page_data :title => 'Carrinho de compras', :type => 'other' %>
+
 <div id="tag">
   <div class="container">
     <%= yield :h1 %>
-    <table class="cart-page table">
+
+    <table class="cart-page-table table">
       <thead>
         <tr>
-          <td>
-            Título
-          </td>
-          <td>
-            Quantidade
-          </td>
-          <td>
-            Peso
-          </td>
-          <td>
-            Preço
-          </td>
-          <td>
-            Remover
-          </td>
+          <td>Título</td>
+          <td>Quantidade</td>
+          <td>Peso</td>
+          <td>Preço</td>
+          <td>Remover</td>
         </tr>
       </thead>
+
       <tbody>
         <% @cart_books.each do |book| %>
           <tr>
             <td>
-              <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-page-book-cover') %>
-              <%= content_tag(:div, content_tag(:p, book.title) + content_tag(:p, authors(book)), :class => 'cart-page-book-data') %>
+              <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-page-book-cover cover') %>
+              <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-page-book-title') + content_tag(:p, authors(book), :class => 'cart-page-book-authors'), :class => 'cart-page-book-data') %>
             </td>
             <td>
 
