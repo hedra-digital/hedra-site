@@ -8,8 +8,9 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :tag_id
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :body, :tag_id, :tag_image
+  attr_accessible :body, :tag_id, :tag_image, :hero_image
 
   # CarrierWave uploaders
   mount_uploader :tag_image, TagImageUploader
+  mount_uploader :hero_image, HeroImageUploader
 end
