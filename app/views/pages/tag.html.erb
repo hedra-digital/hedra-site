@@ -4,6 +4,7 @@
     <%= yield :h1 %>
 
     <% if @page %>
+      <%= content_tag(:div, image_tag(@page.hero_image.to_s), :id => 'hero', :class => 'hero-unit') if @page.hero_image.present?  %>
       <div id="extra">
         <%= content_tag(:div, image_tag(@page.tag_image.to_s), :id => 'image') if @page.tag_image.present? %>
         <%= @page.body if @page.body.present? %>
