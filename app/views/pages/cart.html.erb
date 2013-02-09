@@ -26,7 +26,7 @@
 
             </td>
             <td class="cart-page-book-weight">
-              <%= book.weight %>
+              <%= (book.weight * 1000).to_i %>g
             </td>
             <td class="cart-page-book-price">
               <%= number_to_currency(book.price_print) %>
