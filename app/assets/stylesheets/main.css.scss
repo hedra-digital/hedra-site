@@ -86,8 +86,18 @@ h1, h2, h3, h4 {
 }
 
 h1 {
+  font-family: $serifFontFamily;
+  font-size: 2.1em;
+  color: $text-blue;
+  text-transform: none;
+  letter-spacing: -1px;
+}
+
+.book-page h1 {
+  font-family: $sansFontFamily;
   font-size: 2.32em;
   color: $text-title;
+  text-transform: uppercase;
   letter-spacing: -2px;
 }
 
@@ -940,9 +950,12 @@ article .list-price {
  */
 
 .cart-page-table {
+  font-size: 0.73em;
+  line-height: 1;
+  border-spacing: 1px;
+  border-collapse: separate;
   thead {
     td {
-      font-size: 0.73em;
       text-transform: uppercase;
     }
   }
@@ -951,23 +964,43 @@ article .list-price {
     td {
         background: #ededef;
         @include box-shadow(1px 1px 0 white);
+        vertical-align: middle;
+    }
+    .cart-page-book-weight,
+    .cart-page-book-price {
+      font-family: $sansFontFamily;
+      color: $text-blue;
+      text-align: center;
     }
     .cart-page-book-title,
     .cart-page-book-authors {
-      display: inline;
       font-family: $sansFontFamily;
       line-height: 1;
+      text-transform: uppercase;
     }
     .cart-page-book-title {
-      font-size: 0.73em;
+      color: $textColor;
+      margin-bottom: 5px;
     }
     .cart-page-book-authors {
-      font-size: 0.65em;
+      font-size: 0.9em;
       color: $text-subtitle;
+      margin-bottom: 0;
     }
-    .cart-page-book-title:after {
-      content: "\A";
-      white-space: pre-wrap;
+    // .cart-page-book-title:after {
+    //   content: "\A";
+    //   white-space: pre-wrap;
+    // }
+    .cart-page-remove-item {
+      a {
+        display: block;
+        margin: 0 auto;
+        width: 25px;
+        height: 25px;
+        line-height: 1;
+        background: url(asset_path('remove-icon.png', image));
+        @include hide-text();
+      }
     }
   }
 }
@@ -980,14 +1013,15 @@ article .list-price {
 
 .cart-page-book-data {
   display: inline-block;
-  text-transform: uppercase;
-  line-height: 0.9;
-  white-space: pre-wrap;
 }
 
 #cart-form-total {
   background: white;
   text-align: right;
+  text-transform: uppercase;
+  span {
+    font-size: 1.35em;
+  }
 }
 
 #cart-form-buttons {

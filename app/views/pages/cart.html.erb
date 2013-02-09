@@ -25,20 +25,20 @@
             <td>
 
             </td>
-            <td>
+            <td class="cart-page-book-weight">
               <%= book.weight %>
             </td>
-            <td>
+            <td class="cart-page-book-price">
               <%= number_to_currency(book.price_print) %>
             </td>
-            <td>
+            <td class="cart-page-remove-item">
               <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>
             </td>
           </tr>
         <% end %>
         <tr>
           <td id="cart-form-total" colspan="5">
-            Total <%= number_to_currency(@cart_books.inject(0) { |sum, obj| sum += obj.price_print }) %>
+            Total <span><%= number_to_currency(@cart_books.inject(0) { |sum, obj| sum += obj.price_print }) %></span>
           </td>
         </tr>
       </tbody>
