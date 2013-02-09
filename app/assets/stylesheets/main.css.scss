@@ -446,10 +446,28 @@ footer {
 
 .book-info {
   font-weight: normal;
+  font-size: 0.82em;
   line-height: 1;
   text-transform: uppercase;
   color: $text-light;
   text-shadow: none;
+  background: #ededef;
+  border-radius: 5px;
+  .book-info-cover {
+    margin: 40px;
+  }
+  .book-info-data {
+    margin: 20px;
+    dt {
+      text-transform: none;
+      line-height: 1;
+    }
+    dd {
+      margin-left: 0;
+      margin-bottom: 15px;
+      line-height: 1;
+    }
+  }
 }
 
 .buy {
@@ -772,25 +790,6 @@ article .list-price {
     margin-bottom: 16px;
     font-size: 0.73em;
     color: $text-subtitle !important;
-  }
-  .book-info {
-    background: #ededef;
-    font-size: 0.82em;
-    .book-info-cover {
-      margin: 40px;
-    }
-    .book-info-data {
-      margin: 20px;
-      dt {
-        text-transform: none;
-        line-height: 1;
-      }
-      dd {
-        margin-left: 0;
-        margin-bottom: 15px;
-        line-height: 1;
-      }
-    }
   }
 }
 
