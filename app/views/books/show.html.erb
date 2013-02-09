@@ -1,36 +1,23 @@
 <% page_data :title => @book.title, :type => 'book', :image => "#{request.protocol}#{request.host_with_port}#{@book.cover_url.to_s}", :description => meta_cleanup(@book.description) %>
 <div class="container">
   <div class="book-page row">
-    <aside class="book-info span3">
-      <div class="book-info-cover cover">
-        <%= link_to image_tag(@book.cover_url(:big_thumb).to_s), @book.cover_url.to_s, :class => 'fancybox' %>
-      </div>
-      <div class="book-info-data">
-        <dl>
-          <% book_team(@book).each do |role, people| %>
-            <%= content_tag :dt, role %>
-            <%= content_tag :dd, formatted_list(people) %>
-          <% end %>
-        </dl>
-      </div>
-    </aside>
-
+    <%= render 'aside', :book => @book %>
     <div class="span9">
       <%= yield :h1 %>
       <h2><%= authors(@book) %></h2>
-
-      <% if @book.has_price? %>
+      </div>
+      <% if book.has_price? %>
         <div class="row">
           <div class="book-text span6">
-            <%= @book.description.html_safe %>
+            <%= book.description.html_safe %>
           </div>
           <aside class="book-price span3">
-            <%= list_price(@book) %>
+            <%= list_price(book) %>
           </aside>
         </div>
       <% else %>
         <div class="book-text span9">
-          <%= @book.description.html_safe %>
+          <%= book.description.html_safe %>
         </div>
       <% end %>
     </div>

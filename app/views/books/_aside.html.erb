@@ -1,0 +1,13 @@
+<aside class="book-info span3">
+  <div class="book-info-cover cover">
+    <%= link_to image_tag(book.cover_url(:big_thumb).to_s), book.cover_url.to_s, :class => 'fancybox' %>
+  </div>
+  <div class="book-info-data">
+    <dl>
+      <% book_team(book).each do |role, people| %>
+        <%= content_tag :dt, role %>
+        <%= content_tag :dd, formatted_list(people) %>
+      <% end %>
+    </dl>
+  </div>
+</aside>
