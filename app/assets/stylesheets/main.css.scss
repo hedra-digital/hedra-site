@@ -602,7 +602,7 @@ article .list-price {
 .cart-book-title,
 .cart-book-authors {
   font-family: $sansFontFamily;
-  line-height: 1;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
@@ -984,6 +984,14 @@ article .list-price {
   line-height: 1;
   border-spacing: 1px;
   border-collapse: separate;
+  .cart-book-cover {
+    width: 60px;
+    margin: 20px 5px 20px 20px;
+  }
+  .cart-book-title,
+  .cart-book-authors {
+    line-height: 1;
+  }
   thead {
     td {
       text-transform: uppercase;
@@ -996,18 +1004,13 @@ article .list-price {
         @include box-shadow(1px 1px 0 white);
         vertical-align: middle;
     }
-    .cart-book-cover {
-      width: 60px;
-      margin: 20px 5px 20px 20px;
-    }
   }
-}
-
-.cart-page-book-weight,
-.cart-page-book-price {
-  font-family: $sansFontFamily;
-  color: $text-blue;
-  text-align: center;
+  .cart-page-book-weight,
+  .cart-page-book-price {
+    font-family: $sansFontFamily;
+    color: $text-blue;
+    text-align: center;
+  }
 }
 
 .cart-page-remove-item {
