@@ -45,11 +45,11 @@ module ApplicationHelper
   end
 
   def book_in_cart_for(book)
-    [
-      [image_tag(book.cover_url.to_s), 'cart-book-cover'],
-      [book.title, 'cart-book-title'],
-      [number_to_currency(book.price_print), 'cart-book-price']
-    ].inject([]) { |sum, obj| sum << content_tag(:div, obj[0], :class => obj[1]) }.join.html_safe
+    tags = ""
+    tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
+    tags << content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
+    tags << content_tag(:div, number_to_currency(book.price_print), :class => 'cart-book-price')
+    tags.html_safe
   end
 
   def cart_image

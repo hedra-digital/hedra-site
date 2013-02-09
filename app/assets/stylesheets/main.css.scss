@@ -362,16 +362,14 @@ footer {
         div {
           display: inline-block;
         }
-        .cart-book-cover {
-          width: 40px;
-        }
-        .cart-book-title {
-          margin-left: 10px;
+        .cart-book-data {
           width: 170px;
         }
-        .cart-book-price,
-        .cart-book-remove {
+        .cart-book-price {
           margin-left: 10px;
+          text-align: right;
+          width: 78px;
+          color: $text-blue;
         }
       }
       .btn {
@@ -597,6 +595,38 @@ article .list-price {
   }
 }
 
+/*
+ * Shopping cart
+ */
+
+.cart-book-title,
+.cart-book-authors {
+  font-family: $sansFontFamily;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cart-book-title {
+  color: $textColor;
+  margin-bottom: 5px;
+}
+
+.cart-book-authors {
+  font-size: 0.9em;
+  color: $text-subtitle;
+  margin-bottom: 0;
+}
+
+.cart-book-cover {
+  display: inline-block;
+  width: 40px;
+}
+
+.cart-book-data {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
 
 /* ==========================================================================
    Pages
@@ -966,53 +996,30 @@ article .list-price {
         @include box-shadow(1px 1px 0 white);
         vertical-align: middle;
     }
-    .cart-page-book-weight,
-    .cart-page-book-price {
-      font-family: $sansFontFamily;
-      color: $text-blue;
-      text-align: center;
-    }
-    .cart-page-book-title,
-    .cart-page-book-authors {
-      font-family: $sansFontFamily;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-    .cart-page-book-title {
-      color: $textColor;
-      margin-bottom: 5px;
-    }
-    .cart-page-book-authors {
-      font-size: 0.9em;
-      color: $text-subtitle;
-      margin-bottom: 0;
-    }
-    // .cart-page-book-title:after {
-    //   content: "\A";
-    //   white-space: pre-wrap;
-    // }
-    .cart-page-remove-item {
-      a {
-        display: block;
-        margin: 0 auto;
-        width: 25px;
-        height: 25px;
-        line-height: 1;
-        background: url(asset_path('remove-icon.png', image));
-        @include hide-text();
-      }
+    .cart-book-cover {
+      width: 60px;
+      margin: 20px 5px 20px 20px;
     }
   }
 }
 
-.cart-page-book-cover {
-  display: inline-block;
-  width: 60px;
-  margin: 20px 5px 20px 20px;
+.cart-page-book-weight,
+.cart-page-book-price {
+  font-family: $sansFontFamily;
+  color: $text-blue;
+  text-align: center;
 }
 
-.cart-page-book-data {
-  display: inline-block;
+.cart-page-remove-item {
+  a {
+    display: block;
+    margin: 0 auto;
+    width: 25px;
+    height: 25px;
+    line-height: 1;
+    background: url(asset_path('remove-icon.png', image));
+    @include hide-text();
+  }
 }
 
 #cart-form-total {
