@@ -6,7 +6,7 @@
   <input type="hidden" name="currency" value="BRL">
 
   <!-- Itens do pagamento (ao menos um item é obrigatório) -->
-  <%= render :partial => 'layouts/pagseguro_form_item', :collection => @cart_books %>
+  <%= render :partial => 'pagseguro_form_item', :collection => @cart_books.to_a %>
 
   <!-- Informações de frete (opcionais) -->
   <input type="hidden" name="shippingType" value="1">
