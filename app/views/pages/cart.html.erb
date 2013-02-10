@@ -16,14 +16,14 @@
       </thead>
 
       <tbody>
-        <% @cart_books.each do |book| %>
+        <% @cart_books.each do |book, amount| %>
           <tr>
             <td>
               <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
               <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
             </td>
             <td>
-
+              <%= amount %>
             </td>
             <td class="cart-page-book-weight">
               <%= (book.weight * 1000).to_i %>g
@@ -38,7 +38,7 @@
         <% end %>
         <tr>
           <td id="cart-form-total" colspan="5">
-            Total <span><%= number_to_currency(@cart_books.inject(0) { |sum, obj| sum += obj.price_print }) %></span>
+            Total <span><%= total_cart_price(@cart_books) %></span>
           </td>
         </tr>
       </tbody>

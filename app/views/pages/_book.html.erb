@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="item-price span3">
-      <%= list_price(book) %>
+      <%= render 'books/list_price', :book => book if book.has_price? %>
     </div>
   <% else %>
     <div class="item-info span10">

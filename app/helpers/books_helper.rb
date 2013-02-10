@@ -30,22 +30,16 @@ module BooksHelper
     book.tags.map(&:name).inject([]) { |sum, obj| sum << content_tag(:li, link_to(obj, tag_page_path(obj))) }.join.html_safe
   end
 
-  def list_price(book)
-    render :partial => 'books/list_price', :locals => { :book => book } if book.has_price?
-  end
-
   def description_lead(book)
     raw(book.description.split('</p>')[0] + '</p>')
   end
 
   def book_buttons(book)
-    if book.price_print?
-      content_tag :ul, :class => 'buy' do
-        content_tag :li do
-          link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do
-            concat content_tag(:span, 'Compre', :class => 'type')
-            concat content_tag(:span, number_to_currency(book.price_print), :class => 'price')
-          end
+    content_tag :ul, :class => 'buy' do
+      content_tag :li do
+        link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do
+          concat content_tag(:span, 'Compre', :class => 'type')
+          concat content_tag(:span, number_to_currency(book.price_print), :class => 'price')
         end
       end
     end

@@ -52,6 +52,10 @@ module ApplicationHelper
     tags.html_safe
   end
 
+  def total_cart_price(cart)
+    number_to_currency(cart.inject(0) { |sum, obj| sum += obj[0].price_print })
+  end
+
   def cart_image
     cart_empty? ? image_tag('cart.png') : link_to(image_tag('cart_full.png'), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
   end
@@ -61,7 +65,7 @@ module ApplicationHelper
   end
 
   def total_cart_items
-    session['cart'] ||= []
+    session['cart'] ||= {}
     session['cart'].size unless session['cart'].empty?
   end
 end

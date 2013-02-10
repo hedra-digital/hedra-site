@@ -12,7 +12,7 @@
             <%= @book.description.html_safe %>
           </div>
           <aside class="book-price span3">
-            <%= list_price(@book) %>
+            <%= render 'list_price', :book => @book if @book.has_price? %>
           </aside>
         </div>
       <% else %>

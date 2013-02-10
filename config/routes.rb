@@ -1,4 +1,5 @@
 HedraSite::Application.routes.draw do
+
   mount Ckeditor::Engine => '/ckeditor'
 
   ActiveAdmin.routes(self)
@@ -15,8 +16,8 @@ HedraSite::Application.routes.draw do
   post "/contato"                => "contact#create", :as => :contact
   get  "/tag/:id"                => "pages#tag", :as => :tag_page
   get  "/carrinho"               => "pages#cart", :as => :cart
-  post "/carrinho/:id"           => "books#add_to_cart", :as => :add_to_cart
-  post "/carrinho/:id/remover"   => "books#remove_from_cart", :as => :remove_from_cart
+  post "/carrinho/:id"           => "cart_item#create", :as => :add_to_cart
+  post "/carrinho/:id/remover"   => "cart_item#destroy", :as => :remove_from_cart
   get  "/blog"                   => "pages#posts", :as => :blog
   get  "/posts/:id"              => "pages#posts", :as => :post_page
   get  "/home/*other"            => redirect("/")

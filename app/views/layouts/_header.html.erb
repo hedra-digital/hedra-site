@@ -37,11 +37,13 @@
           <%= cart_image %>
           <%= content_tag :span, total_cart_items, :class => 'cart-count' %>
           <div class="dropdown-menu">
-            <ul>
-              <% @cart_books.each do |book| %>
-                <li><%= book_in_cart_for(book) %></li>
-              <% end %>
-            </ul>
+            <% if @cart_books %>
+              <ul>
+                <% @cart_books.each do |book, amount| %>
+                  <li><%= book_in_cart_for(book) %></li>
+                <% end %>
+              </ul>
+            <% end %>
             <%= link_to 'Ver carrinho', cart_path, :class => 'btn btn-primary' %>
           </div>
         </div>
