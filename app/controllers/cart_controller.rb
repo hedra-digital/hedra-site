@@ -1,7 +1,10 @@
-class CartItemController < ApplicationController
+class CartController < ApplicationController
   before_filter :resource, :only => [:create, :destroy]
 
   # TODO: Do I really need a full AR object for this?
+
+  def index
+  end
 
   def create
     session['cart'] ||= {}
@@ -15,6 +18,7 @@ class CartItemController < ApplicationController
   end
 
   def update
+    params[:cart][:amount]
   end
 
   def destroy

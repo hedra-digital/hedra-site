@@ -18,9 +18,6 @@ class PagesController < ApplicationController
     @page  = @tag.page
   end
 
-  def cart
-  end
-
   def posts
     if params[:id]
       @post = Post.where(:id => params[:id]).first

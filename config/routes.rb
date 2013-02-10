@@ -15,9 +15,10 @@ HedraSite::Application.routes.draw do
   get  "/contato"                => "contact#new", :as => :contact
   post "/contato"                => "contact#create", :as => :contact
   get  "/tag/:id"                => "pages#tag", :as => :tag_page
-  get  "/carrinho"               => "pages#cart", :as => :cart
-  post "/carrinho/:id"           => "cart_item#create", :as => :add_to_cart
-  post "/carrinho/:id/remover"   => "cart_item#destroy", :as => :remove_from_cart
+  get  "/carrinho"               => "cart#index", :as => :cart
+  post "/carrinho/:id"           => "cart#create", :as => :add_to_cart
+  post "/carrinho/:id/remover"   => "cart#destroy", :as => :remove_from_cart
+  put  "/carrinho/atualizar"     => "cart#update", :as => :update_cart
   get  "/blog"                   => "pages#posts", :as => :blog
   get  "/posts/:id"              => "pages#posts", :as => :post_page
   get  "/home/*other"            => redirect("/")
