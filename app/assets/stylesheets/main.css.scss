@@ -44,6 +44,9 @@ $navbarLinkColorActive:           $linkColorHover;
 $navbarLinkBackgroundHover:       transparent;
 $navbarLinkBackgroundActive:      transparent;
 
+$btnBackground:                   #e7e7e7;
+$btnBackgroundHighlight:          $btnBackground;
+
 $btnPrimaryBackground:            #88b2c2;
 $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
 
@@ -124,7 +127,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 
 .btn {
   padding: 15px 20px;
-  background: #88b2c2;
   border: none;
   border-radius: 5px;
   @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.25));
@@ -136,11 +138,18 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   font-size: $baseFontSize * 0.75;
   font-weight: normal;
   line-height: 1;
+  color: #666;
+  &:link, &:visited, &:hover, &:focus, &:active {
+    color: #666 !important;
+    text-decoration: none !important;
+    border: none !important;
+  }
+}
+
+.btn-primary {
   color: white;
   &:link, &:visited, &:hover, &:focus, &:active {
     color: white !important;
-    text-decoration: none !important;
-    border: none !important;
   }
 }
 
@@ -646,6 +655,7 @@ article .list-price {
   margin-left: 10px;
 }
 
+
 /* ==========================================================================
    Pages
    ========================================================================== */
@@ -1004,12 +1014,27 @@ article .list-price {
         vertical-align: middle;
     }
   }
-  .cart-page-book-weight,
-  .cart-page-book-price {
-    font-family: $sansFontFamily;
-    color: $text-blue;
+}
+
+.cart-page-book-quantity {
+  text-align: center !important;
+  input {
+    width: 40px;
+    padding: 5px;
+    margin: auto;
+    background: white;
     text-align: center;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: $textColor;
   }
+}
+
+.cart-page-book-weight,
+.cart-page-book-price {
+  font-family: $sansFontFamily;
+  color: $text-blue;
+  text-align: center !important;
 }
 
 .cart-page-remove-item {
@@ -1038,6 +1063,10 @@ article .list-price {
   button {
     margin-left: 15px;
   }
+}
+
+.cart-form-button-update {
+  float: left;
 }
 
 /*

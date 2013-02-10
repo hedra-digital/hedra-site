@@ -18,7 +18,14 @@ class CartController < ApplicationController
   end
 
   def update
-    params[:cart][:amount]
+    params[:cart].each do |key, value|
+      if key.include?('quantity_') && value.present?
+        book_id = key.scan(/(?<=quantity_)\d*/).join.to_i
+        quantity = value.to_i
+        session['cart'][book_id] = quantity
+      end
+    end
+    redirect_to cart_path
   end
 
   def destroy

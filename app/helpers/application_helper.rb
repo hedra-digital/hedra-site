@@ -53,7 +53,7 @@ module ApplicationHelper
   end
 
   def total_cart_price(cart)
-    number_to_currency(cart.inject(0) { |sum, obj| sum += obj[0].price_print })
+    number_to_currency(@cart_books.inject(0) { |sum, obj| sum += (obj[0].price_print * obj[1]) })
   end
 
   def cart_image

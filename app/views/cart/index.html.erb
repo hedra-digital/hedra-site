@@ -4,50 +4,55 @@
   <div class="container">
     <%= yield :h1 %>
 
-    <%= simple_form_for :cart, :url => update_cart_path do |f| %>
+    <% if @cart_books.present? %>
+      <%= simple_form_for(:cart, :url => update_cart_path, :method => :put) do |f| %>
 
-      <table class="cart-page-table table">
-        <thead>
-          <tr>
-            <td>Título</td>
-            <td>Quantidade</td>
-            <td>Peso</td>
-            <td>Preço</td>
-            <td>Remover</td>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @cart_books.each do |book, amount| %>
+        <table class="cart-page-table table">
+          <thead>
             <tr>
-              <td>
-                <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
-                <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
-              </td>
-              <td>
-                <%= amount %>
-              </td>
-              <td class="cart-page-book-weight">
-                <%= (book.weight * 1000).to_i %>g
-              </td>
-              <td class="cart-page-book-price">
-                <%= number_to_currency(book.price_print) %>
-              </td>
-              <td class="cart-page-remove-item">
-                <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>
+              <td>Título</td>
+              <td>Quantidade</td>
+              <td>Peso</td>
+              <td>Preço</td>
+              <td>Remover</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @cart_books.each do |book, quantity| %>
+              <tr>
+                <td>
+                  <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
+                  <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
+                </td>
+                <td class="cart-page-book-quantity">
+                  <%= f.input "quantity_#{book.id}", :label => false, :input_html => { :value => "#{quantity}" } %>
+                </td>
+                <td class="cart-page-book-weight">
+                  <%= (book.weight * 1000).to_i.*(quantity) %>g
+                </td>
+                <td class="cart-page-book-price">
+                  <%= number_to_currency(book.price_print.*(quantity)) %>
+                </td>
+                <td class="cart-page-remove-item">
+                  <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>
+                </td>
+              </tr>
+            <% end %>
+            <tr>
+              <td id="cart-form-total" colspan="5">
+                Total <span><%= total_cart_price(@cart_books) %></span>
               </td>
             </tr>
-          <% end %>
-          <tr>
-            <td id="cart-form-total" colspan="5">
-              Total <span><%= total_cart_price(@cart_books) %></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
+        <%= f.button :submit, 'Atualizar carrinho', :class => 'btn cart-form-button-update' %>
+      <% end %>
+
+      <%= render :partial => 'pagseguro_form_cart' %>
+    <% else %>
+      <p>Você não tem livros no carrinho.</p>
     <% end %>
-
-    <%= render :partial => 'pagseguro_form_cart' %>
   </div>
 </div>
