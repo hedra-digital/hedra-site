@@ -35,17 +35,17 @@
         </form>
         <div class="cart">
           <%= cart_image %>
-          <%= content_tag :span, total_cart_items, :class => 'cart-count' %>
-          <div class="dropdown-menu">
-            <% if @cart_items %>
-              <ul>
-                <% @cart_items.each do |cart_item| %>
-                  <li><%= book_in_cart_for(cart_item.book) %></li>
-                <% end %>
-              </ul>
-            <% end %>
-            <%= link_to 'Ver carrinho', cart_path, :class => 'btn btn-primary' %>
-          </div>
+          <% if !@cart_items.empty? %>
+            <%= content_tag :span, @cart_items.size, :class => 'cart-count' %>
+            <div class="dropdown-menu">
+                <ul>
+                  <% @cart_items.each do |cart_item| %>
+                    <li><%= book_in_cart_for(cart_item.book) %></li>
+                  <% end %>
+                </ul>
+              <%= link_to 'Ver carrinho', cart_path, :class => 'btn btn-primary' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

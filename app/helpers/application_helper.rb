@@ -61,10 +61,6 @@ module ApplicationHelper
   end
 
   def cart_empty?
-    session[:cart].nil? || session[:cart].empty?
-  end
-
-  def total_cart_items
-    session[:cart].size unless session[:cart].empty?
+    @cart_items.nil? || @cart_items.empty?
   end
 end

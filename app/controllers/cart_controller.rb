@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CartController < ApplicationController
   before_filter :resource, :only => [:create, :destroy]
 
@@ -7,8 +9,10 @@ class CartController < ApplicationController
   end
 
   def create
-    create_cart_item
-    flash[:info] = "Subtotal do seu pedido: O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
+    Cart.new(@book)
+    session[:cart] = {} unless session[:cart]
+    session[:cart][@book.id] = 1
+    flash[:info] = "Subtotal do seu pedido: #{Cart.total_price}<br>Você tem #{@cart_items.size} itens no carrinho."
     redirect_to :back
   end
 
@@ -17,6 +21,7 @@ class CartController < ApplicationController
       if key.include?('quantity_') && value.present?
         book_id = key.scan(/(?<=quantity_)\d*/).join.to_i
         quantity = value.to_i
+        Cart.update_or_initialize(:book_id => book_id, :quantity => quantity)
         session[:cart][book_id] = quantity
       end
     end
@@ -24,7 +29,7 @@ class CartController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    Cart.find(@book.id).delete
     session[:cart].delete(@book.id)
     redirect_to :back
   end
@@ -33,14 +38,5 @@ class CartController < ApplicationController
 
   def resource
     @book = Book.find(params[:id])
-  end
-
-  def create_cart_item
-    session[:cart] ||= {}
-    if session[:cart][@book.id].nil?
-      session[:cart][@book.id] = 1
-    else
-      session[:cart][@book.id] += 1
-    end
   end
 end
