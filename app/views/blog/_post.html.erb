@@ -1,0 +1,28 @@
+<% page_data :title => post.title, :type => 'blog', :description => meta_cleanup(post.body) %>
+
+<div class="blog-post">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h5 class="post-date"><%= post.published_at.strftime("%d-%m-%Y") %></h5>
+        <h2 class="post-title">
+          <% if defined?(single_post) %>
+            <%= post.title %>
+          <% else %>
+            <%= link_to post.title, blog_post_path(post) %>
+          <% end %>
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <%= render "books/aside", :book => post.book if post.book.present? %>
+      <div class="span9">
+        <% if defined?(single_post) %>
+          <%= simple_format(post.body) %>
+        <% else %>
+          <%= simple_format(truncate(post.body, :length => 800, :omission => "...&nbsp;"+ link_to("Leia mais", blog_post_path(post)) )) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

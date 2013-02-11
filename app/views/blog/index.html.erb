@@ -1,0 +1,10 @@
+<% page_data :title => 'Blog da Hedra', :type => 'blog', :description => 'Seja bem-vindo ao Blog da Hedra! Aqui você encontra notícias sobre livros, ebooks e tudo o que rola em torno da nossa Editora.' %>
+
+<div id="blog-header" class="container">
+  <div>
+    <p>Seja bem-vindo ao <b>Blog da Hedra</b>! :-)</p>
+    <p>Aqui você encontra notícias sobre livros, ebooks e tudo o que rola em torno da nossa Editora.</p>
+  </div>
+</div>
+
+<%= render :partial => "post", :collection => @posts %>

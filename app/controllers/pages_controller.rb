@@ -17,13 +17,4 @@ class PagesController < ApplicationController
     @books = @tag.books.includes(:participations => [:person, :role])
     @page  = @tag.page
   end
-
-  def posts
-    if params[:id]
-      @post = Post.where(:id => params[:id]).first
-      render "single_post"
-    else
-      @posts = Post.all
-    end
-  end
 end
