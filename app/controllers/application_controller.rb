@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :get_categories, :cart_books
+  before_filter :get_categories, :build_cart, :get_cart_items
 
   protected
 
@@ -9,12 +9,14 @@ class ApplicationController < ActionController::Base
     @category_list ||= Category.all
   end
 
-  def cart_books
-    if session['cart']
-      @cart_books ||= {}
-      session['cart'].each do |book_id, amount|
-        cart_item = Book.includes(:participations => [:person, :role]).find(book_id)
-        @cart_books[cart_item] ||= amount
+  def get_cart_items
+    @cart_items ||= Cart.all
+  end
+
+  def build_cart
+    if session[:cart]
+      session[:cart].each do |book_id, quantity|
+        Cart.update_or_initialize(:book_id => book_id, :quantity => quantity)
       end
     end
   end

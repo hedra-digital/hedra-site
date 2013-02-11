@@ -7,13 +7,8 @@ class CartController < ApplicationController
   end
 
   def create
-    session['cart'] ||= {}
-    if session['cart'][@book.id].nil?
-      session['cart'][@book.id] = 1
-    else
-      session['cart'][@book.id] += 1
-    end
-    flash[:info] = "O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
+    create_cart_item
+    flash[:info] = "Subtotal do seu pedido: O livro <em>#{@book.title}</em> foi adicionado ao carrinho!"
     redirect_to :back
   end
 
@@ -22,14 +17,15 @@ class CartController < ApplicationController
       if key.include?('quantity_') && value.present?
         book_id = key.scan(/(?<=quantity_)\d*/).join.to_i
         quantity = value.to_i
-        session['cart'][book_id] = quantity
+        session[:cart][book_id] = quantity
       end
     end
     redirect_to cart_path
   end
 
   def destroy
-    session['cart'].delete(@book.id)
+    binding.pry
+    session[:cart].delete(@book.id)
     redirect_to :back
   end
 
@@ -37,5 +33,14 @@ class CartController < ApplicationController
 
   def resource
     @book = Book.find(params[:id])
+  end
+
+  def create_cart_item
+    session[:cart] ||= {}
+    if session[:cart][@book.id].nil?
+      session[:cart][@book.id] = 1
+    else
+      session[:cart][@book.id] += 1
+    end
   end
 end

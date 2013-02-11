@@ -52,8 +52,8 @@ module ApplicationHelper
     tags.html_safe
   end
 
-  def total_cart_price(cart)
-    number_to_currency(@cart_books.inject(0) { |sum, obj| sum += (obj[0].price_print * obj[1]) })
+  def total_cart_price
+    number_to_currency(Cart.total_price)
   end
 
   def cart_image
@@ -61,11 +61,10 @@ module ApplicationHelper
   end
 
   def cart_empty?
-    session['cart'].nil? || session['cart'].empty?
+    session[:cart].nil? || session[:cart].empty?
   end
 
   def total_cart_items
-    session['cart'] ||= {}
-    session['cart'].size unless session['cart'].empty?
+    session[:cart].size unless session[:cart].empty?
   end
 end
