@@ -15,7 +15,7 @@ class CartController < ApplicationController
     Cart.new(@book)
     session[:cart] = {} unless session[:cart]
     session[:cart][@book.id] = 1
-    flash[:info] = "Subtotal do seu pedido: #{number_to_currency(Cart.total_price)}<br>Você tem #{pluralize(@cart_items.size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
+    flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(Cart.total_price)}</strong><br>Você tem #{pluralize(@cart_items.size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
     redirect_to :back
   end
 
