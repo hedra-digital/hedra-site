@@ -1,1 +1,22 @@
-<%= render 'post', :post => @post %>
+<% page_data :title => @post.title, :type => 'blog', :description => meta_cleanup(@post.body) %>
+
+<div class="blog-post">
+  <div class="container">
+    <h5 class="post-date"><%= @post.published_at.strftime("%d-%m-%Y") %></h5>
+    <h2 class="post-title">
+      <%= @post.title %>
+    </h2>
+    <div class="row">
+      <% if @post.book.present? %>
+        <%= render "books/aside", :book => @post.book %>
+        <div class="span9">
+          <%= simple_format(@post.body) %>
+        </div>
+      <% else %>
+        <div class="span12">
+          <%= simple_format(@post.body) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

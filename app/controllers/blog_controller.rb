@@ -1,10 +1,10 @@
 class BlogController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.includes(:book => { :participations => [:person, :role] }).all
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:book => { :participations => [:person, :role] }).find(params[:id])
   end
 end
