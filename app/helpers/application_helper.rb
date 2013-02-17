@@ -52,10 +52,6 @@ module ApplicationHelper
     tags.html_safe
   end
 
-  def total_cart_price
-    number_to_currency(Cart.total_price)
-  end
-
   def cart_image
     cart_empty? ? image_tag('cart.png') : link_to(image_tag('cart_full.png'), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
   end

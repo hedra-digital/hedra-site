@@ -6,16 +6,27 @@ class CartController < ApplicationController
 
   before_filter :resource, :only => [:create, :destroy]
 
-  # TODO: Do I really need a full AR object for this?
-
   def index
   end
 
   def create
-    Cart.new(@book)
-    session[:cart] = {} unless session[:cart]
-    session[:cart][@book.id] = 1
-    flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(Cart.total_price)}</strong><br>Você tem #{pluralize(@cart_items.size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
+    session[:cart] ||= {}
+    session[:cart][@book.id] = 0 unless session[:cart][@book.id]
+    session[:cart][@book.id] += 1
+    @cart_items ||= []
+    if @cart_items.present?
+      @cart_items.each do |book, quantity|
+        if book = @book
+          @cart_items.delete([book, quantity])
+          @cart_items << [book, (quantity + 1)]
+        end
+      end
+    else
+      @cart_items << [@book, 1]
+    end
+    @cart_price ||= 0
+    @cart_price += @book.price_print
+    flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(@cart_price)}</strong><br>Você tem #{pluralize(@cart_items.size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
     redirect_to :back
   end
 
@@ -24,7 +35,6 @@ class CartController < ApplicationController
       if key.include?('quantity_') && value.present?
         book_id = key.scan(/(?<=quantity_)\d*/).join.to_i
         quantity = value.to_i
-        Cart.update_or_initialize(:book_id => book_id, :quantity => quantity)
         session[:cart][book_id] = quantity
       end
     end
@@ -32,7 +42,6 @@ class CartController < ApplicationController
   end
 
   def destroy
-    Cart.find(@book.id).delete
     session[:cart].delete(@book.id)
     redirect_to :back
   end

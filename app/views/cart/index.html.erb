@@ -19,29 +19,29 @@
           </thead>
 
           <tbody>
-            <% @cart_items.each do |cart_item| %>
+            <% @cart_items.each do |book, quantity| %>
               <tr>
                 <td>
-                  <%= content_tag(:div, image_tag(cart_item.book.cover_url.to_s), :class => 'cart-book-cover cover') %>
-                  <%= content_tag(:div, content_tag(:p, cart_item.book.title, :class => 'cart-book-title') + content_tag(:p, authors(cart_item.book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
+                  <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
+                  <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
                 </td>
                 <td class="cart-page-book-quantity">
-                  <%= f.input "quantity_#{cart_item.book.id}", :label => false, :input_html => { :value => "#{cart_item.quantity}" } %>
+                  <%= f.input "quantity_#{book.id}", :label => false, :input_html => { :value => "#{quantity}" } %>
                 </td>
                 <td class="cart-page-book-weight">
-                  <%= (cart_item.book.weight * 1000).to_i.*(cart_item.quantity) %>g
+                  <%= (book.weight * 1000).to_i.*(quantity) %>g
                 </td>
                 <td class="cart-page-book-price">
-                  <%= number_to_currency(cart_item.book.price_print.*(cart_item.quantity)) %>
+                  <%= number_to_currency(book.price_print.*(quantity)) %>
                 </td>
                 <td class="cart-page-remove-item">
-                  <%= link_to("x", remove_from_cart_path(cart_item.book.id), :method => :post) %>
+                  <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>
                 </td>
               </tr>
             <% end %>
             <tr>
               <td id="cart-form-total" colspan="5">
-                Total <span><%= total_cart_price %></span>
+                Total <span><%= number_to_currency(@cart_price) %></span>
               </td>
             </tr>
           </tbody>
