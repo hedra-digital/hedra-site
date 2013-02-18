@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_cart_items
-    if session[:cart]
+    if session[:carrinho]
       @cart_items ||= []
-      session[:cart].each do |book_id, quantity|
+      session[:carrinho].each do |book_id, quantity|
         book = Book.includes(:participations => [:person, :role]).find(book_id)
         @cart_items << [book, quantity]
       end

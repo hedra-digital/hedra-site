@@ -10,9 +10,9 @@ class CartController < ApplicationController
   end
 
   def create
-    session[:cart] ||= {}
-    session[:cart][@book.id] = 0 unless session[:cart][@book.id]
-    session[:cart][@book.id] += 1
+    session[:carrinho] ||= {}
+    session[:carrinho][@book.id] = 0 unless session[:carrinho][@book.id]
+    session[:carrinho][@book.id] += 1
     @cart_items ||= []
     if @cart_items.present?
       @cart_items.each do |book, quantity|
@@ -35,14 +35,14 @@ class CartController < ApplicationController
       if key.include?('quantity_') && value.present?
         book_id = key.scan(/(?<=quantity_)\d*/).join.to_i
         quantity = value.to_i
-        session[:cart][book_id] = quantity
+        session[:carrinho][book_id] = quantity
       end
     end
     redirect_to cart_path
   end
 
   def destroy
-    session[:cart].delete(@book.id)
+    session[:carrinho].delete(@book.id)
     redirect_to :back
   end
 
