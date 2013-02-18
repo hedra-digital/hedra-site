@@ -56,7 +56,6 @@ $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
    ========================================================================== */
 
 @import "bootstrap";
-@import "responsive";
 @import "bourbon";
 
 
@@ -1217,31 +1216,6 @@ html, body {
 /* ==========================================================================
    Responsive media queries
    ========================================================================== */
-
-@media (min-width: 1200px) {
-  #carousel-container {
-    width: (($gridColumnWidth1200 * $gridColumns) + ($gridGutterWidth1200 * ($gridColumns - 1))) + $carousel-offset;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-  #carousel-container {
-    width: (($gridColumnWidth768 * $gridColumns) + ($gridGutterWidth768 * ($gridColumns - 1))) + $carousel-offset;
-  }
-}
-
-@media (max-width: 767px) {
-  #carousel-container {
-    width: auto;
-    left: 0;
-    a.next {
-      right: 5px;
-    }
-    .gradient {
-      background: none;
-    }
-  }
-}
 
 
 /* ==========================================================================
