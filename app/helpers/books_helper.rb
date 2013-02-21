@@ -31,7 +31,7 @@ module BooksHelper
   end
 
   def description_lead(book)
-    raw(book.description.split('</p>')[0] + '</p>')
+    raw(book.description.split('</p>')[0] + '</p>') rescue truncate_html(book.description, :length => 450, :omission => '...')
   end
 
   def book_buttons(book)
