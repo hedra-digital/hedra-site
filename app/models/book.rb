@@ -87,6 +87,11 @@ class Book < ActiveRecord::Base
     self.price_print.present? || self.price_ebook.present?
   end
 
+  def related(total=5)
+   @related_books ||= Book.find(id).tags.map(&:books).flatten.uniq.delete_if{|x| x.id == id}.sort_by{|x| x.title}
+   @related_books[0..total]
+  end
+
   private
 
   def formatted_list(array)
