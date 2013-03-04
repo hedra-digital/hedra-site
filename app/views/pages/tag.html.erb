@@ -12,22 +12,21 @@
         </div>
       </div>
     <% end %>
-
-    <div class="container">
-      <% if @page.tag_image && @page.body %>
-        <div id="extra" class="row">
-          <div class="span4">
-            <%= image_tag(@page.tag_image.to_s) %>
+    <div id="extra">
+      <div class="container">
+        <% if @page.tag_image && @page.body %>
+          <div class="row">
+            <div class="span4">
+              <%= content_tag(:div, image_tag(@page.tag_image.to_s), :class => 'tag-image') %>
+            </div>
+            <div class="span8">
+              <%= @page.body.html_safe %>
+            </div>
           </div>
-          <div class="span8">
+        <% elsif @page.body %>
             <%= @page.body.html_safe %>
-          </div>
-        </div>
-      <% elsif @page.body %>
-        <div id="extra">
-          <%= @page.body.html_safe %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 

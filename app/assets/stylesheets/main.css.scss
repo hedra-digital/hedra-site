@@ -806,7 +806,7 @@ article .list-price {
  * Book page
  */
 
-.book-page {
+.tag {
   padding-bottom: 30px;
   h1 {
     margin-bottom: 0;
@@ -997,9 +997,31 @@ article .list-price {
   }
 }
 
+.tag-image {
+  position: relative;
+  height: 300px;
+  border-radius: 150px;
+  overflow: hidden;
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 150px;
+    @include box-shadow(inset 0 0 20px rgba(0, 0, 0, 0.4));
+    content: "";
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 #extra {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
 }
 
 /*
