@@ -978,26 +978,28 @@ article .list-price {
 
 #tag {
   padding-bottom: 70px;
-  #extra {
-    overflow: auto;
-    padding: 30px;
-    margin-bottom: 40px;
-    #image {
-      float: left;
-      img {
-        width: 200px;
-        height: 200px;
-        padding: 10px;
-      }
-    }
-    p {
-      margin-top: 20px;
-    }
-  }
 }
 
 #tag-list {
   margin-top: 30px;
+}
+
+#hero {
+  background-image: url(asset_path('noisy-pattern.png', image));
+  padding: 50px 0;
+  @include box-shadow(inset 0 7px 15px rgba(0, 0, 0, 0.2));
+  .hero-image {
+    max-height: 400px;
+    overflow: hidden;
+    img {
+      vertical-align: middle;
+    }
+  }
+}
+
+#extra {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 /*

@@ -2,15 +2,35 @@
 <div id="tag">
   <div class="container">
     <%= yield :h1 %>
+  </div>
 
-    <% if @page %>
-      <%= content_tag(:div, image_tag(@page.hero_image.to_s), :id => 'hero', :class => 'hero-unit') if @page.hero_image.present?  %>
-      <div id="extra">
-        <%= content_tag(:div, image_tag(@page.tag_image.to_s), :id => 'image') if @page.tag_image.present? %>
-        <%= @page.body if @page.body.present? %>
+  <% if @page %>
+    <% if @page.hero_image %>
+      <div id="hero">
+        <div class="container">
+          <%= content_tag(:div, image_tag(@page.hero_image.to_s), :class => 'hero-image') %>
+        </div>
       </div>
     <% end %>
+    <div class="container">
+      <% if @page.tag_image && @page.body %>
+        <div id="extra" class="row">
+          <div class="span4">
+            <%= image_tag(@page.tag_image.to_s) %>
+          </div>
+          <div class="span8">
+            <%= @page.body %>
+          </div>
+        </div>
+      <% elsif @page.body %>
+        <div id="extra">
+          <%= @page.body %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
+  <div class="container">
     <div id="tag-list">
       <%= render :partial => 'pages/book', :collection => @books %>
     </div>
