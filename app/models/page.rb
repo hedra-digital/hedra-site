@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: pages
+#
+#  id         :integer          not null, primary key
+#  tag_id     :integer
+#  body       :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  tag_image  :string(255)
+#  hero_image :string(255)
+#
+
 class Page < ActiveRecord::Base
   # Relationships
   belongs_to :tag

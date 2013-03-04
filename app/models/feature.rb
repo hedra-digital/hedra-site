@@ -2,10 +2,12 @@
 #
 # Table name: features
 #
-#  id         :integer          not null, primary key
-#  book_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  book_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  feature_image :string(255)
+#  page_id       :integer
 #
 
 class Feature < ActiveRecord::Base
