@@ -10,8 +10,8 @@
       <%= link_to(image_tag(feature.book.cover_url.to_s), feature.book) %>
     </div>
     <div class="feature-data">
-      <h2 class="title"><%= link_to feature.book.title, feature.book %></h2>
-      <h3 class="authors"><%= authors(feature.book) %></h3>
+      <h2 class="book-title"><%= link_to feature.book.title, feature.book %></h2>
+      <h3 class="book-authors"><%= authors(feature.book) %></h3>
       <%= description_lead feature.book %>
       <%= book_buttons(feature.book) %>
     </div>

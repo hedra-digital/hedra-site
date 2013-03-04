@@ -4,7 +4,7 @@
     <%= render 'aside', :book => @book %>
     <div class="span9">
       <%= yield :h1 %>
-      <h2><%= authors(@book) %></h2>
+      <h2 class="book-authors"><%= authors(@book) %></h2>
       </div>
       <% if @book.has_price? %>
         <div class="row">

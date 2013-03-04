@@ -50,6 +50,13 @@ $btnBackgroundHighlight:          $btnBackground;
 $btnPrimaryBackground:            #88b2c2;
 $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
 
+@mixin book-title {
+  font-family: $sansFontFamily;
+  font-size: 2.32em;
+  color: $text-title;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
 
 /* ==========================================================================
    Importing Bootstrap & Bourbon
@@ -96,11 +103,7 @@ h1 {
 }
 
 .book-page h1 {
-  font-family: $sansFontFamily;
-  font-size: 2.32em;
-  color: $text-title;
-  text-transform: uppercase;
-  letter-spacing: -2px;
+  @include book-title;
 }
 
 p {
@@ -151,6 +154,19 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   &:link, &:visited, &:hover, &:focus, &:active {
     color: white !important;
   }
+}
+
+.book-title {
+  font-size: 1em;
+}
+
+#features .book-title {
+  @include book-title;
+}
+
+.book-authors {
+  font-size: 0.73em;
+  color: $text-subtitle !important;
 }
 
 input::-webkit-input-placeholder,
@@ -460,14 +476,6 @@ footer {
   margin: 20px 0;
   font-size: 0.82em;
   color: $text-blue;
-}
-
-.title {
-  font-size: 1em;
-}
-.authors {
-  font-size: 0.73em;
-  color: $text-subtitle !important;
 }
 
 .book-info {

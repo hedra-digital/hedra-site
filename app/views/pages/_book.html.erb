@@ -5,8 +5,8 @@
 
   <% if book.has_price? %>
     <div class="item-info span7">
-      <h3 class="title"><%= link_to book.title, book %></h3>
-      <h4 class="authors"><%= authors(book) %></h4>
+      <h3 class="book-title"><%= link_to book.title, book %></h3>
+      <h4 class="book-authors"><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>
       </div>
@@ -16,8 +16,8 @@
     </div>
   <% else %>
     <div class="item-info span10">
-      <h3 class="title"><%= link_to book.title, book %></h3>
-      <h4 class="authors"><%= authors(book) %></h4>
+      <h3 class="book-title"><%= link_to book.title, book %></h3>
+      <h4 class="book-authors"><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>
       </div>
