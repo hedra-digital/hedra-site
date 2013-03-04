@@ -1,5 +1,4 @@
 ActiveAdmin.register Book do
-
   index do
     selectable_column
     column :title
@@ -42,5 +41,4 @@ ActiveAdmin.register Book do
     end
     f.buttons
   end
-
 end

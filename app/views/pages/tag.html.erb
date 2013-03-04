@@ -12,6 +12,7 @@
         </div>
       </div>
     <% end %>
+
     <div class="container">
       <% if @page.tag_image && @page.body %>
         <div id="extra" class="row">
@@ -19,12 +20,12 @@
             <%= image_tag(@page.tag_image.to_s) %>
           </div>
           <div class="span8">
-            <%= @page.body %>
+            <%= @page.body.html_safe %>
           </div>
         </div>
       <% elsif @page.body %>
         <div id="extra">
-          <%= @page.body %>
+          <%= @page.body.html_safe %>
         </div>
       <% end %>
     </div>
