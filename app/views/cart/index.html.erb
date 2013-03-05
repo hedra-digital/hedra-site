@@ -29,7 +29,7 @@
                   <%= f.input "quantity_#{book.id}", :label => false, :input_html => { :value => "#{quantity}" } %>
                 </td>
                 <td class="cart-page-book-weight">
-                  <%= (book.weight * 1000).to_i.*(quantity) %>g
+                  <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight %>
                 </td>
                 <td class="cart-page-book-price">
                   <%= number_to_currency(book.price_print.*(quantity)) %>
