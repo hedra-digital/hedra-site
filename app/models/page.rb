@@ -12,18 +12,19 @@
 #
 
 class Page < ActiveRecord::Base
+
   # Relationships
-  belongs_to :tag
-  has_and_belongs_to_many :features
+  belongs_to                :tag
+  has_one                   :feature, :dependent => :destroy
 
   # Validations
-  validates_associated :tag
-  validates_uniqueness_of :tag_id
+  validates_associated      :tag
+  validates_uniqueness_of   :tag_id
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :body, :tag_id, :tag_image, :hero_image
+  attr_accessible           :body, :tag_id, :tag_image, :hero_image
 
   # CarrierWave uploaders
-  mount_uploader :tag_image, TagImageUploader
-  mount_uploader :hero_image, HeroImageUploader
+  mount_uploader            :tag_image, TagImageUploader
+  mount_uploader            :hero_image, HeroImageUploader
 end
