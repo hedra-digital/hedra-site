@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
       @cart_price = @cart_items.inject(0) { |sum, ele| sum += (ele[0].price_print * ele[1]) }
     end
   end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

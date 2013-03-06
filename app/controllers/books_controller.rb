@@ -16,6 +16,6 @@ class BooksController < ApplicationController
   private
 
   def resource
-    @book = Book.includes(:participations => [:person, :role]).find(params[:id])
+    @book = Book.includes(:participations => [:person, :role]).find(params[:id]) rescue not_found
   end
 end
