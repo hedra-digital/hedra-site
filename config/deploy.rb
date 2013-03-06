@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'new_relic/recipes'
 
-set :stages, ["staging", "production"]
+set :stages, ["staging", "production", "edge"]
 set :default_stage, "staging"
 
 set :application, "Hedra Site"
