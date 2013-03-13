@@ -5,38 +5,53 @@
     <div class="span9">
       <%= yield :h1 %>
       <h2 class="book-authors"><%= authors(@book) %></h2>
-      </div>
-      <% if @book.has_price? %>
-        <div class="row">
-          <div class="book-text span6">
-            <%= @book.description.html_safe %>
-          </div>
-          <aside class="book-price span3">
-            <%= render 'list_price', :book => @book if @book.has_price? %>
-          </aside>
-        </div>
-      <% else %>
-        <div class="book-text span9">
+    </div>
+    <% if @book.has_price? %>
+      <div class="row">
+        <div class="book-text span6">
           <%= @book.description.html_safe %>
         </div>
-      <% end %>
-    </div>
+        <aside class="book-price span3">
+          <%= render 'list_price', :book => @book if @book.has_price? %>
+        </aside>
+      </div>
+    <% else %>
+      <div class="book-text span9">
+        <%= @book.description.html_safe %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-  <div class="book-supplementary-info row">
-    <div class="span3">
-      <h3>Ficha técnica</h3>
-      <dl>
-        <%= book_stats(@book) %>
-      </dl>
-    </div>
-    <div class="span6">
-      <h3>Tags</h3>
-      <ul class="taglist">
-        <%= book_tags(@book) %>
-      </ul>
-    </div>
-    <div id="share" class="span3">
-      <%= render 'share' %>
+<div id="book-supplementary-info">
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+        <h3>Ficha técnica</h3>
+        <dl>
+          <%= book_stats(@book) %>
+        </dl>
+      </div>
+      <div class="span6">
+        <h3>Tags</h3>
+        <ul class="taglist">
+          <%= book_tags(@book) %>
+        </ul>
+      </div>
+      <div id="share" class="span3">
+        <%= render 'share' %>
+      </div>
     </div>
   </div>
 </div>
+
+<% if @related_books.present? %>
+  <div class="related">
+    <div class="container">
+      <h2 class="heading">Livros relacionados</h2>
+      <div class="related-list row">
+        <%= render :partial => 'pages/related_book', :collection => @related_books %>
+      </div>
+    </div>
+  </div>
+<% end %>

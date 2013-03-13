@@ -25,7 +25,7 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id                         :title, :use => :slugged
 
-  # Callbacks 
+  # Callbacks
   before_save                         :sanitize_description
 
   # Relationships
@@ -86,11 +86,6 @@ class Book < ActiveRecord::Base
 
   def has_price?
     self.price_print.present? || self.price_ebook.present?
-  end
-
-  def related(total=5)
-   @related_books ||= Book.find(id).tags.map(&:books).flatten.uniq.delete_if{|x| x.id == id}.sort_by{|x| x.title}
-   @related_books[0..total]
   end
 
   private

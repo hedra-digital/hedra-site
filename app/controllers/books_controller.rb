@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   before_filter :resource, :only => :show
 
   def show
+    @related_books ||= @book.tags.map(&:books).flatten.uniq.delete_if{|x| x.id == @book.id}.sort_by{|x| x.title}.first(4)
   end
 
   def by_category
