@@ -18,6 +18,7 @@
 //= require bootstrap-collapse
 //= require jquery.fancybox
 //= require jquery.carouFredSel-6.2.0
+//= require ga
 //= require_self
 
 // FancyBox
