@@ -63,6 +63,7 @@ $btnPrimaryBackgroundHighlight:   $btnPrimaryBackground;
    ========================================================================== */
 
 @import "bootstrap";
+// @import "responsive";
 @import "bourbon";
 
 
@@ -352,10 +353,12 @@ footer {
 
 .navadd {
   position: relative;
-  margin-top: 3px;
+  top: 3px;
   padding-right: 9px;
   float: right;
   .navbar-search {
+    display: inline-block;
+    float: none;
     margin-top: 0;
   }
   .navbar-search input {
