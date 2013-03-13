@@ -40,6 +40,5 @@ HedraSite::Application.configure do
     Bullet.enable = true
     Bullet.alert = true
     Bullet.bullet_logger = true
-    Bullet.disable_browser_cache = true
   end
 end
