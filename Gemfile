@@ -12,7 +12,7 @@ gem "activeadmin"
 gem 'friendly_id', '~> 4.0.1'
 gem 'annotate', ">=2.5.0"
 gem 'carrierwave'
-gem 'mini_magick'
+gem 'rmagick'
 gem 'sanitize'
 gem 'truncate_html'
 gem 'newrelic_rpm'
