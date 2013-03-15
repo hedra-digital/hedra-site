@@ -55,7 +55,7 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
-    bullet (4.3.1)
+    bullet (4.4.0)
       uniform_notifier
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
@@ -125,7 +125,7 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.3)
       pry (~> 0.9.10)
-    pry-remote (0.1.6)
+    pry-remote (0.1.7)
       pry (~> 0.9)
       slop (~> 3.0)
     rack (1.4.5)
@@ -168,7 +168,7 @@ GEM
       activemodel (~> 3.0)
     sitemap_generator (3.4)
       builder
-    slop (3.4.3)
+    slop (3.4.4)
     sprockets (2.2.2.backport1)
       hike (~> 1.2)
       multi_json (~> 1.0)
