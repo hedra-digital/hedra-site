@@ -2,11 +2,11 @@ HedraSite::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  ActiveAdmin.routes(self)
-
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   root :to => "pages#home"
+
+  ActiveAdmin.routes(self)
 
   get  "/livros/busca"           => "books#search"
   get  "/livros/:id"             => "books#show", :as => :book

@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Dashboard" do
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
 
-    panel "Latest Books" do
+    panel "Últimos livros cadastrados" do
       table_for Book.order("created_at desc").limit(5) do
         column :title do |book|
           link_to book.title, admin_book_path(book)
