@@ -20,6 +20,9 @@ gem 'newrelic_rpm'
 gem 'sitemap_generator'
 gem 'will_paginate', '~> 3.0'
 gem 'thinking-sphinx', '2.0.10'
+gem 'jquery-rails'
+gem 'bourbon'
+gem 'ckeditor'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,10 +40,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
 end
-
-gem 'jquery-rails'
-gem 'bourbon'
-gem 'ckeditor', '3.7.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

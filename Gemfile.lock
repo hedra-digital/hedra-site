@@ -60,7 +60,7 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    ckeditor (3.7.3)
+    ckeditor (4.0.4)
       mime-types
       orm_adapter
     coderay (1.0.9)
@@ -205,7 +205,7 @@ DEPENDENCIES
   bourbon
   bullet
   carrierwave
-  ckeditor (= 3.7.3)
+  ckeditor
   coffee-rails (~> 3.2.1)
   friendly_id (~> 4.0.1)
   jquery-rails
