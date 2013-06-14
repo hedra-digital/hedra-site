@@ -15,6 +15,9 @@ ActiveAdmin.register Feature do
       row :page do
         f.page.tag.name if f.page_id.present?
       end
+      row :external_site_url do
+        f.external_site_url if f.external_site_url.present?
+      end
     end
   end
 
@@ -22,9 +25,14 @@ ActiveAdmin.register Feature do
     selectable_column
     column :id
     column "Book" do |f|
-      f.book.present? ? f.book.title : "Destaque da tag #{f.page.tag.name}"
+      f.book.present? ? f.book.title : ""
     end
-    column :updated_at
+    column "Tag" do |f|
+      f.page.present? ? f.page.tag.name : ""
+    end
+    column "External site" do |f|
+      f.external_site_url.present? ? f.external_site_url : ""
+    end
     default_actions
   end
 
@@ -37,6 +45,10 @@ ActiveAdmin.register Feature do
 
       f.inputs "Destaque sem livro" do
         f.input :page, :collection => Page.all.map{|p| [p.tag.name, p.id] }
+        f.input :feature_image, :as => :file, :hint => (( f.object.new_record? || f.object.feature_image.nil? ) ? f.template.content_tag(:span, "nenhuma imagem") : f.template.image_tag(f.object.feature_image.url(:thumb)))
+      end
+      f.inputs "Destaque sem livro para site externo" do
+        f.input :external_site_url
         f.input :feature_image, :as => :file, :hint => (( f.object.new_record? || f.object.feature_image.nil? ) ? f.template.content_tag(:span, "nenhuma imagem") : f.template.image_tag(f.object.feature_image.url(:thumb)))
       end
     end
