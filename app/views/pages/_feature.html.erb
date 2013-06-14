@@ -1,7 +1,11 @@
 <% if feature.feature_image.present? %>
   <article class="feature-item">
     <div class="feature-image-container">
-      <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), tag_page_path(feature.page.tag.slug)) %>
+      <% if feature.page.present? %>
+        <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), tag_page_path(feature.page.tag.slug)) %>
+      <% else %>
+        <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), feature.external_site_url) %>
+      <% end %>
     </div>
   </article>
 <% else %>

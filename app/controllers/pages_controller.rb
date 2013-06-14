@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    @features        = Feature.includes(:book => { :participations => [:person, :role] }).first(6)
+    @features        = Feature.includes(:page, :book => { :participations => [:person, :role] }).first(6)
     @new_releases    = NewRelease.includes(:book => { :participations => [:person, :role] }).map(&:book).first(4)
     @recommendations = Recommendation.includes(:book => { :participations => [:person, :role] }).map(&:book)
   end
