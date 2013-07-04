@@ -10,11 +10,11 @@
       <% if @post.book.present? %>
         <%= render "books/aside", :book => @post.book %>
         <div class="span9">
-          <%= simple_format(@post.body) %>
+          <%= @post.body.html_safe %>
         </div>
       <% else %>
         <div class="span12">
-          <%= simple_format(@post.body) %>
+          <%= @post.body.html_safe %>
         </div>
       <% end %>
     </div>
