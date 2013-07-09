@@ -1,0 +1,9 @@
+development:
+  paypal_login: 
+  paypal_password: 
+  paypal_api_signature: 
+
+production:
+  paypal_login: 
+  paypal_password: 
+  paypal_api_signature: 
