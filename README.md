@@ -5,6 +5,11 @@
 * RVM (https://rvm.io/rvm/install)
 * MySQL (http://www.mysql.com/)
 
+### Outros pacotes
+<code>
+sudo apt-get install libmysql-ruby libmysqlclient-dev
+</code>
+
 ### Clonar a aplicação
 <code>
 $ git clone git@github.com:hedra-digital/hedra-site.git
