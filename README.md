@@ -7,7 +7,7 @@
 
 ### Outros pacotes
 <code>
-sudo apt-get install libmysql-ruby libmysqlclient-dev
+sudo apt-get install libmysql-ruby libmysqlclient-dev libxml2-dev libxslt1-dev imagemagick libmagickwand-dev
 </code>
 
 ### Clonar a aplicação
