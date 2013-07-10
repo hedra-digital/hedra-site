@@ -18,7 +18,8 @@ $ rvm install ruby-1.9.3-p392
 
 ### Criar gemset
 <code>
-$ rvm gemset create ruby-1.9.3-p392@hedra-site
+$ rvm use ruby-1.9.3-p392
+$ rvm gemset create ruby-1.9.3-p392 hedra-site
 $ rvm use ruby-1.9.3-p392@hedra-site
 </code>
 
