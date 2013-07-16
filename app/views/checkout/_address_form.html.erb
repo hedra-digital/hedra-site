@@ -1,0 +1,30 @@
+<%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
+  <h5>Endereço para Entrega</h5>
+  <fieldset>
+  	<div class="zip_code_field">
+    	<%= f.input :zip_code, :label => t('activerecord.attributes.address.zip_code') %>
+    </div>
+    <div class="zip_code_btn">
+		<%= button_to 'Buscar' %>
+	</div>
+    <div class="address_field">
+    	<%= f.input :address, :label => t('activerecord.attributes.address.address') %>
+    </div>
+    <div class="number_field">
+    	<%= f.input :number, :label => t('activerecord.attributes.address.number') %>
+    </div>
+    <div class="complement_field">
+    	<%= f.input :complement, :label => t('activerecord.attributes.address.complement') %>
+    </div>
+    <div class="district_field">
+    	<%= f.input :district, :label => t('activerecord.attributes.address.district') %>
+    </div>
+    <div class="city_field">
+    	<%= f.input :city, :label => t('activerecord.attributes.address.city') %>
+    </div>
+    <div class="state_field">
+    	<%= f.input :state, :label => t('activerecord.attributes.address.state') %>
+    </div>
+    <%= f.submit t('sign_up') %>
+  </fieldset>
+<% end %>
