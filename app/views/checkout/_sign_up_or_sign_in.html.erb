@@ -2,6 +2,10 @@
 <%= link_to t('it_is_not_me'), destroy_user_session_path, :method => :delete, :remote => true %>
 <div class='sign_up_or_sign_in_wrapper'>
   <%= render '/checkout/login_form' %>
-
   <%= render '/checkout/sign_up_form' %>
 </div>
+
+<!-- Pra aparecer a parte do endereço, não fiz a dinamica ainda-->
+<!--div class='address_wrapper'>
+  <%= render '/checkout/address_form' %>
+</div-->
