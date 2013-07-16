@@ -23,7 +23,7 @@ gem 'thinking-sphinx', '2.0.10'
 gem 'jquery-rails'
 gem 'bourbon'
 gem 'ckeditor'
-
+gem 'devise'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

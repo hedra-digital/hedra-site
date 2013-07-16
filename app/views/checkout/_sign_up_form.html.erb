@@ -1,0 +1,8 @@
+<%= simple_form_for(:user, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
+  <fieldset>
+    <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
+    <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
+    <%= f.input :password_confirmation, :label => t('activerecord.attributes.user.password_confirmation') %>
+    <%= f.submit t('sign_up') %>
+  </fieldset>
+<% end %>

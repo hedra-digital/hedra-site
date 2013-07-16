@@ -1,5 +1,7 @@
 HedraSite::Application.routes.draw do
 
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
+
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :admin_users, ActiveAdmin::Devise.config

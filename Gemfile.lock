@@ -207,6 +207,7 @@ DEPENDENCIES
   carrierwave
   ckeditor
   coffee-rails (~> 3.2.1)
+  devise
   friendly_id (~> 4.0.1)
   jquery-rails
   mini_magick

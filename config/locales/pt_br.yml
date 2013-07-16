@@ -264,6 +264,10 @@ pt_br:
         person: 'Pessoa'
       person:
         name: 'Nome'
+      user:
+        email: 'E-mail'
+        password: 'Senha'
+        password_confirmation: 'Confirme a sua senha'
     errors:
   active_admin:
     dashboard: "Painel Administrativo"

@@ -1,0 +1,14 @@
+<%= simple_form_for(:user, :html => {:class => 'login'}, :url => new_user_session_path, :remote => true) do |f| %>
+  <fieldset>
+    <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
+    <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
+    <div class='field'>
+      <label>
+        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+        <%= t(:remember_me) %>
+        <%= link_to t('recover_password.label'), "#", :class => 'recover_password' %>
+      </label>
+    </div>
+    <%= f.submit t('login') %>
+  </fieldset>
+<% end %>

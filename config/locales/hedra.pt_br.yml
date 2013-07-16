@@ -1,0 +1,9 @@
+pt_br:
+  login: "Acessar"
+  remember_me: "Mantenha-me conectado"
+  sign_up: "Cadastrar-se"
+  it_is_not_me: "não sou eu"
+  recover_password:
+    success: "As instruções de recuperação da senha foram enviada para o e-mail"
+    error: "não tem uma conta."
+    label: "Esqueceu sua senha? Recupere aqui"
