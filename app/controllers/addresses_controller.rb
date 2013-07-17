@@ -8,4 +8,10 @@ class AddressesController < ApplicationController
     end
   end
 
+  def get_address
+  	@address = Address.find_by_id(params[:id])
+    respond_to do |format|
+      format.json { render json: @address }
+    end
+  end
 end

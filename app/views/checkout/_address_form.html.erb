@@ -1,17 +1,29 @@
 <%- @addresses = Address.all.collect {|a| [ a.identifier, a.id ] } %>
+
+<%- @address_id = Address.last.id %>
+
 <br>
     <%- if @addresses.count > 0 %>
         <h5>Selecione o endereço da entrega, ou adicione um novo endereço.</h5>
         <div class="address_selector">
-            <%= select('address', 'address_id', @addresses) %>
+            <%= select 'address', 'address_id', @addresses, {:selected => "#{@address_id}", :include_blank => 'Adicionar um novo endereço...' } %>
         </div>
     <%- else %>
         <h5>Por favor adicione o seu endereço para a entrega.</h5>
     <%- end %>
     <div class="add_address_btn">
-        <%= button_to_function t('add_new_address'), "javascript:showNewAddressFields(); $('.go_to_third_step').toggle();" %>
+        <%= button_to_function t('add_new_address'), "javascript:showNewAddressFields();" %>
     </div>
 <br>
+<br>
+<div class="show_address">
+    <p>
+        <h6><span id="identifier_info"></span></h6>
+        <span id="address_info"></span> <br>
+        <span id="region_info"></span> <br>
+        <span id="zipcode_info"></span>
+    </p>
+</div>
 <br>
 <div class="new_address">
 <%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => create_address_path, :remote => true) do |f| %>
