@@ -14,5 +14,9 @@ class Order < ActiveRecord::Base
     order = self.create(user_id: transaction.user_id, address: Address.last,
       email: transaction.user.email, payment_state: 'Aguardando aprovação',
       shipment_state: 'Aguardando envio', total: transaction.total)
+    transaction.items.each do |item|
+      OrderItem.create(order_id: order.id, book_id: item[:number], price: Book.find(item[:number]).price_print, quantity: item[:quantity])
+    end
+    order
   end
 end
