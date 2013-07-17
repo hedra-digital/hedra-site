@@ -1,23 +1,23 @@
+<%- @addresses = Address.all.collect {|a| [ a.identifier, a.id ] } %>
 <br>
-
-    <h5>Endereço para Entrega</h5>
-    <div class="address_selector">
-        <select>
-            <option value="">Minha casa</option>
-            <option value="">Casa da minha mãe</option>
-            <option value="">EScritório</option>
-        </select>
-        <% select('address', 'address_id', Address.all.collect {|a| [ a.identifier, a.id ] }, { :include_blank => true }) %>
-    </div>
+    <%- if @addresses.count > 0 %>
+        <h5>Selecione o endereço da entrega, ou adicione um novo endereço.</h5>
+        <div class="address_selector">
+            <%= select('address', 'address_id', @addresses) %>
+        </div>
+    <%- else %>
+        <h5>Por favor adicione o seu endereço para a entrega.</h5>
+    <%- end %>
     <div class="add_address_btn">
-        <%= button_to_function t('add_new_address'), "javascript:showNewAddressFields()" %>
+        <%= button_to_function t('add_new_address'), "javascript:showNewAddressFields(); $('.go_to_third_step').toggle();" %>
     </div>
 <br>
 <br>
 <div class="new_address">
-<%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
+<%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => create_address_path, :remote => true) do |f| %>
   <br>
   <fieldset>
+    <%= f.input :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
     <div class="identifier_field">
         <%= f.input :identifier, placeholder: 'Ex: Minha Casa, Escritorio, etc', :label => t('activerecord.attributes.address.identifier') %>
     </div>
@@ -29,7 +29,6 @@
     </div>
     <div class="zip_code_btn">
         <%= button_to_function t('find_zip_code'), "javascript:findZipCode()" %>
-		
 	</div>
     <div class="address_field">
     	<%= f.input :address, :label => t('activerecord.attributes.address.address') %>
@@ -50,8 +49,18 @@
         <%= f.input :state, :label => t('activerecord.attributes.address.state'),
             :collection => ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"] %>
     </div>
+    <%= f.submit t('next') %>
   </fieldset>
 <% end %>
 </div>
 <br>
-<%= button_to_function t('next'), "javascript:alert('vai para o proximo passo')" %>
+
+<%= button_tag t('next'), class: 'go_to_third_step' %>
+
+<%- content_for :page_javascripts do %>
+  <script>
+    $('.go_to_third_step').on('click', function(event){
+      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>")
+    });
+  </script>
+<% end %>

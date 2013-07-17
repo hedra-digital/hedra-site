@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddSlugToCategories < ActiveRecord::Migration
   def change
     add_column :categories, :slug, :string

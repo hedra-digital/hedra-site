@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddsPageIdToFeatures < ActiveRecord::Migration
   def change
     add_column :features, :page_id, :integer

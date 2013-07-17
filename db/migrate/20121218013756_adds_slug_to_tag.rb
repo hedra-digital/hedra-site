@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddsSlugToTag < ActiveRecord::Migration
   def change
     add_column :tags, :slug, :string

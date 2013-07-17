@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -10,5 +11,6 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :transactions
+  has_many :addresses
 
 end

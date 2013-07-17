@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class BooksController < ApplicationController
   before_filter :resource, :only => :show
 

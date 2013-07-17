@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBindingTypes < ActiveRecord::Migration
   def change
     create_table :binding_types do |t|

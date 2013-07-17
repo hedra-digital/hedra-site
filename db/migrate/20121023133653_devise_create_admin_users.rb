@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DeviseCreateAdminUsers < ActiveRecord::Migration
   def migrate(direction)
     super

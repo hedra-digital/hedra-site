@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class NotificationsMailer < ActionMailer::Base
   default :from => "editora@hedra.com.br"
   default :to => "editora@hedra.com.br"

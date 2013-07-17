@@ -1,6 +1,8 @@
+<%- r = Random.new %>
+<%- r = r.rand(10...42) %>
 <div class='container'>
   <h1>Pedido realizado com sucesso!</h1>
-  <h4>O número do seu pedido é 1230</h4>
+  <h4>O número do seu pedido é <%=r%></h4>
   <p>Você receberá os detalhes do seu pedido no email: <b><%= current_user.email %></b></p>
   <p>Em caso de dúvidas, entre em contato conosco no e-mail: <%= mail_to 'contato@hedra.com.br' %></p>
   <p>Obrigado por compra na <b>Hedra</b>. Desejamos uma boa leitura! :)</p>

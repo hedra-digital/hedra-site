@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 HedraSite::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
@@ -28,6 +29,7 @@ HedraSite::Application.routes.draw do
 
   match "/checkout/finish/" => "checkout#finish", :as => :finish_checkout
   match "/checkout/review" => "checkout#review", :as => :review
+  match "/address/create" => "addresses#create", :as => :create_address
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

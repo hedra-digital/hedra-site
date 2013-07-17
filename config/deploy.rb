@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 require 'new_relic/recipes'

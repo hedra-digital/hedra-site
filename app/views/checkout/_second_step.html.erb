@@ -8,15 +8,6 @@
   </div>
   <div class='address_wrapper'>
     <%= render '/checkout/address_form' %>
-    <a href="#" class='go_to_third_step'>Ir para o terceiro passo</a>
   </div>
 </div>
 
-<%- content_for :page_javascripts do %>
-  <script>
-    $('.go_to_third_step').on('click', function(event){
-      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>")
-    });
-  </script>
-
-<% end %>

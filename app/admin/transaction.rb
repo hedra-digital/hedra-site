@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ActiveAdmin.register Transaction do
   menu :parent => "eCommerce"
   scope :completed, :default => true

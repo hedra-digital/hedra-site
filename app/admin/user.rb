@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ActiveAdmin.register User do     
   menu :parent => "eCommerce"
   index do                            

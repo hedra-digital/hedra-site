@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ActiveAdmin.register NewRelease do
   menu :parent => "CMS"
 
