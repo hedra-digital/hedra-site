@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716232308) do
+ActiveRecord::Schema.define(:version => 20130717050746) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -151,6 +151,18 @@ ActiveRecord::Schema.define(:version => 20130716232308) do
   end
 
   add_index "new_releases", ["book_id"], :name => "index_new_releases_on_book_id"
+
+  create_table "order_items", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "book_id"
+    t.float    "price"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "order_items", ["book_id"], :name => "index_order_items_on_book_id"
+  add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
 
   create_table "orders", :force => true do |t|
     t.decimal  "item_total",           :precision => 8, :scale => 2, :default => 0.0, :null => false

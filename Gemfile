@@ -25,6 +25,10 @@ gem 'bourbon'
 gem 'ckeditor'
 gem 'devise'
 gem 'country-select'
+gem 'activemerchant'
+gem 'sidekiq'
+gem 'sinatra', :require => false
+gem 'slim'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

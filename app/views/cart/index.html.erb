@@ -51,7 +51,11 @@
       <% end %>
 
       <%= render :partial => 'pagseguro_form_cart' %>
-      <%= render '/checkout/sign_up_or_sign_in' %>
+      <%- if current_user %>
+        <%= render '/checkout/second_step' %>
+      <%- else %>
+        <%= render '/checkout/first_step' %>
+      <%- end %>
     <% else %>
       <p>Você não tem livros no carrinho.</p>
     <% end %>

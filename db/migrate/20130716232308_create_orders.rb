@@ -11,7 +11,6 @@ class CreateOrders < ActiveRecord::Migration
       t.text       :special_instructions
       t.references :user
       t.references :address
-      t.references :book
       t.timestamps
     end
   end

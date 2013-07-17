@@ -39,6 +39,7 @@ class Book < ActiveRecord::Base
   has_many                            :new_releases, :inverse_of => :book, :dependent => :destroy
   has_many                            :recommendations, :inverse_of => :book, :dependent => :destroy
   belongs_to                          :category
+  has_many                            :order_items
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true

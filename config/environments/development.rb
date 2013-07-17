@@ -42,4 +42,8 @@ HedraSite::Application.configure do
     Bullet.alert = true
     Bullet.bullet_logger = true
   end
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
 end

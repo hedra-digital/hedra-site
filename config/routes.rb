@@ -26,6 +26,8 @@ HedraSite::Application.routes.draw do
   get  "/home/*other"            => redirect("/")
   get  "/home"                   => redirect("/")
 
+  match "/checkout/finish/" => "checkout#finish", :as => :finish_checkout
+  match "/checkout/review" => "checkout#review", :as => :review
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

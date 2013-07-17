@@ -1,5 +1,5 @@
 <% if current_user.nil? %>
-  alert('não logado')
+  $('.errors').html("Informações de acesso inválidas.")
 <% else %>
-  alert('logado')
+  $('#sign_up_or_sign_in').html("<%=escape_javascript(render '/checkout/second_step')%>")
 <% end %>
