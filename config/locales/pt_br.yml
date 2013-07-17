@@ -245,6 +245,9 @@ pt_br:
       transaction:
         one: Transação
         other: Transações
+      address:
+        one: Endereço
+        other: Endereços
     successful:
       messages:
         created: "%{model} foi criado com sucesso."
@@ -308,6 +311,17 @@ pt_br:
         paypal_pending_reason: Motivo pendência Paypal
         paypal_reason_code: Código motivo Paypal
         status: Status Paypal
+      address:
+        user: "Usuário"
+        zip_code: CEP
+        address: Endereço
+        number: Número
+        complement: Complemento
+        district: Bairro
+        city: Cidade
+        state: Estado
+        country: País
+
     errors:
   active_admin:
     dashboard: "Painel Administrativo"
