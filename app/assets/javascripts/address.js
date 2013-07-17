@@ -1,3 +1,5 @@
+var address_id;
+
 $(document).ready(function() {
   $('#address_address_id').change(function() 
 	{
@@ -8,8 +10,8 @@ $(document).ready(function() {
 			showExistingAddress($('#address_address_id').val());
 		}
   });
+	$('#address_address_id').change();
 });
-
 
 function showNewAddressFields(){
 	$('.go_to_third_step').hide();
@@ -19,7 +21,6 @@ function showNewAddressFields(){
 }
 
 function showExistingAddress(id){
-
   $.ajax({
     dataType: "json",
     url: '../address/get_address.json?id='+id,
@@ -35,9 +36,8 @@ function showExistingAddress(id){
 }
 
 function fillAddress(data){
-
-	var address_info = data.address + ',' + data.number + ' ' + data.complement;
-	var region_info = data.district + ',' + data.city + ' - ' + data.state;
+	var address_info = data.address + ', ' + data.number + ' ' + data.complement;
+	var region_info = data.district + ', ' + data.city + ' - ' + data.state;
 	var zipcode_info = 'CEP: ' + data.zip_code;
 
 	$('#identifier_info').html(data.identifier);

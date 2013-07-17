@@ -1,4 +1,13 @@
-<%- address = Address.last%>
+<!--<%- address = Address.last%>
 <div class='show_address'>
   A entrega será realizada no endereço: <b><%= address.identifier %></b>
+</div>
+-->
+<div class="show_address">
+    <p>
+        <h6><span id="identifier_info"></span></h6>
+        <span id="address_info"></span> <br>
+        <span id="region_info"></span> <br>
+        <span id="zipcode_info"></span>
+    </p>
 </div>
