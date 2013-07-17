@@ -3,8 +3,9 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :transactions
   has_many :order_items
+  belongs_to :address
 
   def name
-    self.id
+    "##{self.id}"
   end
 end
