@@ -20,6 +20,9 @@
 //= require jquery.carouFredSel-6.2.0
 //= require ga
 //= require_self
+//= require zipcode/zipcode.js
+//= require zipcode/mask.js
+//= require address.js
 
 // FancyBox
 $(".fancybox").fancybox({

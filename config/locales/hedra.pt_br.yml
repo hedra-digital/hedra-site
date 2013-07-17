@@ -7,3 +7,7 @@ pt_br:
     success: "As instruções de recuperação da senha foram enviada para o e-mail"
     error: "não tem uma conta."
     label: "Esqueceu sua senha? Recupere aqui"
+  add_address: "Confirmar Endereço"
+  find_zip_code: "Buscar"
+  next: "Prosseguir"
+  add_new_address: "Adicionar novo endereço"

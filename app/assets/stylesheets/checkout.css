@@ -16,9 +16,43 @@
   border-left: 2px solid #fff;
 }
 
+.new_address{
+  display:none;
+}
+
+.address_selector{
+  width: 70%;
+  float: left;
+  position: relative;
+}
+
+.address_selector select{
+  width: 90%;
+  padding: 0 0 0 5%;
+}
+
+.add_address_btn{
+  width: 30%;
+  float: left;
+  position: relative;
+}
+
 .address_wrapper{
   width: 100%;
   margin-top: 20px;
+}
+
+.identifier_field{
+  width: 60%;
+  float: left;
+  position: relative;
+}
+
+.default_field{
+  width: 40%;
+  float: left;
+  height: 99px;
+  position: relative;
 }
 
 .address_field{
@@ -69,6 +103,10 @@
   padding-top: 30px;
 }
 
+#address_identifier{
+  width: 95%;
+}
+
 #address_address{
 	width: 95%;
 }
@@ -79,4 +117,22 @@
 
 #address_complement{
 	width: 75%;
+}
+
+#address_state{
+  padding: 0 0 0 5%;
+  width: 30%;
+}
+
+.address_default label{
+  padding-top: 35px; 
+}
+
+.address_default label{
+  float: left;
+  width: 50%;
+}
+
+.address_default label.checkbox {
+  padding: 40px 0 0 40px;
 }

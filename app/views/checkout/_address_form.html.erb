@@ -1,11 +1,35 @@
+<br>
+
+    <h5>Endereço para Entrega</h5>
+    <div class="address_selector">
+        <select>
+            <option value="">Minha casa</option>
+            <option value="">Casa da minha mãe</option>
+            <option value="">EScritório</option>
+        </select>
+        <% select('address', 'address_id', Address.all.collect {|a| [ a.identifier, a.id ] }, { :include_blank => true }) %>
+    </div>
+    <div class="add_address_btn">
+        <%= button_to_function t('add_new_address'), "javascript:showNewAddressFields()" %>
+    </div>
+<br>
+<br>
+<div class="new_address">
 <%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
-  <h5>Endereço para Entrega</h5>
+  <br>
   <fieldset>
+    <div class="identifier_field">
+        <%= f.input :identifier, placeholder: 'Ex: Minha Casa, Escritorio, etc', :label => t('activerecord.attributes.address.identifier') %>
+    </div>
+    <div class="default_field">
+        <%= f.input :default, :as => :boolean, input_html: { checked: true }, :label => t('activerecord.attributes.address.default') %>
+    </div>
   	<div class="zip_code_field">
     	<%= f.input :zip_code, :label => t('activerecord.attributes.address.zip_code') %>
     </div>
     <div class="zip_code_btn">
-		<%= button_to 'Buscar' %>
+        <%= button_to_function t('find_zip_code'), "javascript:findZipCode()" %>
+		
 	</div>
     <div class="address_field">
     	<%= f.input :address, :label => t('activerecord.attributes.address.address') %>
@@ -14,7 +38,7 @@
     	<%= f.input :number, :label => t('activerecord.attributes.address.number') %>
     </div>
     <div class="complement_field">
-    	<%= f.input :complement, :label => t('activerecord.attributes.address.complement') %>
+    	<%= f.input :complement, :label => t('activerecord.attributes.address.complement'), :required => false %>
     </div>
     <div class="district_field">
     	<%= f.input :district, :label => t('activerecord.attributes.address.district') %>
@@ -23,8 +47,11 @@
     	<%= f.input :city, :label => t('activerecord.attributes.address.city') %>
     </div>
     <div class="state_field">
-    	<%= f.input :state, :label => t('activerecord.attributes.address.state') %>
+        <%= f.input :state, :label => t('activerecord.attributes.address.state'),
+            :collection => ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"] %>
     </div>
-    <%= f.submit t('sign_up') %>
   </fieldset>
 <% end %>
+</div>
+<br>
+<%= button_to_function t('next'), "javascript:alert('vai para o proximo passo')" %>
