@@ -12,33 +12,24 @@ class CheckoutController < ApplicationController
     address = nil
     @transaction = Transaction.create_transaction(current_user, session[:carrinho])
     # @order = Order.create_order(@transaction)
+    session[:transaction] = @transaction
     total_as_cents, setup_purchase_params = get_setup_purchase_params Order.new(total: @transaction.total), request, @transaction.items
-    puts total_as_cents.inspect
-    puts '-' * 100
-    puts setup_purchase_params.inspect
     setup_response = @gateway.setup_purchase(total_as_cents, setup_purchase_params)
-    puts '-' * 100
     puts setup_response.params
     redirect_to @gateway.redirect_url_for(setup_response.token)
   end
 
   def review
     if params[:token].nil? or params[:PayerID].nil?
-      redirect_to checkout_path(:experience_date_id => session[:experience_date_id]), :notice => "Sorry! Something went wrong with the Paypal purchase. Please try again later."
+      redirect_to cart_url, :notice => "Nos desculpe, ocorreu uma falha ao completar o pagamento pelo PayPal, por favor realize novamente a sua compra."
       return
     end
-    @experience_date = ExperienceDate.find(session[:experience_date_id])
-    @experience = @experience_date.experience
-    @transaction = Transaction.where(:user_id => current_user.id).last
-    total_as_cents, purchase_params = get_purchase_params @experience, request, @transaction.items, params
+    total_as_cents, purchase_params = get_purchase_params Order.new(total: session[:transaction].total), request, session[:transaction].items, params
     @purchase = @gateway.purchase total_as_cents, purchase_params
-    @transaction = Transaction.update_transaction(request, @purchase, @experience_date, current_user)
+    # @transaction = Transaction.update_transaction(request, @purchase, @experience_date, current_user)
 
-    if @purchase.success?
-      @notice = "Thanks! Your purchase is now complete!"
-    else
-      @notice = "Woops. Something went wrong while we were trying to complete the purchase with Paypal. Btw, here's what Paypal said: #{@purchase.message}"
-    end
+    # if @purchase.success?
+    session[:carrinho] = nil
   end
 
   def assigns_gateway

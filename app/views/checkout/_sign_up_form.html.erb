@@ -1,8 +1,14 @@
 <%= simple_form_for(:user, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
+  <h4> <%= t('checkout.sign_up') %> </h4>
   <fieldset>
-    <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
-    <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
-    <%= f.input :password_confirmation, :label => t('activerecord.attributes.user.password_confirmation') %>
+    <div class='field_in_same_line'>
+      <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
+      <%= f.input :name, :label => t('activerecord.attributes.user.name') %>
+    </div>
+    <div class='field_in_same_line'>
+      <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
+      <%= f.input :password_confirmation, :label => t('activerecord.attributes.user.password_confirmation') %>
+    </div>
     <%= f.submit t('sign_up') %>
   </fieldset>
 <% end %>

@@ -24,7 +24,7 @@ module CheckoutHelper
       :subtotal => to_cents(order.total),
       :locale => 'pt_BR',
       :currency => 'BRL',
-      :items => [:name => experience.title,:number => experience.id, :amount => to_cents(experience.price), :quantity => number_of_tickets]
+      :items => items
     }
   end
 

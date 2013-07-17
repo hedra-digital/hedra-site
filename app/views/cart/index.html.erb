@@ -50,7 +50,6 @@
         <%= f.button :submit, 'Atualizar carrinho', :class => 'btn cart-form-button-update' %>
       <% end %>
 
-      <%= render :partial => 'pagseguro_form_cart' %>
       <%- if current_user %>
         <%= render '/checkout/second_step' %>
       <%- else %>

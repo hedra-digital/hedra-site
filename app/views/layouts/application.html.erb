@@ -53,7 +53,7 @@
                 <li><%= link_to 'Blog', blog_path %></li>
               </ul>
             </nav>
-            <p class="company-copyright">Copyright &copy; 2012, Hedra Editora.</p>
+            <p class="company-copyright">Copyright &copy; <%=Date.today.year%>, Hedra Editora.</p>
           </div>
         </div>
         <div id="company-address" class="row">
@@ -67,5 +67,6 @@
     </footer>
 
     <%= javascript_include_tag "application" %>
+    <%= yield :page_javascripts %>
   </body>
 </html>

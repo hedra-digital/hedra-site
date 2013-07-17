@@ -3,6 +3,9 @@ pt_br:
   remember_me: "Mantenha-me conectado"
   sign_up: "Cadastrar-se"
   it_is_not_me: "não sou eu"
+  checkout:
+    already_has_account: "Se você já tem uma conta, faça o login."
+    sign_up: "Ainda não tem conta na Hedra? Cadastre-se."
   recover_password:
     success: "As instruções de recuperação da senha foram enviada para o e-mail"
     error: "não tem uma conta."

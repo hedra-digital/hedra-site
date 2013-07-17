@@ -277,6 +277,7 @@ pt_br:
         email: 'E-mail'
         password: 'Senha'
         password_confirmation: 'Confirme a sua senha'
+        name: 'Nome'
       address:
         zip_code: 'CEP'
         address: 'Endereço'
@@ -285,12 +286,12 @@ pt_br:
         district: 'Bairro'
         city: 'Cidade'
         state: 'Estado'
-        country: 'País'    
+        country: 'País'
       order:
         item_total: Total de itens
         total: Valor total
         state: Status
-        completed_at: Efetuado em 
+        completed_at: Efetuado em
         shipment_state: Status da entrega
         payment_state: Status do pagamento
         email: email
@@ -303,7 +304,7 @@ pt_br:
         order: Pedido
         user_ip: IP do usuário
         paypal_token: Token Paypal
-        paypal_payer_id: Id do usuário Paypal 
+        paypal_payer_id: Id do usuário Paypal
         completed: Finalizado com sucesso?
         paypal_transaction_id: Id transação Paypal
         paypal_payment_date: Data pagamento Paypal

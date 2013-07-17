@@ -1,5 +1,9 @@
 <% if current_user.nil? %>
-  alert('não registrado')
+  <%- error_messages = '' %>
+  <%- @user.errors.full_messages.each do |message| %>
+    <%- error_messages << "<li>#{message}</li>" %>
+  <%- end %>
+  $('.errors').html("<%= error_messages.html_safe %>")
 <% else %>
-  alert('registrado')
+  $('#sign_up_or_sign_in').html("<%=escape_javascript(render '/checkout/second_step')%>")
 <% end %>

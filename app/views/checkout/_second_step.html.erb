@@ -1,4 +1,22 @@
 <%= stylesheet_link_tag "checkout", :media => "all" %>
-<div class='address_wrapper'>
-  <%= render '/checkout/address_form' %>
+<div class='second_step checkout_step'>
+  <div class='user_info'>
+    <h4>
+      <%= "Olá #{current_user.name}," %>
+      <%= link_to "(#{t('it_is_not_me')})", destroy_user_session_path, :method => :delete, :remote => true %>
+    </h4>
+  </div>
+  <div class='address_wrapper'>
+    <%= render '/checkout/address_form' %>
+    <a href="#" class='go_to_third_step'>Ir para o terceiro passo</a>
+  </div>
 </div>
+
+<%- content_for :page_javascripts do %>
+  <script>
+    $('.go_to_third_step').on('click', function(event){
+      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>")
+    });
+  </script>
+
+<% end %>
