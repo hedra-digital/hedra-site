@@ -239,6 +239,12 @@ pt_br:
       page:
         one: Páginas
         other: Páginas
+      order:
+        one: Pedido
+        other: Pedidos
+      transaction:
+        one: Transação
+        other: Transações
     successful:
       messages:
         created: "%{model} foi criado com sucesso."
@@ -277,6 +283,31 @@ pt_br:
         city: 'Cidade'
         state: 'Estado'
         country: 'País'    
+      order:
+        item_total: Total de itens
+        total: Valor total
+        state: Status
+        completed_at: Efetuado em 
+        shipment_state: Status da entrega
+        payment_state: Status do pagamento
+        email: email
+        special_instructions: Instruções
+        user: Usuário
+        address: Endereço
+        book: Livro
+      transaction:
+        user: Usuário
+        order: Pedido
+        user_ip: IP do usuário
+        paypal_token: Token Paypal
+        paypal_payer_id: Id do usuário Paypal 
+        completed: Finalizado com sucesso?
+        paypal_transaction_id: Id transação Paypal
+        paypal_payment_date: Data pagamento Paypal
+        paypal_fee_amount: Fee Paypal
+        paypal_pending_reason: Motivo pendência Paypal
+        paypal_reason_code: Código motivo Paypal
+        status: Status Paypal
     errors:
   active_admin:
     dashboard: "Painel Administrativo"

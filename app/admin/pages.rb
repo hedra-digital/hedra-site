@@ -1,4 +1,6 @@
 ActiveAdmin.register Page  do
+  menu :parent => "CMS"
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
       f.input :tag

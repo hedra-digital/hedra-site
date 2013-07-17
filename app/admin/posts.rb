@@ -1,4 +1,6 @@
 ActiveAdmin.register Post  do
+  menu :parent => "CMS"
+
   form do |f|
     f.inputs do
       f.input :title

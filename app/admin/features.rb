@@ -1,4 +1,5 @@
 ActiveAdmin.register Feature do
+  menu :parent => "CMS"
 
   controller do
     def scoped_collection

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716184214) do
+ActiveRecord::Schema.define(:version => 20130716232308) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -152,6 +152,22 @@ ActiveRecord::Schema.define(:version => 20130716184214) do
 
   add_index "new_releases", ["book_id"], :name => "index_new_releases_on_book_id"
 
+  create_table "orders", :force => true do |t|
+    t.decimal  "item_total",           :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "total",                :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.integer  "state"
+    t.datetime "completed_at"
+    t.integer  "shipment_state"
+    t.integer  "payment_state"
+    t.string   "email"
+    t.text     "special_instructions"
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.integer  "book_id"
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+  end
+
   create_table "pages", :force => true do |t|
     t.integer  "tag_id"
     t.text     "body"
@@ -212,6 +228,26 @@ ActiveRecord::Schema.define(:version => 20130716184214) do
   end
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.string   "user_ip"
+    t.string   "paypal_token"
+    t.string   "paypal_payer_id"
+    t.boolean  "completed"
+    t.string   "paypal_transaction_id"
+    t.date     "paypal_payment_date"
+    t.float    "paypal_fee_amount"
+    t.string   "paypal_pending_reason"
+    t.string   "paypal_reason_code"
+    t.integer  "status"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "transactions", ["order_id"], :name => "index_transactions_on_order_id"
+  add_index "transactions", ["user_id"], :name => "index_transactions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

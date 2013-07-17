@@ -1,4 +1,5 @@
 ActiveAdmin.register Tag do
+  menu :parent => "CMS"
 
   form do |f|
     f.inputs do

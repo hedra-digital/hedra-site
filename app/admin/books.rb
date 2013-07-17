@@ -1,4 +1,6 @@
 ActiveAdmin.register Book do
+  menu :parent => "CMS"
+
   index do
     selectable_column
     column :title

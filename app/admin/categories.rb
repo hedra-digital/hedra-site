@@ -1,4 +1,5 @@
 ActiveAdmin.register Category do
+  menu :parent => "CMS"
 
   form do |f|
     f.inputs do
