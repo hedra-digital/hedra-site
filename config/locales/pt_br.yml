@@ -286,7 +286,8 @@ pt_br:
         district: 'Bairro'
         city: 'Cidade'
         state: 'Estado'
-        country: 'País'
+        identifier: 'Identificador'
+        default: 'Definir como padrão'
       order:
         item_total: Total de itens
         total: Valor total
@@ -322,7 +323,8 @@ pt_br:
         city: Cidade
         state: Estado
         country: País
-
+        identifier: 'Identificador'
+        default: 'Definir como padrão'
     errors:
   active_admin:
     dashboard: "Painel Administrativo"
