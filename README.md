@@ -5,6 +5,11 @@
 * RVM (https://rvm.io/rvm/install)
 * MySQL (http://www.mysql.com/)
 
+### Outros pacotes
+<code>
+sudo apt-get install libmysql-ruby libmysqlclient-dev libxml2-dev libxslt1-dev imagemagick libmagickwand-dev
+</code>
+
 ### Clonar a aplicação
 <code>
 $ git clone git@github.com:hedra-digital/hedra-site.git
@@ -18,7 +23,8 @@ $ rvm install ruby-1.9.3-p392
 
 ### Criar gemset
 <code>
-$ rvm gemset create ruby-1.9.3-p392@hedra-site
+$ rvm use ruby-1.9.3-p392
+$ rvm gemset create ruby-1.9.3-p392 hedra-site
 $ rvm use ruby-1.9.3-p392@hedra-site
 </code>
 
