@@ -1345,3 +1345,190 @@ html, body {
       page-break-after: avoid;
   }
 }
+
+.field_in_same_line {
+  float: left;
+  width: 100%;
+  .control-group {
+    float: left;
+    width: 50%;
+  }
+}
+
+.checkout_step {
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+}
+
+.user_info a {
+  font-size: 16px;
+  text-transform: lowercase;
+}
+
+.third_step div {
+  &.message {
+    width: 740px;
+    float: left;
+  }
+  &.paypal_button {
+    width: 200px;
+    float: right;
+    padding-top: 20px;
+  }
+}
+
+a.paypal_button {
+  background: url('https://www.paypalobjects.com/webstatic/mktg/br/botoes_paypal_nf_v01.png') no-repeat;
+  width: 186px;
+  height: 40px;
+  text-align: center;
+  padding-top: 25px;
+  float: right;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  text-transform: uppercase;
+  text-shadow: none;
+  font-family: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16.5px;
+  font-weight: normal;
+  line-height: 1;
+  padding-top: 35px;
+  height: 60px;
+  color: #fff !important;
+  font-weight: bold;
+  background-color: #39a0c1;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF88B2C2', endColorstr='#FF88B2C2', GradientType=0);
+  border-color: #88b2c2 #88b2c2 #5691a8;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.errors {
+  color: #FF4040;
+  font-weight: bold;
+}
+
+.sign_up_or_sign_in_wrapper {
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+  form {
+    width: 50%;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    &.sign_up {
+      padding-left: 20px;
+      border-left: 2px solid #fff;
+    }
+  }
+}
+
+#sign_up_or_sign_in h4 {
+  font-size: 0.8em;
+  color: #519fc0;
+}
+
+.new_address {
+  display: none;
+}
+
+.address_selector {
+  width: 70%;
+  float: left;
+  position: relative;
+  select {
+    width: 90%;
+    padding: 0 0 0 5%;
+  }
+}
+
+.add_address_btn {
+  width: 30%;
+  float: left;
+  position: relative;
+}
+
+.address_wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.identifier_field {
+  width: 60%;
+  float: left;
+  position: relative;
+}
+
+.default_field {
+  width: 40%;
+  float: left;
+  height: 99px;
+  position: relative;
+}
+
+.address_field {
+  width: 60%;
+  float: left;
+  position: relative;
+}
+
+.number_field {
+  width: 15%;
+  float: left;
+  position: relative;
+}
+
+.complement_field {
+  width: 25%;
+  float: left;
+  position: relative;
+}
+
+.district_field, .city_field, .state_field {
+  width: 33%;
+  float: left;
+  position: relative;
+}
+
+.zip_code_field {
+  width: 25%;
+  float: left;
+}
+
+.zip_code_btn {
+  width: 75%;
+  float: left;
+  height: 99px;
+  padding-top: 30px;
+}
+
+#address_identifier, #address_address {
+  width: 95%;
+}
+
+#address_number, #address_complement {
+  width: 75%;
+}
+
+#address_state {
+  padding: 0 0 0 5%;
+  width: 30%;
+}
+
+.address_default label {
+  padding-top: 35px;
+  float: left;
+  width: 50%;
+  &.checkbox {
+    padding: 40px 0 0 40px;
+  }
+}
+
+.new_address input.error, select.error {
+  border: 1px solid red !important;
+  color: red !important;
+}
