@@ -30,6 +30,8 @@ HedraSite::Application.routes.draw do
   match "/checkout/finish/" => "checkout#finish", :as => :finish_checkout
   match "/checkout/review" => "checkout#review", :as => :review
   match "/address/create" => "addresses#create", :as => :create_address
+  match "/address/get_address" => 'addresses#get_address', :as => :get_address
+  match "/address/get_chosen_address_id" => 'addresses#get_chosen_address_id', :as => :get_chosen_address_id
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
