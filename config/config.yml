@@ -1,11 +1,13 @@
 development:
-  mailto: antonioams@gmail.com
+  mailto: ffc.fabricio@gmail.com
   paypal_login: ffc.fabricio-facilitator_api1.gmail.com
   paypal_password: 1367984873
   paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
   public_url: "http://still-tundra-6290.herokuapp.com/"
 
 production:
-  paypal_login:
-  paypal_password:
-  paypal_api_signature:
+  mailto: ffc.fabricio@gmail.com
+  paypal_login: ffc.fabricio-facilitator_api1.gmail.com
+  paypal_password: 1367984873
+  paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
+  public_url: "http://still-tundra-6290.herokuapp.com/"
