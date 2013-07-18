@@ -201,3 +201,8 @@ a.paypal_button{
 .address_default label.checkbox {
   padding: 40px 0 0 40px;
 }
+
+.new_address input.error, select.error {
+    border: 1px solid red !important;
+    color: red !important;
+}

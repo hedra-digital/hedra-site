@@ -10,15 +10,18 @@ function findZipCode()
 function onZipCodeSuccess(data)
 {
     $('#address_address').val(data.logradouro);
+    $('#address_address').removeClass('error');
     $('#address_district').val(data.bairro);
+    $('#address_district').removeClass('error');
     $('#address_city').val(data.cidade);
+    $('#address_city').removeClass('error');
     $('#address_state').val(data.estado);
-    $('#address_number').focus();
+    $('#address_state').removeClass('error');
+    $('#address_address').focus();
 }
 
 function onZipCodeError(data)
 {
-    alert('cep invalido...');
     $('#address_zip_code').val('');
     $('#address_zip_code').focus();
 }

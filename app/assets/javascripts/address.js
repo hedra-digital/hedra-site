@@ -54,3 +54,16 @@ function getChosenAddress(){
     }
   });
 }
+
+$.validator.messages.required = '';
+$("#address_form").validate({
+                rules: {
+                    address_identifier: "required",
+                    address_zip_code: "required",
+                    address_address: "required",
+                    address_number: "required",
+                    address_district: "required",
+                    address_city: "required",
+                    address_state: "required"
+                }
+            });

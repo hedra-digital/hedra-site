@@ -20,7 +20,8 @@
 <%- end %>
 <br>
 <div class="new_address">
-<%= simple_form_for(:address, :html => {:class => 'sign_up'}, :url => create_address_path, :remote => true) do |f| %>
+    <div class=".errors"></div>
+<%= simple_form_for(:address, :html => {:class => 'sign_up', :id => 'address_form'}, :url => create_address_path, :remote => true) do |f| %>
   <fieldset>
     <%= f.input :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
     <div class="identifier_field">
