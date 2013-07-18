@@ -1,5 +1,3 @@
-var address_id;
-
 $(document).ready(function() {
   $('#address_address_id').change(function() 
 	{
@@ -36,8 +34,6 @@ function showExistingAddress(id){
 }
 
 function fillAddress(data){
-	address_id = data.id;
-
 	var address_info = data.address + ', ' + data.number + ' ' + data.complement;
 	var region_info = data.district + ', ' + data.city + ' - ' + data.state;
 	var zipcode_info = 'CEP: ' + data.zip_code;
@@ -46,4 +42,15 @@ function fillAddress(data){
 	$('#address_info').html(address_info);
 	$('#region_info').html(region_info);
 	$('#zipcode_info').html(zipcode_info);
+}
+
+function getChosenAddress(){
+	$.ajax({
+    dataType: "json",
+    url: '../address/get_chosen_address_id.json?',
+    async: false,
+    success: function(data) {
+    	showExistingAddress(data);
+    }
+  });
 }
