@@ -10,7 +10,7 @@ class CheckoutController < ApplicationController
 
   def finish
     @transaction = Transaction.create_transaction(current_user, session[:carrinho])
-    @address = Address.find(params[:address_id])
+    @address = Address.find(session[:address_id])
     @order = Order.create_order(@transaction, @address)
     session[:transaction_id] = @transaction.id
     session[:items] = @transaction.items
