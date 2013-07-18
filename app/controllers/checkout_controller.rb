@@ -9,9 +9,10 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
-    address = nil
     @transaction = Transaction.create_transaction(current_user, session[:carrinho])
-    @order = Order.create_order(@transaction)
+    @address = Address.find(params[:address_id])
+    @order = Order.create_order(@transaction, @address)
+    session[:transaction_id] = @transaction.id
     session[:items] = @transaction.items
     session[:order_id] = @order.id
     total_as_cents, setup_purchase_params = get_setup_purchase_params @order, request, @transaction.items
@@ -27,9 +28,7 @@ class CheckoutController < ApplicationController
     end
     total_as_cents, purchase_params = get_purchase_params Order.find(session[:order_id]), request, session[:items], params
     @purchase = @gateway.purchase total_as_cents, purchase_params
-    # @transaction = Transaction.update_transaction(request, @purchase, @experience_date, current_user)
-
-    # if @purchase.success?
+    @transaction = Transaction.update_transaction(request, @purchase, session[:transaction_id])
   end
 
   def assigns_gateway

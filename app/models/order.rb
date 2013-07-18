@@ -10,12 +10,13 @@ class Order < ActiveRecord::Base
     "##{self.id}"
   end
 
-  def self.create_order(transaction)
-    order = self.create(user_id: transaction.user_id, address: Address.last,
+  def self.create_order(transaction, address)
+    order = self.create(user_id: transaction.user_id, address: address,
       email: transaction.user.email, payment_state: 'Aguardando aprovação',
       shipment_state: 'Aguardando envio', total: transaction.total)
     transaction.items.each do |item|
-      OrderItem.create(order_id: order.id, book_id: item[:number], price: Book.find(item[:number]).price_print, quantity: item[:quantity])
+      book = Book.find(item[:number])
+      OrderItem.create(order_id: order.id, book_id: item[:number], price: book.price_print, quantity: item[:quantity])
     end
     order
   end

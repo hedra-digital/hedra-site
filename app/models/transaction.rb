@@ -20,9 +20,25 @@ class Transaction < ActiveRecord::Base
     cart.keys.each do |book_id|
       book = Book.find(book_id)
       transaction.total += book.price_print * cart[book_id]
-      transaction.items << {name: book.title, number: book.id, amount: (book.price_print.to_f*100).round, quantity: cart[book_id]}
     end
     return transaction
+  end
+
+  def self.update_transaction(request, purchase, transaction_id)
+    transaction = self.where(:id => transaction_id).last
+    transaction.update_attributes(
+      :customer_ip => request.ip,
+      :paypal_fee_amount => purchase.params['fee_amount'],
+      :paypal_payer_id => purchase.payer_id,
+      :paypal_payment_date => purchase.params['payment_date'],
+      :paypal_pending_reason => purchase.params['pending_reason'],
+      :paypal_reason_code => purchase.params['reason_code'],
+      :paypal_token => purchase.token,
+      :paypal_transaction_id => purchase.params['transaction_id'],
+      :completed => purchase.success?,
+      :status => (purchase.success? == true)? COMPLETED : FAILED
+      )
+    transaction
   end
 
 end
