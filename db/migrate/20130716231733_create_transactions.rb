@@ -14,7 +14,6 @@ class CreateTransactions < ActiveRecord::Migration
       t.string :paypal_pending_reason
       t.string :paypal_reason_code
       t.integer :status
-      t.string :customer_ip
 
       t.timestamps
     end
