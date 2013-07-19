@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(:version => 20130717134842) do
     t.text     "special_instructions"
     t.integer  "user_id"
     t.integer  "address_id"
+    t.integer  "book_id"
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
   end
