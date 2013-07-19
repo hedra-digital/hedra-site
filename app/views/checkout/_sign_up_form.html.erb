@@ -3,7 +3,7 @@
   <fieldset>
     <div class='field_in_same_line'>
       <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
-      <%= f.input :name, :label => t('activerecord.attributes.user.name') %>
+      <%= f.input :name, :label => t('activerecord.attributes.user.name'), :disabled => false %>
     </div>
     <div class='field_in_same_line'>
       <%= f.input :password, :label => t('activerecord.attributes.user.password') %>

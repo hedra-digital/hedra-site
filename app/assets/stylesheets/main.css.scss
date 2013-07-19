@@ -123,17 +123,7 @@ dt {
   font-weight: normal;
 }
 
-textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, textarea, .uneditable-input {
-  padding: 15px 10px;
-  background: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  @include box-shadow(1px 1px 0 #cecece inset);
-  font-family: $sansFontFamily;
-  font-size: $baseFontSize * 0.75;
-  font-weight: normal;
-  line-height: 1;
-  color: $text-light;
-}
+
 
 .btn {
   padding: 15px 20px;
