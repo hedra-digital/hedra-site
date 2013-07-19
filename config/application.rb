@@ -67,13 +67,12 @@ module HedraSite
     config.action_mailer.raise_delivery_errors = false
     config.action_mailer.perform_deliveries = true
     config.action_mailer.smtp_settings = {
-      :address => "in.mailjet.com",
-      :enable_starttls_auto => true,
-      :port => 587,
-      :authentication => 'plain',
-      :user_name => "f6f798721d08716694db9c31db0b4eda",
-      :password => "cd0fb8968c3ba76173f5a58b925aa2bb"
-    }
+    :address => "smtp.gmail.com",
+    :port => "587",
+    :authentication => :plain,
+    :user_name => "snoteapp@gmail.com",
+    :password => "notesmadeeasy"
+  }
     config.action_mailer.default_url_options = {
       :host => "hedra.com.br"
     }
