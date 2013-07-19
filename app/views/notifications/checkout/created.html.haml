@@ -23,18 +23,36 @@
                         %table{:cellpadding => "0", :cellspacing => "0", :style => "border-top:1px solid #fff;border-bottom:1px solid #fff", :width => "600"}
                           %tbody
                             %tr
-                              %td{:height => "10", :width => "42"}
-                              %td{:height => "10", :width => "18"}
-                              %td{:height => "10", :width => "500"}
+                              %td{:valign => "top", :width => "500"}
+                                %p= "Olá #{@order.user.name},"
+                                %p= "Recebemos o seu pedido com sucesso. O número do pedido é <b>#{@order.id}</b>.".html_safe
+                                %h3= "Informações do seu pedido"
+
                             %tr
-                              %td{:valign => "top", :width => "42"}
-                              %td{:width => "18"}
-                              %td{:valign => "top", :width => "500"}= I18n.t('notifications.created.body').html_safe
+                              %td{:height => "10", :width => "300"}
+                                %b Item
+                              %td{:height => "10", :width => "100"}
+                                %b Quantidade
+                              %td{:height => "10", :width => "100"}
+                                %b Valor
+                            - @order.order_items.each do |item|
+                              %tr
+                                %td{:height => "10", :width => "300"}
+                                  = item.book.title
+                                %td{:height => "10", :width => "100"}
+                                  = item.quantity
+                                %td{:height => "10", :width => "100"}
+                                  = number_to_currency item.price
                             %tr
-                              %td{:height => "10", :width => "42"}
-                              %td{:height => "10", :width => "18"}
-                              %td{:height => "10", :width => "500"}
-                        %p{:style => "font-family:Arial,Helvetica,sans-serif;color:#2e2e2e;font-weight:normal;margin:16px 0 20px 0;padding:0;line-height:20px;font-size:13px;text-align:left"}
+                              %td{:valign => "top", :width => "500"}
+                                %p O prazo de entrega é 5 dias utéis, a contar da data da confirmação do pagamento. A entrega será realizada no endereço abaixo:
+                            %tr
+                              %td{:valign => "top", :width => "500"}
+                                %p
+                                  = "#{@order.address.address}, #{@order.address.number} - #{@order.address.district}"
+                                  %br
+                                  = "CEP: #{@order.address.zip_code} #{@order.address.city} - #{@order.address.state}"
+                                %br
                       %td{:width => "20"}
     %tr
       %td

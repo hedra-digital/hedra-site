@@ -6,8 +6,6 @@ class Order < ActiveRecord::Base
   has_many :order_items
   belongs_to :address
 
-  after_create :create_transaction
-
   def name
     "##{self.id}"
   end
@@ -22,6 +20,7 @@ class Order < ActiveRecord::Base
       total += book.price_print * cart[book_id]
       OrderItem.create(order_id: order.id, book_id: book_id, price: book.price_print, quantity: cart[book_id])
     end
+    Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id)
     order.update_attributes(:total => total)
     order
   end
@@ -44,11 +43,5 @@ class Order < ActiveRecord::Base
     when Transaction::FAILED
       "falha no pagamento"
     end
-  end
-
-private
-
-  def create_transaction
-    Transaction.create(user_id: self.user_id, status: Transaction::CREATED, :order_id => self.id)
   end
 end

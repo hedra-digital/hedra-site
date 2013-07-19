@@ -16,12 +16,9 @@ pt_br:
   add_new_address: "Adicionar novo endereço"
   notifications:
     created:
-      body: "Pedido realizado com sucesso."
-      subject: "Pedido realizado com sucesso."
+      subject: "Editora Hedra: Recebemos o seu pedido."
     completed:
-      body: "Recebemos a confirmação do seu pagamento."
-      subject: "Recebemos a confirmação do seu pagamento."
+      subject: "Editora Hedra: Recebemos a confirmação do seu pagamento."
     failed:
-      body: "Pedido não foi completado"
-      subject: "A confirmação do pagamento não foi realizada."
-  no_reply: "Por favor não responda este email, obrigado."
+      subject: "Editora Hedra: Pagamento não efetuado."
+  no_reply: "Este é um e-mail automático, não é necessário respondê-lo."
