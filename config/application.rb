@@ -64,7 +64,19 @@ module HedraSite
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.action_mailer.delivery_method = :smtp
+    # change to false to prevent email from being sent during development
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default :charset => "utf-8"
 
+    config.action_mailer.smtp_settings = {
+      :address => "smtp.gmail.com",
+      :port => "587",
+      :authentication => :plain,
+      :user_name => "snoteapp@gmail.com",
+      :password => "notesmadeeasy"
+    }
     config.action_mailer.default_url_options = {
       :host => "hedra.com.br"
     }
