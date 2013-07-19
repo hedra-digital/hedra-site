@@ -5,6 +5,13 @@ development:
   paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
   public_url: "http://still-tundra-6290.herokuapp.com/"
 
+staging:
+  mailto: ffc.fabricio@gmail.com
+  paypal_login: ffc.fabricio-facilitator_api1.gmail.com
+  paypal_password: 1367984873
+  paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
+  public_url: "http://still-tundra-6290.herokuapp.com/"
+
 production:
   mailto: ffc.fabricio@gmail.com
   paypal_login: ffc.fabricio-facilitator_api1.gmail.com
