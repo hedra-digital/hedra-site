@@ -28,9 +28,7 @@ ActiveAdmin.register Order do
 
   sidebar :order_status, :only => :show do
     attributes_table_for order do
-      row :state
-      row :payment_state
-      row :special_instructions
+      row("state") {order.state_to_s}
     end
   end
 
@@ -47,7 +45,6 @@ ActiveAdmin.register Order do
       row :address
       row :city
       row :complement
-      row :country
       row :district
       row :number
       row :state

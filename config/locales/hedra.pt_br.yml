@@ -14,3 +14,14 @@ pt_br:
   find_zip_code: "Buscar"
   next: "Prosseguir"
   add_new_address: "Adicionar novo endereço"
+  notifications:
+    created:
+      body: "Pedido realizado com sucesso."
+      subject: "Pedido realizado com sucesso."
+    completed:
+      body: "Recebemos a confirmação do seu pagamento."
+      subject: "Recebemos a confirmação do seu pagamento."
+    failed:
+      body: "Pedido não foi completado"
+      subject: "A confirmação do pagamento não foi realizada."
+  no_reply: "Por favor não responda este email, obrigado."

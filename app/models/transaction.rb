@@ -4,6 +4,7 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :order
+  after_save :send_notification, :update_order_state
 
   CREATED = 1
   COMPLETED = 2
@@ -13,25 +14,41 @@ class Transaction < ActiveRecord::Base
   scope :failed, where("status = ?", Transaction::FAILED)
   scope :created, where("status = ?", Transaction::CREATED)
 
-  def self.create_transaction(user)
-    transaction = self.create(user_id: user.id, status: CREATED)
-  end
-
   def self.update_transaction(request, purchase, transaction_id)
     transaction = self.where(:id => transaction_id).last
-    transaction.update_attributes(
-      :customer_ip => request.ip,
-      :paypal_fee_amount => purchase.params['fee_amount'],
-      :paypal_payer_id => purchase.payer_id,
-      :paypal_payment_date => purchase.params['payment_date'],
-      :paypal_pending_reason => purchase.params['pending_reason'],
-      :paypal_reason_code => purchase.params['reason_code'],
-      :paypal_token => purchase.token,
-      :paypal_transaction_id => purchase.params['transaction_id'],
-      :completed => purchase.success?,
-      :status => (purchase.success? == true)? COMPLETED : FAILED
-      )
+    if transaction.status == CREATED
+      transaction.update_attributes(
+        :customer_ip => request.ip,
+        :paypal_fee_amount => purchase.params['fee_amount'],
+        :paypal_payer_id => purchase.payer_id,
+        :paypal_payment_date => purchase.params['payment_date'],
+        :paypal_pending_reason => purchase.params['pending_reason'],
+        :paypal_reason_code => purchase.params['reason_code'],
+        :paypal_token => purchase.token,
+        :paypal_transaction_id => purchase.params['transaction_id'],
+        :completed => purchase.success?,
+        :status => (purchase.success? == true)? COMPLETED : FAILED
+        )
+    end
     transaction
+  end
+
+private
+
+  def send_notification
+    if self.status_changed?
+      if Rails.env == "development"
+        MailWorker.new.perform(self.id)
+      else
+        MailWorker.perform_async(self.id)
+      end
+    end
+  end
+
+  def update_order_state
+    if self.status_changed?
+      self.order.update_attributes(:state => self.status)
+    end
   end
 
 end

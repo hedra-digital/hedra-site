@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717134842) do
+ActiveRecord::Schema.define(:version => 20130719013753) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(:version => 20130717134842) do
     t.integer  "status"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.string   "customer_ip"
   end
 
   add_index "transactions", ["order_id"], :name => "index_transactions_on_order_id"

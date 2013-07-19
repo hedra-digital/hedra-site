@@ -6,13 +6,15 @@ class Order < ActiveRecord::Base
   has_many :order_items
   belongs_to :address
 
+  after_create :create_transaction
+
   def name
     "##{self.id}"
   end
 
-  def self.create_order(transaction, address, cart)
-    order = self.create(user_id: transaction.user_id, address: address,
-      email: transaction.user.email, payment_state: 'Aguardando aprovação',
+  def self.create_order(user, address, cart)
+    order = self.create(user_id: user.id, address: address,
+      email: user.email, payment_state: 'Aguardando aprovação',
       shipment_state: 'Aguardando envio')
     total = 0
     cart.keys.each do |book_id|
@@ -31,5 +33,22 @@ class Order < ActiveRecord::Base
       items << {name: book.title, number: book.id, amount: (item.price*100).round, quantity: item.quantity}
     end
     items
+  end
+
+  def state_to_s
+    case self.state
+    when Transaction::CREATED
+      "aguardando pagamento"
+    when Transaction::COMPLETED
+      "pagamento realizado"
+    when Transaction::FAILED
+      "falha no pagamento"
+    end
+  end
+
+private
+
+  def create_transaction
+    Transaction.create(user_id: self.user_id, status: Transaction::CREATED, :order_id => self.id)
   end
 end

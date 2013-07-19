@@ -9,10 +9,9 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
-    @transaction = Transaction.create_transaction(current_user)
     @address = Address.find(session[:address_id])
-    @order = Order.create_order(@transaction, @address, session[:carrinho])
-    session[:transaction_id] = @transaction.id
+    @order = Order.create_order(current_user, @address, session[:carrinho])
+    session[:transaction_id] = @order.transactions.last.id
     session[:items] = @order.order_items_to_paypal
     session[:order_id] = @order.id
     total_as_cents, setup_purchase_params = get_setup_purchase_params @order, request, @order.order_items_to_paypal
