@@ -1,3 +1,4 @@
+/public/assets/*
 /.project
 /.loadpath
 /config/additional_environment.rb

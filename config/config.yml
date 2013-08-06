@@ -3,18 +3,18 @@ development:
   paypal_login: ffc.fabricio-facilitator_api1.gmail.com
   paypal_password: 1367984873
   paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
-  public_url: "http://still-tundra-6290.herokuapp.com/"
+  public_url: "http://localhost:3000"
 
 staging:
-  mailto: ffc.fabricio@gmail.com
-  paypal_login: ffc.fabricio-facilitator_api1.gmail.com
-  paypal_password: 1367984873
-  paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
-  public_url: "http://still-tundra-6290.herokuapp.com/"
+  mailto: jorge@hedra.com.br
+  paypal_login: editora_api1.hedra.com.br
+  paypal_password: 26UHKT3T2SD3A6RM
+  paypal_api_signature: AFcWxV21C7fd0v3bYYYRCpSSRl31Aig8jMwlvVGCZjlZKFb-JEC6sQs7
+  public_url: "http://www.hedra.com.br/"
 
 production:
-  mailto: ffc.fabricio@gmail.com
-  paypal_login: ffc.fabricio-facilitator_api1.gmail.com
-  paypal_password: 1367984873
-  paypal_api_signature: AbvOQwFJMGZCb.-erhBn4voCUGVXA0U.PBoo2HSYHpWatFWXbdvMfbSg
-  public_url: "http://still-tundra-6290.herokuapp.com/"
+  mailto: jorge@hedra.com.br
+  paypal_login: editora_api1.hedra.com.br
+  paypal_password: 26UHKT3T2SD3A6RM
+  paypal_api_signature: AFcWxV21C7fd0v3bYYYRCpSSRl31Aig8jMwlvVGCZjlZKFb-JEC6sQs7
+  public_url: "http://www.hedra.com.br/"

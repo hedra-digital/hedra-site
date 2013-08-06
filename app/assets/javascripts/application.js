@@ -44,26 +44,29 @@ $(".fancybox").fancybox({
 
 // carouFredSel
 $(window).load(function() {
-  $("#carousel-target").carouFredSel({
-    items           : {
-      visible       : 2
-    },
-    direction       : "left",
-    circular        : true,
-    infinite        : false,
-    auto            : false,
-    prev            : {
-      button        : "#carousel-prev",
-      key           : "left"
-    },
-    next            : {
-      button        : "#carousel-next",
-      key           : "right"
-    },
-    pagination      : "#carousel-pagination",
-    scroll          : {
-      items         : 1,
-      duration      : 700
-    }
-  });
+  if ($('#carousel-target').length){
+    $("#carousel-target").carouFredSel({
+      items           : {
+        visible       : 2
+      },
+      direction       : "left",
+      circular        : true,
+      infinite        : false,
+      auto            : false,
+      prev            : {
+        button        : "#carousel-prev",
+        key           : "left"
+      },
+      next            : {
+        button        : "#carousel-next",
+        key           : "right"
+      },
+      pagination      : "#carousel-pagination",
+      scroll          : {
+        items         : 1,
+        duration      : 700
+      }
+    });
+  }
+
 });
