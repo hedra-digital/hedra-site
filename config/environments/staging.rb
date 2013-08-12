@@ -77,6 +77,6 @@ HedraSite::Application.configure do
     :host => "hedra.com.br"
   }
   config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
+    ActiveMerchant::Billing::Base.mode = :production
   end
 end
