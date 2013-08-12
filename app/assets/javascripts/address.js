@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#address_address_id').change(function() 
+  $('#address_address_id').change(function()
 	{
 		if ($('#address_address_id').val() == ""){
 			showNewAddressFields();

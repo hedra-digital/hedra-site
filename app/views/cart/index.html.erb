@@ -60,3 +60,11 @@
     <% end %>
   </div>
 </div>
+
+<%- content_for :page_javascripts do %>
+  <script>
+    $('body').on('click', '.go_to_third_step', function(event){
+      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>");
+    });
+  </script>
+<% end %>

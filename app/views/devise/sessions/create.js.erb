@@ -3,3 +3,7 @@
 <% else %>
   $('#sign_up_or_sign_in').html("<%=escape_javascript(render '/checkout/second_step')%>")
 <% end %>
+
+<% if @addresses.count > 0 %>
+  showExistingAddress($('#address_address_id').val());
+<% end %>

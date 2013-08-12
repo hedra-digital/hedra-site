@@ -69,11 +69,3 @@
 <%- if @addresses.count > 0 %>
   <%= button_tag t('next'), class: 'go_to_third_step' %>
 <%- end %>
-
-<%- content_for :page_javascripts do %>
-  <script>
-    $('.go_to_third_step').on('click', function(event){
-      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>");
-    });
-  </script>
-<% end %>
