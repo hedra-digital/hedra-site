@@ -37,11 +37,11 @@ private
 
   def send_notification
     if self.status_changed?
-      if Rails.env == "production"
-        MailWorker.perform_async(self.id)
-      else
+      # if Rails.env == "production"
+        # MailWorker.perform_async(self.id)
+      # else
         MailWorker.new.perform(self.id)
-      end
+      # end
     end
   end
 
