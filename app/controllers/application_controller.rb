@@ -4,7 +4,17 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_categories, :get_cart_items, :get_cart_price
 
-  protected
+  before_filter :http_authenticate
+
+protected
+
+  def http_authenticate
+    if Rails.env == 'staging'
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "Lovecraft" && password == "Necronomicon"
+      end
+    end
+  end
 
   def get_categories
     @category_list ||= Category.all
