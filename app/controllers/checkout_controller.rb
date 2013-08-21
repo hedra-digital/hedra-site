@@ -11,13 +11,17 @@ class CheckoutController < ApplicationController
   def finish
     @address = Address.find(session[:address_id])
     @order = Order.create_order(current_user, @address, session[:carrinho])
-    session[:transaction_id] = @order.transactions.last.id
-    session[:items] = @order.order_items_to_paypal
-    session[:order_id] = @order.id
-    total_as_cents, setup_purchase_params = get_setup_purchase_params @order, request, @order.order_items_to_paypal
-    setup_response = @gateway.setup_purchase(total_as_cents, setup_purchase_params)
-    session[:carrinho] = nil
-    redirect_to @gateway.redirect_url_for(setup_response.token)
+    if !@order.nil?
+      session[:transaction_id] = @order.transactions.last.id
+      session[:items] = @order.order_items_to_paypal
+      session[:order_id] = @order.id
+      total_as_cents, setup_purchase_params = get_setup_purchase_params @order, request, @order.order_items_to_paypal
+      setup_response = @gateway.setup_purchase(total_as_cents, setup_purchase_params)
+      session[:carrinho] = nil
+      redirect_to @gateway.redirect_url_for(setup_response.token)
+    else
+      redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
+    end
   end
 
   def review

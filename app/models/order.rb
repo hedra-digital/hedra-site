@@ -11,6 +11,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.create_order(user, address, cart)
+    return nil if cart.nil?
     order = self.create(user_id: user.id, address: address,
       email: user.email, payment_state: 'Aguardando aprovação',
       shipment_state: 'Aguardando envio')
