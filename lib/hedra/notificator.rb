@@ -23,7 +23,7 @@ module Hedra
       end
       Mailer.send_notification(:to => transaction.order.email, :subject => subject, :template_path => 'notifications/checkout',
         :template_name => template_name, :order_id => transaction.order_id,
-        :bcc => 'fabricio@vizir.com.br, fabio@hedra.com.br').deliver
+        :bcc => 'fabricio@vizir.com.br, jorge@hedra.com.br, fabio@hedra.com.br').deliver
     end
 
   end

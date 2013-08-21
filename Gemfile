@@ -31,6 +31,7 @@ gem 'sinatra', :require => false
 gem 'slim'
 gem 'haml'
 gem 'haml-rails'
+gem 'exception_notification'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

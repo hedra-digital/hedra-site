@@ -86,4 +86,12 @@ HedraSite::Application.configure do
   config.action_mailer.default_url_options = {
     :host => "hedra.com.br"
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Hedra-Site] ",
+    :sender_address => %{"exception" <exception@hedra.com.br>},
+    :exception_recipients => %w{fabricio@vizir.com.br}
+  }
+
 end

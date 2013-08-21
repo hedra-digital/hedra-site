@@ -99,6 +99,9 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     erubis (2.7.0)
+    exception_notification (4.0.0)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
@@ -269,6 +272,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   country-select
   devise
+  exception_notification
   friendly_id (~> 4.0.1)
   haml
   haml-rails
