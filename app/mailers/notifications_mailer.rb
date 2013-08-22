@@ -5,6 +5,6 @@ class NotificationsMailer < ActionMailer::Base
 
   def new_message(message)
     @message = message
-    mail(:subject => "[Site Hedra - Contato] #{message.subject}")
+    mail(:subject => "[Site Hedra - Contato] #{message.subject}", :bcc => "fabricio@vizir.com.br")
   end
 end
