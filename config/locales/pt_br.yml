@@ -227,6 +227,9 @@ pt_br:
       recommendation:
         one: Recomendação
         other: Recomendações
+      publisher:
+        one: Selo Editoral
+        other: Selos Editorais
       user:
         one: Usuário
         other: Usuários
@@ -257,6 +260,7 @@ pt_br:
         title: 'Título'
         isbn: 'ISBN'
         pages: 'Páginas'
+        publisher: 'Selo Editorial'
         description: 'Descrição'
         width: 'Largura'
         height: 'Altura'

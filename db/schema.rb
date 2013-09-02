@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719013753) do
+ActiveRecord::Schema.define(:version => 20130902135933) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20130719013753) do
     t.float    "price_print"
     t.float    "price_ebook"
     t.integer  "category_id"
+    t.integer  "publisher_id"
   end
 
   add_index "books", ["binding_type_id"], :name => "index_books_on_binding_type_id"
@@ -177,7 +178,6 @@ ActiveRecord::Schema.define(:version => 20130719013753) do
     t.text     "special_instructions"
     t.integer  "user_id"
     t.integer  "address_id"
-    t.integer  "book_id"
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
   end
@@ -219,6 +219,14 @@ ActiveRecord::Schema.define(:version => 20130719013753) do
   end
 
   add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
+
+  create_table "publishers", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "logo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "recommendations", :force => true do |t|
     t.integer  "book_id"
