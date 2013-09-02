@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_categories, :get_cart_items, :get_cart_price
 
-  before_filter :http_authenticate
+  before_filter :http_authenticate, :current_publisher
 
 protected
 
@@ -13,6 +13,15 @@ protected
       authenticate_or_request_with_http_basic do |username, password|
         username == "Lovecraft" && password == "Necronomicon"
       end
+    end
+  end
+
+  def current_publisher 
+    publisher = Publisher.where(:url => request.host).first
+    if publisher.nil?
+      session[:publisher] = Publisher.first.id
+    else
+      session[:publisher] = publisher.id
     end
   end
 

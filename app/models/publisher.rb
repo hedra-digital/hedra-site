@@ -15,7 +15,7 @@ class Publisher < ActiveRecord::Base
   
   has_many :books
 
-  attr_accessible 					  :name, :url, :logo
+  attr_accessible 					  :name, :url, :logo, :about, :distributors, :contact_email, :contact
 
   mount_uploader                      :logo, LogoUploader
 

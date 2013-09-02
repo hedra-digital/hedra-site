@@ -12,7 +12,12 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search(params[:term], :page => params[:page], :per_page => 5, :include => { :participations => [:person, :role] }, :field_weights => { :title => 10 })
+    @term = "%#{params[:term]}%"
+    @books = Book.where("title LIKE ? OR isbn LIKE ? OR description LIKE ?", @term, @term, @term).
+              includes(:participations).
+              paginate(:page => params[:page], :per_page => 5).
+              order("if(publisher_id = #{session[:publisher]},0,publisher_id)")
+
   end
 
   private

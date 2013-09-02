@@ -6,7 +6,7 @@ ActiveAdmin.register Publisher do
     selectable_column
     column :name
     column :url
-    column :logo
+    column :contact_email
     default_actions
   end
 
@@ -14,7 +14,11 @@ ActiveAdmin.register Publisher do
     f.inputs do
       f.input :name
       f.input :url
+      f.input :contact
+      f.input :contact_email
       f.input :logo, :as => :file, :hint => (( f.object.new_record? || f.object.logo.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.logo.url(:thumb)))
+      f.input :about
+      f.input :distributors
     end
     f.buttons
   end

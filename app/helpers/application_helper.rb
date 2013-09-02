@@ -1,6 +1,26 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
+  def publisher_logo
+    "background: url('#{Publisher.find(session[:publisher]).logo.url}') no-repeat; background-size: 100% 100%;"
+  end
+
+  def publisher_name
+    "#{Publisher.find(session[:publisher]).name}"
+  end
+
+  def publisher_contact
+    "#{Publisher.find(session[:publisher]).contact}"
+  end
+
+  def publisher_about
+    "#{Publisher.find(session[:publisher]).about}".html_safe
+  end
+
+  def publisher_distributors
+    "#{Publisher.find(session[:publisher]).distributors}".html_safe
+  end
+
   def flash_message
     messages = ""
     types = { :notice => 'success', :alert => 'error', :info => 'info' }

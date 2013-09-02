@@ -53,14 +53,12 @@
                 <li><%= link_to 'Blog', blog_path %></li>
               </ul>
             </nav>
-            <p class="company-copyright">Copyright &copy; <%=Date.today.year%>, Hedra Editora.</p>
+            <p class="company-copyright">Copyright &copy; <%=Date.today.year%>, <%= publisher_name %>.</p>
           </div>
         </div>
         <div id="company-address" class="row">
           <address class="span12">
-            Rua Fradique Coutinho 1139, Subsolo
-            CEP 05416-011 - São Paulo - SP
-            Tel.: (11) 3097-8304
+            <%= publisher_contact %>
           </address>
         </div>
       </div>
