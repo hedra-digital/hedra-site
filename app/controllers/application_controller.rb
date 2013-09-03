@@ -19,7 +19,7 @@ protected
   def current_publisher 
     publisher = Publisher.where(:url => request.host).first
     if publisher.nil?
-      session[:publisher] = Publisher.first.id
+      session[:publisher] = Publisher.get_default.id
     else
       session[:publisher] = publisher.id
     end
