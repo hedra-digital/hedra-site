@@ -134,6 +134,7 @@ class Publisher < ActiveRecord::Base
           </div>
         </div>'
         publisher.save
+        Book.update_all(:publisher_id => Publisher.first.id)
   	end
   	
   	Publisher.first
