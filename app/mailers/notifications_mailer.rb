@@ -6,9 +6,9 @@ class NotificationsMailer < ActionMailer::Base
   def new_message(message, publisher_id)
     @message = message
     if publisher_id.nil?
-    	mail(:subject => "[Site Hedra - Contato] #{message.subject}", :bcc => "fabricio@vizir.com.br")
+    	mail(:subject => "[Site Hedra - Contato] #{message.subject}", :bcc => "fabricio@vizir.com.br, jorge@hedra.com.br, fellipe@vizir.com.br")
     else
-    	mail(:to => Publisher.find(publisher_id).contact_email, :subject => "[Site Hedra - Contato] #{message.subject}", :bcc => "fabricio@vizir.com.br")	
+    	mail(:to => Publisher.find(publisher_id).contact_email, :subject => "[Site Hedra - Contato] #{message.subject}", :bcc => "fabricio@vizir.com.br, jorge@hedra.com.br, fellipe@vizir.com.br")	
     end
   end
 end
