@@ -50,7 +50,7 @@ module ApplicationHelper
     end
     if options[:title].presence
       content_for(:h1, content_tag(:h1, options[:title]))
-      content_for(:title, content_tag(:title, "#{options[:title]} | Editora Hedra"))
+      content_for(:title, content_tag(:title, "#{options[:title]} | #{publisher_name}"))
     end
     if options[:description].presence
       content_for(:meta_tags, tag(:meta, { :name => 'description', :content => options[:description] }))
@@ -79,5 +79,9 @@ module ApplicationHelper
 
   def cart_empty?
     @cart_items.nil? || @cart_items.empty?
+  end
+
+  def publisher_name
+    Publisher.find(session[:publisher]).name
   end
 end

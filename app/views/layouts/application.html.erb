@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <%= yield(:title).presence || content_tag(:title, "Editora Hedra") %>
+    <%= yield(:title).presence || content_tag(:title, publisher_name) %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <!--[if lte IE 8]>
       <%= stylesheet_link_tag    "ie8-and-down", :media => "all" %>
