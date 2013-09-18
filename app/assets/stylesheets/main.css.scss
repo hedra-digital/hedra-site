@@ -623,7 +623,9 @@ article .list-price {
 }
 
 .cover-related{
-  max-height: 230px;
+  img{
+    max-height: 230px;
+  }
 }
 
 .book-info .cover {
