@@ -595,6 +595,7 @@ article .list-price {
   }
 }
 
+
 .cover {
   position: relative;
   vertical-align: middle;
@@ -604,7 +605,6 @@ article .list-price {
     @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
     vertical-align: middle;
     display: table-cell;
-    max-height: 230px;
   }
   a{
     vertical-align: middle;
@@ -620,6 +620,10 @@ article .list-price {
     background-size: 100% 100%;
     pointer-events: none;
   }
+}
+
+.cover-related{
+  max-height: 230px;
 }
 
 .book-info .cover {
