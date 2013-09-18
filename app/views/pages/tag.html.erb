@@ -5,7 +5,7 @@
   </div>
 
   <% if @page %>
-    <% if @page.hero_image %>
+    <% if @page.hero_image.present? %>
       <div id="hero">
         <div class="container">
           <%= content_tag(:div, image_tag(@page.hero_image.to_s), :class => 'hero-image') %>
@@ -14,7 +14,7 @@
     <% end %>
     <div id="extra">
       <div class="container">
-        <% if @page.tag_image && @page.body %>
+        <% if @page.tag_image.present? && @page.body.present? %>
           <div class="row">
             <div class="span4">
               <%= content_tag(:div, image_tag(@page.tag_image.to_s), :class => 'tag-image') %>

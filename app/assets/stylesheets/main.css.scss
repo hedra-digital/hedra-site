@@ -597,9 +597,19 @@ article .list-price {
 
 .cover {
   position: relative;
+  vertical-align: middle;
+  display: table-cell;
   img {
     width: 100%;
     @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
+    vertical-align: middle;
+    display: table-cell;
+    max-height: 230px;
+  }
+  a{
+    vertical-align: middle;
+    height: 230px;
+    display: table-cell;
   }
   &:before {
     width: 100%;
@@ -684,6 +694,10 @@ article .list-price {
  * Related books
  */
 
+.related-list-item-holder{
+  height: 280px;
+}
+
 .related {
   position: relative;
   @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
@@ -697,6 +711,7 @@ article .list-price {
   article {
     margin: 0 40px;
     text-align: center;
+    height: 280px;
     h3 {
       margin: 20px -40px 9px;
     }
