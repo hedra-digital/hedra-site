@@ -2,9 +2,9 @@
 class PagesController < ApplicationController
 
   def home
-    @features        = Feature.includes(:book => { :participations => [:person, :role] }).first(6)
-    @new_releases    = NewRelease.includes(:book => { :participations => [:person, :role] }).map(&:book).first(4)
-    @recommendations = Recommendation.includes(:book => { :participations => [:person, :role] }).map(&:book)
+    @features        = Feature.includes(:page).joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").first(6)
+    @new_releases    = NewRelease.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").first(4).map(&:book)
+    @recommendations = Recommendation.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").map(&:book)
   end
 
   def about
@@ -15,7 +15,7 @@ class PagesController < ApplicationController
 
   def tag
     @tag   = Tag.where(:name => params[:id]).first || not_found
-    @books = @tag.books.includes(:participations => [:person, :role])
+    @books = @tag.books.includes(:participations => [:person, :role]).where("books.publisher_id = #{session[:publisher]}")
     @page  = @tag.page
   end
 end

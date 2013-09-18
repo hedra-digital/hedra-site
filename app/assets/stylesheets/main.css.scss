@@ -243,7 +243,7 @@ header {
     margin: 0;
     width: 153px;
     height: 51px;
-    background: url(asset_path('hedra-logo.png', image)) no-repeat;
+    /*background: url(asset_path('hedra-logo.png', image)) no-repeat;*/
     @include background-size(100% 100%);
     @include hide-text;
   }

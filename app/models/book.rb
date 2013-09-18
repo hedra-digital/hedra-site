@@ -20,6 +20,7 @@
 #  price_print     :float
 #  price_ebook     :float
 #  category_id     :integer
+#  publisher_id    :integer
 #
 
 class Book < ActiveRecord::Base
@@ -41,6 +42,7 @@ class Book < ActiveRecord::Base
   has_many                            :recommendations, :inverse_of => :book, :dependent => :destroy
   belongs_to                          :category
   has_many                            :order_items
+  belongs_to                          :publisher
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true
@@ -48,11 +50,12 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for       :tags, :allow_destroy => true
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids, :publisher_id
 
   # Validations
   validates_presence_of               :title, :isbn, :pages
   validates_uniqueness_of             :slug
+  validates                           :publisher, :presence => true
 
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader

@@ -8,11 +8,19 @@ class BooksController < ApplicationController
 
   def by_category
     @category = Category.find(params[:id])
-    @books    = @category.books.includes(:participations => [:person, :role]).paginate(:page => params[:page], :per_page => 10)
+    @books    = @category.books.
+                  includes(:participations => [:person, :role]).
+                  paginate(:page => params[:page], :per_page => 10).
+                  order("if(publisher_id = #{session[:publisher]},0,publisher_id)")
   end
 
   def search
-    @books = Book.search(params[:term], :page => params[:page], :per_page => 5, :include => { :participations => [:person, :role] }, :field_weights => { :title => 10 })
+    @term = "%#{params[:term]}%"
+    @books = Book.where("title LIKE ? OR isbn LIKE ? OR description LIKE ?", @term, @term, @term).
+              includes(:participations).
+              paginate(:page => params[:page], :per_page => 5).
+              order("if(publisher_id = #{session[:publisher]},0,publisher_id)")
+
   end
 
   private

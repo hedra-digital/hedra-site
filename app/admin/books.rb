@@ -18,6 +18,7 @@ ActiveAdmin.register Book do
       f.input :title
       f.input :isbn
       f.input :pages
+      f.input :publisher, :collection => Publisher.order("name")
       f.input :category, :collection => Category.order("name")
       f.input :description, :as => :ckeditor
       f.input :cover, :as => :file, :hint => (( f.object.new_record? || f.object.cover.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.cover.url(:thumb)))
