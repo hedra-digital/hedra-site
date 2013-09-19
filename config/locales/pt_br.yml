@@ -256,6 +256,8 @@ pt_br:
         created: "%{model} foi criado com sucesso."
         updated: "%{model} foi atualizado com sucesso."
     attributes:
+      feature:
+        publisher: 'Selo Editorial'
       book:
         title: 'Título'
         isbn: 'ISBN'

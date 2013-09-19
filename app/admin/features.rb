@@ -20,6 +20,9 @@ ActiveAdmin.register Feature do
       row :external_site_url do
         f.external_site_url if f.external_site_url.present?
       end
+      row :publishers do
+        f.publishers.collect{|p|p.name}.join(",")
+      end 
     end
   end
 
@@ -40,7 +43,9 @@ ActiveAdmin.register Feature do
 
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
-
+      f.inputs "Selo editorial" do
+        f.input :publishers, :as => :check_boxes, :wrapper_html => { :class => "multicolumn1" }, :collection => Publisher.all
+      end
       f.inputs "Destaque com livro" do
         f.input :book, :collection => Book.order("title ASC").all
       end

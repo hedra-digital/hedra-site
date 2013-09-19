@@ -26,7 +26,7 @@ protected
   end
 
   def get_categories
-    @category_list ||= Category.all
+    @category_list ||= Category.joins(:categories_publishers).where("categories_publishers.publisher_id = #{session[:publisher]}")
   end
 
   def get_cart_items

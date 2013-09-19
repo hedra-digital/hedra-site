@@ -14,9 +14,11 @@
 class Publisher < ActiveRecord::Base
   
   has_many :books
+  has_and_belongs_to_many     :features
+  has_and_belongs_to_many     :categories
 
   attr_accessible 					  :name, :url, :logo, :about, :distributors, :contact_email, :contact
-
+   
   mount_uploader                      :logo, LogoUploader
 
   def self.get_default

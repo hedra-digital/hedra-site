@@ -15,9 +15,10 @@ class Feature < ActiveRecord::Base
   # Relationships
   belongs_to                          :book, :inverse_of => :features
   belongs_to                          :page
-
+  has_and_belongs_to_many             :publishers
+  has_many                            :features_publishers  
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :book_id, :feature_image, :page_id, :external_site_url
+  attr_accessible                     :book_id, :feature_image, :page_id, :external_site_url, :publisher_ids
 
   mount_uploader                      :feature_image, FeatureImageUploader
 

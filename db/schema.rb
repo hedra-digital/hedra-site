@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902204912) do
+ActiveRecord::Schema.define(:version => 20130919200007) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -110,9 +110,17 @@ ActiveRecord::Schema.define(:version => 20130902204912) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "slug"
+    t.integer  "order"
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
+
+  create_table "categories_publishers", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "publisher_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -140,6 +148,13 @@ ActiveRecord::Schema.define(:version => 20130902204912) do
   end
 
   add_index "features", ["book_id"], :name => "index_features_on_book_id"
+
+  create_table "features_publishers", :force => true do |t|
+    t.integer  "feature_id"
+    t.integer  "publisher_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "languages", :force => true do |t|
     t.string   "name"

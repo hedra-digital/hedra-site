@@ -14,18 +14,21 @@
   </div>
 </div>
 
-<div id="new-releases" class="related">
-  <div class="container">
-    <h2 class="heading">Lançamentos</h2>
-    <div class="related-list row">
-      <%= render :partial => 'pages/related_book', :collection => @new_releases %>
+<% if @new_releases.size > 0 %>
+  <div id="new-releases" class="related">
+    <div class="container">
+      <h2 class="heading">Lançamentos</h2>
+      <div class="related-list row">
+        <%= render :partial => 'pages/related_book', :collection => @new_releases %>
+      </div>
     </div>
   </div>
-</div>
-
-<div id="recommendations">
-  <div class="container">
-    <h2 class="heading">Indicação nossa</h2>
-    <%= render :partial => 'pages/book', :collection => @recommendations %>
+<% end %>
+<% if @recommendations.size > 0 %>
+  <div id="recommendations">
+    <div class="container">
+      <h2 class="heading">Indicação nossa</h2>
+      <%= render :partial => 'pages/book', :collection => @recommendations %>
+    </div>
   </div>
-</div>
+<% end %>

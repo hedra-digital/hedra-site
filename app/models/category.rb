@@ -15,8 +15,11 @@ class Category < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
   # Relationships
-  has_many :books
-
+  has_many                            :books
+  has_many                            :categories_publishers
+  has_and_belongs_to_many             :publishers
   # Specify fields that can be accessible through mass assignment
-  attr_accessible :name, :book_ids
+  attr_accessible :name, :book_ids, :order, :publisher_ids
+
+  validates :order, :presence => true, :numericality => true
 end
