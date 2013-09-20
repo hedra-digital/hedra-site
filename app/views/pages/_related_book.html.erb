@@ -1,6 +1,8 @@
 <div class="span3 related-list-item-holder">
   <article class="related-list-item">
-    <div class="cover cover-related"><%= link_to(image_tag(related_book.cover_url(:big_thumb).to_s), related_book) %></div>
+    <div class="cover cover-related">
+        <%= link_to(image_tag(related_book.cover_url(:big_thumb).to_s), related_book) %>
+    </div>
     <h3 class="book-title"><%= link_to related_book.title, related_book %></h3>
     <h4 class="book-authors"><%= authors(related_book) %></h4>
   </article>

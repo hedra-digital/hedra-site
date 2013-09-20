@@ -598,33 +598,34 @@ article .list-price {
 
 .cover {
   position: relative;
-  vertical-align: middle;
-  display: table-cell;
   img {
     width: 100%;
     @include box-shadow(2px 3px 8px rgba(0, 0, 0, 0.4));
-    vertical-align: middle;
-    display: table-cell;
-  }
-  a{
-    vertical-align: middle;
-    height: 230px;
-    display: table-cell;
   }
   &:before {
     width: 100%;
     height: 100%;
     position: absolute;
     content: "";
-    background: url(asset_path('cover-gloss.png', image)) no-repeat;
     background-size: 100% 100%;
     pointer-events: none;
   }
 }
 
-.cover-related{
+.feature-cover{
+  &:before {
+    background: url(asset_path('cover-gloss-hide.png', image)) no-repeat !important;
+  }
+}
+
+.cover-related a{
+  display: block;
+  height: 230px;
   img{
     max-height: 230px;
+    bottom: 0;
+    position: absolute;
+    margin-left: -70px;
   }
 }
 
