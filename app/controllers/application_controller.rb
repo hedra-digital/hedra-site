@@ -2,11 +2,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :get_categories, :get_cart_items, :get_cart_price
-
-  before_filter :http_authenticate, :current_publisher
+  before_filter :current_publisher, :get_categories, :get_cart_items, :get_cart_price
+  before_filter :http_authenticate
 
 protected
+
+  def filter
+    http_authenticate
+    current_publisher
+    get_categories
+    get_cart_items
+    get_cart_price
+  end
 
   def http_authenticate
     if Rails.env == 'staging'
