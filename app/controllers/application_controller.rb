@@ -2,8 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :current_publisher, :get_categories, :get_cart_items, :get_cart_price
-  before_filter :http_authenticate
+  before_filter :filter
 
 protected
 
