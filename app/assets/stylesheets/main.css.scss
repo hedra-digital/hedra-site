@@ -247,6 +247,15 @@ header {
     @include background-size(100% 100%);
     @include hide-text;
   }
+
+  .logo-selo {
+    display: block;
+    margin: 0;
+    height: 51px;
+    @include background-size(100% 100%);
+    @include hide-text;
+  }
+
 }
 
 #main {
@@ -614,7 +623,7 @@ article .list-price {
 
 .feature-cover{
   &:before {
-    background: url(asset_path('cover-gloss-hide.png', image)) no-repeat !important;
+    background: url(asset_path('cover-gloss.png', image)) no-repeat !important;
   }
 }
 

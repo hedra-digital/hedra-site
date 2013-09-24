@@ -5,7 +5,11 @@ module ApplicationHelper
     "background: url('#{Publisher.find(session[:publisher]).logo.url}') no-repeat; background-size: 100% 100%;"
   end
 
-  def publisher_name
+  def publisher_logo_img
+    Publisher.find(session[:publisher]).logo.url
+  end
+  
+  def publisher_nameli
     "#{Publisher.find(session[:publisher]).name}"
   end
 
