@@ -32,7 +32,7 @@ protected
   end
 
   def get_categories
-    @category_list ||= Category.joins(:categories_publishers).where("categories_publishers.publisher_id = #{session[:publisher]}")
+    @category_list ||= Category.joins(:categories_publishers).where("categories_publishers.publisher_id = #{session[:publisher]}").order("categories.order ASC")
   end
 
   def get_cart_items
