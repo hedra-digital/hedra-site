@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def tag
-    @tag   = Tag.where(:name => params[:id]).first || not_found
+    @tag   = Tag.where(:slug => params[:id]).first || not_found
     @books = @tag.books.includes(:participations => [:person, :role]).where("books.publisher_id = #{session[:publisher]}")
     @page  = @tag.page
   end
