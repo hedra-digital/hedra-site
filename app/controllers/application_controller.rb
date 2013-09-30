@@ -23,8 +23,7 @@ protected
   end
 
   def current_publisher
-    #hostname = request.host.match(/^www./) ? request.host.gsub("www.", "") : request.host
-    publisher = Publisher.where(:url => request.host).first
+    publisher = Publisher.where("url LIKE ?", "%#{request.host}%").first
     if publisher.nil?
       session[:publisher] = Publisher.get_default.id
     else
