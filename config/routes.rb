@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 HedraSite::Application.routes.draw do
 
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions", :passwords => "passwords"}
+
 
   mount Ckeditor::Engine => '/ckeditor'
 

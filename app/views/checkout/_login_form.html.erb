@@ -7,7 +7,7 @@
       <label>
         <%= check_box_tag :remember_me, 1, params[:remember_me] %>
         <%= t(:remember_me) %>
-        <%= link_to t('recover_password.label'), "#", :class => 'recover_password' %>
+        <%= link_to t('recover_password.label'), new_password_path(:user), :class => 'recover_password' %>
       </label>
     </div>
     <%= f.submit t('login') %>
