@@ -23,6 +23,21 @@ class BooksController < ApplicationController
 
   end
 
+  def veneta_catalog
+    @publisher_id = Publisher.where(:name => "Veneta").first.id
+    @veneta_books = Book.where(:publisher_id => @publisher_id)
+    render :json => @veneta_books.to_json, :callback => params['callback']
+  end
+
+  def veneta
+    @veneta_book = Book.find_by_id(params[:id])
+    @book_json = @veneta_book.as_json
+    @book_json["binding_desc"] = @veneta_book.binding_type.name
+    @book_json["category_desc"] = @veneta_book.category.name
+    @book_json["book_comments"] = @veneta_book.book_comments.as_json
+    render :json => @book_json.to_json, :callback => params['callback']
+  end
+
   private
 
   def resource

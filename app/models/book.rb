@@ -43,6 +43,7 @@ class Book < ActiveRecord::Base
   belongs_to                          :category
   has_many                            :order_items
   belongs_to                          :publisher
+  has_many                            :book_comments
 
   # Allow other models to be nested within this one
   accepts_nested_attributes_for       :participations, :allow_destroy => true

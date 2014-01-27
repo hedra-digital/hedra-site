@@ -230,6 +230,9 @@ pt_br:
       publisher:
         one: Selo Editoral
         other: Selos Editorais
+      book_comment:
+        one: Comentário da Imprensa
+        other: Comentários da Imprensa
       user:
         one: Usuário
         other: Usuários
@@ -274,6 +277,12 @@ pt_br:
         binding_type: 'Encadernação'
         languages: 'Idioma'
         category: 'Categoria'
+      book_comment:
+        book: 'Livro'
+        content: 'Comentário'
+        author: 'Autor do Comentário'
+        vehicle: 'Veículo da Imprensa'
+        commented_at: 'Data do Comentário'
       participation:
         role: 'Papel'
         person: 'Pessoa'

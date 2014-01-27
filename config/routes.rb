@@ -12,6 +12,8 @@ HedraSite::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   get  "/livros/busca"           => "books#search"
+  get  "/livros/veneta"          => "books#veneta_catalog"
+  get  "/livros/veneta/:id"      => "books#veneta"
   get  "/livros/:id"             => "books#show", :as => :book
   get  "/categoria/:id"          => "books#by_category", :as => :category
   get  "/sobre"                  => "pages#about", :as => :about
