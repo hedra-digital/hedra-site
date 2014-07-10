@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 protected
 
   def filter
-    http_authenticate
+    # http_authenticate
     current_publisher
     get_categories
     get_cart_items
