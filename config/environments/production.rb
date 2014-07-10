@@ -70,19 +70,11 @@ HedraSite::Application.configure do
     ActiveMerchant::Billing::Base.mode = :production
   end
 
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
   # change to false to prevent email from being sent during development
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
-
-  config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => "587",
-    :authentication => :plain,
-    :user_name => "fabio@hedra.com.br",
-    :password => "fabio41"
-  }
   config.action_mailer.default_url_options = {
     :host => "hedra.com.br"
   }
