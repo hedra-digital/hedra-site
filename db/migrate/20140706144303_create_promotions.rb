@@ -2,7 +2,7 @@ class CreatePromotions < ActiveRecord::Migration
   def change
     create_table :promotions do |t|
       t.float :discount
-      t.decimal :price, :precision => 8, :scale => 2, :default => 0.0, :null => false
+      t.decimal :price, :precision => 8, :scale => 2
       t.integer :book_id
       t.integer :tag_id
       t.integer :category_id
