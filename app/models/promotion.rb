@@ -7,7 +7,7 @@ class Promotion < ActiveRecord::Base
 
   validates_presence_of :publisher, :started_at, :ended_at
 
-  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "discount"
 
   validate :validate_price_and_discount, :validate_book_tag_category, :started_at_ended_at
 

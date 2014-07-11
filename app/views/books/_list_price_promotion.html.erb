@@ -1,0 +1,38 @@
+<% if find_promotion(book) %>
+
+<div class="list-price promotion">
+  <div>sala do professor</div>
+  <div><span>de </span><span class="price"><%= number_to_currency(book.price_print)%></span></div>
+  <ul class="buy">
+    <li>
+      <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
+      <span class="type">Compre</span>
+      <span class="price"><%= number_to_currency(promotion_price(book))%></span>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<% else %>
+
+<div class="list-price">
+  <ul class="buy">
+    <li>
+      <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
+      <span class="type">Compre</span>
+      <span class="price"><%= number_to_currency(book.price_print)%></span>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<% end %>
+
+
+
+
+
+
+
+
+

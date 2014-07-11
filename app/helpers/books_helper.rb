@@ -45,6 +45,32 @@ module BooksHelper
     end
   end
 
+
+  # promotion priority: book > tag > category
+  def find_promotion(book)
+    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at", book.id, Time.now).order("created_at").last
+    return book_promotion if book_promotion
+
+    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at", book.tags.map(&:id), book.publisher_id, Time.now).order("created_at").last
+    return tag_promotion if tag_promotion
+
+    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at", book.category_id, book.publisher_id, Time.now).order("created_at").last
+    return category_promotion if category_promotion
+
+    nil
+  end
+
+  def promotion_price(book)
+    promotion = find_promotion(book)
+
+    return nil if promotion.nil?
+
+    return promotion.price if promotion.price
+
+    (1 - promotion.discount) * book.price_print
+  end
+
+
   private
 
   def stats_item(title, data)

@@ -549,6 +549,49 @@ footer {
   }
 }
 
+
+.promotion{
+  text-transform: uppercase;  
+  text-shadow: none;
+  text-align: left;
+  font-family: CallunaSansRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16.5px;
+  font-weight: normal;
+  line-height: 1; 
+
+  div{
+    margin-top: 10px;
+
+    span{
+      color: #519fc0;
+
+      &.price{
+        color: #F05B33;
+        font-size: 24px;
+        margin-left: 8px;
+        text-decoration:line-through;
+      }
+    }
+  }
+
+  .buy {
+     margin-top: 20px;
+
+    .btn span.price{
+      background: #F05B33;
+    }
+
+    .btn-primary{
+      background-color: #F17140;
+      background-image: -moz-linear-gradient(top, #F17140, #F17140);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F17140), to(#F17140));
+      background-image: -webkit-linear-gradient(top, #F17140, #F17140);
+      background-image: -o-linear-gradient(top, #F17140, #F17140);
+    }
+  }
+}
+
+
 article .list-price {
   padding: 10px 25px;
   .btn {
