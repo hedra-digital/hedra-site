@@ -575,8 +575,6 @@ footer {
   }
 
   .buy {
-     margin-top: 20px;
-
     .btn span.price{
       background: #F05B33;
     }
@@ -587,6 +585,35 @@ footer {
       background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F17140), to(#F17140));
       background-image: -webkit-linear-gradient(top, #F17140, #F17140);
       background-image: -o-linear-gradient(top, #F17140, #F17140);
+    }
+  }
+}
+
+
+.item-price{
+  span.price{
+    color: #519fc0;
+  }
+
+  .promotion {
+
+    span.price{
+      color: white;
+    }
+
+    span{
+      padding: 27px 22px;
+    } 
+
+    padding: 0px;
+    background: #ededef;
+    border-radius: 5px;
+    h4 {
+      margin: 0 0 15px 0;
+      font-size: 0.82em;
+    }
+    .btn {
+      width: 100%;
     }
   }
 }

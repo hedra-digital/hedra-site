@@ -34,17 +34,6 @@ module BooksHelper
     raw(book.description.split('</p>')[0] + '</p>') rescue truncate_html(book.description, :length => 450, :omission => '...')
   end
 
-  def book_buttons(book)
-    content_tag :ul, :class => 'buy' do
-      content_tag :li do
-        link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do
-          concat content_tag(:span, 'Compre', :class => 'type')
-          concat content_tag(:span, number_to_currency(book.price_print), :class => 'price')
-        end
-      end
-    end
-  end
-
 
   # promotion priority: book > tag > category
   def find_promotion(book)
@@ -68,6 +57,11 @@ module BooksHelper
     return promotion.price if promotion.price
 
     (1 - promotion.discount) * book.price_print
+  end
+
+  def show_discount(promotion, book)
+    return promotion.discount * 100 if promotion.discount
+    (book.price_print - promotion.price) * 100 / book.price_print
   end
 
 

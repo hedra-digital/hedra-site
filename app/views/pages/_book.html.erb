@@ -12,7 +12,29 @@
       </div>
     </div>
     <div class="item-price span3">
-      <%= render 'books/list_price', :book => book if book.has_price? %>
+      <% if find_promotion(book) %>
+        <div class="promotion">
+          <ul class="buy">
+            <li>
+              <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
+              <span class="type"><%= number_to_percentage(show_discount(find_promotion(book), book), precision: 0)%> OFF</span>
+              <span class="price"><%= number_to_currency(promotion_price(book))%></span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="list-price">
+          <ul class="buy">
+            <li>
+              <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
+              <span class="type">Livro</span>
+              <span class="price"><%= number_to_currency(book.price_print)%></span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
     </div>
   <% else %>
     <div class="item-info span10">
