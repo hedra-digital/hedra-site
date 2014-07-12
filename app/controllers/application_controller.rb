@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 protected
 
   def filter
-    # http_authenticate
+    http_authenticate
     current_publisher
     get_categories
     get_cart_items
@@ -17,7 +17,7 @@ protected
   def http_authenticate
     if Rails.env == 'staging'
       authenticate_or_request_with_http_basic do |username, password|
-        username == "Lovecraft" && password == "Necronomicon"
+        username == "teste" && password == "teste13"
       end
     end
   end
