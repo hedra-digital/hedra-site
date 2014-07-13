@@ -73,7 +73,7 @@ module ApplicationHelper
     tags = ""
     tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
     tags << content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
-    tags << content_tag(:div, number_to_currency(book.price_print), :class => 'cart-book-price')
+    tags << content_tag(:div, number_to_currency(book.show_price_print), :class => 'cart-book-price')
     tags.html_safe
   end
 

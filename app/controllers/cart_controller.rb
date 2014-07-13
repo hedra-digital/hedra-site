@@ -25,7 +25,7 @@ class CartController < ApplicationController
       @cart_items << [@book, 1]
     end
     @cart_price ||= 0
-    @cart_price += @book.price_print
+    @cart_price += @book.show_price_print
     flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(@cart_price)}</strong><br>Você tem #{pluralize(@cart_items.size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
     redirect_to :back
   end

@@ -47,7 +47,7 @@ protected
 
   def get_cart_price
     if @cart_items
-      @cart_price = @cart_items.inject(0) { |sum, ele| sum += (ele[0].price_print * ele[1]) }
+      @cart_price = @cart_items.inject(0) { |sum, ele| sum += (ele[0].show_price_print * ele[1]) }
     end
   end
 
