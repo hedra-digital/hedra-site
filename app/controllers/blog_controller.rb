@@ -2,7 +2,7 @@
 class BlogController < ApplicationController
 
   def index
-    @posts = Post.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").all
+    @posts = Post.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").order("created_at desc")
   end
 
   def show
