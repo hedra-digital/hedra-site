@@ -17,7 +17,7 @@
       <h2 class="book-title"><%= link_to feature.book.title, feature.book %></h2>
       <h3 class="book-authors"><%= authors(feature.book) %></h3>
       <%= description_lead feature.book %>
-      <% if find_promotion(feature.book) %>
+      <% if feature.book.find_promotion %>
         <div class="promotion">
           <div><span>de </span><span class="price"><%= number_to_currency(feature.book.price_print)%></span></div>
           <ul class="buy">
