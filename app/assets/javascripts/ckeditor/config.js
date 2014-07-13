@@ -9,4 +9,6 @@ CKEDITOR.editorConfig = function( config )
         { name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar' ] },
     ];
     config.toolbar = 'Basic';
+
+    config.allowedContent = 'iframe[*]';
   };

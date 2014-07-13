@@ -8,11 +8,11 @@
       <% if post.book.present? %>
         <%= render "books/aside", :book => post.book %>
         <div class="span9">
-          <%= simple_format(truncate(post.body, :length => 800, :omission => "...&nbsp;"+ link_to("Leia mais", blog_post_path(post)) )) %>
+          <%= raw truncate(post.body.html_safe, :length => 800, :omission => "...&nbsp;"+ link_to("Leia mais", blog_post_path(post)) ) %>
         </div>
       <% else %>
         <div class="span12">
-          <%= simple_format(truncate(post.body, :length => 800, :omission => "...&nbsp;"+ link_to("Leia mais", blog_post_path(post)) )) %>
+          <%= raw truncate(post.body.html_safe, :length => 800, :omission => "...&nbsp;"+ link_to("Leia mais", blog_post_path(post)) ) %>
         </div>
       <% end %>
     </div>
