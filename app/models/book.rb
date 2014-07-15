@@ -116,7 +116,7 @@ class Book < ActiveRecord::Base
 
     return promotion.price if promotion.price
 
-    (1 - promotion.discount) * book.price_print
+    (1 - promotion.discount) * self.price_print
   end
 
   private
