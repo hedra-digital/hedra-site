@@ -11,10 +11,18 @@
         <%= render "books/aside", :book => @post.book %>
         <div class="span9">
           <%= @post.body.html_safe %>
+          <div class="row blog-foot">
+            <div class="span6"></div>
+            <div id="share" class="span3"><%= render 'books/share' %></div>
+          </div>
         </div>
       <% else %>
         <div class="span12">
           <%= @post.body.html_safe %>
+          <div class="row blog-foot">
+            <div class="span9"></div>
+            <div id="share" class="span3"><%= render 'books/share' %></div>
+          </div>
         </div>
       <% end %>
     </div>
