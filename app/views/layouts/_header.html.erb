@@ -18,7 +18,7 @@
               <% end %>
             </ul>
           </li>
-          <!-- <li><%= link_to 'blog', "http://hedra.com.br/blog" %></li> -->
+          <li><%= link_to('blog', blog_path) if blog_count > 0 %></li>
           <li><%= link_to 'Sobre', about_path %></li>
           <!-- <li><%= link_to 'Contato', contact_path %></li> -->
         </ul>

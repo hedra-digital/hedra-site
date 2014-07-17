@@ -88,4 +88,9 @@ module ApplicationHelper
   def publisher_name
     Publisher.find(session[:publisher]).name
   end
+
+  def blog_count
+    Post.joins(:book).where("books.publisher_id = #{session[:publisher]}").count
+  end
+
 end
