@@ -37,11 +37,10 @@ private
 
   def send_notification
     if self.status_changed?
-      # if Rails.env == "production"
-        # MailWorker.perform_async(self.id)
-      # else
-        MailWorker.new.perform(self.id)
-      # end
+      Thread.new do
+        Hedra::Notificator.new(self.id).send
+        ActiveRecord::Base.connection.close
+      end
     end
   end
 
