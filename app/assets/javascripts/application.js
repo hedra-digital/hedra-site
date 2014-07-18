@@ -16,6 +16,7 @@
 //= require bootstrap-alert
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
+//= require bootstrap-affix
 //= require jquery.fancybox
 //= require jquery.carouFredSel-6.2.0
 //= require ga
@@ -70,3 +71,7 @@ $(window).load(function() {
   }
 
 });
+
+
+$('#site-header').affix({offset: {top: 30}});
+

@@ -1,6 +1,8 @@
 <div class="navbar">
-  <%= link_to(image_tag(publisher_logo_img, class: 'logo-selo'), root_path) %>
   <div class="navbar-inner">
+
+    <%= link_to(image_tag(publisher_logo_img, class: 'logo-selo'), root_path) %>
+
     <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
       <span class="icon-bar"></span>
@@ -23,16 +25,12 @@
           <!-- <li><%= link_to 'Contato', contact_path %></li> -->
         </ul>
       </nav>
+
+      <form class="navbar-search pull-left" action="/livros/busca" method="get">
+           <input type="text" class="search-query" name="term">
+      </form>
+
       <div class="navadd">
-        <div class="social-links">
-          <p>Siga</p>
-          <ul>
-            <li class="facebook"><%= link_to 'Facebook', 'http://www.facebook.com/Editorahedra' %></li><li class="twitter"><%= link_to 'Twitter', 'http://www.twitter.com/hedraonline' %></li>
-          </ul>
-        </div>
-        <form class="navbar-search" action="/livros/busca" method="get">
-          <input type="text" class="search-query" name="term">
-        </form>
         <div class="cart">
           <%= cart_image %>
           <% if @cart_items.present? %>
