@@ -17,7 +17,7 @@ class Publisher < ActiveRecord::Base
   has_and_belongs_to_many     :features
   has_and_belongs_to_many     :categories
 
-  attr_accessible 					  :name, :url, :logo, :about, :distributors, :contact_email, :contact
+  attr_accessible 					  :name, :url, :logo, :about, :distributors, :contact_email, :contact, :link_url, :link_name
    
   mount_uploader                      :logo, LogoUploader
 

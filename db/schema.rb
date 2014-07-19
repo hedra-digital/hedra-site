@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140706144303) do
+ActiveRecord::Schema.define(:version => 20140719153140) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -247,15 +247,15 @@ ActiveRecord::Schema.define(:version => 20140706144303) do
 
   create_table "promotions", :force => true do |t|
     t.float    "discount"
-    t.decimal  "price",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "price",        :precision => 8, :scale => 2
     t.integer  "book_id"
     t.integer  "tag_id"
     t.integer  "category_id"
-    t.integer  "publisher_id",                                                :null => false
-    t.datetime "started_at",                                                  :null => false
-    t.datetime "ended_at",                                                    :null => false
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.integer  "publisher_id",                               :null => false
+    t.datetime "started_at",                                 :null => false
+    t.datetime "ended_at",                                   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "publishers", :force => true do |t|
@@ -268,6 +268,8 @@ ActiveRecord::Schema.define(:version => 20140706144303) do
     t.text     "distributors"
     t.string   "contact_email"
     t.string   "contact"
+    t.string   "link_url"
+    t.string   "link_name"
   end
 
   create_table "recommendations", :force => true do |t|

@@ -8,7 +8,7 @@ protected
 
   def filter
     http_authenticate
-    current_publisher
+    get_publisher
     get_categories
     get_cart_items
     get_cart_price
@@ -22,7 +22,7 @@ protected
     end
   end
 
-  def current_publisher
+  def get_publisher
     publisher = Publisher.where("url LIKE ?", "%#{request.host}%").first
     if publisher.nil?
       session[:publisher] = Publisher.get_default.id

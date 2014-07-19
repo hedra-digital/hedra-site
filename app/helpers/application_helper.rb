@@ -1,5 +1,8 @@
-# -*- encoding : utf-8 -*-
 module ApplicationHelper
+
+  def current_publisher
+    Publisher.find(session[:publisher])
+  end
 
   def publisher_logo
     "background: url('#{Publisher.find(session[:publisher]).logo.url}') no-repeat; background-size: 100% 100%;"
