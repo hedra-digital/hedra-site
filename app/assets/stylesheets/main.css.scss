@@ -219,10 +219,11 @@ textarea:-ms-input-placeholder {
 }
 
 header {
-  position: absolute;
-  right: 15px;
-  left: 15px;
-  top: 30px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1030;
 
   .navbar {
     .nav > li > a {
@@ -254,18 +255,9 @@ header {
 
   .logo-selo {
     float: left;
-    height: 37px;
-    margin: 20px 20px 0px 10px;
+    height: 30px;
+    margin: 23px 7px 0px 10px;
   }
-}
-
-
-.affix{
-  position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
-  z-index: 1030;
 }
 
 
@@ -293,7 +285,7 @@ header {
 
 #main {
   position: relative;
-  margin-top: 145px;
+  margin-top: 115px;
   a:link, a:active, a:visited {
     color: $linkColor;
     text-decoration: none;
@@ -392,15 +384,26 @@ footer {
 
 .navadd {
   position: relative;
-  top: 3px;
-  padding-right: 9px;
+  top: 24px;
+  padding-right: 12px;
   float: right;
+
+  span{
+    font-size: 18px;
+
+    &.user-name{
+      border-left: 1px solid #cdcdd9;
+      padding-left: 16px;
+      margin-left: 16px;
+    }
+  }
 
   .cart {
     position: relative;
     display: inline-block;
     .cart-count {
       color: $text-blue;
+      margin-left: 7px;
     }
     & > a > img,
     & > img {
@@ -868,7 +871,7 @@ article .list-price {
     background-position: -40px 0;
   }
   .pagination {
-    margin: 10px 0 0 0;
+    margin: 0;
     text-align: center;
   }
   .pagination a {
@@ -897,7 +900,7 @@ article .list-price {
 }
 
 #features {
-  padding-bottom: 70px;
+  padding-bottom: 50px;
   z-index: 3;
   background: transparent;
   .feature-item {

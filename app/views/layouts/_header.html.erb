@@ -45,6 +45,9 @@
             </div>
           <% end %>
         </div>
+        <% if current_user and current_user.name%>
+          <span class="user-name">Hi!  <%= current_user.name%></span>
+        <% end %>  
       </div>
     </div>
   </div>
