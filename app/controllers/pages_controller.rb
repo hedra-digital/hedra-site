@@ -1,11 +1,11 @@
-# -*- encoding : utf-8 -*-
 class PagesController < ApplicationController
 
   def home
-    #@features        = Feature.includes(:page).joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").first(6)
-    @features        = Feature.includes(:page).joins(:features_publishers).includes(:book => { :participations => [:person, :role] }).where("features_publishers.publisher_id = #{session[:publisher]}").first(6)
-    @new_releases    = NewRelease.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").first(4).map(&:book)
-    @recommendations = Recommendation.joins(:book).includes(:book => { :participations => [:person, :role] }).where("books.publisher_id = #{session[:publisher]}").map(&:book)
+    @features = Feature.includes(:page).joins(:features_publishers).includes(:book => { :participations => [:person, :role] }).where("features_publishers.publisher_id = #{session[:publisher]}").first(6)
+
+    @new_releases = Book.joins(:new_releases).where("books.publisher_id = #{session[:publisher]}").order("books.position desc, books.id desc").first(4)
+
+    @recommendations = Book.joins(:recommendations).where("books.publisher_id = #{session[:publisher]}").order("books.position desc, books.id desc")
   end
 
   def about
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
 
   def tag
     @tag   = Tag.where(:slug => params[:id]).first || not_found
-    @books = @tag.books.includes(:participations => [:person, :role]).where("books.publisher_id = #{session[:publisher]}")
+    @books = Book.joins(:tags).where("books.publisher_id = #{session[:publisher]} and tags.id = #{@tag.id}").order("books.position desc, books.id desc")
     @page  = @tag.page
   end
 end

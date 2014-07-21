@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class BooksController < ApplicationController
   before_filter :resource, :only => :show
 
@@ -8,10 +7,12 @@ class BooksController < ApplicationController
 
   def by_category
     @category = Category.find(params[:id])
-    @books    = @category.books.
+    @books    = Book.joins(:category).
                   includes(:participations => [:person, :role]).
+                  where("categories.id = #{@category.id}").
                   paginate(:page => params[:page], :per_page => 10).
-                  order("if(publisher_id = #{session[:publisher]},0,publisher_id)")
+                  order("books.publisher_id, books.position desc, books.id desc")
+
   end
 
   def search
@@ -20,7 +21,7 @@ class BooksController < ApplicationController
               where("roles.name in ('Texto', 'Autoria', 'Autor')").
               where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", @term, @term, @term, @term).
               paginate(:page => params[:page], :per_page => 5).
-              order("if(publisher_id = #{session[:publisher]},0,publisher_id)")
+              order("books.publisher_id, books.position desc, books.id desc")
   end
 
   def veneta_catalog
