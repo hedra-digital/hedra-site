@@ -31,6 +31,7 @@ ActiveAdmin.register Book do
       # f.input :price_ebook
       f.input :released_at, :as => :date_select, :include_blank => true, :start_year => 1999, :order => [:year, :month, :day]
       f.input :binding_type
+      f.input :position
       f.inputs "Medidas" do
         f.input :width
         f.input :height
