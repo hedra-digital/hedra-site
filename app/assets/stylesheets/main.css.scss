@@ -529,9 +529,14 @@ footer {
       line-height: 1;
     }
     dd {
+      margin-top: 5px;
       margin-left: 0;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       line-height: 1;
+      a, a:hover, a:focus {
+        color: #3b9fc1 !important;
+        font-size: 17px;
+      }
     }
   }
 }

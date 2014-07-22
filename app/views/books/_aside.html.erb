@@ -5,8 +5,8 @@
   <div class="book-info-data">
     <dl>
       <% book_team(book).each do |role, people| %>
-        <%= content_tag :dt, role %>
-        <%= content_tag :dd, formatted_list(people) %>
+        <dt><%= role%></dt>
+        <dd><%= formatted_list(people.collect{ |p| link_to(p, {controller: "books", action: "search", params: {term: p}}, {target: "_blank"} ) }).html_safe %></dd>
       <% end %>
     </dl>
   </div>
