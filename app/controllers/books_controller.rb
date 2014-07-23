@@ -18,10 +18,9 @@ class BooksController < ApplicationController
   def search
     @term = "%#{params[:term]}%"
     @books = Book.joins(participations: [:role, :person]).
-              where("roles.name in ('Texto', 'Autoria', 'Autor')").
               where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", @term, @term, @term, @term).
               paginate(:page => params[:page], :per_page => 5).
-              order("books.publisher_id, books.position desc, books.id desc")
+              order("books.publisher_id, books.position desc, books.id desc").uniq
   end
 
   def veneta_catalog
