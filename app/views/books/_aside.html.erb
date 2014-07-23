@@ -6,7 +6,7 @@
     <dl>
       <% book_team(book).each do |role, people| %>
         <dt><%= role%></dt>
-        <dd><%= formatted_list(people.collect{ |p| link_to(p, {controller: "books", action: "search", params: {term: p}}, {target: "_blank"} ) }).html_safe %></dd>
+        <dd><%= formatted_list(people.collect{ |p| link_to(p, {controller: "books", action: "search", params: {term: p}} ) }).html_safe %></dd>
       <% end %>
     </dl>
   </div>
