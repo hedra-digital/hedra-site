@@ -33,7 +33,6 @@ gem 'haml'
 gem 'haml-rails'
 gem 'exception_notification'
 gem "awesome_print"
-gem 'yui-compressor'
 
 
 # Gems used only for assets and not required

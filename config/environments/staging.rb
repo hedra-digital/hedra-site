@@ -50,9 +50,6 @@ HedraSite::Application.configure do
   # config.assets.precompile += %w( search.js )
   config.assets.precompile += Ckeditor.assets
 
-  config.assets.css_compressor = :yui
-  config.assets.js_compressor = :yui
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
