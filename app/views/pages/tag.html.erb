@@ -1,5 +1,5 @@
 <% page_data :title => @tag.name, :type => 'article' %>
-<div id="tag">
+<div id="tag" class="highlight-head">
   <div class="container">
     <%= yield :h1 %>
   </div>
@@ -29,10 +29,22 @@
       </div>
     </div>
   <% end %>
+</div>  
 
-  <div class="container">
-    <div id="tag-list">
-      <%= render :partial => 'pages/book', :collection => @books %>
+<% if @highlight %>
+  <div id="new-releases" class="related">
+    <div class="container">
+      <div class="related-list row">
+        <%= render :partial => 'pages/related_book', :collection => @highlight %>
+      </div>
     </div>
   </div>
+<% end %>
+
+<div id="tag-list">
+  <div class="container">
+    <%= render :partial => 'pages/book', :collection => @books %>
+    <%= will_paginate @books %>
+  </div>
 </div>
+

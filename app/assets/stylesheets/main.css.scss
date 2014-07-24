@@ -1135,12 +1135,10 @@ article .list-price {
   * Tag page
   */
 
-#tag {
-  padding-bottom: 70px;
-}
 
 #tag-list {
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #hero {
@@ -1179,8 +1177,7 @@ article .list-price {
 
 #extra {
   padding-top: 50px;
-  padding-bottom: 50px;
-  @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
+  padding-bottom: 25px;
 }
 
 /*
