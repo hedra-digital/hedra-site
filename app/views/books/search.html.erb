@@ -1,7 +1,21 @@
 <% page_data :title => 'Resultados da busca', :type => 'other' %>
-<div id="search-info" class="container">
+
+<div id="search-info" class="highlight-head"> 
+  <div class="container">
   <h1><span class="search-count"><%= @books.total_entries %></span> resultados para <span class="search-term">&ldquo;<%= params[:term] %>&rdquo;</span></h1>
+  </div>
 </div>
+
+<% if @highlight %>
+  <div id="new-releases" class="related">
+    <div class="container">
+      <div class="related-list row">
+        <%= render :partial => 'pages/related_book', :collection => @highlight %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div id="search-results">
   <div class="container">
     <%= render :partial => 'pages/book', :collection => @books %>

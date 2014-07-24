@@ -1,7 +1,21 @@
 <% page_data :title => @category.name, :type => 'book' %>
-<div class="container">
-  <%= yield :h1 %>
+
+<div class="highlight-head"> 
+  <div class="container">
+    <%= yield :h1 %>
+  </div>
 </div>
+
+<% if @highlight %>
+  <div id="new-releases" class="related">
+    <div class="container">
+      <div class="related-list row">
+        <%= render :partial => 'pages/related_book', :collection => @highlight %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div id="category-list">
   <div class="container">
     <%= render :partial => 'pages/book', :collection => @books %>

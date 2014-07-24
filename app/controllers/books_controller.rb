@@ -7,20 +7,22 @@ class BooksController < ApplicationController
 
   def by_category
     @category = Category.find(params[:id])
-    @books    = Book.joins(:category).
-                  includes(:participations => [:person, :role]).
-                  where("categories.id = #{@category.id}").
-                  paginate(:page => params[:page], :per_page => 10).
-                  order("books.publisher_id, books.position desc, books.id desc")
 
+    books_query = Book.joins(:category).includes(:participations => [:person, :role]).where("categories.id = #{@category.id}")
+    books_count = books_query.count
+
+    @highlight = books_query.first(4) if books_count >= 6
+    @books = books_query.order("books.publisher_id, books.position desc, books.id desc").paginate(:page => params[:page], :per_page => 10, :offset => (books_count >= 6 ? 4 : 0))
   end
 
   def search
-    @term = "%#{params[:term]}%"
-    @books = Book.joins(participations: [:role, :person]).
-              where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", @term, @term, @term, @term).
-              paginate(:page => params[:page], :per_page => 5).
-              order("books.publisher_id, books.position desc, books.id desc").uniq
+    term = "%#{params[:term]}%"
+
+    books_query = Book.joins(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).uniq
+    books_count = books_query.count
+    
+    @highlight = books_query.first(4) if books_count >= 6 
+    @books = books_query.order("books.publisher_id, books.position desc, books.id desc").paginate(:page => params[:page], :per_page => 5, :offset => (books_count >= 6 ? 4 : 0))
   end
 
   def veneta_catalog
