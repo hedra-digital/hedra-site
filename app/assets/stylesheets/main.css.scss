@@ -310,6 +310,9 @@ header {
   .item-info {
     display: table-cell;
     vertical-align: middle;
+    margin-top: 30px;
+    padding-left: 10px;
+
     h3 {
       margin: 0 0 9px 0;
     }
@@ -620,6 +623,8 @@ footer {
 
 
 .item-price{
+  margin-top: 30px;
+  
   span.price{
     color: #519fc0;
   }
