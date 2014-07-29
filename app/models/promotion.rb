@@ -11,7 +11,9 @@ class Promotion < ActiveRecord::Base
 
   validate :validate_price_and_discount, :validate_book_tag_category, :started_at_ended_at
 
-  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id
+  validates_uniqueness_of :slug, :allow_blank => true
+
+  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug
 
 
   private

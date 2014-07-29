@@ -29,6 +29,7 @@ HedraSite::Application.routes.draw do
   get  "/blog/:id"               => "blog#show", :as => :blog_post
   get  "/home/*other"            => redirect("/")
   get  "/home"                   => redirect("/")
+  get  "coupon/:id"              => "coupon#set_cookie"
 
   match "/checkout/finish/" => "checkout#finish", :as => :finish_checkout
   match "/checkout/review" => "checkout#review", :as => :review
