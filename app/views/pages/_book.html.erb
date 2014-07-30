@@ -18,7 +18,7 @@
             <li>
               <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
               <span class="type"><%= number_to_percentage(show_discount(find_promotion(book), book), precision: 0)%> OFF</span>
-              <span class="price"><%= number_to_currency(promotion_price(book))%></span>
+              <span class="price"><%= number_to_currency(show_price(book))%></span>
               <% end %>
             </li>
           </ul>

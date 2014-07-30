@@ -24,7 +24,7 @@
             <li>
               <%= link_to add_to_cart_path(feature.book), :method => :post, :class => 'btn btn-primary' do%>
               <span class="type">Compre</span>
-              <span class="price"><%= number_to_currency(promotion_price(feature.book))%></span>
+              <span class="price"><%= number_to_currency(show_price(feature.book))%></span>
               <% end %>
             </li>
           </ul>

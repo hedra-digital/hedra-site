@@ -34,25 +34,15 @@ module BooksHelper
     raw(book.description.split('</p>')[0] + '</p>') rescue truncate_html(book.description, :length => 450, :omission => '...')
   end
 
-
-  def promotion_price(book)
+  # only one interface
+  def show_price(book)
     promotion = find_promotion(book)
 
-    return nil if promotion.nil?
+    return book.price_print if promotion.nil?
 
     return promotion.price if promotion.price
 
-    (1 - promotion.discount) * book.price_print
-  end
-
-  def show_price_print(book)
-    promotion = self.find_promotion
-
-    return self.price_print if promotion.nil?
-
-    return promotion.price if promotion.price
-
-    (1 - promotion.discount) * self.price_print
+    return (1 - promotion.discount) * book.price_print
   end
 
   def show_discount(promotion, book)
