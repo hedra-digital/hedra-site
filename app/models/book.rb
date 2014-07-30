@@ -95,31 +95,6 @@ class Book < ActiveRecord::Base
     self.price_print.present? || self.price_ebook.present?
   end
 
-  # promotion priority: book > tag > category
-  def find_promotion
-    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at", self.id, Time.now).order("created_at").last
-    return book_promotion if book_promotion
-
-    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at", self.tags.map(&:id), self.publisher_id, Time.now).order("created_at").last
-    return tag_promotion if tag_promotion
-
-    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at", self.category_id, self.publisher_id, Time.now).order("created_at").last
-    return category_promotion if category_promotion
-
-    nil
-  end
-
-
-  def show_price_print
-    promotion = self.find_promotion
-
-    return self.price_print if promotion.nil?
-
-    return promotion.price if promotion.price
-
-    (1 - promotion.discount) * self.price_print
-  end
-
   private
 
   def formatted_list(array)

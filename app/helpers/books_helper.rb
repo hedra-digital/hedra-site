@@ -36,7 +36,7 @@ module BooksHelper
 
 
   def promotion_price(book)
-    promotion = book.find_promotion
+    promotion = find_promotion(book)
 
     return nil if promotion.nil?
 
@@ -45,13 +45,66 @@ module BooksHelper
     (1 - promotion.discount) * book.price_print
   end
 
+  def show_price_print(book)
+    promotion = self.find_promotion
+
+    return self.price_print if promotion.nil?
+
+    return promotion.price if promotion.price
+
+    (1 - promotion.discount) * self.price_print
+  end
+
   def show_discount(promotion, book)
     return promotion.discount * 100 if promotion.discount
     (book.price_print - promotion.price) * 100 / book.price_print
   end
 
+  # only one interface
+  def find_promotion(book)
+    return find_private_promotion(book) if find_private_promotion(book)
+    return find_public_promotion(book) if find_public_promotion(book)
+  end
 
   private
+
+  # promotion priority: book > tag > category
+  def find_private_promotion(book)
+
+    coupons = []
+
+    cookies.each_entry do |c|
+      coupons << c.last if c.first.starts_with?("coupon_") 
+    end
+  
+    return nil if coupons.size == 0
+
+    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and slug in (?)", book.id, Time.now, coupons).order("created_at").last
+    return book_promotion if book_promotion
+
+    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.tags.map(&:id), book.publisher_id, Time.now, coupons).order("created_at").last
+    return tag_promotion if tag_promotion
+
+    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.category_id, book.publisher_id, Time.now, coupons).order("created_at").last
+    return category_promotion if category_promotion
+
+    nil
+  end
+
+  # promotion priority: book > tag > category
+  def find_public_promotion(book)
+    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.id, Time.now).order("created_at").last
+    return book_promotion if book_promotion
+
+    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.tags.map(&:id), book.publisher_id, Time.now).order("created_at").last
+    return tag_promotion if tag_promotion
+
+    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.category_id, book.publisher_id, Time.now).order("created_at").last
+    return category_promotion if category_promotion
+
+    nil
+  end
+
 
   def stats_item(title, data)
     render :partial => 'stats_item', :locals => { :title => title, :data => data }

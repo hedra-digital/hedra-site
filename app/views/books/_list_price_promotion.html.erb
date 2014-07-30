@@ -1,4 +1,4 @@
-<% if book.find_promotion %>
+<% if find_promotion(book) %>
 
 <div class="list-price promotion">
   <div><span>de </span><span class="price"><%= number_to_currency(book.price_print)%></span></div>
