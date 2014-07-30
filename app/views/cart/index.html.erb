@@ -32,7 +32,7 @@
                   <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight %>
                 </td>
                 <td class="cart-page-book-price">
-                  <%= number_to_currency(book.show_price_print.*(quantity)) %>
+                  <%= number_to_currency(show_price(book).*(quantity)) %>
                 </td>
                 <td class="cart-page-remove-item">
                   <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>

@@ -10,22 +10,6 @@ class Order < ActiveRecord::Base
     "##{self.id}"
   end
 
-  def self.create_order(user, address, cart)
-    return nil if cart.nil?
-    order = self.create(user_id: user.id, address: address,
-      email: user.email, payment_state: 'Aguardando aprovação',
-      shipment_state: 'Aguardando envio')
-    total = 0
-    cart.keys.each do |book_id|
-      book = Book.find(book_id)
-      total += book.show_price_print * cart[book_id]
-      OrderItem.create(order_id: order.id, book_id: book_id, price: book.show_price_print, quantity: cart[book_id])
-    end
-    Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id)
-    order.update_attributes(:total => total)
-    order
-  end
-
   def order_items_to_paypal
     items = []
     self.order_items.each do |item|
