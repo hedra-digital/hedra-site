@@ -4,7 +4,6 @@ div class: 'panel_contents' do
       f.input :start_date, :as => :datepicker, :required => false
       f.input :end_date, :as => :datepicker, :required => false
       f.input :title, :required => false
-      f.input :author, :required => false
     end
     f.actions
   end
