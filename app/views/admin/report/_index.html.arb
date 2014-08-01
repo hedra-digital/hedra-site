@@ -1,0 +1,31 @@
+div class: 'panel_contents' do
+  active_admin_form_for :search do |f|
+    f.inputs "Search" do
+      f.input :start_date, :as => :datepicker, :required => false
+      f.input :end_date, :as => :datepicker, :required => false
+      f.input :title, :required => false
+      f.input :author, :required => false
+    end
+    f.actions
+  end
+end
+
+
+div class: 'panel' do
+  h3 'Sale Report'
+  div class: 'panel_contents' do
+
+		table_for books do
+		  column "title" do |book|
+		    link_to book.title, book_path(book)
+		  end
+		  column "sold count" do |book|
+		    book.sell_count
+		  end
+		  column "total price" do |book|
+		    number_to_currency(book.total_price)
+		  end
+		end
+
+  end
+end
