@@ -13,7 +13,7 @@ class Promotion < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :allow_blank => true
 
-  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug
+  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link
 
 
   private
