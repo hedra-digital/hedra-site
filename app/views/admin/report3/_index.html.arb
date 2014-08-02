@@ -11,18 +11,21 @@ end
 
 
 div class: 'panel' do
-  h3 "Sale Report, SOLD COUNT #{total_sold_count}, TOTAL PRICE #{number_to_currency(total_amount)}"
+  h3 "Sale Report, CREATED COUNT #{total_created_count.to_i}, COMPLETED COUNT #{total_completed_count.to_i}, FAILED COUNT #{total_failed_count.to_i}"
   div class: 'panel_contents' do
 
 		table_for books do
 		  column "title" do |book|
 		    link_to book.title, book_path(book)
 		  end
-		  column "sold count" do |book|
-		    book.sold_count
+		  column "created count" do |book|
+		    book.created_count.to_i
 		  end
-		  column "total price" do |book|
-		    number_to_currency(book.total_price)
+		 column "completed count" do |book|
+		    book.completed_count.to_i
+		  end
+		  column "failed count" do |book|
+		    book.failed_count.to_i
 		  end
 		end
 
