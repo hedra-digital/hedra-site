@@ -29,7 +29,37 @@ ActiveAdmin.register_page "Report" do
   end
 
   content do
-    render "index"
+    div class: 'panel_contents' do
+		  active_admin_form_for :search do |f|
+		    f.inputs "Search" do
+		      f.input :start_date, :as => :datepicker, :required => false
+		      f.input :end_date, :as => :datepicker, :required => false
+		      f.input :title, :required => false
+		    end
+		    f.actions
+		  end
+		end
+
+
+		div class: 'panel' do
+		  h3 "Sale Report, SOLD COUNT #{total_sold_count}, TOTAL PRICE #{number_to_currency(total_amount)}"
+		  div class: 'panel_contents' do
+
+				table_for books do
+				  column "title" do |book|
+				    link_to book.title, book_path(book)
+				  end
+				  column "sold count" do |book|
+				    book.sold_count
+				  end
+				  column "total price" do |book|
+				    number_to_currency(book.total_price)
+				  end
+				end
+
+		  end
+		end
+
   end
 end
 
@@ -57,7 +87,51 @@ ActiveAdmin.register_page "Report2" do
   end
 
   content do
-    render "index"
+    div class: 'panel_contents' do
+		  active_admin_form_for :search do |f|
+		    f.inputs "Search" do
+		      f.input :start_date, :as => :datepicker, :required => false
+		      f.input :end_date, :as => :datepicker, :required => false
+		      f.input :user_name, :required => false
+		      f.input :user_email, :required => false
+		    end
+		    f.actions
+		  end
+		end
+
+
+		div class: 'panel' do
+		  h3 'Buying Report'
+		  div class: 'panel_contents' do
+
+				table_for transactions do
+				  column "user" do |t|
+				    "#{t.user.name}"
+				  end
+				  column "email" do |t|
+				    "#{t.user.email}"
+				  end
+				  column "amount" do |t|
+				    number_to_currency(t.order.total)
+				  end
+				  column "date" do |t|
+				    t.updated_at
+				  end
+				  column "status" do |t|
+				    case t.status
+				    when 1
+		  		    status_tag('warn', :label => 'CREATED')
+				    when 2
+		  		    status_tag('ok', :label => 'COMPLETED')
+				    when 3
+		  		    status_tag('error', :label => 'FAILED')
+				    end
+				  end
+				end
+
+		  end
+		end
+
   end
 end
 
@@ -98,7 +172,40 @@ ActiveAdmin.register_page "Report3" do
   end
 
   content do
-    render "index"
+    div class: 'panel_contents' do
+		  active_admin_form_for :search do |f|
+		    f.inputs "Search" do
+		      f.input :start_date, :as => :datepicker, :required => false
+		      f.input :end_date, :as => :datepicker, :required => false
+		      f.input :title, :required => false
+		    end
+		    f.actions
+		  end
+		end
+
+
+		div class: 'panel' do
+		  h3 "Sale Report, CREATED COUNT #{total_created_count.to_i}, COMPLETED COUNT #{total_completed_count.to_i}, FAILED COUNT #{total_failed_count.to_i}"
+		  div class: 'panel_contents' do
+
+				table_for books do
+				  column "title" do |book|
+				    link_to book.title, book_path(book)
+				  end
+				  column "created count" do |book|
+				    book.created_count.to_i
+				  end
+				 column "completed count" do |book|
+				    book.completed_count.to_i
+				  end
+				  column "failed count" do |book|
+				    book.failed_count.to_i
+				  end
+				end
+
+		  end
+		end
+
   end
 end
 
