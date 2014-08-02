@@ -1,4 +1,4 @@
-ActiveAdmin.register_page "Book Report" do
+ActiveAdmin.register_page "Transaction Report" do
   menu :parent => "Report"
 
   controller do
@@ -10,21 +10,25 @@ ActiveAdmin.register_page "Book Report" do
 	      title = params[:search][:title]
 	    end
 
-	    @books = Book.select("books.id, books.title, books.slug, count(books.id) as sold_count, sum(order_items.price) as total_price").
+	    @books = Book.select("books.id, books.title, books.slug,
+	     sum(if(transactions.status = 1, 1, 0)) as created_count, 
+	     sum(if(transactions.status = 2, 1, 0)) as completed_count,
+	     sum(if(transactions.status = 3, 1, 0)) as failed_count").
 		    joins(:order_items => [:order => :transactions]).
-		    where("transactions.status = 2").
 		    where(start_date ? ("transactions.updated_at > '#{start_date}'") : "").
 		    where(end_date ? ("transactions.updated_at < '#{end_date}'") : "").
 		    where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
 		    group("books.id").
-		    order("count(books.id) desc")
+		    order("completed_count desc")
 
-      @total_sold_count = 0
-      @total_amount = 0
+      @total_created_count = 0
+      @total_completed_count = 0
+      @total_failed_count = 0
 
       @books.each do |b|
-      	@total_sold_count += b.sold_count
-      	@total_amount += b.total_price
+      	@total_created_count += b.created_count
+      	@total_completed_count += b.completed_count
+      	@total_failed_count += b.failed_count
       end
     end
   end
@@ -43,18 +47,21 @@ ActiveAdmin.register_page "Book Report" do
 
 
 		div class: 'panel' do
-		  h3 "Sale Report, SOLD COUNT #{total_sold_count}, TOTAL PRICE #{number_to_currency(total_amount)}"
+		  h3 "Sale Report, CREATED COUNT #{total_created_count.to_i}, COMPLETED COUNT #{total_completed_count.to_i}, FAILED COUNT #{total_failed_count.to_i}"
 		  div class: 'panel_contents' do
 
 				table_for books do
 				  column "title" do |book|
 				    link_to book.title, book_path(book)
 				  end
-				  column "sold count" do |book|
-				    book.sold_count
+				  column "created count" do |book|
+				    book.created_count.to_i
 				  end
-				  column "total price" do |book|
-				    number_to_currency(book.total_price)
+				 column "completed count" do |book|
+				    book.completed_count.to_i
+				  end
+				  column "failed count" do |book|
+				    book.failed_count.to_i
 				  end
 				end
 
@@ -63,6 +70,4 @@ ActiveAdmin.register_page "Book Report" do
 
   end
 end
-
-
 
