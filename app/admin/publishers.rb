@@ -17,6 +17,8 @@ ActiveAdmin.register Publisher do
       f.input :contact_email
       f.input :logo, :as => :file, :hint => (( f.object.new_record? || f.object.logo.nil? ) ? f.template.content_tag(:span, "no photo yet") : f.template.image_tag(f.object.logo.url(:thumb)))
       f.input :about
+      f.input :about_label
+      f.input :about_title
       f.input :distributors
       f.input :link_url
       f.input :link_name
