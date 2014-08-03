@@ -1,6 +1,6 @@
 <aside class="book-info span3">
   <div class="book-info-cover cover">
-    <%= link_to image_tag(book.cover_url(:big_thumb).to_s), book_path(book) %>
+    <%= link_to image_tag(book.cover_url(:big_thumb).to_s), book.cover_url.to_s, :class => 'fancybox' %>
   </div>
   <div class="book-info-data">
     <dl>
