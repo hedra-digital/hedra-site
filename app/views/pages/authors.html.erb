@@ -1,9 +1,9 @@
 <div class="container" id="authors">
 	<% @authors.each do |initial_letter, people| %>
 		<h3><%= initial_letter%></h3>
-		<ul>
+		<ul class="row">
 			<% people.each do |person|%>
-			<li><%= link_to(person.name, {controller: "books", action: "search", params: {term: person.name}})%></li>
+			<li class="span5"><%= link_to(person.name, {controller: "books", action: "search", params: {term: person.name}})%></li>
 			<% end %>
 		</ul>
 	<% end %>
