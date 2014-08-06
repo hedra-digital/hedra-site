@@ -15,6 +15,8 @@ class Person < ActiveRecord::Base
   has_many :books, :through => :participations
   has_many :roles, :through => :participations
 
+  has_one :page, :dependent => :destroy
+
   # Specify fields that can be accessible through mass assignment
   attr_accessible :name
 end

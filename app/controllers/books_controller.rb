@@ -17,6 +17,15 @@ class BooksController < ApplicationController
 
   def search
     term = "%#{params[:term]}%"
+    
+    # match the whole name
+    author = Person.where(name: params[:term]).first
+    page = author.page if author
+
+    if author and page
+     redirect_to url_for(controller: "pages", action: "author", name: author.name)
+     return
+    end
 
     books_query = Book.joins(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
     books_count = books_query.count

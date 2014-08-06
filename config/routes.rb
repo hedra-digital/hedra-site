@@ -17,7 +17,11 @@ HedraSite::Application.routes.draw do
   get  "/livros/veneta/:id"      => "books#veneta"
   get  "/livros/:id"             => "books#show", :as => :book
   get  "/categoria/:id"          => "books#by_category", :as => :category
+
   get  "/sobre"                  => "pages#about", :as => :about
+  get  "/authors"                => "pages#authors", :as => :authors
+  get  "/author/:name"           => "pages#author", :name => /[^\/]*/
+
   get  "/contato"                => "contact#new", :as => :contact
   post "/contato"                => "contact#create", :as => :contact
   get  "/tag/:id"                => "pages#tag", :as => :tag_page

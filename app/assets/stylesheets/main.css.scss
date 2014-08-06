@@ -1677,4 +1677,31 @@ a.paypal_button {
 }
 
 
+/*
+ * authors
+ */
+
+#authors{
+  h3{
+    margin-left: 29px;
+    margin-bottom: 21px;
+    color: #666666;
+  }
+
+  ul{
+    list-style: none;
+    margin-left: 69px;
+    margin-bottom: 50px;
+    li{
+      margin-bottom: 8px;
+
+      a, a:hover{
+        color: #3b9fc1 !important;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+
 

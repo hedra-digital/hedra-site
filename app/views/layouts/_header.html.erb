@@ -22,6 +22,7 @@
           </li>
           <li><%= link_to('blog', blog_path) if blog_count > 0 %></li>
           <li><%= link_to current_publisher.about_label, about_path %></li>
+          <li><%= link_to "Autores", authors_path %></li>
           <% if current_publisher.link_url and current_publisher.link_name%>
             <li><%= link_to current_publisher.link_name, "http://#{current_publisher.link_url}" %></li>
           <% end %>
