@@ -22,6 +22,7 @@ ActiveAdmin.register Publisher do
       f.input :distributors
       f.input :link_url
       f.input :link_name
+      f.input :tracking_id, :label => "Tracking ID"
     end
     f.buttons
   end
