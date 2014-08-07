@@ -4,3 +4,25 @@
   <p>Você receberá os detalhes do seu pedido no email: <b><%= current_user.email %></b></p>
   <p>Obrigado por comprar em nosso site. Desejamos uma boa leitura.</p>
 </div>
+
+<% if Rails.env.production? and @purchase and @purchase.success? %>
+  <!-- Google Code for book purchase Conversion Page -->
+  <script type="text/javascript">
+  /* <![CDATA[ */
+  var google_conversion_id = 1019919366;
+  var google_conversion_language = "en";
+  var google_conversion_format = "1";
+  var google_conversion_color = "ffffff";
+  var google_conversion_label = "S7EKCLKWywkQhviq5gM";
+  var google_conversion_value = <%= @transaction.order.total%>;
+  var google_remarketing_only = false;
+  /* ]]> */
+  </script>
+  <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+  </script>
+  <noscript>
+  <div style="display:inline;">
+  <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1019919366/?value=<%= @transaction.order.total%>&amp;label=S7EKCLKWywkQhviq5gM&amp;guid=ON&amp;script=0"/>
+  </div>
+  </noscript>
+<% end %>
