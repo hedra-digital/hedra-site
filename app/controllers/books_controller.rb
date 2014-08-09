@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     books_query = Book.joins(:category).includes(:participations => [:person, :role]).where("categories.id = #{@category.id}").order("books.publisher_id, books.position desc, books.id desc")
     books_count = books_query.count
 
-    @highlight = books_query.first(4) if books_count >= 6
+    @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
     @books = books_query.paginate(:page => params[:page], :per_page => 10, :offset => (books_count >= 6 ? 4 : 0))
   end
 
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
     books_query = Book.joins(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
     books_count = books_query.count
     
-    @highlight = books_query.first(4) if books_count >= 6 
+    @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
     @books = books_query.paginate(:page => params[:page], :per_page => 5, :offset => (books_count >= 6 ? 4 : 0))
   end
 
