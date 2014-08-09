@@ -32,9 +32,7 @@
     <![endif]-->
     <div id="wrap">
       <header id="site-header" role="banner">
-        <div class="container">
-          <%= render 'layouts/header' %>
-        </div>
+        <%= render 'layouts/header' %>
       </header>
       <div id="main" role="main">
         <%= flash_message %>
@@ -81,8 +79,8 @@
       </script>
     <% end %>
 
-    <a href="#">
-      <img style="position: absolute; top: 0; right: 14.5px; width: 180px; height: auto; border: 0;" src="<%= image_path("fretegratis.png")%>" alt="free shipping">
+    <a href="#" id="free-shiping">
+      <img src="<%= image_path("fretegratis.png")%>" alt="free shipping">
     </a>
 
   </body>
