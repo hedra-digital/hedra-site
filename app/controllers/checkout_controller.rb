@@ -1,7 +1,6 @@
 class CheckoutController < ApplicationController
 
   include ActiveMerchant::Billing
-  include CheckoutHelper
 
   layout "application"
 
@@ -16,7 +15,6 @@ class CheckoutController < ApplicationController
       session[:order_id] = @order.id
       total_as_cents, setup_purchase_params = get_setup_purchase_params @order, request, @order.order_items_to_paypal
       setup_response = @gateway.setup_purchase(total_as_cents, setup_purchase_params)
-      session[:carrinho] = nil
       redirect_to @gateway.redirect_url_for(setup_response.token)
     else
       redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
@@ -28,9 +26,10 @@ class CheckoutController < ApplicationController
       redirect_to cart_url, :notice => "Nos desculpe, ocorreu uma falha ao completar o pagamento pelo PayPal, por favor realize novamente a sua compra."
       return
     end
+    session[:carrinho] = nil
     total_as_cents, purchase_params = get_purchase_params Order.find(session[:order_id]), request, session[:items], params
     @purchase = @gateway.purchase total_as_cents, purchase_params
-    @transaction = Transaction.update_transaction(request, @purchase, session[:transaction_id])
+    @transaction = update_transaction(request, @purchase, session[:transaction_id])
   end
 
   def assigns_gateway
@@ -48,20 +47,56 @@ class CheckoutController < ApplicationController
 
   private
 
-  def create_order(user, address, cart)
-    return nil if cart.nil?
-    order = Order.create(user_id: user.id, address: address,
-      email: user.email, payment_state: 'Aguardando aprovação',
-      shipment_state: 'Aguardando envio')
-    total = 0
-    cart.keys.each do |book_id|
-      book = Book.find(book_id)
-      total += view_context.show_price(book) * cart[book_id]
-      OrderItem.create(order_id: order.id, book_id: book_id, price: view_context.show_price(book), quantity: cart[book_id])
+  def get_setup_purchase_params(order, request, items)
+    return to_cents(order.total), {
+      :ip => request.remote_ip,
+      :return_url => url_for(:action => 'review', :only_path => false),
+      :cancel_return_url => cart_url,
+      :subtotal => to_cents(order.total),
+      :header_background_color => 'ff0000',
+      :allow_note =>  true,
+      :email => current_user.email,
+      :allow_guest_checkout => true,
+      :locale => 'pt_BR',
+      :currency => 'BRL',
+      :payment_method => "credit_card",
+      :items => items
+      }
+  end
+
+  def get_purchase_params(order, request, items, params)
+    return to_cents(order.total), {
+      :ip => request.remote_ip,
+      :token => params[:token],
+      :payer_id => params[:PayerID],
+      :subtotal => to_cents(order.total),
+      :locale => 'pt_BR',
+      :currency => 'BRL',
+      :items => items
+    }
+  end
+
+  def to_cents(money)
+    (money.to_f*100).round
+  end
+
+  def update_transaction(request, purchase, transaction_id)
+    transaction = self.where(:id => transaction_id).last
+    if transaction.status == Transaction::CREATED
+      transaction.update_attributes(
+        :customer_ip => request.ip,
+        :paypal_fee_amount => purchase.params['fee_amount'],
+        :paypal_payer_id => purchase.payer_id,
+        :paypal_payment_date => purchase.params['payment_date'],
+        :paypal_pending_reason => purchase.params['pending_reason'],
+        :paypal_reason_code => purchase.params['reason_code'],
+        :paypal_token => purchase.token,
+        :paypal_transaction_id => purchase.params['transaction_id'],
+        :completed => purchase.success?,
+        :status => (purchase.success? == true)? Transaction::COMPLETED : Transaction::FAILED
+        )
     end
-    Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id)
-    order.update_attributes(:total => total)
-    order
+    transaction
   end
 
 

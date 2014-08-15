@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -54,4 +53,21 @@ protected
   def not_found
     raise ActiveRecord::RecordNotFound
   end
+
+
+  def create_order(user, address, cart)
+    return nil if cart.nil?
+    order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio')
+    total = 0
+    cart.keys.each do |book_id|
+      book = Book.find(book_id)
+      total += view_context.show_price(book) * cart[book_id]
+      OrderItem.create(order_id: order.id, book_id: book_id, price: view_context.show_price(book), quantity: cart[book_id])
+    end
+    Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id)
+    order.update_attributes(:total => total)
+    order
+  end
+
+
 end

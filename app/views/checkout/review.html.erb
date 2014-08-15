@@ -1,11 +1,11 @@
 <div class='container'>
   <h1>Pedido realizado com sucesso</h1>
-  <p>O número do seu pedido é <b><%=session[:order_id]%></b>.</p>
+  <p>O número do seu pedido é <b><%= @transaction.order.id %></b>.</p>
   <p>Você receberá os detalhes do seu pedido no email: <b><%= current_user.email %></b></p>
   <p>Obrigado por comprar em nosso site. Desejamos uma boa leitura.</p>
 </div>
 
-<% if Rails.env.production? and @purchase and @purchase.success? %>
+<% if Rails.env.production? and @transaction and @transaction.status == Transaction::COMPLETED %>
   <!-- Google Code for book purchase Conversion Page -->
   <script type="text/javascript">
   /* <![CDATA[ */

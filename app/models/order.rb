@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Order < ActiveRecord::Base
   attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id
   belongs_to :user
@@ -15,6 +14,15 @@ class Order < ActiveRecord::Base
     self.order_items.each do |item|
       book = item.book
       items << {name: book.title, number: book.id, amount: (item.price*100).round, quantity: item.quantity}
+    end
+    items
+  end
+
+  def order_items_to_iugu
+    items = []
+    self.order_items.each do |item|
+      book = item.book
+      items << {description: book.title, price_cents: (item.price*100).round, quantity: item.quantity}
     end
     items
   end

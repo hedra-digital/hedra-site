@@ -16,6 +16,9 @@
 //= require bootstrap-alert
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
+//= require bootstrap-modal
+//= require formatter.js
+//= require iugu.js
 //= require jquery.fancybox
 //= require jquery.carouFredSel-6.2.0
 //= require_self

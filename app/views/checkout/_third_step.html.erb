@@ -7,6 +7,9 @@
   <div class='paypal_button'>
   <%= render '/checkout/paypal_button', address: @address %>
   </div>
+
+  <br />
+  <%= link_to "Prosseguir, using Credit Card, ui will better", controller: "payment", action: "index"%>
   <script>
     getChosenAddress();
   </script>

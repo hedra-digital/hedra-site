@@ -1,0 +1,64 @@
+<div class="container" id="payment">
+
+  <h5><i class="icon-credit-card"></i> Credit card</h5>
+
+  <%= form_tag({action: :pay}, {class: "form-horizontal", id: "payment-form"} ) do %>
+	  <div class="control-group">
+	    <div class="controls">
+	      <input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
+	    </div>
+	    <div class="controls">
+	      <input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
+	    </div>
+	    <div class="controls">
+	      <input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
+	    </div>
+	    <div class="controls">
+	      <input autocomplete="off" data-iugu="expiration" placeholder="MM/AA" type="text" value="" />
+	    </div>
+	    <input type="hidden" name="token" id="token"/>
+	    <div class="controls">
+	      <input type="submit" class="btn" value="Pagar" />
+	    </div>
+	  </div>
+	<% end %>
+
+	<div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
+	  <div class="modal-body">
+	    <p>watting...</p>
+	  </div>
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+	Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
+  
+  <% if Rails.env.production? %>
+  	Iugu.setTestMode(false);
+  <% else %>
+	  Iugu.setTestMode(true);
+  <% end %>
+
+  $('#payment-form').submit(function(evt) {
+    var form = $(this);
+    var tokenResponseHandler = function(data) {
+      if (data.errors) {
+      	  // todo error message
+          alert(JSON.stringify(data.errors));
+      } else {
+          $("#token").val( data.id );
+          form.get(0).submit();
+      }
+    }
+    
+    Iugu.createPaymentToken(this, tokenResponseHandler);
+
+    $('#payment-form input[type="submit"]').attr('disabled','disabled');
+    $("#payment-modal").modal({backdrop: true, show: true})
+    return false;
+  });
+
+</script>
+
