@@ -26,6 +26,7 @@
 //= require jquery.validate.min.js
 //= require zipcode/zipcode.js
 //= require address.js
+//= require payment.js
 
 // FancyBox
 $(".fancybox").fancybox({
@@ -71,5 +72,12 @@ $(window).load(function() {
     });
   }
 
+});
+
+
+$(document).on('click', '.go_to_third_step', function(event){
+  $('.address_wrapper').remove()
+  $("#third_step").show()
+  getChosenAddress()
 });
 

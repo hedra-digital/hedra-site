@@ -50,21 +50,57 @@
         <%= f.button :submit, 'Atualizar carrinho', :class => 'btn cart-form-button-update' %>
       <% end %>
 
-      <%- if current_user %>
-        <%= render '/checkout/second_step' %>
-      <%- else %>
-        <%= render '/checkout/first_step' %>
-      <%- end %>
     <% else %>
       <p>Você não tem livros no carrinho.</p>
     <% end %>
   </div>
 </div>
 
-<%- content_for :page_javascripts do %>
-  <script>
-    $('body').on('click', '.go_to_third_step', function(event){
-      $('.address_wrapper').html("<%= escape_javascript(render '/checkout/third_step') %>");
-    });
-  </script>
-<% end %>
+
+<div id="tmp">
+  <div class="container">
+    <%- if current_user %>
+        <%= render '/checkout/second_step' %>
+    <%- else %>
+        <%= render '/checkout/sign_up_or_sign_in' %>
+    <%- end %>
+  </div>
+</div>  
+
+<div id="third_step">
+  <div class="container">
+      <h5>A entrega será realizada no endereço:</h5>
+      <%= render '/checkout/show_address' %>
+
+      <ul>
+        <li>
+          <%= link_to({controller: "payment", action: "index", remote: true}, {id: "link_to_credit_card"}) do %>
+            <div>Prosseguir, using Credit Card</div>
+          <% end %>
+        </li>
+
+        <li>      
+          <%= link_to({controller: "payment", action: "index", remote: true}) do %>
+            <div>payment method 2</div>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to(finish_checkout_url, {title: 'Finalizar compra com o Paypal'}) do %>
+            <div class="row">
+              <span class="span8">
+                Finalize a sua compra clicando no botão ao lado, você será direcionado para o ambiente seguro do PayPal, onde irá realizar o pagamento.
+              </span>
+              
+              <div class="paypal_button span3">Finalizar compra</div>
+            </div>
+          <% end %>
+        </li>
+      </ul>
+
+  </div> 
+</div>   
+
+
+<div id="payment"></div>
+

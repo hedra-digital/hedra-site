@@ -1,0 +1,5 @@
+
+$(document).on("ajax:success", "#link_to_credit_card", function(event, data){
+	$("#third_step").hide()
+  $("#payment").html(data)
+})

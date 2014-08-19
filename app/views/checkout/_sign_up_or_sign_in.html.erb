@@ -2,8 +2,38 @@
   <div id='sign_up_or_sign_in'>
     <div class='errors'></div>
     <div class='sign_up_or_sign_in_wrapper'>
-      <%= render '/checkout/login_form' %>
-      <%= render '/checkout/sign_up_form' %>
+
+      <%= simple_form_for(:user, :html => {:class => 'login'}, :url => new_user_session_path, :remote => true) do |f| %>
+			  <h4> <%= t('checkout.already_has_account') %> </h4>
+			  <fieldset>
+			    <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
+			    <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
+			    <div class='field'>
+			      <label>
+			        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+			        <%= t(:remember_me) %>
+			        <%= link_to t('recover_password.label'), new_password_path(:user), :class => 'recover_password' %>
+			      </label>
+			    </div>
+			    <%= f.submit t('login') %>
+			  </fieldset>
+			<% end %>
+
+      <%= simple_form_for(:user, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
+			  <h4> <%= t('checkout.sign_up') %> </h4>
+			  <fieldset>
+			    <div class='field_in_same_line'>
+			      <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
+			      <%= f.input :name, :label => t('activerecord.attributes.user.name'), :disabled => false %>
+			    </div>
+			    <div class='field_in_same_line'>
+			      <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
+			      <%= f.input :password_confirmation, :label => t('activerecord.attributes.user.password_confirmation') %>
+			    </div>
+			    <%= f.submit t('sign_up') %>
+			  </fieldset>
+			<% end %>
+
     </div>
   </div>
 </div>

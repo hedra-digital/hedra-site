@@ -1,6 +1,10 @@
 class PaymentController < ApplicationController
   layout "application"
 
+  def index
+    render partial: "index"
+  end
+
   def pay
     @address = Address.find(session[:address_id])
     @order = create_order(current_user, @address, session[:carrinho])
