@@ -3,3 +3,69 @@ $(document).on("ajax:success", "#link_to_credit_card", function(event, data){
 	$("#third_step").hide()
   $("#payment").html(data)
 })
+
+
+$(document).on("submit", "#payment-form", function(){
+
+  if(validate_payment_form()){
+    $('#payment-form input[type="submit"]').attr('disabled','disabled')
+    $("#payment-modal").modal({backdrop: true, show: true})
+  }
+
+  var form = $(this);
+  var tokenResponseHandler = function(data) {
+    $("#token").val( data.id )
+    form.get(0).submit();
+  }
+  
+  Iugu.createPaymentToken(this, tokenResponseHandler);
+  return false;
+})  
+
+
+
+function validate_payment_form(){
+
+  validate_full_name = function(e) {
+		return !e || e.length == 0 ? !1 : !0
+	}
+
+  var messages = []
+  var messages_string = ""
+
+  var number = $('#payment-form input[data-iugu="number"]').val()
+  var full_name = $('#payment-form input[data-iugu="full_name"]').val()
+  var expiration = $('#payment-form input[data-iugu="expiration"]').val()
+  var verification_value = $('#payment-form input[data-iugu="verification_value"]').val()
+
+
+  if(!Iugu.utils.validateCreditCardNumber(number)){
+    messages.push("Número do Cartão é inválido.") 
+  }
+
+  if(!validate_full_name(full_name)){
+    messages.push("Titular do Cartão é inválido.") 
+  }
+
+  if(!Iugu.utils.validateExpirationString(expiration)){
+    messages.push("Data de expiração é inválido.") 
+  }
+
+  if(!Iugu.utils.validateCVV(verification_value, Iugu.utils.getBrandByCreditCardNumber(number))){
+    messages.push("CVV é inválido.") 
+  }
+
+  $.each(messages, function(i, m){
+  	messages_string += "<li>"+ m +"</li>"
+  })
+
+  if(messages.length > 0){
+  	$("#payment .alert > ul").html(messages_string)
+    $("#payment .alert").show()
+    return false
+  }else{
+  	$("#payment .alert").hide()
+  	return true
+  }
+  
+}

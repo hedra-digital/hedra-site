@@ -1571,6 +1571,50 @@ html, body {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
+
+#payment-form{
+  margin: 12px auto 35px auto;
+  width: 220px;
+  input{
+    margin-bottom: 12px;
+    &.card-invalid{
+      border-color: #b94a48;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+    &.card-valid{
+      border-color: #468847;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+  }
+}
+
+
+#payment{
+  .modal.fade.in{
+    top: 30%;
+    height: 200px;    
+  }
+
+  .alert{
+    width: 350px;
+    margin: 0px auto;
+    ul{
+      margin-bottom: 1px;
+      li{
+        font-size: 19px;
+      }
+    }
+  }
+  .card-wrapper{
+    margin-bottom: 30px;
+  }
+}
+
+
 .errors {
   color: #FF4040;
   font-weight: bold;
@@ -1741,11 +1785,6 @@ html, body {
 
 
 
-#payment{
-  .modal.fade.in{
-    top: 30%;
-    height: 200px;    
-  }
-}
+
 
 

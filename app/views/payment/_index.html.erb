@@ -2,25 +2,17 @@
 
   <h5><i class="icon-credit-card"></i> Credit card</h5>
 
-  <%= form_tag({action: :pay}, {class: "form-horizontal", id: "payment-form"} ) do %>
-	  <div class="control-group">
-	    <div class="controls">
-	      <input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
-	    </div>
-	    <div class="controls">
-	      <input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
-	    </div>
-	    <div class="controls">
-	      <input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
-	    </div>
-	    <div class="controls">
-	      <input autocomplete="off" data-iugu="expiration" placeholder="MM/AA" type="text" value="" />
-	    </div>
+  <div class="card-wrapper"></div>
+
+  <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+  <%= form_tag({action: :pay}, {id: "payment-form"} ) do %>
+	    <input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
+	    <input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
+	    <input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" />
+	    <input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
 	    <input type="hidden" name="token" id="token"/>
-	    <div class="controls">
-	      <input type="submit" class="btn" value="Pagar" />
-	    </div>
-	  </div>
+	    <input type="submit" class="btn" value="Pagar" />
 	<% end %>
 
 	<div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
@@ -33,32 +25,22 @@
 
 
 <script type="text/javascript">
-	Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
+
+  Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
   
   <% if Rails.env.production? %>
-  	Iugu.setTestMode(false);
+    Iugu.setTestMode(false);
   <% else %>
-	  Iugu.setTestMode(true);
+    Iugu.setTestMode(true);
   <% end %>
 
-  $('#payment-form').submit(function(evt) {
-    var form = $(this);
-    var tokenResponseHandler = function(data) {
-      if (data.errors) {
-      	  // todo error message
-          alert(JSON.stringify(data.errors));
-      } else {
-          $("#token").val( data.id );
-          form.get(0).submit();
-      }
-    }
-    
-    Iugu.createPaymentToken(this, tokenResponseHandler);
-
-    $('#payment-form input[type="submit"]').attr('disabled','disabled');
-    $("#payment-modal").modal({backdrop: true, show: true})
-    return false;
-  });
+  $('#payment-form').card({
+    container: $('.card-wrapper'),
+    numberInput: 'input[data-iugu="number"]', 
+    expiryInput: 'input[data-iugu="expiration"]',
+    cvcInput: 'input[data-iugu="verification_value"]',
+    nameInput: 'input[data-iugu="full_name"]'
+  })
 
 </script>
 

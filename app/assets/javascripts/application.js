@@ -17,7 +17,6 @@
 //= require bootstrap-dropdown
 //= require bootstrap-collapse
 //= require bootstrap-modal
-//= require formatter.js
 //= require iugu.js
 //= require jquery.fancybox
 //= require jquery.carouFredSel-6.2.0
@@ -27,6 +26,7 @@
 //= require zipcode/zipcode.js
 //= require address.js
 //= require payment.js
+//= require card.js
 
 // FancyBox
 $(".fancybox").fancybox({
