@@ -10,6 +10,8 @@ $(document).on("submit", "#payment-form", function(){
   if(validate_payment_form()){
     $('#payment-form input[type="submit"]').attr('disabled','disabled')
     $("#payment-modal").modal({backdrop: true, show: true})
+  }else{
+    return false
   }
 
   var form = $(this);
