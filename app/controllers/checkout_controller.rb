@@ -8,7 +8,7 @@ class CheckoutController < ApplicationController
 
   def finish
     @address = Address.find(session[:address_id])
-    @order = create_order(current_user, @address, session[:carrinho])
+    @order = create_order(current_user, @address, session[:carrinho], Transaction::PAYPAL)
     if !@order.nil?
       session[:transaction_id] = @order.transactions.last.id
       session[:items] = @order.order_items_to_paypal

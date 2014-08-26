@@ -1593,7 +1593,8 @@ html, body {
 }
 
 
-#payment{
+#payment-card{
+  display: none;
   .modal.fade.in{
     top: 30%;
     height: 200px;    
@@ -1611,6 +1612,36 @@ html, body {
   }
   .card-wrapper{
     margin-bottom: 30px;
+  }
+}
+
+#payment_slip{
+  display: none;
+  h3{
+    font-size: 23px;
+    margin: 22px 20px 20px 20px;
+  }
+  input, select{
+    width: 200px;
+    height: 35px;
+    margin: 0px 0px 20px 45px;
+  }
+  input[type=submit]{
+    width: 300px;
+    height: 47px;
+    margin: 10px 44px;
+    text-align: center;
+  }
+
+  .alert{
+    width: 350px;
+    margin: 0px 0px 0px 45px;
+    ul{
+      margin-bottom: 1px;
+      li{
+        font-size: 19px;
+      }
+    }
   }
 }
 
@@ -1737,9 +1768,8 @@ html, body {
   }
 }
 
-.new_address input.error, select.error {
+input.error, select.error {
   border: 1px solid red !important;
-  color: red !important;
 }
 
 

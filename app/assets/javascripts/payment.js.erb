@@ -1,8 +1,23 @@
 
-$(document).on("ajax:success", "#link_to_credit_card", function(event, data){
+$(document).on("click", "#link_to_payment_card", function(){
 	$("#third_step").hide()
-  $("#payment").html(data)
+  $("#payment-card").show()
 })
+
+
+$(document).on("click", "#link_to_payment_slip", function(){
+  $("#third_step").hide()
+  $("#payment_slip").show()
+})
+
+
+Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
+
+<% if Rails.env.production? %>
+  Iugu.setTestMode(false);
+<% else %>
+  Iugu.setTestMode(true);
+<% end %>
 
 
 $(document).on("submit", "#payment-form", function(){
@@ -24,6 +39,32 @@ $(document).on("submit", "#payment-form", function(){
   return false;
 })  
 
+
+$(document).on("submit", "#payment_slip form", function(){
+  var messages_string = ""
+  $("#payment_slip form div.span6 input,select").each(function(){
+    if(this.value.length == 0){
+      if(this.type == "text"){
+        messages_string += "<li>"+ this.placeholder +"é inválido.</li>"
+      }else{
+        messages_string += "<li>Estado é inválido.</li>"
+      }
+      $(this).addClass("error")
+    }else{
+      $(this).removeClass("error")
+    }
+  })
+
+  if(messages_string.length > 0){
+    $("#payment_slip .alert > ul").html(messages_string)
+    $("#payment_slip .alert").show()
+    return false
+  }else{
+    $("#payment_slip .alert").hide()
+    $('#payment_slip input[type="submit"]').attr('disabled','disabled')
+    return true
+  }
+})
 
 
 function validate_payment_form(){
@@ -62,11 +103,11 @@ function validate_payment_form(){
   })
 
   if(messages.length > 0){
-  	$("#payment .alert > ul").html(messages_string)
-    $("#payment .alert").show()
+  	$("#payment-card .alert > ul").html(messages_string)
+    $("#payment-card .alert").show()
     return false
   }else{
-  	$("#payment .alert").hide()
+  	$("#payment-card .alert").hide()
   	return true
   }
   

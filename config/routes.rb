@@ -38,8 +38,9 @@ HedraSite::Application.routes.draw do
   match "/checkout/finish/" => "checkout#finish", :as => :finish_checkout
   match "/checkout/review" => "checkout#review", :as => :review
 
-  get "/payment" => "payment#index"
-  post "/payment/pay" => "payment#pay"
+  post "/payment/credit_card" => "payment#credit_card"
+  post "/payment/bank_slip" => "payment#bank_slip"
+  match "/payment/callback_9E93257460" => "payment#callback_9E93257460"
 
   match "/address/create" => "addresses#create", :as => :create_address
   match "/address/get_address" => 'addresses#get_address', :as => :get_address

@@ -5,6 +5,7 @@
 /config/configuration.yml
 /config/database.yml
 /config/email.yml
+/config/config.yml
 /config/initializers/session_store.rb
 /config/development.sphinx.conf
 /coverage

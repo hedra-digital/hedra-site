@@ -74,14 +74,14 @@
 
       <ul>
         <li>
-          <%= link_to({controller: "payment", action: "index", remote: true}, {id: "link_to_credit_card"}) do %>
-            <div>Prosseguir, using Credit Card</div>
+          <%= link_to("#", {id: "link_to_payment_card"}) do %>
+            <div>Cartão de Crédito</div>
           <% end %>
         </li>
 
         <li>      
-          <%= link_to({controller: "payment", action: "index", remote: true}) do %>
-            <div>payment method 2</div>
+          <%= link_to("#", {id: "link_to_payment_slip"}) do %>
+            <div>Boleto Bancário</div>
           <% end %>
         </li>
 
@@ -102,5 +102,85 @@
 </div>   
 
 
-<div id="payment"></div>
+<div id="payment-card">
+  <div class="container">
+
+    <h5><i class="icon-credit-card"></i> Credit card</h5>
+
+    <div class="card-wrapper"></div>
+
+    <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+    <%= form_tag({controller: :payment, action: :credit_card}, {id: "payment-form"} ) do %>
+        <input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
+        <input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
+        <input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" />
+        <input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
+        <input type="hidden" name="token" id="token"/>
+        <input type="submit" class="btn" value="Pagar" />
+    <% end %>
+
+    <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
+      <div class="modal-body">
+        <p>watting...</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="payment_slip">
+  <div class="container">
+
+    <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+    <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
+
+      <h3><i class="icon-user"></i> Dados Pessoais</h3>
+
+      <div class="row">
+        <div class="span6"><input type="text" placeholder="CPF/CNPJ" name="cpf_cnpj" /></div>
+        <div class="span6"><input type="text" placeholder="Número do Cartão" name="client_name" /></div>
+      </div>
+
+      <div class="row">
+        <div class="span6"><input type="text" placeholder="Telefone Prefix" name="phone_prefix" /></div>
+        <div class="span6"><input type="text" placeholder="Telefone" name="phone" /></div>
+      </div>
+
+      <h3><i class="icon-home"></i> Payment Endereço(different form mail address)</h3>
+
+      <div class="row">
+        <div class="span6"><input type="text" placeholder="Endereço" name="street" /></div>
+        <div class="span6"><input type="text" placeholder="Número" name="number" /></div>
+      </div>
+
+      <div class="row">
+        <div class="span6"><input type="text" placeholder="Cidade" name="city" /></div>
+        <div class="span6"><%= select_tag("state", options_for_select(Address::STATE), prompt: "Estado")%></div>
+      </div>
+    
+      <div class="row">
+        <div class="span6"><input type="text" placeholder="CEP" name="zip_code" /></div>
+      </div>
+
+      <input type="submit" class="btn" value="Pagar" />
+    <% end %>
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+$('#payment-form').card({
+  container: $('.card-wrapper'),
+  numberInput: 'input[data-iugu="number"]', 
+  expiryInput: 'input[data-iugu="expiration"]',
+  cvcInput: 'input[data-iugu="verification_value"]',
+  nameInput: 'input[data-iugu="full_name"]'
+})
+</script>
 
