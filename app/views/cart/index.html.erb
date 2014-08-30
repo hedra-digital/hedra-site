@@ -86,14 +86,8 @@
         </li>
 
         <li>
-          <%= link_to(finish_checkout_url, {title: 'Finalizar compra com o Paypal'}) do %>
-            <div class="row">
-              <span class="span8">
-                Finalize a sua compra clicando no botão ao lado, você será direcionado para o ambiente seguro do PayPal, onde irá realizar o pagamento.
-              </span>
-              
-              <div class="paypal_button span3">Finalizar compra</div>
-            </div>
+          <%= link_to(finish_checkout_url) do %>
+            <div>Paypal</div>
           <% end %>
         </li>
       </ul>
@@ -142,28 +136,12 @@
 
       <div class="row">
         <div class="span6"><input type="text" placeholder="CPF/CNPJ" name="cpf_cnpj" /></div>
-        <div class="span6"><input type="text" placeholder="Número do Cartão" name="client_name" /></div>
+        <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" /></div>
       </div>
 
       <div class="row">
         <div class="span6"><input type="text" placeholder="Telefone Prefix" name="phone_prefix" /></div>
         <div class="span6"><input type="text" placeholder="Telefone" name="phone" /></div>
-      </div>
-
-      <h3><i class="icon-home"></i> Payment Endereço(different form mail address)</h3>
-
-      <div class="row">
-        <div class="span6"><input type="text" placeholder="Endereço" name="street" /></div>
-        <div class="span6"><input type="text" placeholder="Número" name="number" /></div>
-      </div>
-
-      <div class="row">
-        <div class="span6"><input type="text" placeholder="Cidade" name="city" /></div>
-        <div class="span6"><%= select_tag("state", options_for_select(Address::STATE), prompt: "Estado")%></div>
-      </div>
-    
-      <div class="row">
-        <div class="span6"><input type="text" placeholder="CEP" name="zip_code" /></div>
       </div>
 
       <input type="submit" class="btn" value="Pagar" />

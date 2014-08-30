@@ -36,14 +36,15 @@ end
 #   end
 # end
 
-after 'deploy:update_code', 'deploy:symlink_db', 'deploy:symlink_uploads', 'deploy:copy_old_sitemap'
+after 'deploy:update_code', 'deploy:symlink_config_file', 'deploy:symlink_uploads', 'deploy:copy_old_sitemap'
 after 'deploy:update', 'deploy:cleanup'
 after "deploy", "deploy:migrate"
 
 namespace :deploy do
-  desc "Symlinks the database.yml"
-  task :symlink_db, :roles => :app do
+  desc "Symlinks the config file"
+  task :symlink_config_file, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{deploy_to}/shared/config/config.yml #{release_path}/config/config.yml"
   end
 
   desc "Symlinks the uploads directory"

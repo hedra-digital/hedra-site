@@ -52,15 +52,7 @@ class PaymentController < ApplicationController
         name: params[:client_name],
         phone_prefix: params[:phone_prefix],
         phone: params[:phone],
-        email: current_user.email,
-        address: {
-            street: params[:street],
-            number: params[:number],
-            city: params[:city],
-            state: params[:state],
-            country: "Brasil",
-            zip_code: params[:zip_code]
-        }
+        email: current_user.email 
       }
     })
 
@@ -72,7 +64,7 @@ class PaymentController < ApplicationController
 
     if iugu_charge.success
       session[:carrinho] = nil
-      render :template => "checkout/review"
+      redirect_to iugu_charge.url
       return
     else
       redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra"
