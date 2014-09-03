@@ -1,13 +1,23 @@
 
 $(document).on("click", "#link_to_payment_card", function(){
-	$("#third_step").hide()
-  $("#payment-card").show()
+  $("#payment_slip, #payment_paypal").slideUp(600)
+  $("#link_to_payment_slip input:radio, #link_to_payment_paypal input:radio").prop("checked", false)
+  $("#payment_card").slideDown(600)
+  $("#link_to_payment_card input:radio").prop("checked", true)
 })
 
-
 $(document).on("click", "#link_to_payment_slip", function(){
-  $("#third_step").hide()
-  $("#payment_slip").show()
+  $("#payment_card, #payment_paypal").slideUp(600)
+  $("#link_to_payment_card input:radio, #link_to_payment_paypal input:radio").prop("checked", false)
+  $("#payment_slip").slideDown(600)
+  $("#link_to_payment_slip input:radio").prop("checked", true)
+})
+
+$(document).on("click", "#link_to_payment_paypal", function(){
+  $("#payment_card, #payment_slip").slideUp(600)
+  $("#link_to_payment_card input:radio, #link_to_payment_slip input:radio").prop("checked", false)
+  $("#payment_paypal").slideDown(600)
+  $("#link_to_payment_paypal input:radio").prop("checked", true)
 })
 
 
@@ -20,13 +30,23 @@ Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
 <% end %>
 
 
-$(document).on("submit", "#payment-form", function(){
+$(document).on("submit", "#payment_card form", function(){
 
-  if(validate_payment_form()){
-    $('#payment-form input[type="submit"]').attr('disabled','disabled')
-    $("#payment-modal").modal({backdrop: true, show: true})
-  }else{
+  var messages_array =  validate_form_payment_card().concat(validate_form_payment($("#payment_card form [myrequired]")))
+  var messages_string = ""
+  
+  $.each(messages_array, function(i, m){
+    messages_string += "<li>"+ m +"</li>"
+  })
+
+  if(messages_array.length > 0){
+    $("#payment_card .alert > ul").html(messages_string)
+    $("#payment_card .alert").show()
     return false
+  }else{
+    $("#payment_card .alert").hide()
+    $('#payment_card form input[type="submit"]').attr('disabled','disabled')
+    $("#payment-modal").modal({backdrop: true, show: true})
   }
 
   var form = $(this);
@@ -41,18 +61,11 @@ $(document).on("submit", "#payment-form", function(){
 
 
 $(document).on("submit", "#payment_slip form", function(){
+  var messages_array = validate_form_payment($("#payment_slip form [myrequired]"))
   var messages_string = ""
-  $("#payment_slip form div.span6 input,select").each(function(){
-    if(this.value.length == 0){
-      if(this.type == "text"){
-        messages_string += "<li>"+ this.placeholder +"é inválido.</li>"
-      }else{
-        messages_string += "<li>Estado é inválido.</li>"
-      }
-      $(this).addClass("error")
-    }else{
-      $(this).removeClass("error")
-    }
+
+  $.each(messages_array, function(i, m){
+    messages_string += "<li>"+ m +"</li>"
   })
 
   if(messages_string.length > 0){
@@ -62,53 +75,77 @@ $(document).on("submit", "#payment_slip form", function(){
   }else{
     $("#payment_slip .alert").hide()
     $('#payment_slip input[type="submit"]').attr('disabled','disabled')
+    $("#payment-modal").modal({backdrop: true, show: true})
     return true
   }
 })
 
 
-function validate_payment_form(){
+$(document).on("submit", "#payment_paypal form", function(){
+  var messages_array = validate_form_payment($("#payment_paypal form [myrequired]"))
+  var messages_string = ""
+
+  $.each(messages_array, function(i, m){
+    messages_string += "<li>"+ m +"</li>"
+  })
+
+  if(messages_string.length > 0){
+    $("#payment_paypal .alert > ul").html(messages_string)
+    $("#payment_paypal .alert").show()
+    return false
+  }else{
+    $("#payment_paypal .alert").hide()
+    $('#payment_paypal input[type="submit"]').attr('disabled','disabled')
+    $("#payment-modal").modal({backdrop: true, show: true})
+    return true
+  }
+
+})
+
+
+function validate_form_payment(jquery_input_select){
+  var messages_array = []
+  jquery_input_select.each(function(){
+    if($(this).val().length == 0){
+      messages_array.push($(this).attr("placeholder") + " é inválido.")
+      $(this).addClass("error")
+    }else{
+      $(this).removeClass("error")
+    }
+  })
+  return messages_array
+}
+
+
+function validate_form_payment_card(){
 
   validate_full_name = function(e) {
 		return !e || e.length == 0 ? !1 : !0
 	}
 
-  var messages = []
-  var messages_string = ""
+  var messages_array = []
 
-  var number = $('#payment-form input[data-iugu="number"]').val()
-  var full_name = $('#payment-form input[data-iugu="full_name"]').val()
-  var expiration = $('#payment-form input[data-iugu="expiration"]').val()
-  var verification_value = $('#payment-form input[data-iugu="verification_value"]').val()
+  var number = $('#payment_card form input[data-iugu="number"]').val()
+  var full_name = $('#payment_card form input[data-iugu="full_name"]').val()
+  var expiration = $('#payment_card form input[data-iugu="expiration"]').val()
+  var verification_value = $('#payment_card form input[data-iugu="verification_value"]').val()
 
 
   if(!Iugu.utils.validateCreditCardNumber(number)){
-    messages.push("Número do Cartão é inválido.") 
+    messages_array.push("Número do Cartão é inválido.") 
   }
 
   if(!validate_full_name(full_name)){
-    messages.push("Titular do Cartão é inválido.") 
+    messages_array.push("Titular do Cartão é inválido.") 
   }
 
   if(!Iugu.utils.validateExpirationString(expiration)){
-    messages.push("Data de expiração é inválido.") 
+    messages_array.push("Data de expiração é inválido.") 
   }
 
   if(!Iugu.utils.validateCVV(verification_value, Iugu.utils.getBrandByCreditCardNumber(number))){
-    messages.push("CVV é inválido.") 
+    messages_array.push("CVV é inválido.") 
   }
 
-  $.each(messages, function(i, m){
-  	messages_string += "<li>"+ m +"</li>"
-  })
-
-  if(messages.length > 0){
-  	$("#payment-card .alert > ul").html(messages_string)
-    $("#payment-card .alert").show()
-    return false
-  }else{
-  	$("#payment-card .alert").hide()
-  	return true
-  }
-  
+  return messages_array
 }

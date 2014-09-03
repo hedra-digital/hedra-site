@@ -55,8 +55,13 @@ protected
   end
 
 
-  def create_order(user, address, cart, payment_method)
+  def create_order(user, address_hash, cart, payment_method)
     return nil if cart.nil?
+
+    address_hash = address_hash.merge({user_id: user.id})
+
+    address = Address.create(address_hash)
+
     order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio')
     total = 0
     cart.keys.each do |book_id|

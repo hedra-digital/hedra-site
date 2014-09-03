@@ -9,8 +9,7 @@ class PaymentController < ApplicationController
       return
     end
 
-    @address = Address.find(session[:address_id])
-    @order = create_order(current_user, @address, session[:carrinho], Transaction::CREDIT_CARD)
+    @order = create_order(current_user, params[:address], session[:carrinho], Transaction::CREDIT_CARD)
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     iugu_charge = Iugu::Charge.create({ token: params[:token], email: current_user.email, items: @order.order_items_to_iugu } )
@@ -39,8 +38,7 @@ class PaymentController < ApplicationController
       return
     end
 
-    @address = Address.find(session[:address_id])
-    @order = create_order(current_user, @address, session[:carrinho], Transaction::BANK_SLIP)
+    @order = create_order(current_user, params[:address], session[:carrinho], Transaction::BANK_SLIP)
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({
