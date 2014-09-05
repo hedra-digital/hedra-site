@@ -4,8 +4,13 @@ class PaymentController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:callback_9E93257460]
 
   def credit_card
-    if session[:carrinho].nil? 
+    if session[:carrinho].nil?
       redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
+      return
+    end
+
+    if !current_user
+      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
       return
     end
 
@@ -38,6 +43,11 @@ class PaymentController < ApplicationController
       return
     end
 
+    if !current_user
+      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
+      return
+    end
+
     @order = create_order(current_user, params[:address], session[:carrinho], Transaction::BANK_SLIP)
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
@@ -62,7 +72,8 @@ class PaymentController < ApplicationController
 
     if iugu_charge.success
       session[:carrinho] = nil
-      redirect_to iugu_charge.url
+      @bank_slip_pdf = iugu_charge.pdf
+      render :template => "checkout/review"
       return
     else
       redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra"

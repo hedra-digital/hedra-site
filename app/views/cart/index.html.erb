@@ -2,7 +2,7 @@
 
 <div id="tag">
   <div class="container">
-    <%= yield :h1 %>
+    <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
 
     <% if @cart_items.present? %>
       <%= simple_form_for(:cart, :url => update_cart_path, :method => :put) do |f| %>

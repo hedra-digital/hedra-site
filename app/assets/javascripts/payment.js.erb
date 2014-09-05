@@ -32,7 +32,7 @@ Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
 
 $(document).on("submit", "#payment_card form", function(){
 
-  var messages_array =  validate_form_payment_card().concat(validate_form_payment($("#payment_card form [myrequired]")))
+  var messages_array =  check_user_logined().concat(validate_form_payment_card()).concat(validate_form_payment($("#payment_card form [myrequired]")))
   var messages_string = ""
   
   $.each(messages_array, function(i, m){
@@ -61,7 +61,7 @@ $(document).on("submit", "#payment_card form", function(){
 
 
 $(document).on("submit", "#payment_slip form", function(){
-  var messages_array = validate_form_payment($("#payment_slip form [myrequired]"))
+  var messages_array = check_user_logined().concat(validate_form_payment($("#payment_slip form [myrequired]")))
   var messages_string = ""
 
   $.each(messages_array, function(i, m){
@@ -82,7 +82,7 @@ $(document).on("submit", "#payment_slip form", function(){
 
 
 $(document).on("submit", "#payment_paypal form", function(){
-  var messages_array = validate_form_payment($("#payment_paypal form [myrequired]"))
+  var messages_array = check_user_logined().concat(validate_form_payment($("#payment_paypal form [myrequired]")))
   var messages_string = ""
 
   $.each(messages_array, function(i, m){
@@ -147,5 +147,13 @@ function validate_form_payment_card(){
     messages_array.push("CVV é inválido.") 
   }
 
+  return messages_array
+}
+
+function check_user_logined(){
+  var messages_array = []
+  if(!USER_LOGINED){
+    messages_array.push("Por favor, autentique-se primeiro.")
+  }
   return messages_array
 }

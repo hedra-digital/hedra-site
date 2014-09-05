@@ -7,6 +7,10 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
+    if !current_user
+      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
+      return
+    end
 
     @order = create_order(current_user, params[:address], session[:carrinho], Transaction::PAYPAL)
     if !@order.nil?
