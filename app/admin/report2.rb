@@ -12,12 +12,12 @@ ActiveAdmin.register_page "Buying Report" do
 	      user_email = params[:search][:user_email]
 	    end
 
-		  @transactions = Transaction.joins(:user).joins(:order).
-		    where(start_date ? ("transactions.updated_at > '#{start_date}'") : "").
-		    where(end_date ? ("transactions.updated_at < '#{end_date}'") : "").
+		  @transactions = Transaction.includes(:user).joins(:order).
+		    where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+		    where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
 		    where(user_name.blank? ? "" : "users.name like '%#{user_name}%'").
 		    where(user_email.blank? ? "" : "users.email like '%#{user_email}%'").
-		    order("transactions.user_id, transactions.updated_at")
+		    order("transactions.user_id, transactions.created_at")
     end
   end
 
@@ -50,7 +50,10 @@ ActiveAdmin.register_page "Buying Report" do
 				    number_to_currency(t.order.total)
 				  end
 				  column "date" do |t|
-				    t.updated_at
+				    t.created_at
+				  end
+				  column "payment_method" do |t|
+				  	t.payment_method
 				  end
 				  column "status" do |t|
 				    case t.status

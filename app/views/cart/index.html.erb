@@ -1,6 +1,6 @@
 <% page_data :title => 'Carrinho de compras', :type => 'other' %>
 
-<div id="tag">
+<div id="payment_cart" class="related">
   <div class="container">
     <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
 
@@ -41,13 +41,12 @@
             <% end %>
             <tr>
               <td id="cart-form-total" colspan="5">
+                <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
                 Total <span><%= number_to_currency(@cart_price) %></span>
               </td>
             </tr>
           </tbody>
         </table>
-
-        <%= f.button :submit, 'Atualizar carrinho', :class => 'btn cart-form-button-update' %>
       <% end %>
 
     <% else %>
@@ -57,7 +56,7 @@
 </div>
 
 
-<div id="tmp">
+<div id="payment_user" class="related">
   <div class="container">
     <%- if current_user %>
         <%= render '/checkout/second_step' %>
@@ -67,7 +66,9 @@
   </div>
 </div>  
 
-
+<div class="container">
+  <h1>Segundo passo: método de pagamento</h1>
+</div>
 
 <div class="container">
   <h4 id="link_to_payment_card"><input type="radio" checked="checked"/><i class="icon-credit-card"></i> Cartão de Crédito</h4>
@@ -83,12 +84,12 @@
     <%= form_tag({controller: :payment, action: :credit_card} ) do %>
 
       <div class="row">
-        <div class="span6"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
+        <div class="span4"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
         <div class="span6"><input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" /></div>
       </div>
 
       <div class="row">
-        <div class="span6"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
+        <div class="span4"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
         <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
       </div>
         
@@ -96,7 +97,7 @@
 
       <%= render "address"%>
 
-      <input type="submit" class="btn" value="Pagar" />
+      <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
     <% end %>
   </div>
 
@@ -118,18 +119,18 @@
       <h3><i class="icon-user"></i> Dados Pessoais</h3>
 
       <div class="row">
-        <div class="span6"><input type="text" placeholder="CPF/CNPJ" name="cpf_cnpj" myrequired /></div>
+        <div class="span4"><input type="text" placeholder="CPF/CNPJ" name="cpf_cnpj" myrequired /></div>
         <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
       </div>
 
       <div class="row">
-        <div class="span6"><input type="text" placeholder="Telefone Prefix" name="phone_prefix" myrequired /></div>
+        <div class="span4"><input type="text" placeholder="Prefixo telefônico" name="phone_prefix" myrequired /></div>
         <div class="span6"><input type="text" placeholder="Telefone" name="phone" myrequired /></div>
       </div>
 
       <%= render "address"%>
 
-      <input type="submit" class="btn" value="Pagar" />
+      <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
     <% end %>
 
   </div>
@@ -145,7 +146,7 @@
     <div class="alert alert-error" style="display: none;"><ul></ul></div>
     <%= form_tag({controller: :checkout, action: :finish} ) do %>
       <%= render "address"%>
-      <input type="submit" class="btn" value="Pagar" />
+      <input type="submit" class="btn" value="Pagar  (Paypal)" />
     <% end %>
   </div>
 </div>
@@ -153,7 +154,7 @@
 
 <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
   <div class="modal-body">
-    <p>watting...</p>
+    <h5><i class="icon-spinner icon-spin icon-3x"></i> <em>Espera...</em></h5>
   </div>
 </div>
 

@@ -15,8 +15,8 @@ ActiveAdmin.register_page "Transaction Report" do
 	     sum(if(transactions.status = 2, 1, 0)) as completed_count,
 	     sum(if(transactions.status = 3, 1, 0)) as failed_count").
 		    joins(:order_items => [:order => :transactions]).
-		    where(start_date ? ("transactions.updated_at > '#{start_date}'") : "").
-		    where(end_date ? ("transactions.updated_at < '#{end_date}'") : "").
+		    where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+		    where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
 		    where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
 		    group("books.id").
 		    order("completed_count desc")

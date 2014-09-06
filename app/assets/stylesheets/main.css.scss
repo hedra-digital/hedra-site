@@ -778,32 +778,6 @@ article .list-price {
   }
 }
 
-.modal {
-  position: fixed;
-  top: 10px;
-  bottom: 10px;
-  left: 50%;
-  width: 570px;
-  margin: 0 0 0 -285px;
-  .modal-header {
-    h5 {
-      margin: 0;
-      line-height: 35px;
-    }
-  }
-  .modal-body {
-    height: 88%;
-    max-height: none;
-    overflow-y: visible;
-    text-align: center;
-    img {
-      height: 100%;
-    }
-  }
-  &.fade.in {
-    top: 10px;
-  }
-}
 
 /*
  * Shopping cart
@@ -1279,14 +1253,7 @@ article .list-price {
   }
 }
 
-#cart-form-total {
-  background: white;
-  text-align: right;
-  text-transform: uppercase;
-  span {
-    font-size: 1.35em;
-  }
-}
+
 
 #cart-form-buttons {
   text-align: right;
@@ -1295,9 +1262,7 @@ article .list-price {
   }
 }
 
-.cart-form-button-update {
-  float: left;
-}
+
 
 /*
  * About
@@ -1524,6 +1489,41 @@ html, body {
   text-transform: lowercase;
 }
 
+#payment_cart{
+  z-index: 3;
+  background: transparent;
+  padding-top: 0px;
+  padding-bottom: 5px;
+
+  #cart-form-total {
+    background: white;
+    text-align: right;
+    text-transform: uppercase;
+    span {
+      font-size: 1.35em;
+    }
+  }
+
+  #lock_icon{
+    width: 24px;
+    margin-bottom: 8px;
+  }
+
+  .btn-link, .btn-link:hover{
+    float: left;
+    color: #3b9fc1;
+    font-size: 22px;
+    text-decoration: initial;
+  }
+
+}
+
+
+#payment_user{
+  padding-top: 0px;
+  padding-bottom: 30px;
+  margin-bottom: 12px;
+}
 
 #link_to_payment_card, #link_to_payment_slip, #link_to_payment_paypal{
   cursor: pointer;
@@ -1537,12 +1537,12 @@ html, body {
 
 #payment_card, #payment_slip, #payment_paypal{
   input, select{
-    width: 200px;
+    width: 250px;
     height: 35px;
     margin: 0px 0px 20px 45px;
   }
   input[type=submit]{
-    width: 300px;
+    width: 570px;
     height: 47px;
     margin: 10px 44px;
     text-align: center;
@@ -1597,8 +1597,14 @@ html, body {
 
 #payment-modal{
   &.modal.fade.in{
-    top: 30%;
-    height: 200px;    
+    top: 40%;
+  }
+  i{
+    margin-left: 130px; 
+    vertical-align: middle;
+  }
+  em{
+    margin-left: 45px; 
   }
 }
 
@@ -1617,11 +1623,53 @@ html, body {
     padding: 0px;
     float: left;
     &.sign_up {
-      padding-left: 20px;
-      border-left: 2px solid #fff;
+
     }
   }
 }
+
+#login_form{
+  .row{
+    margin-left: 0px;
+  }
+  input[type=text], input[type=password]{
+    width: 250px;
+    height: 35px;
+  }
+  input[type=checkbox]{
+    margin-bottom: 8px;
+  }
+  input[type=submit]{
+    margin-top: 14px;
+    width: 250px;
+    text-align: center;
+  }
+  a, a:visited{
+    color: #3b9fc1;
+    margin-left: 17px;
+  }
+}
+
+#registration_form{
+  .row{
+    margin-left: 0px;
+  }
+  input[type=text], input[type=password]{
+    width: 250px;
+    height: 35px;
+  }
+  input[type=submit]{
+    width: 250px;
+    text-align: center;
+  }
+  padding-left: 20px;
+  border-left: 2px solid #fff;
+}
+
+.card-container{
+  margin: 0px 0px 0px 45px;  
+}
+
 
 #sign_up_or_sign_in h4 {
   font-size: 0.8em;
@@ -1770,10 +1818,7 @@ input.error, select.error {
   }
 }
 
-#lock_icon{
-  width: 50px;
-  margin-bottom: 10px;
-}
+
 
 
 

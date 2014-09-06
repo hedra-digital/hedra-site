@@ -11,8 +11,8 @@ ActiveAdmin.register Transaction do
     column :order
     column :completed
     column :status
-    column :paypal_payer_id
-    column :paypal_fee_amount
+    column :payment_method
+    column :created_at
     default_actions                   
   end                                 
 end

@@ -1,38 +1,34 @@
 <div class='first_step checkout_step'>
   <div id='sign_up_or_sign_in'>
+  	<h1>Primeiro passo: registro</h1>
     <div class='errors'></div>
     <div class='sign_up_or_sign_in_wrapper'>
 
-      <%= simple_form_for(:user, :html => {:class => 'login'}, :url => new_user_session_path, :remote => true) do |f| %>
-			  <h4> <%= t('checkout.already_has_account') %> </h4>
-			  <fieldset>
-			    <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
-			    <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
-			    <div class='field'>
-			      <label>
-			        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-			        <%= t(:remember_me) %>
-			        <%= link_to t('recover_password.label'), new_password_path(:user), :class => 'recover_password' %>
-			      </label>
-			    </div>
-			    <%= f.submit t('login') %>
-			  </fieldset>
-			<% end %>
+			<%= form_tag({controller: :sessions, action: :create}, {remote: true, id: "login_form"}) do%>
+   		  <h4>Se você já tem uma conta, faça o login.</h4>
+   		  <div class="row"><input type="text" name="user[email]" placeholder="E-mail" /></div>
+   		  <div class="row"><input type="password" name="user[password]" placeholder="Senha" /></div>
+   		  <div class="row">
+          <label>
+            <input id="remember_me" name="remember_me" type="checkbox" value="1" />  Mantenha-me conectado
+          </label>
+   		  </div>
+   		  <div class="row"><a href="/users/password/new">Esqueceu sua senha?</a></div>
+   		  <div class="row"><input class="btn" name="commit" type="submit" value="Acessar"></div>
+   		<% end %>
 
-      <%= simple_form_for(:user, :html => {:class => 'sign_up'}, :url => user_registration_path, :remote => true) do |f| %>
-			  <h4> <%= t('checkout.sign_up') %> </h4>
-			  <fieldset>
-			    <div class='field_in_same_line'>
-			      <%= f.input :email, :label => t('activerecord.attributes.user.email'), :input_html => {:class => 'login_email'} %>
-			      <%= f.input :name, :label => t('activerecord.attributes.user.name'), :disabled => false %>
-			    </div>
-			    <div class='field_in_same_line'>
-			      <%= f.input :password, :label => t('activerecord.attributes.user.password') %>
-			      <%= f.input :password_confirmation, :label => t('activerecord.attributes.user.password_confirmation') %>
-			    </div>
-			    <%= f.submit t('sign_up') %>
-			  </fieldset>
-			<% end %>
+      <%= form_tag({controller: :registrations, action: :create}, {remote: true, id: "registration_form"}) do %>
+        <h4> Ainda não tem conta na Hedra? Cadastre-se. </h4>
+        <div class="row">
+          <input name="user[email]" type="text" placeholder="E-mail"/>
+          <input name="user[name]" type="text" placeholder="Nome"/>
+        </div>
+        <div class="row">
+        	<input name="user[password]" type="password" placeholder="Senha" />
+        	<input name="user[password_confirmation]" type="password" placeholder="Confirme a sua senha" />
+        </div>
+        <div class="row"><input name="commit" type="submit" value="Cadastrar-se" class="btn" /></div>
+      <% end %>
 
     </div>
   </div>

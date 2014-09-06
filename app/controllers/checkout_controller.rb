@@ -85,7 +85,7 @@ class CheckoutController < ApplicationController
   end
 
   def update_transaction(request, purchase, transaction_id)
-    transaction = self.where(:id => transaction_id).last
+    transaction = Transaction.where(:id => transaction_id).last
     if transaction.status == Transaction::CREATED
       transaction.update_attributes(
         :customer_ip => request.ip,

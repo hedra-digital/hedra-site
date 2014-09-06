@@ -20,7 +20,7 @@ class PaymentController < ApplicationController
     iugu_charge = Iugu::Charge.create({ token: params[:token], email: current_user.email, items: @order.order_items_to_iugu } )
 
     @transaction = @order.transactions.last
-    @transaction.customer_ip = request.ip,
+    @transaction.customer_ip = request.remote_ip,
     @transaction.payment_status = Transaction::PENDING
     @transaction.invoice_id = iugu_charge.invoice_id
     @transaction.save
@@ -65,7 +65,7 @@ class PaymentController < ApplicationController
     })
 
     @transaction = @order.transactions.last
-    @transaction.customer_ip = request.ip,
+    @transaction.customer_ip = request.remote_ip,
     @transaction.invoice_id = iugu_charge.invoice_id
     @transaction.payment_status = Transaction::PENDING
     @transaction.save
