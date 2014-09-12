@@ -45,6 +45,10 @@ HedraSite::Application.routes.draw do
   match "/address/create" => "addresses#create", :as => :create_address
   match "/address/get_address" => 'addresses#get_address', :as => :get_address
   match "/address/get_chosen_address_id" => 'addresses#get_chosen_address_id', :as => :get_chosen_address_id
+  
+  get "post_tracking/:id" => "post_tracking#index"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

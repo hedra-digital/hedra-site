@@ -1,6 +1,34 @@
-# -*- encoding : utf-8 -*-
 ActiveAdmin.register Order do
   menu :parent => "eCommerce"
+
+  index do                            
+    column :id
+    column "User" do |o|
+      o.user.email
+    end
+    column "Amount" do |o|
+      number_to_currency o.total
+    end
+    column "Payment method" do |o|
+      o.transactions.last.payment_method
+    end
+    column "Payment status" do |o|
+      o.transactions.last.show_status
+    end
+    column :post_tracking_code
+    column "Created at" do |o|
+      o.created_at
+    end
+    default_actions                   
+  end 
+
+  form do |f|
+    f.inputs do
+      f.input :post_tracking_code
+    end
+    f.buttons
+  end
+
 
   show do
     panel "Itens" do

@@ -1,9 +1,11 @@
 class Order < ActiveRecord::Base
-  attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id
+  attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id, :post_tracking_code
   belongs_to :user
   has_many :transactions
   has_many :order_items
   belongs_to :address
+
+  after_save :send_post_tracking_mail
 
   def name
     "##{self.id}"
@@ -26,7 +28,8 @@ class Order < ActiveRecord::Base
     end
     items
   end
-
+  
+  # do not use this method
   def state_to_s
     case self.state
     when Transaction::CREATED
@@ -35,6 +38,12 @@ class Order < ActiveRecord::Base
       "pagamento realizado"
     when Transaction::FAILED
       "falha no pagamento"
+    end
+  end
+
+  def send_post_tracking_mail
+    if self.post_tracking_code_changed? and !self.post_tracking_code.blank?
+      Notifier.order_post_tracking(self).deliver
     end
   end
 end

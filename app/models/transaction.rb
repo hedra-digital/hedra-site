@@ -25,6 +25,19 @@ class Transaction < ActiveRecord::Base
   scope :failed, where("status = ?", Transaction::FAILED)
   scope :created, where("status = ?", Transaction::CREATED)
 
+  def show_status
+    case self.status
+      when Transaction::CREATED
+        "CREATED"
+      when Transaction::COMPLETED
+        "COMPLETED"
+      when Transaction::FAILED
+        "FAILED"
+      else
+        ""
+      end
+  end
+
   private
 
   def send_notification

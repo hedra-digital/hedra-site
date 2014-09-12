@@ -1,0 +1,24 @@
+<div id="post_tracking">
+	<div class='container'>
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th>Data</th>
+		      <th>Local</th>
+		      <th>Situação</th>
+		      <th>Detalhes</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @locations.each do |l|%>
+		    <tr>
+		      <td><%= l["data"]%></td>
+		      <td><%= l["local"]%></td>
+		      <td><%= l["acao"]%></td>
+		      <td><%= l["detalhes"]%></td>
+		    </tr>
+	      <% end %>
+		  </tbody>
+		</table>
+	</div>
+</div>
