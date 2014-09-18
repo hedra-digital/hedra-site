@@ -19,8 +19,10 @@ class PaymentController < ApplicationController
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     iugu_charge = Iugu::Charge.create({ token: params[:token], email: current_user.email, items: @order.order_items_to_iugu } )
 
+    logger.info(iugu_charge.attributes)
+  
     @transaction = @order.transactions.last
-    @transaction.customer_ip = request.remote_ip,
+    @transaction.customer_ip = request.remote_ip
     @transaction.payment_status = Transaction::PENDING
     @transaction.invoice_id = iugu_charge.invoice_id
     @transaction.save
@@ -65,14 +67,14 @@ class PaymentController < ApplicationController
     })
 
     @transaction = @order.transactions.last
-    @transaction.customer_ip = request.remote_ip,
+    @transaction.customer_ip = request.remote_ip
     @transaction.invoice_id = iugu_charge.invoice_id
     @transaction.payment_status = Transaction::PENDING
     @transaction.save
 
     if iugu_charge.success
       session[:carrinho] = nil
-      @bank_slip_pdf = iugu_charge.pdf
+      @bank_slip_url = iugu_charge.url
       render :template => "checkout/review"
       return
     else
