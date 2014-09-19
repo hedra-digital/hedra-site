@@ -6,6 +6,9 @@ ActiveAdmin.register Order do
     column "User" do |o|
       o.user.email
     end
+    column "Name" do |o|
+      o.user.name
+    end
     column "Amount" do |o|
       number_to_currency o.total
     end
@@ -21,6 +24,12 @@ ActiveAdmin.register Order do
     end
     default_actions                   
   end 
+ 
+  filter :id
+  filter :user_email, :as => :string
+  filter :user_name, :as => :string
+  filter :address_zip_code, :as => :string, :label => "CEP"
+  filter :post_tracking_code
 
   form do |f|
     f.inputs do
