@@ -33,26 +33,38 @@ Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
 $(document).on("submit", "#payment_card form", function(){
 
   var messages_array =  check_user_logined().concat(validate_form_payment_card()).concat(validate_form_payment($("#payment_card form [myrequired]")))
-  var messages_string = ""
-  
-  $.each(messages_array, function(i, m){
-    messages_string += "<li>"+ m +"</li>"
-  })
 
-  if(messages_array.length > 0){
-    $("#payment_card .alert > ul").html(messages_string)
-    $("#payment_card .alert").show()
-    return false
-  }else{
-    $("#payment_card .alert").hide()
-    $('#payment_card form input[type="submit"]').attr('disabled','disabled')
-    $("#payment-modal").modal({backdrop: true, show: true})
+  var show_errors = function(messages_array){
+    var messages_string = ""
+    
+    $.each(messages_array, function(i, m){
+      messages_string += "<li>"+ m +"</li>"
+    })
+
+    if(messages_array.length > 0){
+      $("#payment_card .alert > ul").html(messages_string)
+      $("#payment_card .alert").show()
+      $('#payment_card form input[type="submit"]').removeAttr('disabled')
+      $("#payment-modal").modal('hide')
+      return false
+    }else{
+      $("#payment_card .alert").hide()
+      $('#payment_card form input[type="submit"]').attr('disabled','disabled')
+      $("#payment-modal").modal({backdrop: true, show: true})
+      return true
+    }
   }
+
+  if(!show_errors(messages_array)){return false} 
 
   var form = $(this);
   var tokenResponseHandler = function(data) {
-    $("#token").val( data.id )
-    form.get(0).submit();
+    if(data.errors != undefined && data.errors.timeout != undefined){
+      if(!show_errors(["tempo limite da rede, por favor, tente novamente mais tarde"])){return false} 
+    }else{
+      $("#token").val(data.id)
+      form.get(0).submit();
+    }
   }
   
   Iugu.createPaymentToken(this, tokenResponseHandler);
