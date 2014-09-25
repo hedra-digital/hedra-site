@@ -17,7 +17,9 @@ class PaymentController < ApplicationController
     @order = create_order(current_user, params[:address], session[:carrinho], Transaction::CREDIT_CARD)
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
-    iugu_charge = Iugu::Charge.create({ token: params[:token], email: current_user.email, items: @order.order_items_to_iugu } )
+    payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
+    payment_params[:months] = params[:months] unless params[:months].blank?
+    iugu_charge = Iugu::Charge.create(payment_params)
 
     logger.info(iugu_charge.attributes)
   

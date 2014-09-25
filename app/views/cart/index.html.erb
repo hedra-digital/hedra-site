@@ -92,6 +92,10 @@
         <div class="span4"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
         <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
       </div>
+
+      <div class="row">
+        <div class="span4"><%= select_tag("months", options_for_select(options_for_installment(@cart_price)), prompt: "Selecione Parcela (Opção)")%></div>
+      </div>
         
       <input type="hidden" name="token" id="token"/>
 

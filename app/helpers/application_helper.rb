@@ -96,4 +96,25 @@ module ApplicationHelper
     Post.joins(:book).where("books.publisher_id = #{session[:publisher]}").count
   end
 
+  def options_for_installment(total)
+    options = [
+      ["2 x #{number_to_currency(total/2)} = #{number_to_currency(total)}  (parcela livre)", 2],
+      ["3 x #{number_to_currency(total/3)} = #{number_to_currency(total)}  (parcela livre)", 3]
+    ]
+
+    (4..12).each do |i|
+      t = total_after_installment(total,i)
+      options << ["#{i} x #{number_to_currency(t/i)} = #{number_to_currency(t)} (incluídos Taxa de parcelamento #{number_to_currency(t - total)})", i]
+    end
+
+    options
+  end
+
+  private
+
+  def total_after_installment(total, installment)
+    installment_fee = {4 => 0.05, 5 => 0.06, 6 => 0.08, 7 => 0.09, 8 => 0.1, 9 => 0.11, 10 => 0.13, 11 => 0.14, 12 => 0.15}
+    total * (1 - 0.07) / (1 - 0.07 - installment_fee[installment])
+  end
+
 end
