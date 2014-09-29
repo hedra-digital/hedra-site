@@ -1541,6 +1541,9 @@ html, body {
     height: 35px;
     margin: 0px 0px 20px 45px;
   }
+  select[name=months]{
+    width: 570px;
+  }
   input[type=submit]{
     width: 570px;
     height: 47px;

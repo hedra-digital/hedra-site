@@ -98,13 +98,14 @@ module ApplicationHelper
 
   def options_for_installment(total)
     options = [
-      ["2 x #{number_to_currency(total/2)} = #{number_to_currency(total)}  (parcela livre)", 2],
-      ["3 x #{number_to_currency(total/3)} = #{number_to_currency(total)}  (parcela livre)", 3]
+      ["1 x #{number_to_currency(total/1)} = #{number_to_currency(total)}  (Sem juros)", 1],
+      ["2 x #{number_to_currency(total/2)} = #{number_to_currency(total)}  (Sem juros)", 2],
+      ["3 x #{number_to_currency(total/3)} = #{number_to_currency(total)}  (Sem juros)", 3]
     ]
 
     (4..12).each do |i|
       t = total_after_installment(total,i)
-      options << ["#{i} x #{number_to_currency(t/i)} = #{number_to_currency(t)} (incluídos Taxa de parcelamento #{number_to_currency(t - total)})", i]
+      options << ["#{i} x #{number_to_currency(t/i)} = #{number_to_currency(t)} (Taxa de parcelamento #{number_to_currency(t - total)})", i]
     end
 
     options

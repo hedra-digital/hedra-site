@@ -94,7 +94,7 @@
       </div>
 
       <div class="row">
-        <div class="span4"><%= select_tag("months", options_for_select(options_for_installment(@cart_price)), prompt: "Selecione Parcela (Opção)")%></div>
+        <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(@cart_price)), prompt: "Parcelamento")%></div>
       </div>
         
       <input type="hidden" name="token" id="token"/>
