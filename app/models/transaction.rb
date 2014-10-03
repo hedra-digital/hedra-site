@@ -41,7 +41,7 @@ class Transaction < ActiveRecord::Base
   private
 
   def send_notification
-    if self.status_changed? and self.status == Transaction::COMPLETED #and Rails.env.production?
+    if self.status_changed? and self.status == Transaction::COMPLETED and Rails.env.production?
       Thread.new do
         Notifier.mail_to_trello(self.order).deliver
         ActiveRecord::Base.connection.close
