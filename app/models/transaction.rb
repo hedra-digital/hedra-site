@@ -41,6 +41,14 @@ class Transaction < ActiveRecord::Base
   private
 
   def send_notification
+    if self.status_changed? and self.status == Transaction::COMPLETED #and Rails.env.production?
+      Thread.new do
+        Notifier.mail_to_trello(self.order).deliver
+        ActiveRecord::Base.connection.close
+      end
+    end
+    
+
     if self.status_changed?
       Thread.new do
         Hedra::Notificator.new(self.id).send

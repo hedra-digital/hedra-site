@@ -1,0 +1,24 @@
+Order 
+-------------
+https://hedra.com.br/admin/orders/<%= @order.id%> ,Paid at **<%= @order.transactions.last.updated_at.strftime("%Y-%m-%d")%>**
+
+
+User 
+-------------
+<%= @order.user.name %> , <%= @order.user.email%>  https://hedra.com.br/admin/users/<%= @order.user.id%> 
+
+
+Address
+-------------
+<%= @order.address.address%>, <%= @order.address.number%>, <%= @order.address.city%>, <%= @order.address.state%>, <%= @order.address.zip_code%>
+
+
+Items
+-------------
+<% @order.order_items.each do |item|%>
+- **<%= item.book.title%>** , <%= number_to_currency item.price%> , X<%= item.quantity %>, <%= number_to_currency item.price * item.quantity%> .    
+<% end%>
+
+**Total <%= number_to_currency(@order.total)%>**
+**<%= @order.order_items.count%> Books**
+
