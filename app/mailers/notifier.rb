@@ -8,7 +8,8 @@ class Notifier < ActionMailer::Base
 
   def mail_to_trello(order)
   	@order = order
-    mail(to: APP_CONFIG["trello_mail"], subject: "Due at #{(@order.transactions.last.updated_at + 10.days).strftime("%Y-%m-%d")}, #{@order.id}, #{@order.user.email}")
+    mail(to: APP_CONFIG["trello_mail"], subject: "Due at #{(@order.transactions.last.updated_at + APP_CONFIG["trello_mail_add_date"].days).strftime("%Y-%m-%d")}, #{@order.id}, #{@order.user.email}")
   end
 end
+
 
