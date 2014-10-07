@@ -9,7 +9,7 @@ set :default_stage, "staging"
 set :application, "Hedra Site"
 
 set :scm, :git
-set :repository,  "git@bitbucket.org:myvizir/hedra-site.git"
+set :repository,  "git@github.com:hedra-digital/hedra-site.git"
 set :deploy_via, 'copy'
 set :user, 'deploy'
 
