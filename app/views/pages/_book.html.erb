@@ -24,11 +24,11 @@
           </ul>
         </div>
       <% else %>
-        <div class="list-price">
+        <div class="list-price2">
           <ul class="buy">
             <li>
               <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
-              <span class="type">Livro</span>
+              <span class="type">Compre</span>
               <span class="price"><%= number_to_currency(show_price(book))%></span>
               <% end %>
             </li>
