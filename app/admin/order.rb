@@ -1,8 +1,24 @@
 ActiveAdmin.register Order do
   menu :parent => "eCommerce"
 
-  index do                            
-    column :id
+  actions :all, :except => [:destroy]
+
+  scope :completed, :default => true do |order|
+    order.joins(:transactions).where("transactions.status = ?", Transaction::COMPLETED).reorder("transactions.updated_at desc")
+  end
+
+  scope :created do |order|
+    order.joins(:transactions).where("transactions.status = ?", Transaction::CREATED).reorder("transactions.updated_at desc")
+  end
+
+  scope :failed do |order|
+    order.joins(:transactions).where("transactions.status = ?", Transaction::FAILED).reorder("transactions.updated_at desc")
+  end
+
+
+  index do   
+    selectable_column                        
+    column :id, :sortable => false
     column "User" do |o|
       o.user.email
     end
@@ -15,15 +31,74 @@ ActiveAdmin.register Order do
     column "Payment method" do |o|
       o.transactions.last.payment_method
     end
-    column "Payment status" do |o|
-      o.transactions.last.show_status
-    end
-    column :post_tracking_code
+    column :post_tracking_code, :sortable => false
     column "Created at" do |o|
       o.created_at
     end
+    column "Paid at" do |o|
+      o.transactions.last.updated_at if o.transactions.last.status == Transaction::COMPLETED
+    end
     default_actions                   
   end 
+
+  batch_action :labels , if: proc { @current_scope.id == "completed" } do |selection|
+    folder_name = SecureRandom.uuid
+    Dir.mkdir "tmp/#{folder_name}"
+    books_txt = File.open(Rails.root.join("tmp", folder_name, "books.txt"), "w+")
+    uniq_books_txt = File.open(Rails.root.join("tmp", folder_name, "uniq_books.txt"), "w+")
+
+    # books_txt
+    Order.find(selection).each do |order|
+      books_txt.puts("")
+      books_txt.puts("")
+      books_txt.puts("#{order.user.name} [#{order.id}]")
+      books_txt.puts("")
+      books_txt.puts("#{order.address.address}, #{order.address.number}, #{order.address.city}")
+      books_txt.puts("#{order.address.state}, #{order.address.zip_code}")
+      books_txt.puts("")
+
+      order.order_items.each do |item|
+        books_txt.puts("[#{item.quantity}X]  #{item.book.title}")
+      end
+
+      books_txt.puts("")
+      books_txt.puts("")
+      books_txt.puts("------------------------------------------------------------------")
+    end
+    books_txt.close
+
+    # uniq_books_txt
+    books = Book.select("books.id, books.title, count(books.id) as sold_count").
+      joins(:order_items => [:order]).
+      where("orders.id in (?)", selection).
+      group("books.id").
+      order("books.title")
+
+    uniq_books_txt.puts("")
+    uniq_books_txt.puts("")
+    uniq_books_txt.puts("")
+
+    books.each do |b|
+      uniq_books_txt.puts("[#{b.sold_count}X] #{b.title}")
+      uniq_books_txt.puts("")
+    end
+
+    uniq_books_txt.close
+
+
+    # send zip file
+    folder = Rails.root.join("tmp", folder_name).to_s
+    zipfile_name = Rails.root.join("tmp", folder_name, "books.zip")
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      ["books.txt", "uniq_books.txt"].each do |filename|
+        zipfile.add(filename, folder + '/' + filename)
+      end
+    end
+
+    send_data(File.read(zipfile_name), :type => 'application/zip', :filename => "books.zip")
+  end
+
  
   filter :id
   filter :user_email, :as => :string

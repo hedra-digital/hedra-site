@@ -35,6 +35,7 @@ gem 'exception_notification'
 gem "awesome_print"
 gem 'iugu'
 gem "font-awesome-rails", "3.2.1.3"
+gem "rubyzip"
 
 # Gems used only for assets and not required
 # in production environments by default.
