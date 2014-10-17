@@ -59,8 +59,21 @@ $(document).on("submit", "#payment_card form", function(){
 
   var form = $(this);
   var tokenResponseHandler = function(data) {
-    if(data.errors != undefined && data.errors.timeout != undefined){
-      if(!show_errors(["tempo limite da rede, por favor, tente novamente mais tarde"])){return false} 
+
+    if(data.errors != undefined){
+      if(data.errors.timeout != undefined){
+        return show_errors(["Tempo limite da rede, por favor, tente novamente mais tarde."])
+
+      }else if(data.errors.first_name != undefined){
+        return show_errors(["Primeiro nome é inválido."])
+
+      }else if(data.errors.last_name != undefined){
+        return show_errors(["Sobrenome é inválido."])
+
+      }else{
+        return show_errors(["Por favor, verifique suas informações de cartão de crédito."])
+      }
+
     }else{
       $("#token").val(data.id)
       form.get(0).submit();

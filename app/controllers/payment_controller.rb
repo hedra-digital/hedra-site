@@ -14,6 +14,12 @@ class PaymentController < ApplicationController
       return
     end
 
+    if params[:token].blank?
+      redirect_to cart_url, :alert => "Por favor, verifique suas informações de cartão de crédito."
+      return
+    end
+
+
     @order = create_order(current_user, params[:address], session[:carrinho], Transaction::CREDIT_CARD)
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
