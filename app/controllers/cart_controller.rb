@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 class CartController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TextHelper
@@ -7,6 +5,10 @@ class CartController < ApplicationController
   before_filter :resource, :only => [:create, :destroy]
 
   def index
+    if session[:carrinho].blank?
+      redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
+      return
+    end
   end
 
   def create

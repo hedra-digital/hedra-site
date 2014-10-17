@@ -7,6 +7,11 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
+    if session[:carrinho].blank?
+      redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
+      return
+    end
+
     if !current_user
       redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
       return
