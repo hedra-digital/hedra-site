@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def tag
-    @tag   = Tag.where(:slug => params[:id]).first || not_found
+    @tag   = Tag.where("name = ? or slug = ?", params[:id], params[:id]).first || not_found
     @page  = @tag.page
     @entity = @tag
 
