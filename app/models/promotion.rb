@@ -24,13 +24,12 @@ class Promotion < ActiveRecord::Base
   end
 
   def validate_book_tag_category
-    nil_count = 0
+    fill_count = 0
     [self.book, self.tag, self.category].each do |attr|
-      nil_count += 1 unless attr
+      fill_count += 1 if attr
     end
 
-    self.errors.add(:book, "Book, tag and category can not be blank at the same time") if nil_count == 3
-    self.errors.add(:book, "Book, tag and category can not be set at the same time") if nil_count == 0 or nil_count == 1
+    self.errors.add(:book, "Book, tag and category can not be set at the same time") if fill_count == 3 or fill_count == 2
   end
 
   def started_at_ended_at
