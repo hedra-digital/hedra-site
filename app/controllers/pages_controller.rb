@@ -26,7 +26,9 @@ class PagesController < ApplicationController
   end
 
   def authors
-    @authors = Person.all.group_by{|p| p.name[0].upcase }.sort_by{|k, v| k}
+    @authors = Person.all.sort_by{|p| SortAlphabetical.normalize(p.name.gsub("[","")).upcase }
+
+    @authors = @authors.group_by{|p| SortAlphabetical.normalize(p.name.gsub("[","")[0]).upcase} 
   end
 
   def author
