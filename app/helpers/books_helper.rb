@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 module BooksHelper
 
   def book_team(book)
@@ -52,6 +50,9 @@ module BooksHelper
 
   # only one interface
   def find_promotion(book)
+    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.publisher_id, Time.now).order("created_at").last
+    return site_promotion if site_promotion
+
     return find_private_promotion(book) if find_private_promotion(book)
     return find_public_promotion(book) if find_public_promotion(book)
   end
@@ -84,7 +85,7 @@ module BooksHelper
     nil
   end
 
-  # promotion priority: book > tag > category > site
+  # promotion priority: book > tag > category
   def find_public_promotion(book)
     book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.id, Time.now).order("created_at").last
     return book_promotion if book_promotion
@@ -94,9 +95,6 @@ module BooksHelper
 
     category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.category_id, book.publisher_id, Time.now).order("created_at").last
     return category_promotion if category_promotion
-
-    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.publisher_id, Time.now).order("created_at").last
-    return site_promotion if site_promotion
 
     nil
   end
