@@ -27,9 +27,6 @@ class Book < ActiveRecord::Base
   extend FriendlyId
   friendly_id                         :title, :use => :slugged
 
-  # Callbacks
-  before_save                         :sanitize_description
-
   # Relationships
   has_many                            :participations, :dependent => :destroy
   has_many                            :people, :through => :participations
