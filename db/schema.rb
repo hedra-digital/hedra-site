@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140909103624) do
+ActiveRecord::Schema.define(:version => 20141102074825) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(:version => 20140909103624) do
     t.integer  "category_id"
     t.integer  "publisher_id"
     t.integer  "position",        :default => 5
+    t.string   "ebook"
+    t.float    "packet_discount"
   end
 
   add_index "books", ["binding_type_id"], :name => "index_books_on_binding_type_id"

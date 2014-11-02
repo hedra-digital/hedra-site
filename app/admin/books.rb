@@ -27,8 +27,10 @@ ActiveAdmin.register Book do
         association.input :role
         association.input :person, :collection => Person.order("name ASC").all
       end
+      f.input :ebook, :as => :file, :hint => (( f.object.new_record? || f.object.ebook.file.nil? ) ? f.template.content_tag(:span, "no ebook yet") : f.template.content_tag(:span, f.object.ebook.url))
       f.input :price_print
-      # f.input :price_ebook
+      f.input :price_ebook
+      f.input :packet_discount
       f.input :released_at, :as => :date_select, :include_blank => true, :start_year => 1999, :order => [:year, :month, :day]
       f.input :binding_type
       f.input :position

@@ -48,16 +48,22 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for       :tags, :allow_destroy => true
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids, :publisher_id, :position
+  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids, :publisher_id, :position, :ebook, :packet_discount
 
   # Validations
   validates_presence_of               :title, :isbn, :pages
   validates_uniqueness_of             :slug
   validates                           :publisher, :presence => true
   validates                           :position, numericality: { only_integer: true }
+  validates_presence_of               :ebook, :if => :price_ebook
+  validates_presence_of               :price_print, :if => :packet_discount
+  validates_presence_of               :price_ebook, :if => :packet_discount
+  validates                           :packet_discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "packet_discount"
+
 
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
+  mount_uploader                      :ebook, EbookUploader
 
   # Search
   define_index do

@@ -32,6 +32,7 @@
 /.bundle
 /Gemfile.local
 /public/uploads/
+/private
 
 .DS_Store
 zeus.json

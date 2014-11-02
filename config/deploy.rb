@@ -50,6 +50,7 @@ namespace :deploy do
   desc "Symlinks the uploads directory"
   task :symlink_uploads, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/public/uploads #{release_path}/public/uploads"
+    run "ln -nfs #{deploy_to}/shared/private #{release_path}/private"
   end
 
   task :copy_old_sitemap do
