@@ -72,20 +72,12 @@ module ApplicationHelper
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ') rescue ""
   end
 
-  def book_in_cart_for(book)
+  def book_in_cart_for(book, book_type)
     tags = ""
     tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
-    tags << content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
+    tags << content_tag(:div, content_tag(:p, book_title_include_type(book, book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
     tags << content_tag(:div, number_to_currency(show_price(book)), :class => 'cart-book-price')
     tags.html_safe
-  end
-
-  def cart_image
-    cart_empty? ? image_tag('cart.png') : link_to(image_tag('cart_full.png'), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
-  end
-
-  def cart_empty?
-    @cart_items.nil? || @cart_items.empty?
   end
 
   def cart_total

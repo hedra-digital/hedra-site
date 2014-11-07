@@ -36,13 +36,19 @@
 
       <div class="navadd">
         <div class="cart">
-          <%= cart_image %>
-          <% if @cart_items.present? %>
-            <%= content_tag :span, @cart_items.size, :class => 'cart-count' %>
+    
+          <%= if session[:cart].size > 0 
+                link_to(image_tag('cart_full.png'), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown') 
+              else
+                image_tag('cart.png') 
+              end 
+          %>
+          <% if session[:cart].size > 0 %>
+            <%= content_tag :span, session[:cart].size, :class => 'cart-count' %>
             <div class="dropdown-menu">
                 <ul>
-                  <% @cart_items.each do |book, quantity| %>
-                    <li><%= book_in_cart_for(book) %></li>
+                  <% session[:cart].each do |item| %>
+                    <li><%= book_in_cart_for(Book.find(item[:book_id]), item[:book_type]) %></li>
                   <% end %>
                 </ul>
               <%= link_to 'Ver carrinho', cart_path, :class => 'btn btn-primary' %>
