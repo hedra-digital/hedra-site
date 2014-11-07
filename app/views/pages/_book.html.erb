@@ -26,12 +26,30 @@
       <% else %>
         <div class="list-price2">
           <ul class="buy">
+            <% if book.price_print%>
             <li>
-              <%= link_to add_to_cart_path(book), :method => :post, :class => 'btn btn-primary' do%>
-              <span class="type">Compre</span>
-              <span class="price"><%= number_to_currency(show_price(book))%></span>
+              <%= link_to add_to_cart_path(book, book_type: :print), :method => :post, :class => 'btn btn-primary' do%>
+              <span class="type">livro</span>
+              <span class="price"><%= number_to_currency(show_price(book, :print))%></span>
               <% end %>
             </li>
+            <% end %>
+            <% if book.price_ebook%>
+            <li>
+              <%= link_to add_to_cart_path(book, book_type: :ebook), :method => :post, :class => 'btn btn-primary' do%>
+              <span class="type">ebook</span>
+              <span class="price"><%= number_to_currency(show_price(book, :ebook))%></span>
+              <% end %>
+            </li>
+            <% end %>
+            <% if book.packet_discount%>
+            <li>
+              <%= link_to add_to_cart_path(book, book_type: :packet), :method => :post, :class => 'btn btn-primary' do%>
+              <span class="type">ebook+livro</span>
+              <span class="price"><%= number_to_currency(show_price(book, :packet))%></span>
+              <% end %>
+            </li>
+            <% end %>
           </ul>
         </div>
       <% end %>

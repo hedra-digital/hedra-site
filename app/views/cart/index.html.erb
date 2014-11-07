@@ -4,7 +4,7 @@
   <div class="container">
     <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
 
-    <% if @cart_items.present? %>
+    <% if session[:cart].size > 0 %>
       <%= simple_form_for(:cart, :url => update_cart_path, :method => :put) do |f| %>
 
         <table class="cart-page-table table">
@@ -19,30 +19,44 @@
           </thead>
 
           <tbody>
-            <% @cart_items.each do |book, quantity| %>
+            <% session[:cart].each do |item| %>
+            <% 
+              book = Book.find(item[:book_id])
+              book_type = item[:book_type]
+              quantity = item[:quantity] 
+
+              book_title = case book_type
+              when :print
+                book.title
+              when :ebook
+                "(EBOOK) #{book.title}"
+              when :packet
+                "(EBOOK+LIVRO) #{book.title}" 
+              end
+            %>
               <tr>
                 <td>
                   <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
-                  <%= content_tag(:div, content_tag(:p, book.title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
+                  <%= content_tag(:div, content_tag(:p, book_title, :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
                 </td>
                 <td class="cart-page-book-quantity">
-                  <%= f.input "quantity_#{book.id}", :label => false, :input_html => { :value => "#{quantity}" } %>
+                  <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}" } %>
                 </td>
                 <td class="cart-page-book-weight">
-                  <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight %>
+                  <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight and book_type != :ebook %>
                 </td>
                 <td class="cart-page-book-price">
-                  <%= number_to_currency(show_price(book).*(quantity)) %>
+                  <%= number_to_currency(show_price(book, book_type).*(quantity)) %>
                 </td>
                 <td class="cart-page-remove-item">
-                  <%= link_to("x", remove_from_cart_path(book.id), :method => :post) %>
+                  <%= link_to("x", remove_from_cart_path(book.id, book_type: book_type), :method => :post) %>
                 </td>
               </tr>
             <% end %>
             <tr>
               <td id="cart-form-total" colspan="5">
                 <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
-                Total <span><%= number_to_currency(@cart_price) %></span>
+                Total <span><%= number_to_currency(cart_total) %></span>
               </td>
             </tr>
           </tbody>
@@ -94,7 +108,7 @@
       </div>
 
       <div class="row">
-        <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(@cart_price)), prompt: "Parcelamento")%></div>
+        <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
       </div>
         
       <input type="hidden" name="token" id="token"/>

@@ -64,7 +64,7 @@ class Book < ActiveRecord::Base
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
   mount_uploader                      :ebook, EbookUploader
-
+  
   # Search
   define_index do
     indexes title
@@ -73,6 +73,11 @@ class Book < ActiveRecord::Base
     indexes people(:name), :as => :people
   end
 
+
+  EBOOK = "ebook"
+  PRINT = "print"
+  PACKET = "packet"
+  
 
   def dimensions
     "#{self.width} &times; #{self.height} cm".html_safe if self.width.present? && self.height.present?

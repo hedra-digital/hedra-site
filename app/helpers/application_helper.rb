@@ -88,6 +88,14 @@ module ApplicationHelper
     @cart_items.nil? || @cart_items.empty?
   end
 
+  def cart_total
+    return 0 if session[:cart] == nil
+    total = 0
+
+    session[:cart].each{ |h| total += h[:quantity] * show_price(Book.find(h[:book_id]), h[:book_type]) }
+    total
+  end
+
   def publisher_name
     Publisher.find(session[:publisher]).name
   end

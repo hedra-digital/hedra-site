@@ -33,14 +33,15 @@ module BooksHelper
   end
 
   # only one interface
-  def show_price(book)
-    promotion = find_promotion(book)
-
-    return book.price_print if promotion.nil?
-
-    return promotion.price if promotion.price
-
-    return (1 - promotion.discount) * book.price_print
+  def show_price(book, book_type = :print)
+    case book_type
+    when :print
+      return book_print_price(book)
+    when :ebook
+      return book.price_ebook
+    when :packet
+      return (1 - book.packet_discount) * (book_print_price(book) + book.price_ebook)
+    end
   end
 
   def show_discount(promotion, book)
@@ -99,9 +100,21 @@ module BooksHelper
     nil
   end
 
-
   def stats_item(title, data)
     render :partial => 'stats_item', :locals => { :title => title, :data => data }
   end
+
+  private
+
+  def book_print_price(book)
+    promotion = find_promotion(book)
+
+    return book.price_print if promotion.nil?
+
+    return promotion.price if promotion.price
+
+    return (1 - promotion.discount) * book.price_print
+  end
+
 
 end

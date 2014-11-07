@@ -27,7 +27,7 @@ HedraSite::Application.routes.draw do
   get  "/tag/:id"                => "pages#tag", :as => :tag_page
   get  "/carrinho"               => "cart#index", :as => :cart
   post "/carrinho/:id"           => "cart#create", :as => :add_to_cart
-  post "/carrinho/:id/remover"   => "cart#destroy", :as => :remove_from_cart
+  post "/carrinho/remove/:id"   => "cart#destroy", :as => :remove_from_cart
   put  "/carrinho/atualizar"     => "cart#update", :as => :update_cart
   get  "/blog"                   => "blog#index", :as => :blog
   get  "/blog/:id"               => "blog#show", :as => :blog_post
