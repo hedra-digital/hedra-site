@@ -7,7 +7,7 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
-    if session[:carrinho].blank?
+    if session[:cart].blank?
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:carrinho], Transaction::PAYPAL)
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL)
     if !@order.nil?
       session[:transaction_id] = @order.transactions.last.id
       session[:items] = @order.order_items_to_paypal
@@ -35,7 +35,7 @@ class CheckoutController < ApplicationController
       redirect_to cart_url, :notice => "Nos desculpe, ocorreu uma falha ao completar o pagamento pelo PayPal, por favor realize novamente a sua compra."
       return
     end
-    session[:carrinho] = nil
+    session[:cart] = []
     total_as_cents, purchase_params = get_purchase_params Order.find(session[:order_id]), request, session[:items], params
     @purchase = @gateway.purchase total_as_cents, purchase_params
     @transaction = update_transaction(request, @purchase, session[:transaction_id])

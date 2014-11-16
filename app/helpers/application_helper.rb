@@ -75,8 +75,8 @@ module ApplicationHelper
   def book_in_cart_for(book, book_type)
     tags = ""
     tags << content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover')
-    tags << content_tag(:div, content_tag(:p, book_title_include_type(book, book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
-    tags << content_tag(:div, number_to_currency(show_price(book)), :class => 'cart-book-price')
+    tags << content_tag(:div, content_tag(:p, book.long_title(book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data')
+    tags << content_tag(:div, number_to_currency(show_price(book, book_type)), :class => 'cart-book-price')
     tags.html_safe
   end
 

@@ -103,6 +103,17 @@ class Book < ActiveRecord::Base
     self.price_print.present? || self.price_ebook.present?
   end
 
+  def long_title(book_type)
+    case book_type
+    when :print
+      self.title
+    when :ebook
+      "(EBOOK) #{self.title}"
+    when :packet
+      "(EBOOK+LIVRO) #{self.title}" 
+    end
+  end
+
   private
 
   def formatted_list(array)

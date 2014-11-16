@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
     items = []
     self.order_items.each do |item|
       book = item.book
-      items << {name: book.title, number: book.id, amount: (item.price*100).round, quantity: item.quantity}
+      items << {name: book.long_title(item.book_type.to_sym), number: book.id, amount: (item.price*100).round, quantity: item.quantity}
     end
     items
   end
@@ -24,7 +24,7 @@ class Order < ActiveRecord::Base
     items = []
     self.order_items.each do |item|
       book = item.book
-      items << {description: book.title, price_cents: (item.price*100).round, quantity: item.quantity}
+      items << {description: book.long_title(item.book_type.to_sym), price_cents: (item.price*100).round, quantity: item.quantity}
     end
     items
   end

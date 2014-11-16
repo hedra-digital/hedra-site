@@ -10,8 +10,6 @@ class CartController < ApplicationController
   end
 
   def create
-    session[:cart] = [] if session[:cart] == nil
-
     @book = Book.find(params[:id])
     book_type = params[:book_type].to_sym
 

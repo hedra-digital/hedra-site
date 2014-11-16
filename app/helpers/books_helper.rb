@@ -32,19 +32,8 @@ module BooksHelper
     raw(book.description.split('</p>')[0] + '</p>') rescue truncate_html(book.description, :length => 450, :omission => '...')
   end
 
-  def book_title_include_type(book, book_type)
-    case book_type
-    when :print
-      book.title
-    when :ebook
-      "(EBOOK) #{book.title}"
-    when :packet
-      "(EBOOK+LIVRO) #{book.title}" 
-    end
-  end
-
   # only one interface
-  def show_price(book, book_type = :print)
+  def show_price(book, book_type)
     case book_type
     when :print
       return book_print_price(book)

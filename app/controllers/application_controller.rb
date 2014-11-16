@@ -42,7 +42,7 @@ protected
   end
 
   def create_order(user, address_hash, cart, payment_method)
-    return nil if cart.nil?
+    return nil if cart.blank?
 
     address_hash = address_hash.merge({user_id: user.id})
 
@@ -50,11 +50,13 @@ protected
 
     order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio')
     total = 0
-    cart.keys.each do |book_id|
-      book = Book.find(book_id)
-      total += view_context.show_price(book) * cart[book_id]
-      OrderItem.create(order_id: order.id, book_id: book_id, price: view_context.show_price(book), quantity: cart[book_id])
+
+    cart.each do |item|
+      book = Book.find(item[:book_id])
+      total += view_context.show_price(book, item[:book_type]) * item[:quantity]
+      OrderItem.create(order_id: order.id, book_id: item[:book_id], price: view_context.show_price(book, item[:book_type]), quantity: item[:quantity], book_type: item[:book_type])
     end
+
     Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id, :payment_method => payment_method)
     order.update_attributes(:total => total)
     order

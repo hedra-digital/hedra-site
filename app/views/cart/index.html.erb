@@ -28,7 +28,7 @@
               <tr>
                 <td>
                   <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
-                  <%= content_tag(:div, content_tag(:p, book_title_include_type(book, book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
+                  <%= content_tag(:div, content_tag(:p, book.long_title(book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
                 </td>
                 <td class="cart-page-book-quantity">
                   <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}" } %>

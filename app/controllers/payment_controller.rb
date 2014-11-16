@@ -4,7 +4,7 @@ class PaymentController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:callback_9E93257460]
 
   def credit_card
-    if session[:carrinho].blank?
+    if session[:cart].blank?
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
@@ -20,7 +20,7 @@ class PaymentController < ApplicationController
     end
 
 
-    @order = create_order(current_user, params[:address], session[:carrinho], Transaction::CREDIT_CARD)
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD)
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
@@ -36,7 +36,7 @@ class PaymentController < ApplicationController
     @transaction.save
 
     if iugu_charge.invoice.status == Transaction::PAID
-      session[:carrinho] = nil
+      session[:cart] = []
       render :template => "checkout/review"
       return
     else
@@ -48,7 +48,7 @@ class PaymentController < ApplicationController
 
 
   def bank_slip
-    if session[:carrinho].blank? 
+    if session[:cart].blank? 
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
@@ -58,7 +58,7 @@ class PaymentController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:carrinho], Transaction::BANK_SLIP)
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP)
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({
@@ -81,7 +81,7 @@ class PaymentController < ApplicationController
     @transaction.save
 
     if iugu_charge.success
-      session[:carrinho] = nil
+      session[:cart] = []
       @bank_slip_url = iugu_charge.url
       render :template => "checkout/review"
       return
