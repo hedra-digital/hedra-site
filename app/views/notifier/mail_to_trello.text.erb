@@ -16,7 +16,7 @@ Address
 Items
 -------------
 <% @order.order_items.each do |item|%>
-- **<%= item.book.title%>** , <%= number_to_currency item.price%> , X<%= item.quantity %>, <%= number_to_currency item.price * item.quantity%> .    
+- **<%= item.book.long_title(item.book_type.to_sym)%>** , <%= number_to_currency item.price%> , X<%= item.quantity %>, <%= number_to_currency item.price * item.quantity%> .    
 <% end%>
 
 **Total <%= number_to_currency(@order.total)%>**

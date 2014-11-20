@@ -60,7 +60,7 @@ ActiveAdmin.register Order do
       books_txt.puts("")
 
       order.order_items.each do |item|
-        books_txt.puts("[#{item.quantity}X]  #{item.book.title}")
+        books_txt.puts("[#{item.quantity}X]  #{item.book.long_title(item.book_type.to_sym)}")
       end
 
       books_txt.puts("")
@@ -73,6 +73,7 @@ ActiveAdmin.register Order do
     books = Book.select("books.id, books.title, count(books.id) as sold_count").
       joins(:order_items => [:order]).
       where("orders.id in (?)", selection).
+      where("order_items.book_type != 'ebook' ").
       group("books.id").
       order("books.title")
 
@@ -119,7 +120,7 @@ ActiveAdmin.register Order do
   show do
     panel "Itens" do
       table_for(order.order_items) do |t|
-        t.column("Livro") {|item| auto_link item.book }
+        t.column("Livro") {|item| auto_link item.book, item.book.long_title(item.book_type.to_sym) }
         t.column("Quantidade") {|item| item.quantity }
         t.column("Preco Unitario") {|item| number_to_currency item.price }
         t.column("Preco Total") {|item| number_to_currency item.price * item.quantity }
