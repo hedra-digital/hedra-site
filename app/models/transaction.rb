@@ -3,7 +3,7 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :order
-  after_save :send_notification, :update_order_state
+  after_save :send_notification, :update_order_state, :send_ebook
 
   CREATED = 1
   COMPLETED = 2
@@ -56,6 +56,17 @@ class Transaction < ActiveRecord::Base
       end
     end
   end
+
+
+  def send_ebook
+    if self.status_changed? and self.status == Transaction::COMPLETED and self.order.order_items.any?{|i| i.book_type == 'ebook'}
+      Thread.new do
+        Notifier.send_ebook(self.order).deliver
+        ActiveRecord::Base.connection.close
+      end
+    end
+  end
+
   
   # do not use order status
   def update_order_state

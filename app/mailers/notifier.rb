@@ -10,6 +10,16 @@ class Notifier < ActionMailer::Base
   	@order = order
     mail(to: APP_CONFIG["trello_mail"], subject: "Due at #{(@order.transactions.last.updated_at + APP_CONFIG["trello_mail_add_date"].days).strftime("%Y-%m-%d")}, #{@order.id}, #{@order.user.email}")
   end
-end
 
+  def send_ebook(order)
+  	@order = order
+
+  	order.order_items.each do |i|
+  		attachments["#{i.book.title}.epub"] = File.read(i.book.ebook.path) if i.book_type == Book::EBOOK
+    end
+
+    mail(to: order.user.email, subject: "Seu ebook está chegando!")
+  end
+
+end
 
