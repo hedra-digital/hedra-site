@@ -1569,6 +1569,38 @@ html, body {
     }
   }
 
+  div.cpf-cnpj{
+    input[type=radio]{
+      width: 16px;
+      margin: 0px;
+    }
+    button.cpf{
+      margin-left: 12px;
+    }
+    input[type=text]{
+      margin: 0px;
+      width: 215px;
+    }
+    label{
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .btn-group-xs{
+      line-height: 1;
+      
+      .btn {
+        padding: 1px 4px;
+        font-size: 12px;
+        line-height: 1.8;
+        border-radius: 3px;
+      }
+      .current, .current:hover{
+        color: black !important;
+      }
+    }
+  }
+
   h3{
     font-size: 23px;
     margin: 22px 20px 20px 20px;

@@ -21,6 +21,28 @@ $(document).on("click", "#link_to_payment_paypal", function(){
 })
 
 
+//set defalut mask
+$(document).ready(function(){
+  $("div.cpf-cnpj input").mask("999.999.999-99");
+})
+
+
+$(document).on("click", "div.cpf-cnpj button", function(){
+  $(this).parent().children().removeClass("current")
+  $(this).addClass("current")
+
+  var input = $(this).parents(".cpf-cnpj").children("input")
+
+  if($(this).hasClass("cpf")){
+    input.attr("placeholder", "CPF")
+    input.mask("999.999.999-99")
+  }else{
+    input.attr("placeholder", "CNPJ")
+    input.mask("99.999.999/9999-99")
+  }
+})
+
+
 Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
 
 <% if Rails.env.production? %>

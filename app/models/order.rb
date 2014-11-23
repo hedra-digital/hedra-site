@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id, :post_tracking_code
+  attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id, :post_tracking_code, :cpf_cnpj
   belongs_to :user
   has_many :transactions
   has_many :order_items

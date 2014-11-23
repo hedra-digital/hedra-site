@@ -20,7 +20,7 @@ class PaymentController < ApplicationController
     end
 
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD)
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj])
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
@@ -58,7 +58,7 @@ class PaymentController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP)
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj])
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({
