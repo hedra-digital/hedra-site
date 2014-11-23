@@ -147,6 +147,12 @@ ActiveAdmin.register Order do
     end
   end
 
+  sidebar :cpf_cnpj, :only => :show do
+    attributes_table_for order do
+      row :cpf_cnpj
+    end
+  end
+
   sidebar :customer_information, :only => :show do
     attributes_table_for order.user do
       row("User") { auto_link order.user }
