@@ -1031,16 +1031,25 @@ article .list-price {
   text-align: center;
 }
 
-.taglist {
-  margin: 0;
+#taglist {
+  margin: -10px 0px 12px 0px;
   list-style: none;
   li {
     display: inline;
-    &:after {
-      content: ", ";
+    line-height: 20px;
+    margin: 0 1em 0 0;
+    a, a:link, a:visited, a:hover{
+      display: inline-block;
+      height: 22px;
+      padding: 0px 8px 0 16px;
+      background: url(asset_path('tag.png', image)) no-repeat;
+      color: #6c6c6c;
+      text-shadow: 1px 1px #fff;
+      font-size: 11px;
+      border-radius: 2px;
     }
-    &:last-child:after {
-      content: "";
+    a:hover{
+      color: rgb(32, 81, 148);
     }
   }
 }

@@ -5,6 +5,9 @@
     <div class="span9">
       <%= yield :h1 %>
       <h2 class="book-authors"><%= authors(@book) %></h2>
+      <ul id="taglist">
+        <%= book_tags(@book) %>
+      </ul>
     </div>
     <% if @book.has_price? %>
       <div class="row">
@@ -67,10 +70,6 @@
         </dl>
       </div>
       <div class="span6">
-        <h3>Tags</h3>
-        <ul class="taglist">
-          <%= book_tags(@book) %>
-        </ul>
       </div>
       <div id="share" class="span3">
         <%= render 'share' %>
