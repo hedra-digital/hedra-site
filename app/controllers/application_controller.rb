@@ -41,14 +41,14 @@ protected
     raise ActiveRecord::RecordNotFound
   end
 
-  def create_order(user, address_hash, cart, payment_method, cpf_cnpj)
+  def create_order(user, address_hash, cart, payment_method, cpf_cnpj, telephone)
     return nil if cart.blank?
 
     address_hash = address_hash.merge({user_id: user.id})
 
     address = Address.create(address_hash)
 
-    order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio', cpf_cnpj: cpf_cnpj)
+    order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio', cpf_cnpj: cpf_cnpj, telephone: telephone)
     total = 0
 
     cart.each do |item|

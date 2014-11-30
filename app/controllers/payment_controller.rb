@@ -20,7 +20,7 @@ class PaymentController < ApplicationController
     end
 
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj])
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj], params[:telephone])
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
@@ -58,7 +58,7 @@ class PaymentController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj])
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone])
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({
@@ -68,11 +68,13 @@ class PaymentController < ApplicationController
       payer: {
         cpf_cnpj: params[:cpf_cnpj],
         name: params[:client_name],
-        phone_prefix: params[:phone_prefix],
-        phone: params[:phone],
+        phone_prefix: params[:telephone].gsub("(", "").gsub(")","").split.first,
+        phone: params[:telephone].gsub("(", "").gsub(")","").split.last,
         email: current_user.email 
       }
     })
+
+    logger.info(iugu_charge.attributes)
 
     @transaction = @order.transactions.last
     @transaction.customer_ip = request.remote_ip

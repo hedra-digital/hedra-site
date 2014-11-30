@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj])
+    @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone])
     if !@order.nil?
       session[:transaction_id] = @order.transactions.last.id
       session[:items] = @order.order_items_to_paypal

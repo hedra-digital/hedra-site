@@ -43,6 +43,13 @@ $(document).on("click", "div.cpf-cnpj button", function(){
 })
 
 
+$(document).ready(function(){
+  $(".phone-formatter").formatter({
+    'pattern': '({{99}}) {{99999}}-{{9999}}'
+  })
+})
+
+
 Iugu.setAccountID("<%=APP_CONFIG['iugu_account_id']%>");
 
 <% if Rails.env.production? %>
