@@ -38,6 +38,16 @@ class Transaction < ActiveRecord::Base
       end
   end
 
+  # temp code, can delete later
+  def resend_ebook
+    if self.status == Transaction::COMPLETED and self.order.order_items.any?{|i| i.book_type == 'packet'}
+      Thread.new do
+        Notifier.send_ebook(self.order).deliver
+        ActiveRecord::Base.connection.close
+      end
+    end
+  end
+
   private
 
   def send_notification
@@ -59,7 +69,7 @@ class Transaction < ActiveRecord::Base
 
 
   def send_ebook
-    if self.status_changed? and self.status == Transaction::COMPLETED and self.order.order_items.any?{|i| i.book_type == 'ebook'}
+    if self.status_changed? and self.status == Transaction::COMPLETED and self.order.order_items.any?{|i| i.book_type == 'ebook' or i.book_type == 'packet'}
       Thread.new do
         Notifier.send_ebook(self.order).deliver
         ActiveRecord::Base.connection.close

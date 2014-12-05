@@ -15,7 +15,7 @@ class Notifier < ActionMailer::Base
   	@order = order
 
   	order.order_items.each do |i|
-  		attachments["#{i.book.title}.epub"] = File.read(i.book.ebook.path) if i.book_type == Book::EBOOK
+  		attachments["#{i.book.title}.epub"] = File.read(i.book.ebook.path) if i.book_type == Book::EBOOK or i.book_type == Book::PACKET
     end
 
     mail(to: order.user.email, subject: "Seu ebook está chegando!")
