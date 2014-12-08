@@ -21,5 +21,24 @@ class Notifier < ActionMailer::Base
     mail(to: order.user.email, subject: "Seu ebook está chegando!")
   end
 
+  def order_created(order)
+    @order = order
+    publisher = @order.order_items.first.book.publisher
+    mail(from: "#{publisher.name}<#{publisher.contact_email}>", to: order.user.email, subject: I18n.t('notifications.created.subject'), bbc: "jorge@hedra.com.br")
+  end
+
+  def order_completed(order)
+    @order = order
+    publisher = @order.order_items.first.book.publisher
+    mail(from: "#{publisher.name}<#{publisher.contact_email}>", to: order.user.email, subject: I18n.t('notifications.completed.subject'), bbc: "jorge@hedra.com.br")
+  end
+
+  def order_failed(order)
+    @order = order
+    publisher = @order.order_items.first.book.publisher
+    mail(from: "#{publisher.name}<#{publisher.contact_email}>", to: order.user.email, subject: I18n.t('notifications.failed.subject'), bbc: "jorge@hedra.com.br")
+  end
+
 end
+
 

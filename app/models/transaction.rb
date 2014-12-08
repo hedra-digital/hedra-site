@@ -38,17 +38,17 @@ class Transaction < ActiveRecord::Base
       end
   end
 
-  # temp code, can delete later
-  def resend_ebook
-    if self.status == Transaction::COMPLETED and self.order.order_items.any?{|i| i.book_type == 'packet'}
-      Thread.new do
-        Notifier.send_ebook(self.order).deliver
-        ActiveRecord::Base.connection.close
-      end
+  private
+
+  # run background job
+  # https://www.agileplannerapp.com/blog/building-agile-planner/rails-background-jobs-in-threads
+  def background(&block)
+    Thread.new do
+      yield
+      ActiveRecord::Base.connection.close
     end
   end
 
-  private
 
   def send_notification
     if self.status_changed? and self.status == Transaction::COMPLETED and Rails.env.production?
@@ -58,11 +58,14 @@ class Transaction < ActiveRecord::Base
       end
     end
     
-
     if self.status_changed?
-      Thread.new do
-        Hedra::Notificator.new(self.id).send
-        ActiveRecord::Base.connection.close
+      case self.status
+      when Transaction::CREATED
+        background {Notifier.order_created(self.order).deliver}
+      when Transaction::COMPLETED
+        background {Notifier.order_completed(self.order).deliver}
+      when Transaction::FAILED
+        background {Notifier.order_failed(self.order).deliver}
       end
     end
   end
