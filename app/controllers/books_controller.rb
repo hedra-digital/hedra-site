@@ -28,7 +28,7 @@ class BooksController < ApplicationController
      return
     end
 
-    books_query = Book.joins(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
+    books_query = Book.includes(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
     books_count = books_query.count
     
     @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
