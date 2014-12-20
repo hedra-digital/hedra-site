@@ -35,6 +35,19 @@ protected
 
   def get_cart_items
     session[:cart] ||= []
+
+    out_of_stock = []
+
+    session[:cart].each do |item|
+      book = Book.find(item[:book_id])
+      price = view_context.show_price(book, item[:book_type])
+      out_of_stock << item if price.nil?
+    end
+
+    session[:cart] = session[:cart] - out_of_stock
+
+    flash.alert = "Alguns livros em seus ware cartão de vender para fora agora." if out_of_stock.size > 0
+
   end
 
   def not_found

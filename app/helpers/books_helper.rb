@@ -40,6 +40,7 @@ module BooksHelper
     when :ebook
       return book.price_ebook
     when :packet
+      return nil if (book_print_price(book) == nil or book.price_ebook == nil)
       return (1 - book.packet_discount) * (book_print_price(book) + book.price_ebook)
     end
   end
@@ -107,6 +108,8 @@ module BooksHelper
   private
 
   def book_print_price(book)
+    return nil if book.price_print.nil?
+
     promotion = find_promotion(book)
 
     return book.price_print if promotion.nil?
