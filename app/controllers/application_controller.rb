@@ -56,22 +56,26 @@ protected
 
   def create_order(user, address_hash, cart, payment_method, cpf_cnpj, telephone)
     return nil if cart.blank?
+    order = nil
 
-    address_hash = address_hash.merge({user_id: user.id})
+    ActiveRecord::Base.transaction do
 
-    address = Address.create(address_hash)
+      address_hash = address_hash.merge({user_id: user.id})
 
-    order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio', cpf_cnpj: cpf_cnpj, telephone: telephone)
-    total = 0
+      address = Address.create(address_hash)
 
-    cart.each do |item|
-      book = Book.find(item[:book_id])
-      total += view_context.show_price(book, item[:book_type]) * item[:quantity]
-      OrderItem.create(order_id: order.id, book_id: item[:book_id], price: view_context.show_price(book, item[:book_type]), quantity: item[:quantity], book_type: item[:book_type])
+      order = Order.create(user_id: user.id, address: address, email: user.email, payment_state: 'Aguardando aprovação', shipment_state: 'Aguardando envio', cpf_cnpj: cpf_cnpj, telephone: telephone)
+      total = 0
+
+      cart.each do |item|
+        book = Book.find(item[:book_id])
+        total += view_context.show_price(book, item[:book_type]) * item[:quantity]
+        OrderItem.create(order_id: order.id, book_id: item[:book_id], price: view_context.show_price(book, item[:book_type]), quantity: item[:quantity], book_type: item[:book_type])
+      end
+
+      Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id, :payment_method => payment_method)
+      order.update_attributes(:total => total)
     end
-
-    Transaction.create(user_id: order.user_id, status: Transaction::CREATED, :order_id => order.id, :payment_method => payment_method)
-    order.update_attributes(:total => total)
     order
   end
 
