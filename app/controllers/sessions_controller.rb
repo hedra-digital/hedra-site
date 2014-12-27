@@ -12,8 +12,10 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
+    session[:cart] = []
     sign_out current_user
     respond_to do |format|
+      format.html { redirect_to(new_session_path(resource_name)) }
       format.js
     end
   end

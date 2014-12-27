@@ -56,7 +56,15 @@
           <% end %>
         </div>
         <% if current_user and current_user.name %>
-          <span class="user-name">Oi,  <%= current_user.name%></span>
+          <div class="user-name"> 
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Oi,  <%= current_user.name%></a>
+            <div class="dropdown-menu">
+              <ul>
+                <li><%= link_to "Ordens", :controller => "orders", :action => "index"%></li>
+                <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </div>
+          </div>
         <% end %>  
       </div>
     </div>
