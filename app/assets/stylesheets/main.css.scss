@@ -1908,15 +1908,25 @@ input.error, select.error {
   }
 }
 
-#post_tracking, #order-history{
+#post_tracking{
   .table{
     font-size: 18px;
   }
 }
 
 #order-history{
+  .table{
+    font-size: 18px;
+  }
   a, a:hover {
     color: #3b9fc1 !important;
+  }
+  .item{
+    margin: 5px 20px 5px 0px;
+  }
+  .price{
+    display: inline-block;
+    float: right;
   }
   span{
     font-size: 14px;

@@ -1,0 +1,49 @@
+<div id="order-history">
+	<div class='container'>
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		    	<th>Item</th>
+		      <th>Total</th>
+		      <th>Situação</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<% @orders.each do |o|%>
+		    <tr>
+		      <td>
+		      	<% o.order_items.each do |item| %>
+		      	  <div class="item">
+		      	    <%= link_to(item.book.long_title(item.book_type.to_sym), item.book, target: "_blank")%>
+		      	    <div class="price">
+		      	      <%= number_to_currency(item.price)%>
+                  <span>(X <%= item.quantity%>)</span>
+                </div>
+		      	  </div>
+            <% end %>
+		      </td>
+		      <td>  
+	          <%= number_to_currency(o.total)%><br />
+	          <br />
+	          <%= " ##{o.id}"%><span> ID</span><br />
+          </td>
+		      <td>  
+		        <% if o.post_tracking_code %> 
+		          <%= link_to("Despachado", {controller: "post_tracking", action: "index", id: o.post_tracking_code}, target: "_blank") %>
+            <% else %>
+              Não despachado dados
+            <% end%>
+		        <br />
+
+	          <span><%= o.address.address%> <%= o.address.number%> <%= o.address.district%></span><br /> 
+	          <span><%= o.address.zip_code%> <%= o.address.city%> <%= o.address.state%></span><br /> 
+          </td>
+		    </tr>
+	      <% end %>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+
+
