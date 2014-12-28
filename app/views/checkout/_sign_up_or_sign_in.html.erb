@@ -1,10 +1,14 @@
 <div class='first_step checkout_step'>
   <div id='sign_up_or_sign_in'>
-  	<h1>Primeiro passo: registro</h1>
+    <% if standalone %>
+    	<h1>Login</h1>
+    <% else %>
+      <h1>Primeiro passo: registro</h1>
+    <% end %>
     <div class='errors'></div>
     <div class='sign_up_or_sign_in_wrapper'>
 
-			<%= form_tag({controller: :sessions, action: :create}, {remote: true, id: "login_form"}) do%>
+			<%= form_tag({controller: :sessions, action: :create}, {remote: !standalone, id: "login_form"}) do%>
    		  <h4>Se você já tem uma conta, faça o login.</h4>
    		  <div class="row"><input type="text" name="user[email]" placeholder="E-mail" /></div>
    		  <div class="row"><input type="password" name="user[password]" placeholder="Senha" /></div>
@@ -17,7 +21,7 @@
    		  <div class="row"><input class="btn" name="commit" type="submit" value="Acessar"></div>
    		<% end %>
 
-      <%= form_tag({controller: :registrations, action: :create}, {remote: true, id: "registration_form"}) do %>
+      <%= form_tag({controller: :registrations, action: :create}, {remote: !standalone, id: "registration_form"}) do %>
         <h4> Ainda não tem conta na Hedra? Cadastre-se. </h4>
         <div class="row">
           <input name="user[email]" type="text" placeholder="E-mail"/>
