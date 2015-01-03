@@ -65,6 +65,10 @@
               </ul>
             </div>
           </div>
+        <% else %>  
+          <div class="user-name">
+            <%= link_to "Login", new_session_path(:user), class: "dropdown-toggle" %>
+          </div>
         <% end %>  
       </div>
     </div>
