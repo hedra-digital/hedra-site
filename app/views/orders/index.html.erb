@@ -14,7 +14,7 @@
 		      <td>
 		      	<% o.order_items.each do |item| %>
 		      	  <div class="item">
-		      	    <%= link_to(item.book.long_title(item.book_type.to_sym), item.book, target: "_blank")%>
+		      	    <%= link_to(truncate(item.book.long_title(item.book_type.to_sym), length: 45), item.book, target: "_blank")%>
 		      	    <div class="price">
 		      	      <%= number_to_currency(item.price)%>
                   <span>(X <%= item.quantity%>)</span>
@@ -22,21 +22,33 @@
 		      	  </div>
             <% end %>
 		      </td>
-		      <td>  
-	          <%= number_to_currency(o.total)%><br />
-	          <br />
-	          <%= " ##{o.id}"%><span> ID</span><br />
+		      <td>
+		        <div class="total">  
+			      	<%= number_to_currency(o.total)%><br />
+
+			      	<% t = o.transactions.last %>
+			      	<% if t.status == Transaction::COMPLETED %>
+			      	  <span>Sucesso</span>
+	            <% else %>
+	              <%= link_to "Pagar", t.bank_slip_url, target: "_blank", class: "pay" %>
+	            <% end %>
+			      	<br />
+
+		          <span><%= "ID ##{o.id}"%></span><br />
+	          </div>
           </td>
 		      <td>  
-		        <% if o.post_tracking_code %> 
-		          <%= link_to("Despachado", {controller: "post_tracking", action: "index", id: o.post_tracking_code}, target: "_blank") %>
-            <% else %>
-              Não despachado dados
-            <% end%>
-		        <br />
+		      	<div class="status">
+		          <% if o.post_tracking_code %> 
+			          <%= link_to("Despachado", {controller: "post_tracking", action: "index", id: o.post_tracking_code}, target: "_blank") %>
+	            <% else %>
+	              Não despachado dados
+	            <% end%>
+	            <br />
 
-	          <span><%= o.address.address%> <%= o.address.number%> <%= o.address.district%></span><br /> 
-	          <span><%= o.address.zip_code%> <%= o.address.city%> <%= o.address.state%></span><br /> 
+		          <span><%= o.address.address%> <%= o.address.number%> <%= o.address.district%></span><br /> 
+		          <span><%= o.address.zip_code%> <%= o.address.city%> <%= o.address.state%></span><br /> 
+	          </div>
           </td>
 		    </tr>
 	      <% end %>

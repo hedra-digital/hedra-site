@@ -35,10 +35,14 @@ class CheckoutController < ApplicationController
       redirect_to cart_url, :notice => "Nos desculpe, ocorreu uma falha ao completar o pagamento pelo PayPal, por favor realize novamente a sua compra."
       return
     end
-    session[:cart] = []
+    
     total_as_cents, purchase_params = get_purchase_params Order.find(session[:order_id]), request, session[:items], params
     @purchase = @gateway.purchase total_as_cents, purchase_params
     @transaction = update_transaction(request, @purchase, session[:transaction_id])
+
+    if @purchase.success?
+      session[:cart] = []
+    end
   end
 
   def assigns_gateway

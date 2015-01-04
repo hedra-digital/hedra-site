@@ -1921,6 +1921,15 @@ input.error, select.error {
   a, a:hover {
     color: #3b9fc1 !important;
   }
+  .pay, .pay:hover{
+    color: #e7611d !important;
+  }
+  .total{
+    margin: 18px 8px;
+  }
+  .status{
+    margin: 18px 8px;
+  }
   .item{
     margin: 5px 20px 5px 0px;
   }

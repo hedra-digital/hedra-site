@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141218165050) do
+ActiveRecord::Schema.define(:version => 20150104124847) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(:version => 20141218165050) do
     t.string   "invoice_id"
     t.string   "payment_method"
     t.string   "payment_status"
+    t.string   "bank_slip_url"
   end
 
   add_index "transactions", ["order_id"], :name => "index_transactions_on_order_id"

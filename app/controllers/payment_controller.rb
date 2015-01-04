@@ -85,6 +85,8 @@ class PaymentController < ApplicationController
     if iugu_charge.success
       session[:cart] = []
       @bank_slip_url = iugu_charge.url
+      @transaction.bank_slip_url = iugu_charge.url
+      @transaction.save
       render :template => "checkout/review"
       return
     else
