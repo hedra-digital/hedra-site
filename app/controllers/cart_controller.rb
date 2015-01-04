@@ -7,6 +7,21 @@ class CartController < ApplicationController
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
+
+    @default_phone = nil
+    @default_cpf = nil
+    @default_address = nil
+
+    if current_user
+
+      last_order = Order.where(user_id: current_user.id).order("id").last
+
+      if last_order 
+        @default_phone = last_order.telephone
+        @default_cpf = last_order.cpf_cnpj
+        @default_address = last_order.address
+      end
+    end
   end
 
   def create
