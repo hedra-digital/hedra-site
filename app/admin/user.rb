@@ -9,6 +9,9 @@ ActiveAdmin.register User do
     column :last_sign_in_at           
     column :sign_in_count
     column :orders
+    column "Switch User" do |u|
+      link_to "#{u.name}", switch_admin_user_path(u)
+    end
     default_actions                   
   end                                 
 
@@ -25,5 +28,11 @@ ActiveAdmin.register User do
       f.input :password_confirmation  
     end                               
     f.buttons                         
-  end                                 
+  end    
+
+  member_action :switch, :method => :get do
+    user = User.find(params[:id])
+    sign_in(user, bypass: true)
+    redirect_to "/" 
+  end                             
 end                                   
