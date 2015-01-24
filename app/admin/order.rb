@@ -120,7 +120,7 @@ ActiveAdmin.register Order do
   show do
     panel "Itens" do
       table_for(order.order_items) do |t|
-        t.column("Livro") {|item| auto_link item.book, item.book.long_title(item.book_type.to_sym) }
+        t.column("Livro") {|item| item.book.nil? ? "One book missed" : auto_link(item.book, item.book.long_title(item.book_type.to_sym)) }
         t.column("Quantidade") {|item| item.quantity }
         t.column("Preco Unitario") {|item| number_to_currency item.price }
         t.column("Preco Total") {|item| number_to_currency item.price * item.quantity }
