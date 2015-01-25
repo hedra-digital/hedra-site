@@ -217,6 +217,8 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rest_client (1.8.3)
+      netrc (~> 0.7.7)
     riddle (1.5.4)
     rmagick (2.13.2)
     rubyzip (1.1.6)
@@ -308,6 +310,7 @@ DEPENDENCIES
   pry-remote
   quiet_assets
   rails (= 3.2.13)
+  rest_client
   rmagick
   rubyzip
   sanitize
