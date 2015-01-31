@@ -60,7 +60,7 @@ ActiveAdmin.register Order do
       books_txt.puts("")
 
       order.order_items.each do |item|
-        books_txt.puts("[#{item.quantity}X]  #{item.book.long_title(item.book_type.to_sym)}")
+        books_txt.puts("[#{item.quantity}X]  #{item.book.nil? ? "One book missed" : item.book.long_title(item.book_type.to_sym)}")
       end
 
       books_txt.puts("")
