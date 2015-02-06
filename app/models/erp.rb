@@ -5,7 +5,7 @@ class Erp
   def self.add_bp(order)
   	business_partner = {
 			  _entityName: "BusinessPartner",
-		    searchKey: order.cpf_cnpj.delete(".", "-", "/"),
+		    searchKey: order.cpf_cnpj.delete("./-"),
 		    name: order.user.name,
 		    taxID: order.cpf_cnpj,
 		    organization: APP_CONFIG['openbravo_organization'],
