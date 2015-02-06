@@ -24,7 +24,8 @@ class Erp
   	address = {
       _entityName: "BusinessPartnerLocation",
       name: location,
-      businessPartner: bp_id
+      businessPartner: bp_id,
+		  organization: APP_CONFIG['openbravo_organization']
     }
 
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => address }.to_json, :content_type => :json)
