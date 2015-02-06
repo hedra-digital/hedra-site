@@ -13,8 +13,23 @@ class Erp
 	  	}
 
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => business_partner }.to_json, :content_type => :json)
-
 	  result = JSON.parse(response)
+	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+  end
+
+
+  def self.add_address(order, bp_id)
+  	location = "#{order.address.address}, #{order.address.number}, #{order.address.city}, #{order.address.state}, #{order.address.zip_code}"
+
+  	address = {
+      _entityName: "BusinessPartnerLocation",
+      name: location,
+      locationAddress: location,
+      businessPartner: bp_id
+    }
+
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => address }.to_json, :content_type => :json)
+    result = JSON.parse(response)
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
 
