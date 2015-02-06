@@ -24,7 +24,6 @@ class Erp
   	address = {
       _entityName: "BusinessPartnerLocation",
       name: location,
-      locationAddress: location,
       businessPartner: bp_id
     }
 
