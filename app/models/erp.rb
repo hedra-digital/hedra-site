@@ -33,5 +33,20 @@ class Erp
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
 
+   def self.add_location(order)
+  	location = {
+      _entityName: "Location",
+		  addressLine1: "#{order.address.address}, #{order.address.number}, #{order.address.city}, #{order.address.state}, #{order.address.zip_code}",
+		  country: "139",
+		  organization: APP_CONFIG['openbravo_organization']
+    }
+
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => location }.to_json, :content_type => :json)
+    result = JSON.parse(response)
+	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+  end
+
 end
+
+
 
