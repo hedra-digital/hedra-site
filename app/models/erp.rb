@@ -1,5 +1,25 @@
 class Erp
-  def self.add_order(order)
+  def self.add_order(order, bp_id, address_id)
+    o = {
+      _entityName: "Order",
+      documentType: APP_CONFIG['openbravo_order_document_type'],
+      transactionDocument: APP_CONFIG['openbravo_order_document_type'],
+      orderDate: order.created_at.as_json,
+      accountingDate: order.created_at.as_json,
+      businessPartner: bp_id,
+      partnerAddress: address_id,
+	    organization: APP_CONFIG['openbravo_organization'],
+      currency: "297",
+      paymentTerms: APP_CONFIG['openbravo_order_payment_terms'],
+      warehouse: APP_CONFIG['openbravo_order_warehouse'],
+      priceList: APP_CONFIG['openbravo_order_price_list'],
+      summedLineAmount: order.total.to_s,
+      grandTotalAmount: order.total.to_s
+    }
+
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => o }.to_json, :content_type => :json)
+    result = JSON.parse(response)
+    Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
 
   def self.add_bp(order)
@@ -46,6 +66,19 @@ class Erp
     result = JSON.parse(response)
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
+
+
+  def self.list(entity_type, name_like = nil)
+  	if name_like.nil?
+      response =  RestClient.get "#{APP_CONFIG['openbravo_url']}/#{entity_type}"
+    else
+      response =  RestClient.get "#{APP_CONFIG['openbravo_url']}/#{entity_type}?_where=name%20like'%25#{name_like}%25'"
+    end
+    pp JSON.parse(response)
+    nil
+  end
+
+
 
 end
 
