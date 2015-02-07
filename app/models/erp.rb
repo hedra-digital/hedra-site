@@ -13,8 +13,8 @@ class Erp
       paymentTerms: APP_CONFIG['openbravo_order_payment_terms'],
       warehouse: APP_CONFIG['openbravo_order_warehouse'],
       priceList: APP_CONFIG['openbravo_order_price_list'],
-      summedLineAmount: order.total.to_s,
-      grandTotalAmount: order.total.to_s
+      summedLineAmount: order.total.to_f,
+      grandTotalAmount: order.total.to_f
     }
 
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => o }.to_json, :content_type => :json)
