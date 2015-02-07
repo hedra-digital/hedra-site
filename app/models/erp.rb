@@ -18,13 +18,14 @@ class Erp
   end
 
 
-  def self.add_address(order, bp_id)
+  def self.add_address(order, bp_id, l_id)
   	location = "#{order.address.address}, #{order.address.number}, #{order.address.city}, #{order.address.state}, #{order.address.zip_code}"
 
   	address = {
       _entityName: "BusinessPartnerLocation",
       name: location,
       businessPartner: bp_id,
+      locationAddress: l_id,
 		  organization: APP_CONFIG['openbravo_organization']
     }
 
