@@ -9,8 +9,10 @@ class Erp
       businessPartner: bp_id,
       partnerAddress: address_id,
 	    organization: APP_CONFIG['openbravo_organization'],
-      currency: "297",
+      currency: "297", # the id of BRL in db
+      invoiceTerms: "I", # I (Immediate): Immediate Invoice
       paymentTerms: APP_CONFIG['openbravo_order_payment_terms'],
+      paymentMethod: APP_CONFIG['openbravo_order_payment_method'],
       warehouse: APP_CONFIG['openbravo_order_warehouse'],
       priceList: APP_CONFIG['openbravo_order_price_list'],
       summedLineAmount: order.total.to_f,
