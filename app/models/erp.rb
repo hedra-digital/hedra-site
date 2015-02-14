@@ -34,7 +34,7 @@ class Erp
   def self.sync_business_partner(orders)
     # which business partner need to sync
     need_sync = []
-    orders.each {|order| need_sync << order if BusinessPartner.find_by_tax_id(order.cpf_cnpj) == nil }
+    orders.each {|order| need_sync << order if (!need_sync.map(& :cpf_cnpj).include?(order.cpf_cnpj) and BusinessPartner.find_by_tax_id(order.cpf_cnpj) == nil )}
 
     # sync business partner to erp
     business_partners = []
