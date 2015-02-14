@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150125095149) do
+ActiveRecord::Schema.define(:version => 20150214083352) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -117,6 +117,13 @@ ActiveRecord::Schema.define(:version => 20150125095149) do
   end
 
   add_index "books_tags", ["book_id", "tag_id"], :name => "index_books_tags_on_book_id_and_tag_id"
+
+  create_table "business_partners", :force => true do |t|
+    t.string   "tax_id"
+    t.string   "erp_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"

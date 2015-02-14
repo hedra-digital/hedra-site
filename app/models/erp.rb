@@ -25,18 +25,39 @@ class Erp
   end
 
   def self.add_bp(order)
-  	business_partner = {
-			  _entityName: "BusinessPartner",
-		    searchKey: order.cpf_cnpj.delete("./-"),
-		    name: order.user.name,
-		    taxID: order.cpf_cnpj,
-		    organization: APP_CONFIG['openbravo_organization'],
-		    businessPartnerCategory: APP_CONFIG['openbravo_business_partner_category']
-	  	}
-
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => business_partner }.to_json, :content_type => :json)
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_bp(order) }.to_json, :content_type => :json)
 	  result = JSON.parse(response)
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+  end
+
+
+  def self.sync_business_partner(orders)
+    # which business partner need to sync
+    need_sync = []
+    orders.each {|order| need_sync << order if BusinessPartner.find_by_tax_id(order.cpf_cnpj) == nil }
+
+    # sync business partner to erp
+    business_partners = []
+    need_sync.each {|order| business_partners << self.to_bp(order) }
+    results = self.api_wrapper(business_partners)
+
+    # insert in web app
+    results.each {|business_partner| BusinessPartner.create!(tax_id: business_partner["taxID"], erp_id: business_partner["id"]) }
+  end
+
+
+  # add a object or a list of objects
+  def self.api_wrapper(objs)
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => objs }.to_json, :content_type => :json)
+    result = JSON.parse(response)
+    Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+
+    if result["response"]["status"] == 0
+      return result["response"]["data"]
+    else
+      return nil
+      # todo error handle
+    end
   end
 
 
@@ -81,8 +102,22 @@ class Erp
   end
 
 
+  private
+
+
+  def self.to_bp(order)
+    {
+      _entityName: "BusinessPartner",
+      searchKey: order.cpf_cnpj.delete("./-"),
+      name: order.user.name,
+      taxID: order.cpf_cnpj,
+      organization: APP_CONFIG['openbravo_organization'],
+      businessPartnerCategory: APP_CONFIG['openbravo_business_partner_category']
+    }
+  end
+
+
 
 end
-
 
 
