@@ -19,7 +19,7 @@ class Address < ActiveRecord::Base
 
 
   def address_line1
-    "#{self.address}, #{self.number}"
+    "#{self.address}, #{self.number}".truncate(60)
   end 
 
 
