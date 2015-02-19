@@ -59,8 +59,8 @@ class Erp
     # insert in web app
     results.each do |location|
       addresses.each do |address|
-        if address.location_id == nil and address.address_line1 == location.addressLine1 and address.address_line2 == location.addressLine2
-          address.location_id = location.id
+        if address.location_id == nil and address.address_line1 == location["addressLine1"] and address.address_line2 == location["addressLine2"]
+          address.location_id = location["id"]
           address.save
           break
         end
