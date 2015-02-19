@@ -1,6 +1,5 @@
-# -*- encoding : utf-8 -*-
 class Address < ActiveRecord::Base
-  attr_accessible :address, :city, :complement, :country, :district, :number, :state, :user_id, :zip_code, :default, :identifier
+  attr_accessible :address, :city, :complement, :country, :district, :number, :state, :user_id, :zip_code, :default, :identifier, :location_id
 
   belongs_to :user
   has_many :orders
@@ -17,4 +16,14 @@ class Address < ActiveRecord::Base
   		end
   	end
   end
+
+
+  def address_line1
+    "#{self.address}, #{self.number}"
+  end 
+
+
+  def address_line2
+    "#{self.city}, #{self.state}, #{self.zip_code}"
+  end    
 end

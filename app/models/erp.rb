@@ -45,6 +45,29 @@ class Erp
     results.each {|business_partner| BusinessPartner.create!(tax_id: business_partner["taxID"], erp_id: business_partner["id"]) }
   end
 
+  # one location can be added twice in erp 
+  def self.sync_location(orders)
+    #which location need to sync
+    addresses = []
+    orders.each {|order| addresses << order.address if order.address.location_id == nil}
+
+    # sync location to erp
+    locations = []
+    addresses.each {|address| locations << self.to_location(address)}
+    results = self.api_wrapper(locations)
+
+    # insert in web app
+    results.each do |location|
+      addresses.each do |address|
+        if address.location_id == nil and address.address_line1 == location.addressLine1 and address.address_line2 == location.addressLine2
+          address.location_id = location.id
+          address.save
+          break
+        end
+      end
+    end
+  end
+
 
   # add a object or a list of objects
   def self.api_wrapper(objs)
@@ -77,15 +100,8 @@ class Erp
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
 
-   def self.add_location(order)
-  	location = {
-      _entityName: "Location",
-		  addressLine1: "#{order.address.address}, #{order.address.number}, #{order.address.city}, #{order.address.state}, #{order.address.zip_code}",
-		  country: "139",
-		  organization: APP_CONFIG['openbravo_organization']
-    }
-
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => location }.to_json, :content_type => :json)
+  def self.add_location(order)
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_location(order) }.to_json, :content_type => :json)
     result = JSON.parse(response)
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
@@ -116,8 +132,21 @@ class Erp
     }
   end
 
+  def self.to_location(address)
+    {
+      _entityName: "Location",
+      addressLine1: address.address_line1,
+      addressLine2: address.address_line2,
+      country: "139",
+      organization: APP_CONFIG['openbravo_organization']
+    }
+  end
+
 
 
 end
+
+
+
 
 
