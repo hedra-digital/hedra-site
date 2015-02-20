@@ -84,7 +84,7 @@ class Erp
     results = self.api_wrapper(api_orders)
 
     # insert in web app
-    results.each do {|order| Order.find(order["orderReference"]).update_attributes(erp_id: order["id"]) }
+    results.each {|order| Order.find(order["orderReference"]).update_attributes(erp_id: order["id"]) }
   end
 
 
