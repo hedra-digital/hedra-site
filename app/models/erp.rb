@@ -1,25 +1,6 @@
 class Erp
-  def self.add_order(order, bp_id, address_id)
-    o = {
-      _entityName: "Order",
-      documentType: APP_CONFIG['openbravo_order_document_type'],
-      transactionDocument: APP_CONFIG['openbravo_order_document_type'],
-      orderDate: order.created_at.as_json,
-      accountingDate: order.created_at.as_json,
-      businessPartner: bp_id,
-      partnerAddress: address_id,
-	    organization: APP_CONFIG['openbravo_organization'],
-      currency: "297", # the id of BRL in db
-      invoiceTerms: "I", # I (Immediate): Immediate Invoice
-      paymentTerms: APP_CONFIG['openbravo_order_payment_terms'],
-      paymentMethod: APP_CONFIG['openbravo_order_payment_method'],
-      warehouse: APP_CONFIG['openbravo_order_warehouse'],
-      priceList: APP_CONFIG['openbravo_order_price_list'],
-      summedLineAmount: order.total.to_f,
-      grandTotalAmount: order.total.to_f
-    }
-
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => o }.to_json, :content_type => :json)
+  def self.add_order(order)
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_order(order) }.to_json, :content_type => :json)
     result = JSON.parse(response)
     Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
@@ -88,6 +69,22 @@ class Erp
       address = Address.find_by_location_id(business_partner_location["locationAddress"])
       BusinessPartnerLocation.create!(business_partner_id: business_partner.id, address_id: address.id, erp_id: business_partner_location["id"])
     end
+  end
+
+
+  def self.sync_order(orders)
+    # which orders need to sync
+    api_orders = []
+    orders.each do |order|
+      next if order.erp_id != nil
+      api_orders << self.to_order(order)
+    end
+
+    # sync orders to erp
+    results = self.api_wrapper(api_orders)
+
+    # insert in web app
+    results.each do {|order| Order.find(order["orderReference"]).update_attributes(erp_id: order["id"]) }
   end
 
 
@@ -160,6 +157,30 @@ class Erp
       businessPartner: business_partner.erp_id,
       locationAddress: order.address.location_id,
       organization: APP_CONFIG['openbravo_organization']
+    }
+  end
+
+  def self.to_order(order)
+    business_partner = BusinessPartner.find_by_tax_id(order.cpf_cnpj)
+    business_partner_location = BusinessPartnerLocation.where(business_partner_id: business_partner.id, address_id: order.address.id).first
+    {
+      _entityName: "Order",
+      documentType: APP_CONFIG['openbravo_order_document_type'],
+      transactionDocument: APP_CONFIG['openbravo_order_document_type'],
+      orderDate: order.created_at.as_json,
+      accountingDate: order.created_at.as_json,
+      orderReference: "#{order.id}",
+      businessPartner: business_partner.erp_id,
+      partnerAddress: business_partner_location.erp_id,
+      organization: APP_CONFIG['openbravo_organization'],
+      currency: "297", # the id of BRL in db
+      invoiceTerms: "I", # I (Immediate): Immediate Invoice
+      paymentTerms: APP_CONFIG['openbravo_order_payment_terms'],
+      paymentMethod: APP_CONFIG['openbravo_order_payment_method'],
+      warehouse: APP_CONFIG['openbravo_order_warehouse'],
+      priceList: APP_CONFIG['openbravo_order_price_list'],
+      summedLineAmount: order.total.to_f,
+      grandTotalAmount: order.total.to_f
     }
   end
 
