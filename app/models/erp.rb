@@ -69,6 +69,28 @@ class Erp
   end
 
 
+  def self.sync_business_partner_location(orders)
+    # which business_partner_location need to sync
+    need_sync_orders = []
+    orders.each do |order|
+      business_partner = BusinessPartner.find_by_tax_id(order.cpf_cnpj)
+      need_sync_orders << order if BusinessPartnerLocation.where(business_partner_id: business_partner.id, address_id: order.address.id).first == nil
+    end
+
+    # sync business_partner_location to erp
+    business_partner_locations = []
+    need_sync_orders.each {|order| business_partner_locations << self.to_business_partner_location(order)}
+    results = self.api_wrapper(business_partner_locations)
+
+    # insert in web app
+    results.each do |business_partner_location|
+      business_partner = BusinessPartner.find_by_erp_id(business_partner_location["businessPartner"])
+      address = Address.find_by_location_id(business_partner_location["locationAddress"])
+      BusinessPartnerLocation.create!(business_partner_id: business_partner.id), address_id: address.id, erp_id: business_partner_location["id"])
+    end
+  end
+
+
   # add a object or a list of objects
   def self.api_wrapper(objs)
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => objs }.to_json, :content_type => :json)
@@ -84,18 +106,8 @@ class Erp
   end
 
 
-  def self.add_address(order, bp_id, l_id)
-  	location = "#{order.address.address}, #{order.address.number}, #{order.address.city}, #{order.address.state}, #{order.address.zip_code}"
-
-  	address = {
-      _entityName: "BusinessPartnerLocation",
-      name: location,
-      businessPartner: bp_id,
-      locationAddress: l_id,
-		  organization: APP_CONFIG['openbravo_organization']
-    }
-
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => address }.to_json, :content_type => :json)
+  def self.add_address(order)
+    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_business_partner_location(order) }.to_json, :content_type => :json)
     result = JSON.parse(response)
 	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
   end
@@ -119,8 +131,6 @@ class Erp
 
 
   private
-
-
   def self.to_bp(order)
     {
       _entityName: "BusinessPartner",
@@ -142,7 +152,16 @@ class Erp
     }
   end
 
-
+  def self.to_business_partner_location(order)
+    business_partner = BusinessPartner.find_by_tax_id(order.cpf_cnpj)
+    {
+      _entityName: "BusinessPartnerLocation",
+      name: "#{business_partner.id}_#{order.address.id}",
+      businessPartner: business_partner.erp_id,
+      locationAddress: order.address.location_id,
+      organization: APP_CONFIG['openbravo_organization']
+    }
+  end
 
 end
 

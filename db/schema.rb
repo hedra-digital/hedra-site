@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150214151339) do
+ActiveRecord::Schema.define(:version => 20150220082722) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(:version => 20150214151339) do
   end
 
   add_index "books_tags", ["book_id", "tag_id"], :name => "index_books_tags_on_book_id_and_tag_id"
+
+  create_table "business_partner_locations", :force => true do |t|
+    t.integer  "business_partner_id"
+    t.integer  "address_id"
+    t.string   "erp_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "business_partner_locations", ["business_partner_id", "address_id"], :name => "index_business_partner_locations_unique", :unique => true
 
   create_table "business_partners", :force => true do |t|
     t.string   "tax_id"
