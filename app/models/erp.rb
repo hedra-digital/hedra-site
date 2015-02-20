@@ -86,7 +86,7 @@ class Erp
     results.each do |business_partner_location|
       business_partner = BusinessPartner.find_by_erp_id(business_partner_location["businessPartner"])
       address = Address.find_by_location_id(business_partner_location["locationAddress"])
-      BusinessPartnerLocation.create!(business_partner_id: business_partner.id), address_id: address.id, erp_id: business_partner_location["id"])
+      BusinessPartnerLocation.create!(business_partner_id: business_partner.id, address_id: address.id, erp_id: business_partner_location["id"])
     end
   end
 
