@@ -76,6 +76,19 @@ class Erp
   end
 
 
+  def self.delete_orders(orders)
+    orders.each do |order|
+      next if order.erp_id == nil
+      response = RestClient.delete "#{APP_CONFIG['openbravo_url']}/Order/#{order.erp_id}"
+      result = JSON.parse(response)
+
+      if result["response"]["status"] == 0
+        order.update_attributes(erp_id: nil)
+      end
+    end
+  end
+
+
   # add a object or a list of objects
   def self.api_wrapper(objs)
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => objs }.to_json, :content_type => :json)
