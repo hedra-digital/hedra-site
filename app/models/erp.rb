@@ -81,6 +81,7 @@ class Erp
       next if order.erp_id == nil
       response = RestClient.delete "#{APP_CONFIG['openbravo_url']}/Order/#{order.erp_id}"
       result = JSON.parse(response)
+      ERP_LOGGER.info "OPENBRAVO::#{(pp result)}" 
 
       if result["response"]["status"] == 0
         order.update_attributes(erp_id: nil)
