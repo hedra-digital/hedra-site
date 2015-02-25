@@ -1,16 +1,4 @@
 class Erp
-  def self.add_order(order)
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_order(order) }.to_json, :content_type => :json)
-    result = JSON.parse(response)
-    Rails.logger.info "OPENBRAVO::#{(pp result)}" 
-  end
-
-  def self.add_bp(order)
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_bp(order) }.to_json, :content_type => :json)
-	  result = JSON.parse(response)
-	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
-  end
-
 
   def self.sync_business_partner(orders)
     # which business partner need to sync
@@ -92,7 +80,7 @@ class Erp
   def self.api_wrapper(objs)
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => objs }.to_json, :content_type => :json)
     result = JSON.parse(response)
-    Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+    ERP_LOGGER.info "OPENBRAVO::#{(pp result)}" 
 
     if result["response"]["status"] == 0
       return result["response"]["data"]
@@ -103,18 +91,21 @@ class Erp
   end
 
 
-  def self.add_address(order)
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_business_partner_location(order) }.to_json, :content_type => :json)
-    result = JSON.parse(response)
-	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+  def self.add_bp(order)
+    self.api_wrapper(self.to_bp(order))
   end
 
   def self.add_location(order)
-    response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => self.to_location(order) }.to_json, :content_type => :json)
-    result = JSON.parse(response)
-	  Rails.logger.info "OPENBRAVO::#{(pp result)}" 
+    self.api_wrapper(self.to_location(order))
   end
 
+  def self.add_address(order)
+    self.api_wrapper(self.to_business_partner_location(order))
+  end
+
+  def self.add_order(order)
+    self.api_wrapper(self.to_order(order))
+  end
 
   def self.list(entity_type, name_like = nil)
   	if name_like.nil?
