@@ -114,6 +114,18 @@ class Book < ActiveRecord::Base
     end
   end
 
+
+  def self.scan_isbn
+    Book.all.each do |book|
+      isbn = book.isbn.delete(". -")
+      if !(isbn.length == 13 and /\d{13}/.match(isbn))
+        puts "#{book.isbn} #{book.title}"
+      end
+    end
+    nil
+  end
+
+
   private
 
   def formatted_list(array)
