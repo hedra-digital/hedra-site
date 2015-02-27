@@ -59,7 +59,7 @@ class Book < ActiveRecord::Base
   validates_presence_of               :price_print, :if => :packet_discount
   validates_presence_of               :price_ebook, :if => :packet_discount
   validates                           :packet_discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "packet_discount"
-
+  validate                            :customer_isbn_validator
 
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
@@ -123,6 +123,13 @@ class Book < ActiveRecord::Base
       end
     end
     nil
+  end
+
+  def customer_isbn_validator
+    isbn13 = self.isbn.delete(". -")
+    if !(isbn13.length == 13 and /\d{13}/.match(isbn13))
+      errors.add(:isbn, "please input a 13-digit ISBN")
+    end
   end
 
 
