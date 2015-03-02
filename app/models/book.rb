@@ -52,7 +52,7 @@ class Book < ActiveRecord::Base
 
   # Validations
   validates_presence_of               :title, :isbn, :pages
-  validates_uniqueness_of             :slug
+  validates_uniqueness_of             :slug, :isbn
   validates                           :publisher, :presence => true
   validates                           :position, numericality: { only_integer: true }
   validates_presence_of               :ebook, :if => :price_ebook
