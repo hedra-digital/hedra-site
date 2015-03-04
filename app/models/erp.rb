@@ -90,6 +90,15 @@ class Erp
   end
 
 
+
+  def self.sync_all(orders)
+    self.sync_business_partner(orders)
+    self.sync_location(orders)
+    self.sync_business_partner_location(orders)
+    self.sync_order(orders)
+  end
+
+
   # add a object or a list of objects
   def self.api_wrapper(objs)
     response = RestClient.post(APP_CONFIG['openbravo_url'], { "data" => objs }.to_json, :content_type => :json)
@@ -119,6 +128,10 @@ class Erp
 
   def self.add_order(order)
     self.api_wrapper(self.to_order(order))
+  end
+
+  def self.add_book(book)
+    self.api_wrapper(self.to_product(book))
   end
 
   def self.list(entity_type, name_like = nil)
@@ -188,6 +201,25 @@ class Erp
       grandTotalAmount: order.total.to_f
     }
   end
+
+  def self.to_product(book)
+    {
+      _entityName: "Product",
+      searchKey: book.isbn,
+      uPCEAN: book.isbn,
+      name: book.title,
+      uOM: "100", # unit
+      productCategory: "DD5AD85E80AD409892A3A25DD49AABD1", # Not Specific
+      taxCategory: "91DC6F729C5B4A15BF3DF34D41983711", # PADRAO
+      organization: "0", # *
+      purchase: true,
+      sale: true,
+      stocked: true,
+      active: true,
+      hdrAutor: ApplicationController.helpers.authors(book)
+    }
+  end
+
 
 end
 
