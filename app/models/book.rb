@@ -117,8 +117,7 @@ class Book < ActiveRecord::Base
 
   def self.scan_isbn
     Book.all.each do |book|
-      isbn = book.isbn.delete(". -")
-      if !(isbn.length == 13 and /\d{13}/.match(isbn))
+      if !(self.isbn.length == 13 and /\d{13}/.match(self.isbn))
         puts "#{book.isbn} #{book.title}"
       end
     end
@@ -126,8 +125,7 @@ class Book < ActiveRecord::Base
   end
 
   def customer_isbn_validator
-    isbn13 = self.isbn.delete(". -")
-    if !(isbn13.length == 13 and /\d{13}/.match(isbn13))
+    if !(self.isbn.length == 13 and /\d{13}/.match(self.isbn))
       errors.add(:isbn, "please input a 13-digit ISBN")
     end
   end
