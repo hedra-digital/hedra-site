@@ -94,7 +94,7 @@ class Erp
     books = []
     orders.each do |order|
       order.order_items.each do |item|
-        books << item.book if book.erp_id == nil
+        books << item.book if item.book.erp_id == nil
       end
     end
 
