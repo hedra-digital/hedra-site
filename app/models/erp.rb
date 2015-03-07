@@ -89,6 +89,41 @@ class Erp
     end
   end
 
+  def self.sync_product(orders)
+    # which books need to sync
+    books = []
+    orders.each do |order|
+      order.order_items.each do |item|
+        books << item.book if book.erp_id == nil
+      end
+    end
+
+    new_books = []
+    books.each do |book|
+      response =  RestClient.get "#{APP_CONFIG['openbravo_url']}/Product?_where=searchKey=%27#{book.isbn}%27"
+      result = JSON.parse(response)
+
+      if result["response"]["totalRows"] == 0
+        new_books << book
+      else
+        book.erp_id = result["response"]["data"][0]["id"]
+        book.save
+      end
+    end
+
+    # sync books to erp
+    new_books_erp = []
+    new_books.each {|book| new_books_erp << self.to_product(book)}
+    results = self.api_wrapper(new_books_erp)
+
+    # insert in web app
+    results.each do |product|
+      book = Book.find_by_isbn(product["searchKey"])
+      book.erp_id = product["id"]
+      book.save
+    end
+  end
+
 
 
   def self.sync_all(orders)
