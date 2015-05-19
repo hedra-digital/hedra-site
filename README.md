@@ -43,9 +43,7 @@ Configure usuário e senha de acesso ao MySQL no arquivo config/database.yml
 
 ### Criar estrutura do banco de dados da aplicação
 <code>
-$ rake db:create
-$ rake db:migrate
-$ rake db:seeds
+$ rake db:create && rake db:migrate && rake db:seed
 </code>
 
 ### Executar aplicação local
