@@ -41,3 +41,5 @@ zeus.json
 /log/searchd.development.pid
 .vagrant
 Vagrantfile
+
+*.notes
