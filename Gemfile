@@ -26,6 +26,8 @@ gem 'ckeditor',           '4.0.4'
 gem 'devise',             '2.2.4'
 gem 'country-select',     '1.1.1'
 gem 'activemerchant',     '1.34.1'
+gem 'active_utils',       '< 3.0.0' #The v3 change the namespace of validateable. See commit:
+                                    # => https://github.com/Shopify/active_utils/commit/2b45f7f
 gem 'sidekiq',            '2.13.0'
 gem 'sinatra',            '1.4.3', require: false
 gem 'slim',               '2.0.0'
