@@ -1,0 +1,6 @@
+test:
+  mailto: "<FIXME: Fill it>"
+  paypal_login: "<FIXME: Fill it>"
+  paypal_password: "<FIXME: Fill it>"
+  paypal_api_signature: "<FIXME: Fill it>"
+  public_url: "<FIXME: Fill it>"
