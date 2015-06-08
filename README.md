@@ -1,3 +1,11 @@
+### Code Climate
+[![Code Climate](https://codeclimate.com/github/hedra-digital/hedra-site/badges/gpa.svg)](https://codeclimate.com/github/hedra-digital/hedra-site)
+
+
+### Test coverage
+[![Test Coverage](https://codeclimate.com/github/hedra-digital/hedra-site/badges/coverage.svg)](https://codeclimate.com/github/hedra-digital/hedra-site/coverage)
+
+
 ##
 ## Como configurar o ambiente de desenvolvimento
 
@@ -54,3 +62,6 @@ $ rails server
 </code>
 
 Acesse a aplicação através da url http://127.0.0.1:3000
+
+##TODO:
+  - Document about config/config.yml
