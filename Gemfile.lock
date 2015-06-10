@@ -93,6 +93,8 @@ GEM
     ckeditor (4.0.4)
       mime-types
       orm_adapter
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -325,6 +327,7 @@ DEPENDENCIES
   capistrano (= 2.15.5)
   carrierwave (= 0.8.0)
   ckeditor (= 4.0.4)
+  codeclimate-test-reporter
   coffee-rails (~> 3.2.1)
   country-select (= 1.1.1)
   devise (= 2.2.4)
