@@ -1,5 +1,9 @@
 language: ruby
 cache: bundler
+branches:
+  only:
+    - master
+    - staging
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
@@ -8,3 +12,7 @@ before_script:
   - mysql -e 'create database hedrasite_test;'
   - cp config/database.travis.yml config/database.yml
   - cp config/config.travis.yml config/config.yml
+
+addons:
+  code_climate:
+    repo_token: 11f28282c0839d364442350579618fca50ce2657f2baa359b672857856f4a09b
