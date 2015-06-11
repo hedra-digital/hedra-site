@@ -8,6 +8,8 @@ set :default_stage, "staging"
 
 set :application, "Hedra Site"
 
+set :deploy_via, :remote_cache
+
 set :scm, :git
 set :repository,  "https://github.com/hedra-digital/hedra-site.git"
 set :user, 'deploy'
