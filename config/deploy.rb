@@ -14,7 +14,7 @@ set :scm, :git
 set :repository,  "https://github.com/hedra-digital/hedra-site.git"
 set :user, 'deploy'
 
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "livrodaclasse_rsa"), File.join(ENV["HOME"], ".ssh", "id_rsa")]
+set :ssh_options, keys: ["config/deploy_hedra_id_rsa"] if File.exist?("config/deploy_hedra_id_rsa")
 
 set :use_sudo, false
 set :keep_releases, 3
