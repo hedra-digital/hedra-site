@@ -16,9 +16,9 @@ addons:
   code_climate:
     repo_token: 11f28282c0839d364442350579618fca50ce2657f2baa359b672857856f4a09b
 after_success:
-- openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out
-  config/deploy_hedra_id_rsa
-- '[[ $TRAVIS_BRANCH = ''staging'' ]] && bundle exec cap staging deploy'
+- openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_hedra_id_rsa_enc_travis -d -a -out config/deploy_hedra_id_rsa
+- 'if [[ "$TRAVIS_BRANCH" == "staging" ]]; then bundle exec cap staging deploy; fi'
+- 'if [[ "$TRAVIS_BRANCH" == "master" ]]; then bundle exec cap master deploy; fi'
 env:
   global:
     secure: FjIWNqbfzHidKWFryJPv2ilvJqDmQAHxJEaE5pDXXHgADmsPZP8mvaC2pn3/CF93Mv5t0Og1nl93bNMV3y3coBfRichH8nzdcsXX5CwW4gZz7wYch+Fc1ZGIUvKZJPDYf8sUg5aPzchO3wDUNAfX4L+BVh5mvD1fgbZTxZf8QcOFu+ADz88VI/DOP0JmJnfn86yeK38MPLWJpAAgrQzTf2+KtUpqPLY367YpBi/CJDs7Mutw+tlbobb7pn+ZASC68d3k8uBGyCxfCtWNsRoRHb8ZP6okcGx/nyH+jMf8GiQ/HHdttVrQ95Ru36SM0V7nwI5CUxoGzfJdPHxwNrTc9ZTrGMKifudWpcKF36Gw/cZYbgj312t6ba9VJyCZVBAENGQwSoHOZVV62kKP5zs5MyiOxkREBtUYXAoNfB3U31X0dzF5sUTRfn1dR6nRC2guHxsmax0yIw490SK2vZsCYrIg/3c7LjG2Qtey69//d6q62Qi430+6+mpJPes5JCCn8giJBSZHsiOGw9FJAyLGJMJNNCNc2bNzAcdg1HutDajCP2+pIGD6IVu7oFJhL2PvZ/XTJ8R0ZKZYJlyCn2e7gw4ore5KQJrm4OD5Vq5X9POmRxmmU2IcEveE4YmFI/HvJvBdTHC/9L8jEzwXfXXLk4SeUP3l0G0rnol92x18CoU=
