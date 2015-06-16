@@ -9,7 +9,7 @@ gem 'rails', '3.2.13'
 gem 'mysql2',             '0.3.11'
 gem 'sprockets',          '2.2.3'
 gem 'simple_form',        '2.1.2'
-gem "activeadmin",        '0.6.0'
+gem "activeadmin",        '0.6.6'
 gem 'friendly_id',        '~> 4.0.1'
 gem 'annotate',           ">=2.5.0"
 gem 'carrierwave',        '0.8.0'
