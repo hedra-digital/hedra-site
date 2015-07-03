@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    @features = Feature.includes(:page).joins(:features_publishers).includes(:book => { :participations => [:person, :role] }).where("features_publishers.publisher_id = #{session[:publisher]}").first(6)
+    @features = Feature.includes(:site_page).joins(:features_publishers).includes(:book => { :participations => [:person, :role] }).where("features_publishers.publisher_id = #{session[:publisher]}").first(6)
 
     @new_releases = Book.joins(:new_releases).where("books.publisher_id = #{session[:publisher]}").order("books.position desc, books.id desc").first(4)
 

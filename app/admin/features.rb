@@ -14,8 +14,8 @@ ActiveAdmin.register Feature do
       row :feature_image do
         image_tag(f.feature_image_url(:thumb)) if f.feature_image.present?
       end
-      row :page do
-        f.page.tag.name if f.page_id.present?
+      row :site_page do
+        f.site_page.tag.name if f.page_id.present?
       end
       row :external_site_url do
         f.external_site_url if f.external_site_url.present?
@@ -33,7 +33,7 @@ ActiveAdmin.register Feature do
       f.book.present? ? f.book.title : ""
     end
     column "Tag" do |f|
-      f.page.present? ? f.page.tag.name : ""
+      f.site_page.present? ? f.site_page.tag.name : ""
     end
     column "External site" do |f|
       f.external_site_url.present? ? f.external_site_url : ""
@@ -51,7 +51,7 @@ ActiveAdmin.register Feature do
       end
 
       f.inputs "Destaque sem livro" do
-        f.input :page, :collection => Page.where("tag_id is not null").map{|p| [p.tag.name, p.id] }
+        f.input :site_page, :collection => Page.where("tag_id is not null").map{|p| [p.tag.name, p.id] }
         f.input :feature_image, :as => :file, :hint => (( f.object.new_record? || f.object.feature_image.nil? ) ? f.template.content_tag(:span, "nenhuma imagem") : f.template.image_tag(f.object.feature_image.url(:thumb)))
       end
       f.inputs "Destaque sem livro para site externo" do
