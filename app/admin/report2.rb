@@ -35,7 +35,7 @@ ActiveAdmin.register_page "Buying Report" do
       h3 'Buying Report'
       div class: 'panel_contents' do
 
-        paginated_collection transactions.page(1, 10) do
+        paginated_collection transactions.per_page_kaminari(params[:page]).per(50) do
           table_for collection do
             column "user" do |t|
               "#{t.user.name}"
@@ -44,7 +44,7 @@ ActiveAdmin.register_page "Buying Report" do
               "#{t.user.email}"
             end
             column "amount" do |t|
-              number_to_currency(t.order.total)
+              number_to_currency(t.order.nil? ? 0.0 : t.order.total)
             end
             column "date" do |t|
               t.created_at
