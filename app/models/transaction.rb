@@ -1,6 +1,8 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :user, :order, :user_ip, :paypal_token, :paypal_payer_id, :completed, :paypal_transaction_id, :paypal_payment_date, :paypal_fee_amount, :paypal_pending_reason, :paypal_reason_code, :status, :user_id, :order_id, :customer_ip, :payment_method, :payment_status
 
+  self.per_page = 50
+
   belongs_to :user
   belongs_to :order
   after_save :send_notification, :update_order_state, :send_ebook
@@ -24,6 +26,15 @@ class Transaction < ActiveRecord::Base
   scope :completed, where("status = ?", Transaction::COMPLETED)
   scope :failed, where("status = ?", Transaction::FAILED)
   scope :created, where("status = ?", Transaction::CREATED)
+
+  scope :for_buying_report, -> (start_date, end_date, user_name, user_email) do
+    includes(:user).includes(:order).
+      where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+      where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
+      where(user_name.blank? ? "" : "users.name like '%#{user_name}%'").
+      where(user_email.blank? ? "" : "users.email like '%#{user_email}%'").
+      order("transactions.user_id, transactions.created_at")
+  end
 
   def show_status
     case self.status

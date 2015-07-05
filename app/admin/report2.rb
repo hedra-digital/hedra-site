@@ -12,12 +12,7 @@ ActiveAdmin.register_page "Buying Report" do
         user_email = params[:search][:user_email]
       end
 
-      @transactions = Transaction.includes(:user).joins(:order).
-        where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
-        where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
-        where(user_name.blank? ? "" : "users.name like '%#{user_name}%'").
-        where(user_email.blank? ? "" : "users.email like '%#{user_email}%'").
-        order("transactions.user_id, transactions.created_at")
+      @transactions = Transaction.for_buying_report(start_date, end_date, user_name, user_email)
     end
   end
 
