@@ -58,6 +58,7 @@ group :development do
   gem 'binding_of_caller', '0.7.1'
   gem 'bullet', '4.6.0'
   gem 'quiet_assets', '1.0.3'
+  gem 'byebug'
 end
 
 group :development, :test do
