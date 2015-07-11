@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     
     # match the whole name
     author = Person.where(name: params[:term]).first
-    page = author.page if author
+    page = author.site_page if author
 
     if author and page
      redirect_to url_for(controller: "pages", action: "author", name: author.name)
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
 
     books_query = Book.includes(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
     books_count = books_query.count
-    
+
     @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
     @books = books_query.paginate(:page => params[:page], :per_page => 5, :offset => (books_count >= 6 ? 4 : 0), :total_entries => (books_count >= 6 ? books_count - 4 : books_count))
   end

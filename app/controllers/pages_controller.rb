@@ -16,7 +16,7 @@ class PagesController < ApplicationController
 
   def tag
     @tag   = Tag.where("name = ? or slug = ?", params[:id], params[:id]).first || not_found
-    @page  = @tag.page
+    @page  = @tag.site_page
     @entity = @tag
 
     books_query = Book.joins(:tags).where("books.publisher_id = #{session[:publisher]} and tags.id = #{@tag.id}").order("books.position desc, books.id desc")
@@ -32,8 +32,9 @@ class PagesController < ApplicationController
   end
 
   def author
-    author = Person.where(name: params[:name]).first || not_found 
-    @page = author.page
+    #TODO: is this used?
+    author = Person.where(name: params[:name]).first || not_found
+    @page = author.site_page
     @entity = author
 
     books_query = Book.joins(participations: [:role, :person]).where("books.publisher_id = #{session[:publisher]} and people.name = ?", author.name).order("books.position desc, books.id desc").uniq
