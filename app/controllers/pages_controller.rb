@@ -16,7 +16,7 @@ class PagesController < ApplicationController
 
   def tag
     @tag   = Tag.where("name = ? or slug = ?", params[:id], params[:id]).first || not_found
-    @page  = @tag.page
+    @page  = @tag.site_page
     @entity = @tag
 
     books_query = Book.joins(:tags).where("books.publisher_id = #{session[:publisher]} and tags.id = #{@tag.id}").order("books.position desc, books.id desc")
