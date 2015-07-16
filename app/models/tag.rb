@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
 
   # Relationships
   has_and_belongs_to_many :books
-  has_one :page, :dependent => :destroy
+  has_one :site_page, class_name: "Page", dependent: :destroy
 
   # Specify fields that can be accessible through mass assignment
   attr_accessible :name, :books_attributes, :book_ids

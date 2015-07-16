@@ -25,6 +25,15 @@ class Transaction < ActiveRecord::Base
   scope :failed, where("status = ?", Transaction::FAILED)
   scope :created, where("status = ?", Transaction::CREATED)
 
+  scope :for_buying_report, -> (start_date, end_date, user_name, user_email) do
+    includes(:user).includes(:order).
+      where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+      where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
+      where(user_name.blank? ? "" : "users.name like '%#{user_name}%'").
+      where(user_email.blank? ? "" : "users.email like '%#{user_email}%'").
+      order("transactions.user_id, transactions.created_at")
+  end
+
   def show_status
     case self.status
       when Transaction::CREATED
