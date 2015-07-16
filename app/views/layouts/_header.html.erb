@@ -37,7 +37,9 @@
       <div class="navadd">
         <div class="cart">
           <% if session[:cart].size > 0 %>
-            <%= link_to(image_tag('cart_full.png', style: "width: 25px"), '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown') %>
+            <%= link_to '#', class: 'dropdown-toggle shopping-cart filled', 'data-toggle' => 'dropdown' do%>
+              <%= fa_icon "shopping-cart" %>
+            <%end%>
             <%= content_tag :span, session[:cart].size, :class => 'cart-count' %>
             <div class="dropdown-menu">
               <ul>
@@ -48,7 +50,7 @@
               <%= link_to 'Ver carrinho', cart_path, class: 'btn btn-primary' %>
             </div>
           <% else %>
-            <%= image_tag('cart.png') %>
+            <%= fa_icon "shopping-cart", class: "shopping-cart empty" %>
           <% end %>
         </div>
         <% if current_user and current_user.name %>
@@ -61,11 +63,11 @@
               </ul>
             </div>
           </div>
-        <% else %>  
+        <% else %>
           <div class="user-name">
             <%= link_to "Login", new_session_path(:user), class: "dropdown-toggle" %>
           </div>
-        <% end %>  
+        <% end %>
       </div>
     </div>
   </div>
