@@ -1,3 +1,9 @@
 <% page_data :title => 'Blog da Hedra', :type => 'blog', :description => 'Seja bem-vindo ao Blog da Hedra! Aqui você encontra notícias sobre livros, ebooks e tudo o que rola em torno da nossa Editora.' %>
 
 <%= render :partial => "post", :collection => @posts %>
+
+<% content_for :main_footer do %>
+  <div class="pagination">
+    <%= will_paginate @posts %>
+  </div>
+<% end %>
