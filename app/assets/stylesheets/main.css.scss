@@ -415,11 +415,21 @@ footer {
       margin-left: 7px;
       font-size: 22px;
     }
-    & > a > img,
-    & > img {
-      margin-left: 15px;
-      margin-bottom: 5px;
+    & > a > i.icon-shopping-cart, & > i.icon-shopping-cart {
+      display: inline-block;
+      margin-top: 7px;
+      margin-right: 5px;
     }
+    & > a.shopping-cart.filled:hover, & > a.shopping-cart.filled {
+      color: #E7611D;
+      text-decoration: none;
+      font-size: 25px;
+    }
+
+    & i.icon-shopping-cart.empty{
+      color: #bababa;
+    }
+
     .dropdown-menu {
       left: auto;
       right: 0;
@@ -1340,6 +1350,16 @@ article .list-price {
   margin: 30px 0;
   padding-bottom: 50px;
   @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
+
+  & aside.book-info .book-info-data aside.book-price {
+    margin-left: -20px;
+    & .list-price {
+      padding-left: 20px;
+      & ul.buy a span {
+        font-size: 13px;
+      }
+    }
+  }
 }
 
 .post-date {
