@@ -28,7 +28,6 @@
 //= require address.js
 //= require payment.js
 //= require card.js
-//= require blog_infinite_scroll.js
 
 // FancyBox
 $(".fancybox").fancybox({
