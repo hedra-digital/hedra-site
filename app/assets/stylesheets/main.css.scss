@@ -1364,6 +1364,9 @@ article .list-price {
     margin-left: -20px;
     & .list-price {
       padding-left: 20px;
+      & ul.buy a span {
+        font-size: 13px;
+      }
     }
   }
 }
