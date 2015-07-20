@@ -1359,6 +1359,13 @@ article .list-price {
   margin: 30px 0;
   padding-bottom: 50px;
   @include box-shadow(0 7px 10px rgba(0, 0, 0, 0.07));
+
+  & aside.book-info .book-info-data aside.book-price {
+    margin-left: -20px;
+    & .list-price {
+      padding-left: 20px;
+    }
+  }
 }
 
 .post-date {

@@ -1,11 +1,10 @@
 <aside class="book-info span3">
   <div class="book-info-cover cover" style=<%="#{controller_name == 'blog' ? 'margin-bottom:10px;' : ''}"%>>
     <%= if controller_name == "blog"
-          link_to image_tag(book.cover_url(:big_thumb).to_s), book_path(book)
-        else
-          link_to image_tag(book.cover_url(:big_thumb).to_s), book.cover_url.to_s, :class => 'fancybox'
-        end
-    %>
+      link_to image_tag(book.cover_url(:big_thumb).to_s), book_path(book)
+    else
+      link_to image_tag(book.cover_url(:big_thumb).to_s), book.cover_url.to_s, :class => 'fancybox'
+    end%>
   </div>
     <div class="book-info-data">
     <dl>
@@ -17,6 +16,9 @@
       <% book_team(book).each do |role, people| %>
         <dt><%= role%></dt>
         <dd><%= formatted_list(people.collect{ |p| link_to(p, {controller: "books", action: "search", params: {term: p}} ) }).html_safe %></dd>
+      <% end %>
+      <% if controller_name == "blog" && book %>
+        <%= render "books/book_price", book: book %>
       <% end %>
     </dl>
   </div>
