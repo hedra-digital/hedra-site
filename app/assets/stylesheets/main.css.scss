@@ -426,21 +426,11 @@ footer {
       margin-left: 7px;
       font-size: 22px;
     }
-    & > a > i.icon-shopping-cart, & > i.icon-shopping-cart {
-      display: inline-block;
-      margin-top: 7px;
-      margin-right: 5px;
+    & > a > img,
+    & > img {
+      margin-left: 15px;
+      margin-bottom: 5px;
     }
-    & > a.shopping-cart.filled:hover, & > a.shopping-cart.filled {
-      color: #E7611D;
-      text-decoration: none;
-      font-size: 25px;
-    }
-
-    & i.icon-shopping-cart.empty{
-      color: #bababa;
-    }
-
     .dropdown-menu {
       left: auto;
       right: 0;
