@@ -9,15 +9,15 @@
     <ul class="buy">
       <% if book.price_print%>
         <li>
-          <%= link_to add_to_cart_path(book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(book)}", target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
-            <span class="type">livro</span>
+          <%= link_to add_to_cart_path(book, book_type: :print, source: controller_name), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(book)}", target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
+            <span class="type">comprar</span>
             <span class="price"><%= number_to_currency(show_price(book, :print))%></span>
           <% end %>
         </li>
       <% end %>
       <% if book.price_ebook%>
         <li>
-          <%= link_to add_to_cart_path(book, book_type: :ebook), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
+          <%= link_to add_to_cart_path(book, book_type: :ebook, source: controller_name), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">ebook</span>
             <span class="price"><%= number_to_currency(show_price(book, :ebook))%></span>
           <% end %>
@@ -25,7 +25,7 @@
       <% end %>
       <% if book.packet_discount%>
         <li>
-          <%= link_to add_to_cart_path(book, book_type: :packet), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
+          <%= link_to add_to_cart_path(book, book_type: :packet, source: controller_name), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">ebook+livro</span>
             <span class="price"><%= number_to_currency(show_price(book, :packet))%></span>
           <% end %>
@@ -35,9 +35,3 @@
   </div>
 
 </aside>
-
-<!-- Pendientes:
-  - Cambiar link de compra, para que vaya directamente al carrito.
-  - Trabajar con los estilos.
-  - Probar casos más extremos(hay precio para ebook, print y pack)
-  - agregar utm_source(creo que así es) para usarlo despues en Google Analytics -->
