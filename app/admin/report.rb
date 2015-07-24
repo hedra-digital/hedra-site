@@ -21,6 +21,7 @@ ActiveAdmin.register_page "Book Report" do
       @total_sold_count = 0
       @total_amount = 0
 
+      #TODO: cambiar por inject
       @books.each do |b|
         @total_sold_count += b.sold_count
         @total_amount += b.total_price
@@ -45,15 +46,17 @@ ActiveAdmin.register_page "Book Report" do
       h3 "Sale Report, SOLD COUNT #{total_sold_count}, TOTAL PRICE #{number_to_currency(total_amount)}"
       div class: 'panel_contents' do
 
-        table_for books do
-          column "title" do |book|
-            link_to book.title, book_path(book)
-          end
-          column "sold count" do |book|
-            book.sold_count
-          end
-          column "total price" do |book|
-            number_to_currency(book.total_price)
+        paginated_collection books.per_page_kaminari(params[:page]).per(50) do
+          table_for collection do
+            column "title" do |book|
+              link_to book.title, book_path(book)
+            end
+            column "sold count" do |book|
+              book.sold_count
+            end
+            column "total price" do |book|
+              number_to_currency(book.total_price)
+            end
           end
         end
 
