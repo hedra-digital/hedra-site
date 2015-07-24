@@ -9,19 +9,11 @@ ActiveAdmin.register_page "Book Report" do
         title = params[:search][:title]
       end
 
-      @books = Book.select("books.id, books.title, books.slug, count(books.id) as sold_count, sum(order_items.price) as total_price").
-        joins(:order_items => [:order => :transactions]).
-        where("transactions.status = 2").
-        where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
-        where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
-        where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
-        group("books.id").
-        order("count(books.id) desc")
+      @books = Book.for_book_report(start_date, end_date, title)
 
       @total_sold_count = 0
       @total_amount = 0
 
-      #TODO: cambiar por inject
       @books.each do |b|
         @total_sold_count += b.sold_count
         @total_amount += b.total_price
