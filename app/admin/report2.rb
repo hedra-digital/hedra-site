@@ -1,4 +1,3 @@
-
 ActiveAdmin.register_page "Buying Report" do
   menu :parent => "Report"
 
