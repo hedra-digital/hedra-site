@@ -3,31 +3,33 @@ ActiveAdmin.register_page "Book Report" do
 
   controller do
     def index
+      @search = Struct.new(:start_date, :end_date, :title).new
+
       if params[:search]
-        start_date = Date.parse(params[:search][:start_date]) unless params[:search][:start_date].blank?
-        end_date = (Date.parse(params[:search][:end_date]) + 1.day) unless params[:search][:end_date].blank?
-        title = params[:search][:title]
+        @search.start_date  = Date.parse(params[:search][:start_date])          unless params[:search][:start_date].blank?
+        @search.end_date    = (Date.parse(params[:search][:end_date]) + 1.day)  unless params[:search][:end_date].blank?
+        @search.title       = params[:search][:title]
       end
 
-      @books = Book.for_book_report(start_date, end_date, title)
+      @books = Book.for_book_report(@search.start_date, @search.end_date, @search.title)
 
       @total_sold_count = 0
       @total_amount = 0
 
       @books.each do |b|
         @total_sold_count += b.sold_count
-        @total_amount += b.total_price
+        @total_amount     += b.total_price
       end
     end
   end
 
   content do
     div class: 'panel_contents' do
-      active_admin_form_for :search do |f|
+      active_admin_form_for :search, method: :get do |f|
         f.inputs "Search" do
-          f.input :start_date, :as => :datepicker, :required => false
-          f.input :end_date, :as => :datepicker, :required => false
-          f.input :title, :required => false
+          f.input :start_date, required: false, as: :datepicker
+          f.input :end_date,   required: false, as: :datepicker
+          f.input :title,      required: false
         end
         f.actions
       end
