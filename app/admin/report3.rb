@@ -3,14 +3,15 @@ ActiveAdmin.register_page "Transaction Report" do
 
   controller do
     def index
+      @search = Struct.new(:start_date, :end_date, :title).new
 
       if params[:search]
-        start_date = Date.parse(params[:search][:start_date]) unless params[:search][:start_date].blank?
-        end_date = (Date.parse(params[:search][:end_date]) + 1.day) unless params[:search][:end_date].blank?
-        title = params[:search][:title]
+        @search.start_date = Date.parse(params[:search][:start_date]) unless params[:search][:start_date].blank?
+        @search.end_date = (Date.parse(params[:search][:end_date]) + 1.day) unless params[:search][:end_date].blank?
+        @search.title = params[:search][:title]
       end
 
-      @books = Book.for_transaction_report(start_date, end_date, title)
+      @books = Book.for_transaction_report(@search.start_date, @search.end_date, @search.title)
 
       @total_created_count    = 0
       @total_completed_count  = 0
