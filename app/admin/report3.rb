@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Transaction Report" do
 
   content do
     div class: 'panel_contents' do
-      active_admin_form_for :search do |f|
+      active_admin_form_for :search, method: :get  do |f|
         f.inputs "Search" do
           f.input :start_date, :as => :datepicker, :required => false
           f.input :end_date, :as => :datepicker, :required => false
