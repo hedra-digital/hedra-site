@@ -61,10 +61,34 @@ class Book < ActiveRecord::Base
   validates                           :packet_discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "packet_discount"
   validate                            :customer_isbn_validator
 
+  scope :for_transaction_report, -> (start_date, end_date, title) do
+    select("books.id, books.title, books.slug,
+        sum(if(transactions.status = 1, 1, 0)) as created_count,
+        sum(if(transactions.status = 2, 1, 0)) as completed_count,
+        sum(if(transactions.status = 3, 1, 0)) as failed_count").
+      joins(:order_items => [:order => :transactions]).
+      where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+      where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
+      where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
+      group("books.id").
+      order("sum(if(transactions.status = 2, 1, 0)) desc") #using the raw completed_count because the pagination invoke 'count' and that method ignore the select method.
+  end
+
+  scope :for_book_report, -> (start_date, end_date, title) do
+    select("books.id, books.title, books.slug, count(books.id) as sold_count, sum(order_items.price) as total_price").
+      joins(:order_items => [:order => :transactions]).
+      where("transactions.status = 2").
+      where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
+      where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
+      where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
+      group("books.id").
+      order("count(books.id) desc")
+  end
+
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
   mount_uploader                      :ebook, EbookUploader
-  
+
   # Search
   define_index do
     indexes title
@@ -77,7 +101,7 @@ class Book < ActiveRecord::Base
   EBOOK = "ebook"
   PRINT = "print"
   PACKET = "packet"
-  
+
 
   def dimensions
     "#{self.width} &times; #{self.height} cm".html_safe if self.width.present? && self.height.present?
