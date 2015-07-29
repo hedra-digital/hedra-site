@@ -1645,9 +1645,47 @@ html, body {
   h3{
     font-size: 23px;
     margin: 22px 20px 20px 20px;
+    i {
+      margin-top: 5px;
+      margin-right: 10px
+    }
+  }
+}
+#payment-method-choosing {
+  h3 i, h4 i {
+      margin-top: 7px;
+      margin-right: 10px
   }
 }
 
+#shipment-selection {
+  > h3 {
+    margin-bottom: 0px;
+  }
+  > span {
+    margin-left: 20px;
+    font-size: 18px;
+    display:block;
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+  #shipment-types {
+    input[type=radio] {
+      width: 15px;
+      margin-right: 15px;
+    }
+
+    span.delivery-time {
+      font-size: 13.5px;
+      display: block;
+      margin-top: -10px; //Fixme!!!
+    }
+
+    label {
+      height: 35px;
+    }
+  }
+}
 
 #payment_slip, #payment_paypal, #payment_card{
   display: none;
