@@ -1,34 +1,25 @@
-<div id="shipment-selection">
+<div class="shipment-selection">
   <h3> <i class="icon-truck"></i> Cálculo de frete </h3>
-  <span> Calculo realizado para el CPF ingresado previamente: <b>171.037.078-55</b> </span>
+  <span> Calculo realizado para el CEP ingresado previamente: <b><%=@default_address.zip_code%></b></span>
+  <span>Para un nuevo cálculo, cambia el CEP en el cuadro de arriba.</span>
 
   <div class="row" id="shipment-types">
     <div class="span6">
-      <label class="radio">
-        <input type="radio" name="shipement-type" value="modico"/> Módico
-        <span class="delivery-time">(Plazo de entrega: 5 dias úteis)</span>
-      </label>
-      <br/>
-      <label class="radio">
-        <input type="radio" name="shipement-type" value="pac" checked/> PAC <br/><span class="delivery-time">(Plazo de entrega: 3 dias úteis)</span>
-      </label>
-      <br/>
-      <label class="radio">
-        <input type="radio" name="shipement-type" value="sedek"/> Sedex <br/><span class="delivery-time">(Plazo de entrega: 1 dias úteis)</span>
-      </label>
+      <% @shipment_costs.each do |name, values| %>
+        <label class="radio">
+          <input type="radio" name="shipement-type" value="<%=name%>"/> <%=name.to_s.capitalize%>
+          <span class="delivery-time">(Plazo de entrega: <%= values[:shipping_time] %> dias úteis)</span>
+        </label>
+        <br/>
+      <% end %>
     </div>
     <div class="span4">
-      <label class="label" style="font-size: 18px">
-        Costo: R$ 5<br/>
-      </label>
-      <br/>
-      <label class="label" style="font-size: 18px">
-        Costo: R$ 11<br/>
-      </label>
-      <br/>
-      <label class="label" style="font-size: 18px">
-        Costo: R$ 25<br/>
-      </label>
+      <% @shipment_costs.each do |name, values| %>
+        <label class="label" style="font-size: 18px">
+          Costo: R$ <%=values[:cost]%><br/>
+        </label>
+        <br/>
+      <% end %>
     </div>
   </div>
 </div>

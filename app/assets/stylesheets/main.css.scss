@@ -1658,7 +1658,7 @@ html, body {
   }
 }
 
-#shipment-selection {
+.shipment-selection {
   > h3 {
     margin-bottom: 0px;
   }
@@ -1666,10 +1666,10 @@ html, body {
     margin-left: 20px;
     font-size: 18px;
     display:block;
-    margin-bottom: 20px;
-    margin-top: 5px;
   }
   #shipment-types {
+    margin-top: 20px;
+
     input[type=radio] {
       width: 15px;
       margin-right: 15px;
