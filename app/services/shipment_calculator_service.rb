@@ -7,28 +7,37 @@ DEFAULT_BOOK_LENGTH = 25  #cm
 DEFAULT_BOOK_PAGES  = 100
 DEFAULT_BOOK_PRICE  = 28.71 #reales
 
-PRINT_BOOK_TYPE = :print
+
+DEFAULT_PACKAGE_WIDTH = 16 #cm
+
+
+PRINT_BOOK_TYPE     = :print
+DEFAULT_ORIGIN_CEP  = "05416-011"
 
 class ShipmentCalculatorService
-  def self.execute(hashed_books, cep)
+  def self.execute(hashed_books, destination_cep)
     package = calculate_rough_package_size(hashed_books)
 
-    puts "="*50
-    puts package
-    puts "="*50
+    frete = ::Correios::Frete::Calculador.new cep_origem: DEFAULT_ORIGIN_CEP,
+                                        cep_destino: destination_cep,
+                                        peso: package.weight,
+                                        comprimento: package.width,
+                                        largura: package.length,
+                                        altura: package.height,
+                                        valor_declarado: package.declared_value
 
-    {
-      modico: { shipping_time: 1, cost: 16.10 },
-      pac:    { shipping_time: 1, cost: 16.10 },
-      sedex:  { shipping_time: 1, cost: 16.10 }
-    } 
+    shipment_services_values = frete.calcular(:pac, :sedex)
 
-    # calculate_shipment_costs_for @default_address.zip_code
+    shipment_info = shipment_services_values.map do |service_key, service_value|
+      [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
+    end
+
+    Hash[shipment_info]
   end
 
   private
     def self.calculate_rough_package_size(hashed_books)
-      package = Package.new(0, 0, 0, 0, 0)
+      package = Package.new(0, DEFAULT_PACKAGE_WIDTH, 0, 0, 0)
 
       hashed_books.each do |data|
         next if data[:book_type] != PRINT_BOOK_TYPE
@@ -41,12 +50,10 @@ class ShipmentCalculatorService
         book_pages  = book.pages        || DEFAULT_BOOK_PAGES
         book_price  = book.price_print  || DEFAULT_BOOK_PRICE
 
-        data[:quantity].times do
-          package.weight += (book_weight * data[:quantity])
-          package.width   = book_width  if package.width < book_width
-          package.length  = book_length if package.length < book_length
-          package.height += calculate_book_height(book_pages)
-        end
+        package.weight += (book_weight * data[:quantity])
+        package.width   = book_width  if package.width < book_width
+        package.length  = book_length if package.length < book_length
+        package.height += (calculate_book_height(book_pages) * data[:quantity])
 
         #TODO: it doesn't consider promotions.
         package.declared_value += (data[:quantity] * book_price)
