@@ -1666,7 +1666,18 @@ html, body {
     margin-left: 20px;
     font-size: 18px;
     display:block;
+    line-height: 20px;
+    i {
+      margin-top: 5px;
+      margin-right: 7px;
+    }
   }
+  span.recalculate-shipment-cost {
+    margin-top: 5px;
+    color: #519fc0;
+    cursor: pointer;
+  }
+  
   #shipment-types {
     margin-top: 20px;
 

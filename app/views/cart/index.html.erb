@@ -106,7 +106,7 @@
         <input type="hidden" name="token" id="token"/>
 
         <%= render "address", :payment_method => :credit_card%>
-        <%= render "shipment_selection", :payment_method => :credit_card %>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
 
         <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
       <% end %>
@@ -134,7 +134,7 @@
         </div>
 
         <%= render "address", :payment_method => :bank_slip %>
-        <%= render "shipment_selection", :payment_method => :credit_card%>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
 
         <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
       <% end %>
@@ -152,7 +152,7 @@
       <div class="alert alert-error" style="display: none;"><ul></ul></div>
       <%= form_tag({controller: :checkout, action: :finish} ) do %>
         <%= render "address", :payment_method => :paypal%>
-        <%= render "shipment_selection", :payment_method => :credit_card%>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
         <input type="submit" class="btn" value="Pagar  (Paypal)" />
       <% end %>
     </div>
