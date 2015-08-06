@@ -15,7 +15,6 @@ gem 'annotate',           ">=2.5.0"
 gem 'carrierwave',        '0.8.0'
 gem 'rmagick',            '2.13.2'
 gem 'mini_magick',        '3.6.0'
-gem 'sanitize',           '2.0.3'
 gem 'truncate_html',      '0.9.2'
 gem 'newrelic_rpm',       '3.6.2.96'
 gem 'sitemap_generator',  '3.4'
@@ -26,7 +25,7 @@ gem 'bourbon',            '3.1.6'
 gem 'ckeditor',           '4.0.4'
 gem 'devise',             '2.2.4'
 gem 'country-select',     '1.1.1'
-gem 'activemerchant',     '1.34.1'
+gem 'activemerchant',     '1.43.3'
 gem 'active_utils',       '< 3.0.0' #The v3 change the namespace of validateable. See commit:
                                     # => https://github.com/Shopify/active_utils/commit/2b45f7f
 gem 'sidekiq',            '2.13.0'
@@ -81,3 +80,4 @@ gem 'capistrano', '2.15.5'
 
 # To use debugger
 # gem 'debugger'
+gem 'correios-frete', '1.9.3', require: false

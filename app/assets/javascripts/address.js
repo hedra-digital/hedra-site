@@ -67,3 +67,16 @@ $("#address_form").validate({
                     address_state: "required"
                 }
             });
+
+function recalculateShipmentCosts(source) {
+  var input =  $(source).closest("form").find("input[name='address[zip_code]']")[0];
+  if(input == undefined) return;
+
+  var cep = input.value;
+
+  $.ajax({
+    url: "shipment_cost/" + cep + ".js",
+    success: function(data) {
+    },
+  });
+}

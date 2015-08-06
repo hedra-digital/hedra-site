@@ -1,163 +1,168 @@
 <% page_data :title => 'Carrinho de compras', :type => 'other' %>
 
-<div id="payment_cart" class="related">
-  <div class="container">
-    <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
+<div id="payment-method-choosing">
+  <div id="payment_cart" class="related">
+    <div class="container">
+      <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
 
-    <% if session[:cart].size > 0 %>
-      <%= simple_form_for(:cart, :url => update_cart_path, :method => :put) do |f| %>
+      <% if session[:cart].size > 0 %>
+        <%= simple_form_for(:cart, :url => update_cart_path, :method => :put) do |f| %>
 
-        <table class="cart-page-table table">
-          <thead>
-            <tr>
-              <td>Título</td>
-              <td>Quantidade</td>
-              <td>Peso</td>
-              <td>Preço</td>
-              <td>Remover</td>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% session[:cart].each do |item| %>
-            <% 
-              book = Book.find(item[:book_id])
-              book_type = item[:book_type]
-              quantity = item[:quantity] 
-            %>
+          <table class="cart-page-table table">
+            <thead>
               <tr>
-                <td>
-                  <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
-                  <%= content_tag(:div, content_tag(:p, book.long_title(book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
-                </td>
-                <td class="cart-page-book-quantity">
-                  <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}" } %>
-                </td>
-                <td class="cart-page-book-weight">
-                  <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight and book_type != :ebook %>
-                </td>
-                <td class="cart-page-book-price">
-                  <%= number_to_currency(show_price(book, book_type).*(quantity)) %>
-                </td>
-                <td class="cart-page-remove-item">
-                  <%= link_to("x", remove_from_cart_path(book.id, book_type: book_type), :method => :post) %>
+                <td>Título</td>
+                <td>Quantidade</td>
+                <td>Peso</td>
+                <td>Preço</td>
+                <td>Remover</td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% session[:cart].each do |item| %>
+              <% 
+                book = Book.find(item[:book_id])
+                book_type = item[:book_type]
+                quantity = item[:quantity] 
+              %>
+                <tr>
+                  <td>
+                    <%= content_tag(:div, image_tag(book.cover_url.to_s), :class => 'cart-book-cover cover') %>
+                    <%= content_tag(:div, content_tag(:p, book.long_title(book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
+                  </td>
+                  <td class="cart-page-book-quantity">
+                    <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}" } %>
+                  </td>
+                  <td class="cart-page-book-weight">
+                    <%= (book.weight * 1000).to_i.*(quantity).to_s + "g" if book.weight and book_type != :ebook %>
+                  </td>
+                  <td class="cart-page-book-price">
+                    <%= number_to_currency(show_price(book, book_type).*(quantity)) %>
+                  </td>
+                  <td class="cart-page-remove-item">
+                    <%= link_to("x", remove_from_cart_path(book.id, book_type: book_type), :method => :post) %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td id="cart-form-total" colspan="5">
+                  <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
+                  Total <span><%= number_to_currency(cart_total) %></span>
                 </td>
               </tr>
-            <% end %>
-            <tr>
-              <td id="cart-form-total" colspan="5">
-                <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
-                Total <span><%= number_to_currency(cart_total) %></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        <% end %>
+
+      <% else %>
+        <p>Você não tem livros no carrinho.</p>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div id="payment_user" class="related">
+    <div class="container">
+      <%- if current_user %>
+          <%= render '/checkout/second_step' %>
+      <%- else %>
+          <%= render '/checkout/sign_up_or_sign_in', standalone: false %>
+      <%- end %>
+    </div>
+  </div>  
+
+  <div class="container">
+    <h1>Segundo passo: método de pagamento</h1>
+  </div>
+
+  <div class="container">
+    <h4 id="link_to_payment_card"><input type="radio" checked="checked"/><i class="icon-credit-card"></i> Cartão de Crédito</h4>
+  </div>
+
+  <div id="payment_card">
+    <div class="container">
+      
+      <div class="card-wrapper"></div>
+
+      <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+      <%= form_tag({controller: :payment, action: :credit_card} ) do %>
+
+        <div class="row">
+          <div class="span4"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
+          <div class="span6"><input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" /></div>
+        </div>
+
+        <div class="row">
+          <div class="span4"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
+          <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
+        </div>
+
+        <div class="row">
+          <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
+        </div>
+          
+        <input type="hidden" name="token" id="token"/>
+
+        <%= render "address", :payment_method => :credit_card%>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
+
+        <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
+      <% end %>
+    </div>
+
+  </div>
+
+
+
+  <div class="container">
+    <h4 id="link_to_payment_slip"><input type="radio" /><i class="icon-barcode"></i> Boleto Bancário</h4>
+  </div>
+
+  <div id="payment_slip">
+    <div class="container">
+
+      <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+      <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
+
+        <h3><i class="icon-user"></i> Dados Pessoais</h3>
+
+        <div class="row">
+          <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
+        </div>
+
+        <%= render "address", :payment_method => :bank_slip %>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
+
+        <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
       <% end %>
 
-    <% else %>
-      <p>Você não tem livros no carrinho.</p>
-    <% end %>
+    </div>
   </div>
-</div>
 
 
-<div id="payment_user" class="related">
   <div class="container">
-    <%- if current_user %>
-        <%= render '/checkout/second_step' %>
-    <%- else %>
-        <%= render '/checkout/sign_up_or_sign_in', standalone: false %>
-    <%- end %>
-  </div>
-</div>  
-
-<div class="container">
-  <h1>Segundo passo: método de pagamento</h1>
-</div>
-
-<div class="container">
-  <h4 id="link_to_payment_card"><input type="radio" checked="checked"/><i class="icon-credit-card"></i> Cartão de Crédito</h4>
-</div>
-
-<div id="payment_card">
-  <div class="container">
-    
-    <div class="card-wrapper"></div>
-
-    <div class="alert alert-error" style="display: none;"><ul></ul></div>
-
-    <%= form_tag({controller: :payment, action: :credit_card} ) do %>
-
-      <div class="row">
-        <div class="span4"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
-        <div class="span6"><input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" /></div>
-      </div>
-
-      <div class="row">
-        <div class="span4"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
-        <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
-      </div>
-
-      <div class="row">
-        <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
-      </div>
-        
-      <input type="hidden" name="token" id="token"/>
-
-      <%= render "address", :payment_method => :credit_card%>
-
-      <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
-    <% end %>
+    <h4 id="link_to_payment_paypal"><input type="radio" /> Paypal</h4>
   </div>
 
-</div>
-
-
-
-<div class="container">
-  <h4 id="link_to_payment_slip"><input type="radio" /><i class="icon-barcode"></i> Boleto Bancário</h4>
-</div>
-
-<div id="payment_slip">
-  <div class="container">
-
-    <div class="alert alert-error" style="display: none;"><ul></ul></div>
-
-    <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
-
-      <h3><i class="icon-user"></i> Dados Pessoais</h3>
-
-      <div class="row">
-        <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
-      </div>
-
-      <%= render "address", :payment_method => :bank_slip %>
-
-      <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
-    <% end %>
-
+  <div id="payment_paypal">
+    <div class="container">
+      <div class="alert alert-error" style="display: none;"><ul></ul></div>
+      <%= form_tag({controller: :checkout, action: :finish} ) do %>
+        <%= render "address", :payment_method => :paypal%>
+        <%= render "shipment_selection", cep: @default_address.zip_code%>
+        <input type="submit" class="btn" value="Pagar  (Paypal)" />
+      <% end %>
+    </div>
   </div>
-</div>
 
 
-<div class="container">
-  <h4 id="link_to_payment_paypal"><input type="radio" /> Paypal</h4>
-</div>
-
-<div id="payment_paypal">
-  <div class="container">
-    <div class="alert alert-error" style="display: none;"><ul></ul></div>
-    <%= form_tag({controller: :checkout, action: :finish} ) do %>
-      <%= render "address", :payment_method => :paypal%>
-      <input type="submit" class="btn" value="Pagar  (Paypal)" />
-    <% end %>
-  </div>
-</div>
-
-
-<div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
-  <div class="modal-body">
-    <h5><i class="icon-spinner icon-spin icon-3x"></i> <em>Espera...</em></h5>
+  <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
+    <div class="modal-body">
+      <h5><i class="icon-spinner icon-spin icon-3x"></i> <em>Espera...</em></h5>
+    </div>
   </div>
 </div>
 

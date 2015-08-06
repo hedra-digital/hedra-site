@@ -1,4 +1,3 @@
-class CartController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TextHelper
 
@@ -8,18 +7,24 @@ class CartController < ApplicationController
       return
     end
 
-    @default_phone = nil
-    @default_cpf = nil
-    @default_address = nil
+    @default_phone    = nil
+    @default_cpf      = nil
+    @default_address  = nil
+    @shipment_costs   = nil
 
     if current_user
 
       last_order = Order.where(user_id: current_user.id).order("id").last
 
-      if last_order 
-        @default_phone = last_order.telephone
-        @default_cpf = last_order.cpf_cnpj
-        @default_address = last_order.address
+      if last_order
+        @default_phone    = last_order.telephone
+        @default_cpf      = last_order.cpf_cnpj
+        @default_address  = last_order.address
+
+        #TODO: it won't certainly have shipment cost if all purchased book isn't printed.
+        if session[:cart].size > 0
+          @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @default_address.zip_code)
+        end
       end
     end
   end
@@ -59,4 +64,14 @@ class CartController < ApplicationController
     redirect_to :back
   end
 
+  def shipment_cost
+    @cep   = params[:cep]
+    @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
+  end
+
+  private
+
+    def come_from_blog?
+      request.referer =~ /\/blog(\/|$)/
+    end
 end
