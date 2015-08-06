@@ -1,3 +1,4 @@
+class CartController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TextHelper
 
