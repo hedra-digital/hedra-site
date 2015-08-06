@@ -21,12 +21,13 @@ class CartController < ApplicationController
         @default_phone    = last_order.telephone
         @default_cpf      = last_order.cpf_cnpj
         @default_address  = last_order.address
-
-        #TODO: it won't certainly have shipment cost if all purchased book isn't printed.
-        if session[:cart].size > 0
-          @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @default_address.zip_code)
-        end
       end
+    end
+
+    @cep = @default_address.nil? ? nil : @default_address.zip_code
+
+    if session[:cart].size > 0
+      @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep) #nil when there aren't printed books.
     end
   end
 

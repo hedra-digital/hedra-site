@@ -8,7 +8,8 @@ DEFAULT_BOOK_PAGES  = 100
 DEFAULT_BOOK_PRICE  = 28.71 #reales
 
 
-DEFAULT_PACKAGE_WIDTH = 16 #cm
+DEFAULT_PACKAGE_WIDTH   = 16 #cm
+DEFAULT_PACKAGE_HEIGHT  =  2 #cm
 
 
 PRINT_BOOK_TYPE     = :print
@@ -16,7 +17,11 @@ DEFAULT_ORIGIN_CEP  = "05416-011"
 
 class ShipmentCalculatorService
   def self.execute(hashed_books, destination_cep)
+    return {} unless destination_cep
+
     package = calculate_rough_package_size(hashed_books)
+
+    return nil unless package #is nil when there aren't printed books.
 
     frete = ::Correios::Frete::Calculador.new cep_origem: DEFAULT_ORIGIN_CEP,
                                         cep_destino: destination_cep,
@@ -28,6 +33,7 @@ class ShipmentCalculatorService
 
     shipment_services_values = frete.calcular(:pac, :sedex)
 
+    #TODO: check the errors.
     shipment_info = shipment_services_values.map do |service_key, service_value|
       [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
     end
@@ -37,10 +43,11 @@ class ShipmentCalculatorService
 
   private
     def self.calculate_rough_package_size(hashed_books)
-      package = Package.new(0, DEFAULT_PACKAGE_WIDTH, 0, 0, 0)
+      package = nil
 
       hashed_books.each do |data|
         next if data[:book_type] != PRINT_BOOK_TYPE
+        package ||= Package.new(0, DEFAULT_PACKAGE_WIDTH, 0, DEFAULT_PACKAGE_HEIGHT, 0)
 
         book = Book.find(data[:book_id])
 

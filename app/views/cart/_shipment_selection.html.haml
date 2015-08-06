@@ -1,0 +1,32 @@
+.shipment-selection
+  %h3
+    %i.icon-truck
+    Cálculo de frete
+  - unless cep
+    %span Por favor, llene la información de entrega para poder calcular los gastos de envio
+    %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
+      %i.icon-refresh
+      Recalcular
+  - else
+    %span
+      Calculo realizado para el CEP ingresado previamente:
+      %b= cep
+    %span Para un nuevo cálculo, cambia el CEP en el cuadro de arriba.
+    %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
+      %i.icon-refresh
+      Recalcular
+    #shipment-types.row
+      .span6
+        - @shipment_costs.each_with_index do |(name, values), index|
+          %label.radio
+            %input{:name => "shipement-type", :type => "radio", :checked => index == 0, :value => name }
+              #{name.to_s.capitalize}
+            %span.delivery-time
+              (Plazo de entrega: #{values[:shipping_time]} dias úteis)
+          %br/
+      .span4
+        - @shipment_costs.each do |name, values|
+          %label.label{:style => "font-size: 18px"}
+            Costo: R$ #{values[:cost]}
+            %br/
+          %br/
