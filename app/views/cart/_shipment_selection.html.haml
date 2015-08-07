@@ -19,7 +19,7 @@
       .span6
         - @shipment_costs.each_with_index do |(name, values), index|
           %label.radio
-            %input{:name => "shipement-type", :type => "radio", :checked => index == 0, :value => name }
+            %input{:name => "shipping_type", :type => "radio", :checked => index == 0, :value => name }
               #{name.to_s.capitalize}
             %span.delivery-time
               (Plazo de entrega: #{values[:shipping_time]} dias úteis)

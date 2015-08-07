@@ -19,8 +19,13 @@ class PaymentController < ApplicationController
       return
     end
 
+    @order = nil
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj], params[:telephone])
+    begin
+      @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
+    rescue ArgumentError => e
+      redirect_to cart_url, :alert => "Error to calculate shipping costs." and return
+    end
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
@@ -28,7 +33,7 @@ class PaymentController < ApplicationController
     iugu_charge = Iugu::Charge.create(payment_params)
 
     logger.info(iugu_charge.attributes)
-  
+
     @transaction = @order.transactions.last
     @transaction.customer_ip = request.remote_ip
     @transaction.payment_status = Transaction::PENDING
@@ -48,7 +53,7 @@ class PaymentController < ApplicationController
 
 
   def bank_slip
-    if session[:cart].blank? 
+    if session[:cart].blank?
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
@@ -58,7 +63,14 @@ class PaymentController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone])
+    @order = nil
+
+    begin
+      @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
+    rescue ArgumentError => e
+      redirect_to cart_url, :alert => "Error to calculate shipping costs." and return
+    end
+
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({

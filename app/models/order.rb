@@ -1,5 +1,11 @@
 class Order < ActiveRecord::Base
-  attr_accessible :item_total, :total, :state, :completed_at, :shipment_state, :payment_state, :email, :special_instructions, :user, :address, :book, :user_id, :post_tracking_code, :cpf_cnpj, :telephone, :erp_id
+  attr_accessible :item_total, :total, :state,
+    :completed_at, :shipment_state, :payment_state,
+    :email, :special_instructions, :user, :address,
+    :book, :user_id, :post_tracking_code,
+    :cpf_cnpj, :telephone, :erp_id,
+    :shipping_type, :shipping_cost, :shipping_time
+
   belongs_to :user
   has_many :transactions
   has_many :order_items
@@ -15,8 +21,23 @@ class Order < ActiveRecord::Base
     items = []
     self.order_items.each do |item|
       book = item.book
-      items << {name: book.long_title(item.book_type.to_sym), number: book.id, amount: (item.price*100).round, quantity: item.quantity}
+      items << {
+        name: book.long_title(item.book_type.to_sym),
+        number: book.id,
+        amount: (item.price*100).round,
+        quantity: item.quantity
+      }
     end
+
+    if shipping_cost && shipping_time && shipping_type
+      items << {
+        name: "Shipping cost(service: #{shipping_type}, cep: #{address.zip_code})",
+        number: 0,
+        amount: (shipping_cost*100).round,
+        quantity: 1
+      }
+    end
+
     items
   end
 
@@ -25,6 +46,10 @@ class Order < ActiveRecord::Base
     self.order_items.each do |item|
       book = item.book
       items << {description: book.long_title(item.book_type.to_sym), price_cents: (item.price*100).round, quantity: item.quantity}
+    end
+
+    if shipping_cost && shipping_time && shipping_type
+      items << { description: "Shipping cost(service: #{shipping_type}, cep: #{address.zip_code})", price_cents: (shipping_cost*100).round, quantity: 1 }
     end
     items
   end

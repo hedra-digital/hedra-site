@@ -16,7 +16,7 @@ PRINT_BOOK_TYPE     = :print
 DEFAULT_ORIGIN_CEP  = "05416-011"
 
 class ShipmentCalculatorService
-  def self.execute(hashed_books, destination_cep)
+  def self.execute(hashed_books, destination_cep, choose_type=nil)
     return {} unless destination_cep
 
     package = calculate_rough_package_size(hashed_books)
@@ -31,11 +31,15 @@ class ShipmentCalculatorService
                                         altura: package.height,
                                         valor_declarado: package.declared_value
 
-    shipment_services_values = frete.calcular(:pac, :sedex)
-
-    #TODO: check the errors.
-    shipment_info = shipment_services_values.map do |service_key, service_value|
-      [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
+    if choose_type
+      shipment_service = frete.calcular choose_type.to_sym
+      shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega } ]]
+    else
+      #TODO: check the errors.
+      shipment_services_values = frete.calcular(:pac, :sedex)
+      shipment_info = shipment_services_values.map do |service_key, service_value|
+        [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
+      end
     end
 
     Hash[shipment_info]
