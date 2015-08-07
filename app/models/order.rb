@@ -21,8 +21,23 @@ class Order < ActiveRecord::Base
     items = []
     self.order_items.each do |item|
       book = item.book
-      items << {name: book.long_title(item.book_type.to_sym), number: book.id, amount: (item.price*100).round, quantity: item.quantity}
+      items << {
+        name: book.long_title(item.book_type.to_sym),
+        number: book.id,
+        amount: (item.price*100).round,
+        quantity: item.quantity
+      }
     end
+
+    if shipping_cost && shipping_time && shipping_type
+      items << {
+        name: "Shipping cost(service: #{shipping_type}, cep: #{address.zip_code})",
+        number: 0,
+        amount: (shipping_cost*100).round,
+        quantity: 1
+      }
+    end
+
     items
   end
 
