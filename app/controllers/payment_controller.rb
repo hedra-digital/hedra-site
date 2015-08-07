@@ -63,7 +63,14 @@ class PaymentController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone])
+    @order = nil
+
+    begin
+      @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
+    rescue ArgumentError => e
+      redirect_to cart_url, :alert => "Error to calculate shipping costs." and return
+    end
+
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
 
     iugu_charge = Iugu::Charge.create({
