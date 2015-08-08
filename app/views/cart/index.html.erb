@@ -61,7 +61,6 @@
     </div>
   </div>
 
-
   <div id="payment_user" class="related">
     <div class="container">
       <%- if current_user %>
@@ -70,7 +69,7 @@
           <%= render '/checkout/sign_up_or_sign_in', standalone: false %>
       <%- end %>
     </div>
-  </div>  
+  </div>
 
   <div class="container">
     <h1>Segundo passo: método de pagamento</h1>
@@ -105,16 +104,13 @@
           
         <input type="hidden" name="token" id="token"/>
 
+        <%= render "shipment_selection", cep: @cep %>
         <%= render "address", :payment_method => :credit_card%>
-        <%= if @shipment_costs ; render "shipment_selection", cep: @cep ; end %>
 
         <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
       <% end %>
     </div>
-
   </div>
-
-
 
   <div class="container">
     <h4 id="link_to_payment_slip"><input type="radio" /><i class="icon-barcode"></i> Boleto Bancário</h4>
@@ -133,15 +129,14 @@
           <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
         </div>
 
+        <%= render "shipment_selection", cep: @cep %>
         <%= render "address", :payment_method => :bank_slip %>
-        <%= if @shipment_costs ; render "shipment_selection", cep: @cep ; end %>
 
         <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
       <% end %>
 
     </div>
   </div>
-
 
   <div class="container">
     <h4 id="link_to_payment_paypal"><input type="radio" /> Paypal</h4>
@@ -151,13 +146,12 @@
     <div class="container">
       <div class="alert alert-error" style="display: none;"><ul></ul></div>
       <%= form_tag({controller: :checkout, action: :finish} ) do %>
+        <%= render "shipment_selection", cep: @cep %>
         <%= render "address", :payment_method => :paypal%>
-        <%= if @shipment_costs ; render "shipment_selection", cep: @cep ; end %>
         <input type="submit" class="btn" value="Pagar  (Paypal)" />
       <% end %>
     </div>
   </div>
-
 
   <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
     <div class="modal-body">

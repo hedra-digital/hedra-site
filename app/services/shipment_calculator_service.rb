@@ -15,6 +15,8 @@ DEFAULT_PACKAGE_HEIGHT  =  2 #cm
 PRINT_BOOK_TYPE     = :print
 DEFAULT_ORIGIN_CEP  = "05416-011"
 
+SUCCESS_CORREIOS_RESPONSE = "0"
+
 class ShipmentCalculatorService
   def self.execute(hashed_books, destination_cep, choose_type=nil)
     return {} unless destination_cep
@@ -37,7 +39,9 @@ class ShipmentCalculatorService
     else
       #TODO: check the errors.
       shipment_services_values = frete.calcular(:pac, :sedex)
+
       shipment_info = shipment_services_values.map do |service_key, service_value|
+        return nil unless service_value.erro == SUCCESS_CORREIOS_RESPONSE
         [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
       end
     end
