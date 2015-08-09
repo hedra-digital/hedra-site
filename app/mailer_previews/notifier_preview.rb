@@ -20,7 +20,7 @@ class NotifierPreview
 
 
   def order_completed
-    Notifier.order_completed order
+    Notifier.order_completed Order.last
   end
 
 

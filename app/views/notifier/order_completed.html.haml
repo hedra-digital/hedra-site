@@ -41,9 +41,29 @@
                                   = item.quantity
                                 %td{:height => "10", :width => "100"}
                                   = number_to_currency item.price
+
+                            %tr
+                              %td{:height => "50", colpan: 3}
+                            %tr
+                              %td{:height => "15", :width => "300"}
+                              %td{:height => "15", :width => "100"} Subtotal
+                              %td{:height => "15", :width => "100"}
+                                = number_to_currency(@order.total - @order.shipping_cost)
+                            %tr
+                              %td{:height => "15", :width => "300"}
+                              %td{:height => "15", :width => "150"}Frete Cargo
+                              %td{:height => "15", :width => "100"}
+                                = number_to_currency @order.shipping_cost
+                            %tr
+                              %td{:height => "30", colpan: 3}
+                            %tr
+                              %td{:height => "15", :width => "300"}
+                              %td{:height => "15", :width => "100"} <b>Total</b>
+                              %td{:height => "15", :width => "100"}
+                                = number_to_currency @order.total
                             %tr
                               %td{:valign => "top", :width => "500"}
-                                %p O prazo de entrega é de até 10 dias úteis a partir de hoje. A entrega será realizada no endereço abaixo:
+                                %p O prazo de entrega é de até #{@order.shipping_time + 1} dias úteis a partir de hoje. A entrega será realizada no endereço abaixo:
                             %tr
                               %td{:valign => "top", :width => "500"}
                                 %p
