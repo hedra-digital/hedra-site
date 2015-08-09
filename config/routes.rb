@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 HedraSite::Application.routes.draw do
 
+  mount RailsEmailPreview::Engine, at: 'emails'
+
   devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions", :passwords => "passwords"}
 
 

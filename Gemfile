@@ -64,6 +64,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'simplecov', require: false
   gem "codeclimate-test-reporter", group: :test, require: nil
+  gem "rails_email_preview",    "0.2.29"
 end
 
 # To use ActiveModel has_secure_password
