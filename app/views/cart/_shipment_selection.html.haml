@@ -30,6 +30,6 @@
       .span3{style: "text-align: right"}
         - @shipment_costs.each do |name, values|
           %label.label{:style => "font-size: 18px"}
-            Costo: R$ #{values[:cost]}
+            Custo: #{number_to_currency(values[:cost])}
             %br/
           %br/
