@@ -8,19 +8,26 @@ class CartController < ApplicationController
       return
     end
 
-    @default_phone = nil
-    @default_cpf = nil
-    @default_address = nil
+    @default_phone    = nil
+    @default_cpf      = nil
+    @default_address  = nil
+    @shipment_costs   = nil
 
     if current_user
 
       last_order = Order.where(user_id: current_user.id).order("id").last
 
-      if last_order 
-        @default_phone = last_order.telephone
-        @default_cpf = last_order.cpf_cnpj
-        @default_address = last_order.address
+      if last_order
+        @default_phone    = last_order.telephone
+        @default_cpf      = last_order.cpf_cnpj
+        @default_address  = last_order.address
       end
+    end
+
+    @cep = @default_address.nil? ? nil : @default_address.zip_code
+
+    if session[:cart].size > 0
+      @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep) #nil when there aren't printed books.
     end
   end
 
@@ -37,8 +44,7 @@ class CartController < ApplicationController
     end
 
     flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(view_context.cart_total)}</strong><br>Você tem #{pluralize(session[:cart].size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
-
-    redirect_to(come_from_blog? ? cart_path : :back)
+    redirect_to :back
   end
 
   def update
@@ -60,10 +66,14 @@ class CartController < ApplicationController
     redirect_to :back
   end
 
+  def shipment_cost
+    @cep   = params[:cep]
+    @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
+  end
+
   private
 
     def come_from_blog?
       request.referer =~ /\/blog(\/|$)/
     end
-
 end

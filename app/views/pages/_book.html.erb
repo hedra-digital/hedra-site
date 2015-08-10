@@ -21,7 +21,7 @@
                 <% if find_promotion(book) %>
                   <%= number_to_percentage(show_discount(find_promotion(book), book), precision: 0)%> OFF
                 <% else %>
-                  livro
+                  compre
                 <% end %>
               </span>
               <span class="price"><%= number_to_currency(show_price(book, :print))%></span>

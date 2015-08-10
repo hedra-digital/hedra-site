@@ -1,20 +1,31 @@
 <h3><i class="icon-home"></i> endereço para a entrega</h3>
 
 <div class="row">
-  <div class="span4"><input type="text" placeholder="Endereço" name="address[address]" myrequired value='<%= @default_address.nil? ? "" : @default_address.address%>'  /></div>
-  <div class="span6"><input type="text" placeholder="Número" name="address[number]" value='<%= @default_address.nil? ? "" : @default_address.number%>' /></div>
+  <div class="span4">
+    <input type="text" placeholder="Endereço" name="address[address]" myrequired value='<%= @default_address.nil? ? "" : @default_address.address%>'  />
+  </div>
+
+  <div class="span6">
+    <input type="text" placeholder="Número" name="address[number]" value='<%= @default_address.nil? ? "" : @default_address.number%>' />
+  </div>
 </div>
 
 <div class="row">
-  <div class="span4"><input type="text" placeholder="Cidade" name="address[city]" myrequired value='<%= @default_address.nil? ? "" : @default_address.city%>' /></div>
-  <div class="span6"><%= select_tag("address[state]", options_for_select(Address::STATE, @default_address.nil? ? "" : @default_address.state), prompt: "Estado", placeholder: "Estado", myrequired: "")%></div>
+  <div class="span4">
+    <input type="text" placeholder="Cidade" name="address[city]" myrequired value='<%= @default_address.nil? ? "" : @default_address.city%>' />
+  </div>
+
+  <div class="span6">
+    <%= select_tag("address[state]", options_for_select(Address::STATE, @default_address.nil? ? "" : @default_address.state), prompt: "Estado", placeholder: "Estado", myrequired: "")%>
+  </div>
 </div>
 
 <div class="row">
-  <div class="span4"><input type="text" placeholder="CEP" name="address[zip_code]" value='<%= @default_address.nil? ? "" : @default_address.zip_code%>'/></div>
+  <div class="span4">
+    <input type="text" placeholder="CEP de cálculo de frete" readonly="true" name="address[zip_code]" value='<%= @default_address.nil? ? "" : @default_address.zip_code%>'/>
+    </div>
   <div class="span4 cpf-cnpj">
-
-  	<div class="btn-group btn-group-xs" role="group">
+    <div class="btn-group btn-group-xs" role="group">
       <button type="button" class="btn btn-default cpf current">CPF</button>
       <button type="button" class="btn btn-default cnpj">CNPJ</button>
     </div>
@@ -24,6 +35,7 @@
 </div>
 
 <div class="row">
-  <div class="span4"><input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" 
-    value="<%= @default_phone%>" <%= "myrequired" if payment_method == :bank_slip%> /></div>
+  <div class="span4">
+    <input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" value="<%= @default_phone%>" <%= "myrequired" if payment_method == :bank_slip%> />
+  </div>
 </div>

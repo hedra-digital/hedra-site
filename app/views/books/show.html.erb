@@ -14,7 +14,43 @@
         <div class="book-text span6">
           <%= @book.description.html_safe %>
         </div>
-        <%=render "book_price", book: @book %>
+        <aside class="book-price span3">
+          <div class="list-price">
+            <% if find_promotion(@book) %>
+              <div class="promotion-div">
+                <span>de </span><span class="price"><%= number_to_currency(@book.price_print)%></span>
+              </div>
+            <% end %>
+
+            <ul class="buy">
+              <% if @book.price_print%>
+                <li>
+                  <%= link_to add_to_cart_path(@book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(@book)}" do%>
+                    <span class="type">compre</span>
+                    <span class="price"><%= number_to_currency(show_price(@book, :print))%></span>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @book.price_ebook%>
+                <li>
+                  <%= link_to add_to_cart_path(@book, book_type: :ebook), :method => :post, :class => 'btn btn-primary' do%>
+                    <span class="type">compre (ebook)</span>
+                    <span class="price"><%= number_to_currency(show_price(@book, :ebook))%></span>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @book.packet_discount%>
+                <li>
+                  <%= link_to add_to_cart_path(@book, book_type: :packet), :method => :post, :class => 'btn btn-primary' do%>
+                    <span class="type">compre (ebook+livro)</span>
+                    <span class="price"><%= number_to_currency(show_price(@book, :packet))%></span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+        </aside>
       </div>
     <% else %>
       <div class="book-text span9">

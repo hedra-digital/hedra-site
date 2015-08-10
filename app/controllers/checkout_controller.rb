@@ -17,7 +17,14 @@ class CheckoutController < ApplicationController
       return
     end
 
-    @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone])
+    @order = nil
+
+    begin
+      @order = @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
+    rescue ArgumentError => e
+      redirect_to cart_url, :alert => "Erro AO calcular custo do frete." and return
+    end
+
     if !@order.nil?
       session[:transaction_id] = @order.transactions.last.id
       session[:items] = @order.order_items_to_paypal
@@ -61,11 +68,13 @@ class CheckoutController < ApplicationController
   private
 
   def get_setup_purchase_params(order, request, items)
-    return to_cents(order.total), {
+    total = to_cents(order.total + (order.shipping_cost || 0))
+
+    return total, {
       :ip => request.remote_ip,
       :return_url => url_for(:action => 'review', :only_path => false),
       :cancel_return_url => cart_url,
-      :subtotal => to_cents(order.total),
+      :subtotal => total,
       :header_background_color => 'ff0000',
       :allow_note =>  true,
       :email => current_user.email,

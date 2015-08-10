@@ -1,0 +1,35 @@
+.shipment-selection
+  %h3
+    %i.icon-truck
+    Cálculo de frete
+  .row
+    .span3{style: "text-align:left;"}
+      %label.label CEP de Endereço
+    .span3
+      %input.cep_to_estimate_shipping_costs{autocomplete: "off", placeholder: "CEP", type: "text", value: cep}
+    .span3{style: "text-align: center;"}
+      %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
+        %i.icon-refresh
+        Calcular
+
+  #shipment-types.row
+    - unless @shipment_costs
+      .span12.shipping-error
+        .alert.alert-error
+          %ul
+            %li Erro de calcular os custos de frete.
+    -else
+      .span6
+        - @shipment_costs.each_with_index do |(name, values), index|
+          %label.radio
+            %input{:name => "shipping_type", :type => "radio", :checked => index == 0, :value => name }
+              #{name.to_s.capitalize}
+            %span.delivery-time
+              (Plazo de entrega: #{values[:shipping_time]} #{values[:shipping_time] == 1 ? "dia útil" : "dias úteis"})
+          %br/
+      .span3{style: "text-align: right"}
+        - @shipment_costs.each do |name, values|
+          %label.label{:style => "font-size: 18px"}
+            Custo: #{number_to_currency(values[:cost])}
+            %br/
+          %br/

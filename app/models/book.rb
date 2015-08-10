@@ -161,8 +161,8 @@ class Book < ActiveRecord::Base
     array.to_sentence(:two_words_connector => ' e ', :last_word_connector => ' e ').capitalize
   end
 
-  def sanitize_description
-    self.description = Sanitize.clean(self.description, Sanitize::Config::BASIC).html_safe
-  end
+  # def sanitize_description
+  #   self.description = Sanitize.clean(self.description, Sanitize::Config::BASIC).html_safe
+  # end
 
 end

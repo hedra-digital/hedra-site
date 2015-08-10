@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150306142415) do
+ActiveRecord::Schema.define(:version => 20150807120327) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -232,6 +232,9 @@ ActiveRecord::Schema.define(:version => 20150306142415) do
     t.string   "cpf_cnpj"
     t.string   "telephone"
     t.string   "erp_id"
+    t.decimal  "shipping_cost",        :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "shipping_time"
+    t.string   "shipping_type"
   end
 
   create_table "pages", :force => true do |t|

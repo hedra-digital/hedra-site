@@ -67,3 +67,32 @@ $("#address_form").validate({
                     address_state: "required"
                 }
             });
+
+function recalculateShipmentCosts(source) {
+  var input =  $(source).closest("form").find("input.cep_to_estimate_shipping_costs")[0];
+  if(input == undefined) {
+    alert("Erro interno. Por favor, informe esse erro para o nosso departament sistema.")
+    return;
+  }
+
+  var cep = input.value;
+
+  if(cep == "") {
+    alert("Insira um CEP para recalcular os custos de envio");
+    $(".shipping-error").remove();
+    return;
+  }
+
+  $.ajax({
+    url: "shipment_cost/" + cep + ".js",
+    success: function(data) {
+      //TODO: add support to fill automatically the address and city fields using correios-cep gem.
+      if($(".shipping-error").length == 0) {
+        $("input[name='address[zip_code]'").val(cep);
+      } else
+      {
+        $("input[name='address[zip_code]'").val("");
+      }
+    },
+  });
+}
