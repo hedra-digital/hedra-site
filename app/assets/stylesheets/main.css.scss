@@ -621,6 +621,7 @@ footer {
   padding: 2px 10px;
   background: #ededef;
   border-radius: 5px;
+  width: 290px;
 
   a.promotion-css{
     background-color: #F17140;
@@ -987,6 +988,7 @@ article .list-price {
   padding-bottom: 0;
   z-index: 1;
   background: #f7f7f9;
+  .book-list-item .buy .btn { line-height: 0 }
 }
 
 /*
