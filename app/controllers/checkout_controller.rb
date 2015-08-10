@@ -22,7 +22,7 @@ class CheckoutController < ApplicationController
     begin
       @order = @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
     rescue ArgumentError => e
-      redirect_to cart_url, :alert => "Error to calculate shipping costs." and return
+      redirect_to cart_url, :alert => "Erro AO calcular custo do frete." and return
     end
 
     if !@order.nil?

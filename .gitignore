@@ -43,3 +43,4 @@ zeus.json
 Vagrantfile
 
 *.notes
+/public/tmp

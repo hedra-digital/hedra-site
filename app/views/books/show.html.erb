@@ -26,7 +26,7 @@
               <% if @book.price_print%>
                 <li>
                   <%= link_to add_to_cart_path(@book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(@book)}" do%>
-                    <span class="type">livro</span>
+                    <span class="type">compre</span>
                     <span class="price"><%= number_to_currency(show_price(@book, :print))%></span>
                   <% end %>
                 </li>
@@ -34,7 +34,7 @@
               <% if @book.price_ebook%>
                 <li>
                   <%= link_to add_to_cart_path(@book, book_type: :ebook), :method => :post, :class => 'btn btn-primary' do%>
-                    <span class="type">ebook</span>
+                    <span class="type">compre (ebook)</span>
                     <span class="price"><%= number_to_currency(show_price(@book, :ebook))%></span>
                   <% end %>
                 </li>
@@ -42,7 +42,7 @@
               <% if @book.packet_discount%>
                 <li>
                   <%= link_to add_to_cart_path(@book, book_type: :packet), :method => :post, :class => 'btn btn-primary' do%>
-                    <span class="type">ebook+livro</span>
+                    <span class="type">compre (ebook+livro)</span>
                     <span class="price"><%= number_to_currency(show_price(@book, :packet))%></span>
                   <% end %>
                 </li>

@@ -10,7 +10,7 @@
     .span3{style: "text-align: center;"}
       %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
         %i.icon-refresh
-        Recalcular
+        Calcular
 
   #shipment-types.row
     - unless @shipment_costs
@@ -25,11 +25,11 @@
             %input{:name => "shipping_type", :type => "radio", :checked => index == 0, :value => name }
               #{name.to_s.capitalize}
             %span.delivery-time
-              (Plazo de entrega: #{values[:shipping_time]} dias úteis)
+              (Plazo de entrega: #{values[:shipping_time]} #{values[:shipping_time] == 1 ? "dia útil" : "dias úteis"})
           %br/
       .span3{style: "text-align: right"}
         - @shipment_costs.each do |name, values|
           %label.label{:style => "font-size: 18px"}
-            Costo: R$ #{values[:cost]}
+            Custo: #{number_to_currency(values[:cost])}
             %br/
           %br/
