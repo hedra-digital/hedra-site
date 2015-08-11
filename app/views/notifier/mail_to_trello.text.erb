@@ -1,9 +1,9 @@
-Order 
+Order
 -------------
 https://hedra.com.br/admin/orders/<%= @order.id%> ,Paid at **<%= @order.transactions.last.updated_at.strftime("%Y-%m-%d")%>**
 
 
-User 
+User
 -------------
 <%= @order.user.name %> , <%= @order.user.email%>  https://hedra.com.br/admin/users/<%= @order.user.id%> 
 
@@ -12,13 +12,19 @@ Address
 -------------
 <%= @order.address.address%>, <%= @order.address.number%>, <%= @order.address.city%>, <%= @order.address.state%>, <%= @order.address.zip_code%>
 
+Shipping
+-------------
+  - Type: **<%= @order.shipping_type%>**
+  - Estimated time: <%= @order.shipping_time > 1 ? "#{@order.shipping_time} days" : "#{@order.shipping_time} day" %>
+  - Charge: <%= number_to_currency(@order.shipping_cost)%>
 
 Items
 -------------
 <% @order.order_items.each do |item|%>
-- **<%= item.book.long_title(item.book_type.to_sym)%>** , <%= number_to_currency item.price%> , X<%= item.quantity %>, <%= number_to_currency item.price * item.quantity%> .    
+- **<%= item.book.long_title(item.book_type.to_sym)%>** , <%= number_to_currency item.price%> , X<%= item.quantity %>, <%= number_to_currency item.price * item.quantity%> .
 <% end%>
 
+**Subtotal <%= number_to_currency(@order.total - @order.shipping_cost)%>**
 **Total <%= number_to_currency(@order.total)%>**
-**<%= @order.order_items.count%> Books**
 
+**<%= @order.order_items.count%> Books**

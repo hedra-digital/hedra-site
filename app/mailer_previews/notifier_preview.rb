@@ -5,7 +5,7 @@ class NotifierPreview
 
 
   def mail_to_trello
-    Notifier.mail_to_trello order
+    Notifier.mail_to_trello Order.last
   end
 
 
