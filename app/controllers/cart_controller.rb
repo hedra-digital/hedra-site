@@ -44,7 +44,8 @@ class CartController < ApplicationController
     end
 
     flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(view_context.cart_total)}</strong><br>Você tem #{pluralize(session[:cart].size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
-    redirect_to :back
+
+    redirect_to(come_from_blog? ? cart_path : :back)
   end
 
   def update

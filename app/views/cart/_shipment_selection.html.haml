@@ -1,6 +1,6 @@
 .shipment-selection
   %h3
-    %i.icon-truck
+    = fa_icon :truck
     Cálculo de frete
   .row
     .span3{style: "text-align:left;"}
@@ -9,7 +9,7 @@
       %input.cep_to_estimate_shipping_costs{autocomplete: "off", placeholder: "CEP", type: "text", value: cep}
     .span3{style: "text-align: center;"}
       %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
-        %i.icon-refresh
+        = fa_icon :refresh
         Calcular
 
   #shipment-types.row
