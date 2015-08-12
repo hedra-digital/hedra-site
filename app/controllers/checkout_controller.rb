@@ -21,7 +21,7 @@ class CheckoutController < ApplicationController
 
 
     if params[:address].blank? || params[:address][:zip_code].blank?
-      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega."
+      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega." and return
     end
 
     begin
