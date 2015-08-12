@@ -19,8 +19,13 @@ class CheckoutController < ApplicationController
 
     @order = nil
 
+
+    if params[:address].blank? || params[:address][:zip_code].blank?
+      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega."
+    end
+
     begin
-      @order = @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
+      @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
     rescue ArgumentError => e
       redirect_to cart_url, :alert => "Erro AO calcular custo do frete." and return
     end
