@@ -1,5 +1,4 @@
 class CheckoutController < ApplicationController
-
   include ActiveMerchant::Billing
 
   layout "application"
@@ -7,22 +6,9 @@ class CheckoutController < ApplicationController
   before_filter :assigns_gateway
 
   def finish
-    if session[:cart].blank?
-      redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
-      return
-    end
-
-    if !current_user
-      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
-      return
-    end
+    return if order_validation_triggered_redirect?
 
     @order = nil
-
-
-    if params[:address].blank? || params[:address][:zip_code].blank?
-      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega." and return
-    end
 
     begin
       @order = create_order(current_user, params[:address], session[:cart], Transaction::PAYPAL, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
