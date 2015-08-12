@@ -676,6 +676,12 @@ footer {
   }
 }
 
+.blog-post .list-price {
+  width: auto;
+  span.type { font-size: 12px !important;}
+  a.btn { width: 180px !important; }
+}
+
 .promotion-div{
   margin-top: 10px;
 
