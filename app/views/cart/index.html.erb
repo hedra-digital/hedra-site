@@ -76,7 +76,7 @@
   </div>
 
   <div class="container">
-    <h4 id="link_to_payment_card"><input type="radio" checked="checked"/><i class="icon-credit-card"></i> Cartão de Crédito</h4>
+    <h4 id="link_to_payment_card"><input type="radio" checked="checked"/><%= fa_icon 'credit-card' %>  Cartão de Crédito</h4>
   </div>
 
   <div id="payment_card">
@@ -113,7 +113,7 @@
   </div>
 
   <div class="container">
-    <h4 id="link_to_payment_slip"><input type="radio" /><i class="icon-barcode"></i> Boleto Bancário</h4>
+    <h4 id="link_to_payment_slip"><input type="radio" /><%= fa_icon :barcode %> Boleto Bancário</h4>
   </div>
 
   <div id="payment_slip">
@@ -123,7 +123,7 @@
 
       <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
 
-        <h3><i class="icon-user"></i> Dados Pessoais</h3>
+        <h3><i class="fa fa-user"></i> Dados Pessoais</h3>
 
         <div class="row">
           <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
@@ -155,7 +155,7 @@
 
   <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
     <div class="modal-body">
-      <h5><i class="icon-spinner icon-spin icon-3x"></i> <em>Espera...</em></h5>
+      <h5><i class="fa fa-spinner fa-spin fa-3x"></i> <em>Espera...</em></h5>
     </div>
   </div>
 </div>
