@@ -19,6 +19,10 @@ class PaymentController < ApplicationController
       return
     end
 
+    if params[:address].blank? || params[:address][:zip_code].blank?
+      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega."
+    end
+
     @order = nil
 
     begin
@@ -61,6 +65,10 @@ class PaymentController < ApplicationController
     if !current_user
       redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
       return
+    end
+
+    if params[:address].blank? || params[:address][:zip_code].blank?
+      redirect_to cart_url, :alert => "Por favor, verifique su endereço para a entrega."
     end
 
     @order = nil
