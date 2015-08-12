@@ -83,7 +83,7 @@ HedraSite::Application.configure do
   :email => {
     :email_prefix => "[Hedra-Site] ",
     :sender_address => %{"exception" <exception@hedra.com.br>},
-    :exception_recipients => %w{jorge@hedra.com.br}
+    :exception_recipients => %w{jorge@hedra.com.br augusto.pedraza@gmail.com}
   }
 
 end
