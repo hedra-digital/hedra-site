@@ -33,7 +33,7 @@ gem 'sinatra',            '1.4.3', require: false
 gem 'slim',               '2.0.0'
 gem 'haml',               '4.0.3'
 gem 'haml-rails',         '0.4'
-gem 'exception_notification', '4.0.0'
+gem 'exception_notification', '4.1.1'
 gem "awesome_print",      '1.2.0'
 gem 'iugu',               '1.0.7'
 gem "font-awesome-rails", "4.4.0.0"
