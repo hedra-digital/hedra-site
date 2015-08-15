@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150807120327) do
+ActiveRecord::Schema.define(:version => 20150815111103) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20150807120327) do
     t.string   "isbn"
     t.text     "description"
     t.float    "width"
-    t.float    "height"
+    t.float    "length"
     t.float    "weight"
     t.date     "released_at"
     t.integer  "binding_type_id"
