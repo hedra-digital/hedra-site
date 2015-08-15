@@ -4,20 +4,7 @@ class PaymentController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:callback_9E93257460]
 
   def credit_card
-    if session[:cart].blank?
-      redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
-      return
-    end
-
-    if !current_user
-      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
-      return
-    end
-
-    if params[:token].blank?
-      redirect_to cart_url, :alert => "Por favor, verifique suas informações de cartão de crédito."
-      return
-    end
+    return if order_validation_triggered_redirect?(true)
 
     @order = nil
 
@@ -53,15 +40,7 @@ class PaymentController < ApplicationController
 
 
   def bank_slip
-    if session[:cart].blank?
-      redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
-      return
-    end
-
-    if !current_user
-      redirect_to cart_url, :alert => "Por favor, autentique-se primeiro."
-      return
-    end
+    return if order_validation_triggered_redirect?
 
     @order = nil
 

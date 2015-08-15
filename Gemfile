@@ -33,10 +33,10 @@ gem 'sinatra',            '1.4.3', require: false
 gem 'slim',               '2.0.0'
 gem 'haml',               '4.0.3'
 gem 'haml-rails',         '0.4'
-gem 'exception_notification', '4.0.0'
+gem 'exception_notification', '4.1.1'
 gem "awesome_print",      '1.2.0'
 gem 'iugu',               '1.0.7'
-gem "font-awesome-rails", "3.2.1.3"
+gem "font-awesome-rails", "4.4.0.0"
 gem "rubyzip",            '1.1.6'
 gem "sort_alphabetical",  '1.0.1'
 gem "rest-client",        '1.7.2'

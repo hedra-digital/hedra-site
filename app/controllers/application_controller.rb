@@ -1,6 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  ERROR_MESSAGES = {
+    empty_cart: "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras.",
+    not_authenticated: "Por favor, autentique-se primeiro.",
+    error_credit_card: "Por favor, verifique suas informações de cartão de crédito.",
+    not_shipping_address: "Por favor, verifique su endereço para a entrega.",
+    not_shipping_data: "Por favor, verifique su informações de frete."
+  }
+
   before_filter :filter
 
 protected
@@ -95,5 +103,15 @@ protected
     end
 
     order
+  end
+
+  def order_validation_triggered_redirect?(check_credit_card_token = false)
+    redirect_to "/",        alert: ERROR_MESSAGES[:empty_cart]            and return true if session[:cart].blank?
+    redirect_to cart_path,  alert: ERROR_MESSAGES[:not_authenticated]     and return true unless current_user
+    redirect_to cart_path,  alert: ERROR_MESSAGES[:error_credit_card]     and return true if check_credit_card_token && params[:token].blank?
+    redirect_to cart_path,  alert: ERROR_MESSAGES[:not_shipping_address]  and return true if params[:address].blank? || params[:address][:zip_code].blank?
+    redirect_to cart_path,  alert: ERROR_MESSAGES[:not_shipping_data]     and return true if params[:shipping_type].blank?
+
+    return false
   end
 end

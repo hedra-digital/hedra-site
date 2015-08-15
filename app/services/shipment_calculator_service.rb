@@ -38,7 +38,13 @@ class ShipmentCalculatorService
       shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega } ]]
     else
       #TODO: check the errors.
-      shipment_services_values = frete.calcular(:pac, :sedex)
+      shipment_services_values = []
+
+      begin
+        shipment_services_values = frete.calcular(:pac, :sedex)
+      rescue
+        return nil
+      end
 
       shipment_info = shipment_services_values.map do |service_key, service_value|
         return nil unless service_value.erro == SUCCESS_CORREIOS_RESPONSE
