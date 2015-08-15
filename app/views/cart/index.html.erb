@@ -104,7 +104,7 @@
           
         <input type="hidden" name="token" id="token"/>
 
-        <%= render "shipment_selection", cep: @cep %>
+        <%= render "shipment_selection", cep: @cep if includes_print_books? %>
         <%= render "address", :payment_method => :credit_card%>
 
         <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
@@ -129,7 +129,7 @@
           <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
         </div>
 
-        <%= render "shipment_selection", cep: @cep %>
+        <%= render "shipment_selection", cep: @cep if includes_print_books? %>
         <%= render "address", :payment_method => :bank_slip %>
 
         <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
@@ -146,7 +146,7 @@
     <div class="container">
       <div class="alert alert-error" style="display: none;"><ul></ul></div>
       <%= form_tag({controller: :checkout, action: :finish} ) do %>
-        <%= render "shipment_selection", cep: @cep %>
+        <%= render "shipment_selection", cep: @cep if includes_print_books?  %>
         <%= render "address", :payment_method => :paypal%>
         <input type="submit" class="btn" value="Pagar  (Paypal)" />
       <% end %>

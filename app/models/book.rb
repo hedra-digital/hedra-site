@@ -9,6 +9,7 @@
 #  isbn            :string(255)
 #  description     :text
 #  width           :float
+#  length          :float
 #  height          :float
 #  weight          :float
 #  released_at     :date
@@ -48,7 +49,7 @@ class Book < ActiveRecord::Base
   accepts_nested_attributes_for       :tags, :allow_destroy => true
 
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :description, :edition, :height, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids, :publisher_id, :position, :ebook, :packet_discount
+  attr_accessible                     :description, :edition, :length, :title, :pages, :isbn, :released_at, :weight, :width, :binding_type_id, :language_ids, :participations_attributes, :cover, :price_print, :price_ebook, :category_id, :tags_attributes, :tag_ids, :publisher_id, :position, :ebook, :packet_discount, :height
 
   # Validations
   validates_presence_of               :title, :isbn, :pages
@@ -104,7 +105,9 @@ class Book < ActiveRecord::Base
 
 
   def dimensions
-    "#{self.width} &times; #{self.height} cm".html_safe if self.width.present? && self.height.present?
+    if width.present? && length.present? && height.present?
+      "#{width} cm &times; #{length} cm &times; #{height} cm".html_safe
+    end
   end
 
   def language_list
