@@ -270,7 +270,7 @@ pt_br:
         width: 'Largura'
         height: 'Altura'
         length: 'Comprimento'
-        weight: 'Peso'
+        weight: 'Peso (kg)'
         released_at: 'Data de lançamento'
         cover: 'Imagem da capa'
         price_print: 'Preço do impresso'

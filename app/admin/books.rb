@@ -37,6 +37,7 @@ ActiveAdmin.register Book do
       f.inputs "Medidas" do
         f.input :width
         f.input :length
+        f.input :height
         f.input :weight
       end
       f.inputs "Idiomas" do
