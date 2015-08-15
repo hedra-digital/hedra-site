@@ -8,10 +8,6 @@ DEFAULT_BOOK_PAGES  = 100
 DEFAULT_BOOK_PRICE  = 28.71 #reales
 
 
-DEFAULT_PACKAGE_WIDTH   = 16 #cm
-DEFAULT_PACKAGE_HEIGHT  =  2 #cm
-
-
 PRINT_BOOK_TYPE     = :print
 DEFAULT_ORIGIN_CEP  = "05416-011"
 
@@ -57,27 +53,20 @@ class ShipmentCalculatorService
 
   private
     def self.calculate_rough_package_size(hashed_books)
-      package = nil
+      package = Package.new(0, 0, 0, 0, 0)
 
       hashed_books.each do |data|
-        next if data[:book_type] != PRINT_BOOK_TYPE
-        package ||= Package.new(0, DEFAULT_PACKAGE_WIDTH, 0, DEFAULT_PACKAGE_HEIGHT, 0)
+        next unless data[:book_type] == PRINT_BOOK_TYPE
 
         book = Book.find(data[:book_id])
 
-        book_weight = book.weight       || DEFAULT_BOOK_WEIGHT
-        book_width  = book.width        || DEFAULT_BOOK_WIDTH
-        book_length = book.height       || DEFAULT_BOOK_LENGTH # the book.height means length
-        book_pages  = book.pages        || DEFAULT_BOOK_PAGES
-        book_price  = book.price_print  || DEFAULT_BOOK_PRICE
+        package.weight          += (book.weight   || DEFAULT_BOOK_WEIGHT)                  * data[:quantity]
+        package.width           += (book.width    || DEFAULT_BOOK_WIDTH)                   * data[:quantity]
+        package.length          += (book.length   || DEFAULT_BOOK_LENGTH)                  * data[:quantity]
 
-        package.weight += (book_weight * data[:quantity])
-        package.width   = book_width  if package.width < book_width
-        package.length  = book_length if package.length < book_length
-        package.height += (calculate_book_height(book_pages) * data[:quantity])
+        package.height          += (book.height   || calculate_book_height(book.pages || DEFAULT_BOOK_PAGES))   * data[:quantity]
 
-        #TODO: it doesn't consider promotions.
-        package.declared_value += (data[:quantity] * book_price)
+        package.declared_value  += (book.price_print  || DEFAULT_BOOK_PRICE)               * data[:quantity] #TODO: it doesn't consider promotions.
       end
 
       package

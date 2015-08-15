@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :filter
 
+  helper_method :includes_print_books?
+
 protected
 
   def filter
@@ -65,11 +67,16 @@ protected
     return nil if cart.blank?
     order = nil
 
-    shipping_cost_result = ShipmentCalculatorService.execute(cart, address_hash[:zip_code], shipping_type)
-    raise ArgumentError if shipping_cost_result.nil? || shipping_cost_result.empty?
+    if includes_print_books?
+      shipping_cost_result = ShipmentCalculatorService.execute(cart, address_hash[:zip_code], shipping_type)
+      raise ArgumentError if shipping_cost_result.nil? || shipping_cost_result.empty?
 
-    shipping_cost = shipping_cost_result[shipping_type][:cost]
-    shipping_time = shipping_cost_result[shipping_type][:shipping_time]
+      shipping_cost = shipping_cost_result[shipping_type][:cost]
+      shipping_time = shipping_cost_result[shipping_type][:shipping_time]
+    else
+      shipping_cost = 0
+      shipping_time = 0
+    end
 
     ActiveRecord::Base.transaction do
       address_hash = address_hash.merge({user_id: user.id})
@@ -109,9 +116,15 @@ protected
     redirect_to "/",        alert: ERROR_MESSAGES[:empty_cart]            and return true if session[:cart].blank?
     redirect_to cart_path,  alert: ERROR_MESSAGES[:not_authenticated]     and return true unless current_user
     redirect_to cart_path,  alert: ERROR_MESSAGES[:error_credit_card]     and return true if check_credit_card_token && params[:token].blank?
+
+    return false unless includes_print_books?
     redirect_to cart_path,  alert: ERROR_MESSAGES[:not_shipping_address]  and return true if params[:address].blank? || params[:address][:zip_code].blank?
     redirect_to cart_path,  alert: ERROR_MESSAGES[:not_shipping_data]     and return true if params[:shipping_type].blank?
 
     return false
+  end
+
+  def includes_print_books?
+    session[:cart].detect { |k, v| k == :book_type && v == :print }
   end
 end
