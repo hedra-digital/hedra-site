@@ -69,6 +69,10 @@ class ShipmentCalculatorService
         package.declared_value  += (book.price_print  || DEFAULT_BOOK_PRICE)               * data[:quantity] #TODO: it doesn't consider promotions.
       end
 
+      package.height  = 2  if package.height < 2
+      package.width   = 16 if package.width < 16
+      package.length  = 11 if package.length < 11
+
       package
     end
 
