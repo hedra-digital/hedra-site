@@ -47,7 +47,7 @@ module ApplicationHelper
       [
         ['og:title', options[:title]],
         ['og:type', options[:type]],
-        ['og:url', "#{request.protocol}#{request.host_with_port}#{request.fullpath}"],
+        ['og:url', "http://#{request.host_with_port}#{request.fullpath}"],
         ['og:description', options[:description]],
         ['og:image', options[:image]],
         ['fb:admins', '694928618'],
