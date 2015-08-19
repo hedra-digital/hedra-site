@@ -125,6 +125,6 @@ protected
   end
 
   def includes_print_books?
-    session[:cart].detect { |k, v| k == :book_type && v == :print }
+    session[:cart].detect { |item_hash| item_hash[:book_type] == :print }
   end
 end

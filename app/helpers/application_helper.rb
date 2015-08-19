@@ -47,14 +47,21 @@ module ApplicationHelper
       [
         ['og:title', options[:title]],
         ['og:type', options[:type]],
-        ['og:url', "#{request.protocol}#{request.host_with_port}#{request.fullpath}"],
+        ['og:url', "http://#{request.host_with_port}#{request.fullpath}/"],
         ['og:description', options[:description]],
         ['og:image', options[:image]],
         ['fb:admins', '694928618'],
         ['fb:admins', '534302953'],
         ['og:site_name', 'Editora Hedra']
-      ].inject([]) { |sum, obj| obj[1].nil? ? sum : sum << tag(:meta, { :property => obj[0], :content => obj[1]}) }.join.html_safe
+      ].inject([]) do |sum, obj|
+        if(obj.first == "og:url")
+          obj[1].nil? ? sum : sum << tag(:meta, { :property => obj[0], :content => obj[1], rel: "canonical"})
+        else
+          obj[1].nil? ? sum : sum << tag(:meta, { :property => obj[0], :content => obj[1]})
+        end
+      end.join.html_safe
     end
+
     if options[:title].presence
       content_for(:h1, content_tag(:h1, options[:title]))
       content_for(:title, content_tag(:title, "#{options[:title]} | #{publisher_name}"))
