@@ -57,7 +57,7 @@ $(window).load(function() {
       direction       : "left",
       circular        : true,
       infinite        : false,
-      auto            : false,
+      auto            : true,
       prev            : {
         button        : "#carousel-prev",
         key           : "left"
