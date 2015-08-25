@@ -14,14 +14,22 @@ describe CouponController do
 
       before(:each) do
         allow(Promotion).to receive(:find_by_slug).with(slug).and_return(promotion)
-
-        get :set_cookie, id: slug
       end
 
-      describe "created cookie" do
-        subject { @response.cookies["coupon_1007"] }
+      it "create a new cookie" do
+        get :set_cookie, id: slug
 
-        it { is_expected.not_to be_nil }
+        expect(@response.cookies["coupon_1007"]).to eq(slug)
+      end
+
+      it "sets the cookie experiation" do
+        stub_cookie_jar = HashWithIndifferentAccess.new
+        controller.stub(:cookies) { stub_cookie_jar }
+
+        get :set_cookie, id: slug
+
+        cookie = stub_cookie_jar["coupon_1007"]
+        expect(cookie[:expires]).to eq(ended_at)
       end
     end
   end
