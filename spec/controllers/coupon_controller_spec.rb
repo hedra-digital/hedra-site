@@ -12,14 +12,16 @@ describe CouponController do
         p
       end
 
-      before do
+      before(:each) do
         allow(Promotion).to receive(:find_by_slug).with(slug).and_return(promotion)
+
+        get :set_cookie, id: slug
       end
 
-      it "assigns a new cookie" do
-        get :set_cookie, id: slug
+      describe "created cookie" do
+        subject { @response.cookies["coupon_1007"] }
 
-        expect(@response.cookies["coupon_1007"]).not_to be_nil
+        it { is_expected.not_to be_nil }
       end
     end
   end
