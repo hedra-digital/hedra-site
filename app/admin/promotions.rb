@@ -5,6 +5,8 @@ ActiveAdmin.register Promotion do
     column :id
     column :price
     column :discount
+    column :name
+    column :for_traffic_origin
     column "coupon" do |p|
       link_to(p.slug, "http://#{p.publisher.url}/coupon/#{p.slug}") unless p.slug.blank?
     end

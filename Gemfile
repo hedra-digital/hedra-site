@@ -57,7 +57,6 @@ group :development do
   gem 'binding_of_caller', '0.7.1'
   gem 'bullet', '4.6.0'
   gem 'quiet_assets', '1.0.3'
-  gem 'byebug'
 end
 
 group :development, :test do
@@ -65,6 +64,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem "rails_email_preview",    "0.2.29"
+  gem 'byebug'
 end
 
 # To use ActiveModel has_secure_password
