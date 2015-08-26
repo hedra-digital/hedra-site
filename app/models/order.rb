@@ -10,6 +10,7 @@ class Order < ActiveRecord::Base
   has_many :transactions
   has_many :order_items
   belongs_to :address
+  belongs_to :promotion
 
   after_save :send_post_tracking_mail
 

@@ -5,7 +5,10 @@ class Promotion < ActiveRecord::Base
   belongs_to :category
   belongs_to :publisher
 
+  has_many  :orders, dependent: :restrict
+
   validates_presence_of :publisher, :started_at, :ended_at
+  validates_presence_of :name, if: "for_traffic_origin"
 
   validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "discount"
 
@@ -13,14 +16,15 @@ class Promotion < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :allow_blank => true
 
-  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link
+  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin
 
 
   private
 
   def validate_price_and_discount
-    self.errors.add(:discount, "Price and discount can not be blank at the same time") if ( !self.price and !self.discount)
+    self.errors.add(:discount, "Price and discount can not be blank at the same time") if ( !for_traffic_origin && (!self.price and !self.discount))
     self.errors.add(:discount, "Price and discount can not be set at the same time") if ( self.price and self.discount)
+    self.errors.add(:discount, "Price and discount can not be set for a Traffic Origin promotion") if ( for_traffic_origin and (self.price || self.discount))
   end
 
   def validate_book_tag_category

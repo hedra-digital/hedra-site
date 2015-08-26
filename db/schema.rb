@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150822115910) do
+ActiveRecord::Schema.define(:version => 20150826114326) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -236,7 +236,10 @@ ActiveRecord::Schema.define(:version => 20150822115910) do
     t.decimal  "shipping_cost",        :precision => 8, :scale => 2, :default => 0.0
     t.integer  "shipping_time"
     t.string   "shipping_type"
+    t.integer  "promotion_id"
   end
+
+  add_index "orders", ["promotion_id"], :name => "index_orders_on_promotion_id"
 
   create_table "pages", :force => true do |t|
     t.integer  "tag_id"

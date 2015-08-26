@@ -21,6 +21,10 @@ ActiveAdmin.register Promotion do
         @promotion.slug = SecureRandom.uuid
       end
     end
+
+    rescue_from ActiveRecord::DeleteRestrictionError do |exception|
+      redirect_to(:back, :alert => exception.message)
+    end
   end
 
 end
