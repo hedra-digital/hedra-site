@@ -13,10 +13,19 @@ class CouponController < ApplicationController
 
   private
     def create_cookie_for(promotion)
-      cookies["coupon_#{promotion.id}".to_sym] = {
-        value: promotion.slug,
-        expires: promotion.ended_at,
-        domain: :all
-      }
+      if promotion.for_traffic_origin
+        value = [promotion.id, promotion.name.downcase.gsub(/\s+/, ' ').split(" ")].flatten.join("_")
+        cookies["current_campaign"] = {
+          value: value,
+          expires: promotion.ended_at,
+          domain: :all
+        }
+      else
+        cookies["coupon_#{promotion.id}".to_sym] = {
+          value: promotion.slug,
+          expires: promotion.ended_at,
+          domain: :all
+        }
+      end
     end
 end
