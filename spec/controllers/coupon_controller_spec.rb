@@ -70,8 +70,17 @@ describe CouponController do
 
           expect(@response.cookies["current_campaign"]).to eq("8008_some_campaign_name")
         end
+
+        it "sets the cookie experiation" do
+          stub_cookie_jar = HashWithIndifferentAccess.new
+          allow(controller).to receive(:cookies) { stub_cookie_jar }
+
+          get :set_cookie, id: slug
+
+          cookie = stub_cookie_jar["current_campaign"]
+          expect(cookie[:expires].to_i).to be_within(100).of(1.hour.from_now.to_i)
+        end
       end
     end
   end
 end
-

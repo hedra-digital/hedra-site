@@ -17,7 +17,7 @@ class CouponController < ApplicationController
         value = [promotion.id, promotion.name.downcase.gsub(/\s+/, ' ').split(" ")].flatten.join("_")
         cookies["current_campaign"] = {
           value: value,
-          expires: promotion.ended_at,
+          expires: 1.hour.from_now,
           domain: :all
         }
       else
