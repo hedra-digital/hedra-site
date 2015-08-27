@@ -92,7 +92,8 @@ protected
         telephone: telephone,
         shipping_type: shipping_type,
         shipping_cost: shipping_cost,
-        shipping_time: shipping_time
+        shipping_time: shipping_time,
+        promotion_id: (cookies["current_campaign"] || "").split("_").first
         )
 
       total = 0

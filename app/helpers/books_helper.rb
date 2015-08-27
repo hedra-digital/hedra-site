@@ -52,7 +52,7 @@ module BooksHelper
 
   # only one interface
   def find_promotion(book)
-    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.publisher_id, Time.now).order("created_at").last
+    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '') and for_traffic_origin <> 1", book.publisher_id, Time.now).order("created_at").last
     return site_promotion if site_promotion
 
     return find_private_promotion(book) if find_private_promotion(book)
@@ -72,13 +72,13 @@ module BooksHelper
   
     return nil if coupons.size == 0
 
-    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and slug in (?)", book.id, Time.now, coupons).order("created_at").last
+    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.id, Time.now, coupons).order("created_at").last
     return book_promotion if book_promotion
 
-    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.tags.map(&:id), book.publisher_id, Time.now, coupons).order("created_at").last
+    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.tags.map(&:id), book.publisher_id, Time.now, coupons).order("created_at").last
     return tag_promotion if tag_promotion
 
-    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.category_id, book.publisher_id, Time.now, coupons).order("created_at").last
+    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.category_id, book.publisher_id, Time.now, coupons).order("created_at").last
     return category_promotion if category_promotion
 
     site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.publisher_id, Time.now, coupons).order("created_at").last
@@ -89,13 +89,12 @@ module BooksHelper
 
   # promotion priority: book > tag > category
   def find_public_promotion(book)
-    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.id, Time.now).order("created_at").last
+    book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and (slug is null or slug = '') and for_traffic_origin <> 1", book.id, Time.now).order("created_at").last
     return book_promotion if book_promotion
 
-    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.tags.map(&:id), book.publisher_id, Time.now).order("created_at").last
+    tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '') and for_traffic_origin <> 1", book.tags.map(&:id), book.publisher_id, Time.now).order("created_at").last
     return tag_promotion if tag_promotion
-
-    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.category_id, book.publisher_id, Time.now).order("created_at").last
+    category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '') and for_traffic_origin <> 1", book.category_id, book.publisher_id, Time.now).order("created_at").last
     return category_promotion if category_promotion
 
     nil

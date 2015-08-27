@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
     :email, :special_instructions, :user, :address,
     :book, :user_id, :post_tracking_code,
     :cpf_cnpj, :telephone, :erp_id,
-    :shipping_type, :shipping_cost, :shipping_time
+    :shipping_type, :shipping_cost, :shipping_time, :promotion_id
 
   belongs_to :user
   has_many :transactions
