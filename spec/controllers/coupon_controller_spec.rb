@@ -51,11 +51,10 @@ describe CouponController do
 
       context "when is a campaing" do
         let(:slug) { "fAkE1-a222-ReAlLy-bIg3-SlUg-6006" }
-        let(:ended_at) { DateTime.parse("2014-01-31 09:00:00") }
         let(:link) { nil }
 
         let(:promotion) do
-          p = Promotion.new(slug: slug, ended_at: ended_at, name: "Some Campaign Name", for_traffic_origin: true )
+          p = Promotion.new(slug: slug, started_at: started_at, ended_at: ended_at, name: "Some Campaign Name", for_traffic_origin: true )
 
           allow(p).to receive(:id).and_return(8008)
           p
@@ -65,20 +64,37 @@ describe CouponController do
           allow(Promotion).to receive(:find_by_slug).with(slug).and_return(promotion)
         end
 
-        it "sets a new cookie" do
-          get :set_cookie, id: slug
+        context "when is valid" do
+          let(:ended_at) { Date.tomorrow }
+          let(:started_at) { Date.yesterday }
+          let(:link) { nil }
 
-          expect(@response.cookies["current_campaign"]).to eq("8008_some_campaign_name")
+          it "sets a new cookie" do
+            get :set_cookie, id: slug
+
+            expect(@response.cookies["current_campaign"]).to eq("8008_some_campaign_name")
+          end
+
+          it "sets the cookie experiation" do
+            stub_cookie_jar = HashWithIndifferentAccess.new
+            allow(controller).to receive(:cookies) { stub_cookie_jar }
+
+            get :set_cookie, id: slug
+
+            cookie = stub_cookie_jar["current_campaign"]
+            expect(cookie[:expires].to_i).to be_within(100).of(1.hour.from_now.to_i)
+          end
         end
 
-        it "sets the cookie experiation" do
-          stub_cookie_jar = HashWithIndifferentAccess.new
-          allow(controller).to receive(:cookies) { stub_cookie_jar }
+        context "when is invalid" do
+          let(:started_at) { 2.days.ago }
+          let(:ended_at) { Date.yesterday }
 
-          get :set_cookie, id: slug
+          it "doesn't set a cookie" do
+            get :set_cookie, id: slug
 
-          cookie = stub_cookie_jar["current_campaign"]
-          expect(cookie[:expires].to_i).to be_within(100).of(1.hour.from_now.to_i)
+            expect(@response.cookies["current_campaign"]).to be_nil
+          end
         end
       end
     end
