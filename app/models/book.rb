@@ -67,7 +67,7 @@ class Book < ActiveRecord::Base
         sum(if(transactions.status = 1, 1, 0)) as created_count,
         sum(if(transactions.status = 2, 1, 0)) as completed_count,
         sum(if(transactions.status = 3, 1, 0)) as failed_count").
-      joins(:order_items => [:order => :transactions]).
+      joins(:order_items => [:order => [:transactions]]).
       where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
       where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
       where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
@@ -75,13 +75,16 @@ class Book < ActiveRecord::Base
       order("sum(if(transactions.status = 2, 1, 0)) desc") #using the raw completed_count because the pagination invoke 'count' and that method ignore the select method.
   end
 
-  scope :for_book_report, -> (start_date, end_date, title) do
+  scope :for_book_report, -> (start_date, end_date, title, campaign_name) do
     select("books.id, books.title, books.slug, count(books.id) as sold_count, sum(order_items.price) as total_price").
       joins(:order_items => [:order => :transactions]).
+      joins("LEFT JOIN promotions ON orders.promotion_id = promotions.id").
       where("transactions.status = 2").
       where(start_date ? ("transactions.created_at > '#{start_date}'") : "").
       where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
       where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
+      where(title.blank? ? "" : "books.title LIKE '%#{title}%'").
+      where(campaign_name.blank? ? "" : "promotions.name = '#{campaign_name}'").
       group("books.id").
       order("count(books.id) desc")
   end
