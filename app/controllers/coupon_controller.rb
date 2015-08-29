@@ -13,7 +13,7 @@ class CouponController < ApplicationController
 
   private
     def create_cookie_for(promotion)
-      if promotion.for_traffic_origin && promotion.started_at < Date.today && promotion.ended_at > Date.today
+      if promotion.for_traffic_origin && promotion.started_at <= Date.today && promotion.ended_at > Date.today
         value = [promotion.id, promotion.name.downcase.gsub(/\s+/, ' ').split(" ")].flatten.join("_")
         cookies["current_campaign"] = {
           value: value,
