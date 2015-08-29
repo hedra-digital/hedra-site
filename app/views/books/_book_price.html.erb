@@ -1,6 +1,9 @@
 <aside class="book-price span3">
   <div class="list-price">
-    <% if find_promotion(book)%>
+    <% discount_price = show_price(book, :print) %>
+    <% have_discount_price = discount_price != book.price_print %>
+
+    <% if have_discount_price %>
       <div class="promotion-div">
         <span>de </span><span class="price"><%= number_to_currency(book.price_print)%></span>
       </div>
@@ -9,9 +12,9 @@
     <ul class="buy">
       <% if book.price_print%>
         <li>
-          <%= link_to add_to_cart_path(book, book_type: :print, source: controller_name), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(book)}", target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
+          <%= link_to add_to_cart_path(book, book_type: :print, source: controller_name), :method => :post, :class => "btn btn-primary #{'promotion-css' if have_discount_price }", target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">compre</span>
-            <span class="price"><%= number_to_currency(show_price(book, :print))%></span>
+            <span class="price"><%= number_to_currency(discount_price)%></span>
           <% end %>
         </li>
       <% end %>
