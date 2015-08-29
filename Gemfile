@@ -62,8 +62,10 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'simplecov', require: false
-  gem "codeclimate-test-reporter", group: :test, require: nil
-  gem "rails_email_preview",    "0.2.29"
+  gem 'codeclimate-test-reporter', require: nil
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
+  gem "rails_email_preview",    "0.2.29", require: false
   gem 'byebug'
 end
 
