@@ -44,3 +44,5 @@ Vagrantfile
 
 *.notes
 /public/tmp
+
+rubocop_output.html

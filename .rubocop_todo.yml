@@ -213,7 +213,6 @@ Style/AndOr:
     - 'app/controllers/checkout_controller.rb'
     - 'app/controllers/pages_controller.rb'
     - 'app/controllers/payment_controller.rb'
-    - 'app/helpers/books_helper.rb'
     - 'app/mailers/notifier.rb'
     - 'app/models/book.rb'
     - 'app/models/erp.rb'
@@ -304,7 +303,6 @@ Style/EmptyLines:
     - 'app/admin/report3.rb'
     - 'app/controllers/checkout_controller.rb'
     - 'app/controllers/payment_controller.rb'
-    - 'app/helpers/books_helper.rb'
     - 'app/mailer_previews/notifier_preview.rb'
     - 'app/models/address.rb'
     - 'app/models/book.rb'
@@ -357,7 +355,6 @@ Style/EmptyLinesAroundMethodBody:
     - 'app/controllers/payment_controller.rb'
     - 'app/controllers/registrations_controller.rb'
     - 'app/controllers/sessions_controller.rb'
-    - 'app/helpers/books_helper.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -365,7 +362,6 @@ Style/EmptyLinesAroundMethodBody:
 Style/EmptyLinesAroundModuleBody:
   Exclude:
     - 'app/helpers/application_helper.rb'
-    - 'app/helpers/books_helper.rb'
 
 # Offense count: 18
 # Cop supports --auto-correct.
@@ -527,7 +523,6 @@ Style/NumericLiterals:
 Style/ParenthesesAroundCondition:
   Exclude:
     - 'app/admin/books.rb'
-    - 'app/helpers/books_helper.rb'
     - 'app/models/erp.rb'
     - 'app/models/page.rb'
     - 'app/models/promotion.rb'

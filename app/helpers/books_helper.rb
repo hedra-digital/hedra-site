@@ -1,5 +1,4 @@
 module BooksHelper
-
   def book_team(book)
     book.participations.inject({}) do |result, element|
       result[element.role.name] ||= []
@@ -21,7 +20,7 @@ module BooksHelper
       ['Dimensões', book.dimensions],
       ['Peso', book.weight_with_unit],
       ['Ano de lançamento', book.release_year]
-    ].inject([]) { |sum, obj| obj[1].nil? ? sum : sum << stats_item(obj[0], obj[1]) }.join.html_safe
+    ].inject([]){ |sum, obj| obj[1].nil? ? sum : sum << stats_item(obj[0], obj[1]) }.join.html_safe
   end
 
   def book_tags(book)
@@ -40,7 +39,7 @@ module BooksHelper
     when :ebook
       return book.price_ebook
     when :packet
-      return nil if (book_print_price(book) == nil or book.price_ebook == nil)
+      return nil if book_print_price(book) == nil || book.price_ebook == nil
       return (1 - book.packet_discount) * (book_print_price(book) + book.price_ebook)
     end
   end
@@ -63,7 +62,6 @@ module BooksHelper
 
   # promotion priority: book > tag > category > site
   def find_private_promotion(book)
-
     coupons = []
 
     cookies.each_entry do |c|
@@ -81,7 +79,7 @@ module BooksHelper
     category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.category_id, book.publisher_id, Time.now, coupons).order("created_at").last
     return category_promotion if category_promotion
 
-    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.publisher_id, Time.now, coupons).order("created_at").last
+    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.publisher_id, Time.now, coupons).order("created_at").last
     return site_promotion if site_promotion
 
     nil
@@ -117,6 +115,4 @@ module BooksHelper
 
     return (1 - promotion.discount) * book.price_print
   end
-
-
 end
