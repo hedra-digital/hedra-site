@@ -81,7 +81,7 @@ module BooksHelper
     category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.category_id, book.publisher_id, Time.now, coupons).order("created_at").last
     return category_promotion if category_promotion
 
-    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and slug in (?)", book.publisher_id, Time.now, coupons).order("created_at").last
+    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and slug in (?) and for_traffic_origin <> 1", book.publisher_id, Time.now, coupons).order("created_at").last
     return site_promotion if site_promotion
 
     nil
