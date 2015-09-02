@@ -18,7 +18,10 @@
       <h3 class="book-authors"><%= authors(feature.book) %></h3>
       <%= description_lead feature.book %>
 
-      <% if find_promotion(feature.book) %>
+      <% discount_price = show_price(feature.book, :print)%>
+      <% have_discount_price = discount_price != feature.book.price_print %>
+
+      <% if have_discount_price %>
         <div class="promotion-div">
           <span>de </span><span class="price"><%= number_to_currency(feature.book.price_print)%></span>
         </div>
@@ -26,9 +29,9 @@
 
       <ul class="buy">
         <li>
-          <%= link_to add_to_cart_path(feature.book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(feature.book)}" do%>
+          <%= link_to add_to_cart_path(feature.book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if have_discount_price}" do%>
             <span class="type">Compre</span>
-            <span class="price"><%= number_to_currency(show_price(feature.book, :print))%></span>
+            <span class="price"><%= number_to_currency(discount_price)%></span>
           <% end %>
         </li>
       </ul>

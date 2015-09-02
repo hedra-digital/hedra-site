@@ -3,15 +3,16 @@ ActiveAdmin.register_page "Book Report" do
 
   controller do
     def index
-      @search = Struct.new(:start_date, :end_date, :title).new
+      @search = Struct.new(:start_date, :end_date, :title, :campaign_name).new
 
       if params[:search]
-        @search.start_date  = Date.parse(params[:search][:start_date])          unless params[:search][:start_date].blank?
-        @search.end_date    = (Date.parse(params[:search][:end_date]) + 1.day)  unless params[:search][:end_date].blank?
-        @search.title       = params[:search][:title]
+        @search.start_date    = Date.parse(params[:search][:start_date])          unless params[:search][:start_date].blank?
+        @search.end_date      = (Date.parse(params[:search][:end_date]) + 1.day)  unless params[:search][:end_date].blank?
+        @search.title         = params[:search][:title]
+        @search.campaign_name = params[:search][:campaign_name]
       end
 
-      @books = Book.for_book_report(@search.start_date, @search.end_date, @search.title)
+      @books = Book.for_book_report(@search.start_date, @search.end_date, @search.title, @search.campaign_name)
 
       @total_sold_count = 0
       @total_amount = 0
@@ -30,6 +31,7 @@ ActiveAdmin.register_page "Book Report" do
           f.input :start_date, required: false, as: :datepicker
           f.input :end_date,   required: false, as: :datepicker
           f.input :title,      required: false
+          f.input :campaign_name, as: :select, collection: Promotion.pluck(:name).uniq.reject(&:blank?)
         end
         f.actions
       end
