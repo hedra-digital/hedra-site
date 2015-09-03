@@ -173,7 +173,6 @@ Rails/Validation:
     - 'app/models/ckeditor/asset.rb'
     - 'app/models/page.rb'
     - 'app/models/participation.rb'
-    - 'app/models/promotion.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -218,7 +217,6 @@ Style/AndOr:
     - 'app/models/erp.rb'
     - 'app/models/order.rb'
     - 'app/models/page.rb'
-    - 'app/models/promotion.rb'
     - 'app/models/transaction.rb'
 
 # Offense count: 2
@@ -307,7 +305,6 @@ Style/EmptyLines:
     - 'app/models/address.rb'
     - 'app/models/book.rb'
     - 'app/models/erp.rb'
-    - 'app/models/promotion.rb'
     - 'app/models/transaction.rb'
     - 'app/services/shipment_calculator_service.rb'
     - 'app/uploaders/feature_image_uploader.rb'
@@ -374,7 +371,6 @@ Style/ExtraSpacing:
     - 'app/admin/report3.rb'
     - 'app/controllers/cart_controller.rb'
     - 'app/models/erp.rb'
-    - 'app/models/promotion.rb'
     - 'app/models/publisher.rb'
     - 'app/services/shipment_calculator_service.rb'
     - 'config.ru'
@@ -525,7 +521,6 @@ Style/ParenthesesAroundCondition:
     - 'app/admin/books.rb'
     - 'app/models/erp.rb'
     - 'app/models/page.rb'
-    - 'app/models/promotion.rb'
 
 # Offense count: 1
 # Configuration parameters: NamePrefix, NamePrefixBlacklist.
@@ -557,7 +552,6 @@ Style/RedundantSelf:
     - 'app/models/erp.rb'
     - 'app/models/order.rb'
     - 'app/models/page.rb'
-    - 'app/models/promotion.rb'
     - 'app/models/transaction.rb'
 
 # Offense count: 3
@@ -608,7 +602,6 @@ Style/SingleSpaceBeforeFirstArg:
     - 'app/models/new_release.rb'
     - 'app/models/page.rb'
     - 'app/models/post.rb'
-    - 'app/models/promotion.rb'
     - 'app/models/publisher.rb'
     - 'app/models/recommendation.rb'
 
@@ -693,7 +686,6 @@ Style/SpaceInsideParens:
     - 'app/admin/publishers.rb'
     - 'app/models/erp.rb'
     - 'app/models/page.rb'
-    - 'app/models/promotion.rb'
     - 'spec/controllers/coupon_controller_spec.rb'
 
 # Offense count: 450
