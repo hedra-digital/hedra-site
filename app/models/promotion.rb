@@ -24,7 +24,6 @@ class Promotion < ActiveRecord::Base
   def validate_price_and_discount
     self.errors.add(:discount, "Price and discount can not be blank at the same time") if ( !for_traffic_origin && (!self.price and !self.discount))
     self.errors.add(:discount, "Price and discount can not be set at the same time") if ( self.price and self.discount)
-    self.errors.add(:discount, "Price and discount can not be set for a Traffic Origin promotion") if ( for_traffic_origin and (self.price || self.discount))
   end
 
   def validate_book_tag_category
