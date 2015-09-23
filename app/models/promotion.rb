@@ -15,13 +15,14 @@ class Promotion < ActiveRecord::Base
   validate :validate_price_and_discount, :validate_book_tag_category, :started_at_ended_at
 
   validates :slug, uniqueness: true, allow_blank: true
+  validates :slug, presence: true, if: "for_traffic_origin"
 
   attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin
 
   private
 
   def validate_price_and_discount
-    errors.add(:discount, "Price and discount can not be blank at the same time") if !for_traffic_origin && (!price && !discount)
+    errors.add(:discount, "Price and discount can not be blank at the same time") if !price && !discount
     errors.add(:discount, "Price and discount can not be set at the same time") if price && discount
   end
 

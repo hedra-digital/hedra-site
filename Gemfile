@@ -65,8 +65,10 @@ group :development, :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
-  gem "rails_email_preview",    "0.2.29", require: false
+  gem 'rails_email_preview',    "0.2.29", require: false
   gem 'byebug'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner', require: false
 end
 
 # To use ActiveModel has_secure_password
