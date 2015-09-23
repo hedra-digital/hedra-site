@@ -22,7 +22,7 @@ RSpec.describe BooksHelper, :type => :helper do
             create(:promotion, price: 100.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, publisher: publisher)
             create(:promotion, price: 111.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, publisher: publisher)
             create(:promotion, price: 122.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, slug: 'some-fake-slug', publisher: publisher)
-            create(:promotion, price: 133.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, for_traffic_origin: 1, name: 'dummy name', publisher: publisher)
+            create(:promotion, price: 133.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, for_traffic_origin: 1, slug: 'dummy-slug', name: 'dummy name', publisher: publisher)
             create(:promotion, price: 144.00, started_at: (Time.zone.now - 10.days), ended_at: Time.zone.now.yesterday, publisher: publisher)
             create(:promotion, price: 155.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, book_id: 1, publisher: publisher)
             create(:promotion, price: 166.00, started_at: Time.zone.now.yesterday, ended_at: Time.zone.now.tomorrow, tag_id: 1, publisher: publisher)
