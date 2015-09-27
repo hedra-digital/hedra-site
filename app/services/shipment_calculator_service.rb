@@ -29,7 +29,7 @@ class ShipmentCalculatorService
                                         altura: package.height,
                                         valor_declarado: package.declared_value
 
-    if choose_type.to_sym == :modico
+    if choose_type and choose_type.to_sym == :modico
       shipment_info = [[choose_type, { cost: ModicoTablePrices.for(package.weight * 1000), shipping_time: 15 } ]]
     elsif choose_type
       shipment_service = frete.calcular choose_type.to_sym
