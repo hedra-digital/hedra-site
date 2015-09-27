@@ -122,7 +122,7 @@ module BooksHelper
 
     promotion = find_promotion(book)
 
-    return book.price_print if promotion.nil?
+    return book.price_print if promotion.nil? || (!promotion.price && !promotion.discount)
     return promotion.price if promotion.price and promotion.book_id == book.id
     return (1 - promotion.discount) * book.price_print
   end
