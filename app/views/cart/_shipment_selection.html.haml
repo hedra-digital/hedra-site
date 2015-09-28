@@ -23,12 +23,15 @@
         - @shipment_costs.each_with_index do |(name, values), index|
           %label.radio
             %input{:name => "shipping_type", :type => "radio", :checked => index == 0, :value => name }
-              #{name.to_s.capitalize}
+              - if name == :modico
+                Módico
+              - else
+                #{name.to_s.capitalize}
             %span.delivery-time
               - if name == :modico
-                (Plazo de entrega: Em até 15 dias)
+                (Prazo de entrega: Em até 15 dias)
               - else
-                (Plazo de entrega: #{values[:shipping_time]} #{values[:shipping_time] == 1 ? "dia útil" : "dias úteis"})
+                (Prazo de entrega: #{values[:shipping_time]} #{values[:shipping_time] == 1 ? "dia útil" : "dias úteis"})
           %br/
       .span3{style: "text-align: right"}
         - @shipment_costs.each do |name, values|
