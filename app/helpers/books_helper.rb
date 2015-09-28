@@ -124,6 +124,6 @@ module BooksHelper
 
     return book.price_print if promotion.nil? || (!promotion.price && !promotion.discount)
     return promotion.price if promotion.price and promotion.book_id == book.id
-    return (1 - promotion.discount) * book.price_print
+    return (1 - (promotion.discount || 0)) * book.price_print #FIX THIS!!!
   end
 end
