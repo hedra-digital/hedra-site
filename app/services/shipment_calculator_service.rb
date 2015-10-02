@@ -33,7 +33,7 @@ class ShipmentCalculatorService
       shipment_info = [[choose_type, { cost: ModicoTablePrices.for(package.weight * 1000), shipping_time: 15 } ]]
     elsif choose_type
       shipment_service = frete.calcular choose_type.to_sym
-      shipment_info = [[choose_type, { cost: ModicoTablePrices.for(package.weight * 1000), shipping_time: 15 } ]]
+      shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega } ]]
     else
       #TODO: check the errors.
       shipment_services_values = []
