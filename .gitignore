@@ -46,3 +46,7 @@ Vagrantfile
 /public/tmp
 
 rubocop_output.html
+
+# Vim buffers
+*.swp
+
