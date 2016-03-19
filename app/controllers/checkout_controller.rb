@@ -59,7 +59,7 @@ class CheckoutController < ApplicationController
   private
 
   def get_setup_purchase_params(order, request, items)
-    total = to_cents(order.total + (order.shipping_cost || 0))
+    total = to_cents order.total
 
     return total, {
       :ip => request.remote_ip,
