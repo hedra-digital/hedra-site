@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Partnership Report" do
       elsif @search.start_date.present?
         @promotion = @promotion.where(" orders.completed_at >= ? ", @search.start_date)
       elsif @search.end_date.present?
-        @promotion = @promotion.where(" orders.completed_at <= ? ",   @search.end_date + 1.day)
+        @promotion = @promotion.where(" orders.completed_at <= ? ", @search.end_date + 1.day)
       end
 
       if @search.partner_name = params[:partner_name].presence
