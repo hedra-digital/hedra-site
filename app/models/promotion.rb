@@ -5,6 +5,8 @@ class Promotion < ActiveRecord::Base
   belongs_to :category
   belongs_to :publisher
 
+  belongs_to :partner, :autosave => true
+
   has_many :orders, dependent: :restrict
 
   validates :publisher, :started_at, :ended_at, presence: true
@@ -17,7 +19,8 @@ class Promotion < ActiveRecord::Base
   validates :slug, uniqueness: true, allow_blank: true
   validates :slug, presence: true, if: "for_traffic_origin"
 
-  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin
+  attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin, :partner_id, :partner_attributes
+  accepts_nested_attributes_for :partner
 
   private
 

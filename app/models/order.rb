@@ -14,6 +14,20 @@ class Order < ActiveRecord::Base
 
   after_save :send_post_tracking_mail
 
+  scope :completed, -> { where('completed_at is not null') }
+  
+  scope :completed_at_last_week, -> {
+    where(
+      completed_at: 1.week.ago.beginning_of_week(:sunday)..1.week.ago.end_of_week(:sunday)
+    )
+  }
+
+  scope :completed_at_current_month, -> {
+    where(
+      completed_at: Date.today.beginning_of_month..Date.today.end_of_month
+    )
+  }
+
   def name
     "##{self.id}"
   end
