@@ -13,6 +13,39 @@ ActiveAdmin.register Promotion do
     default_actions
   end
 
+  form do |f|
+    f.semantic_errors
+    f.inputs "Promotion" do
+      f.input :book
+      f.input :tag
+      f.input :category
+      f.input :publisher
+      f.input :discount
+      f.input :price
+      f.input :started_at
+      f.input :ended_at
+      f.input :slug
+      f.input :link
+      f.input :name
+      f.input :for_traffic_origin
+    end
+
+    f.inputs "Partners" do
+      if f.object.new_record?
+        f.semantic_fields_for :partner_attributes do |j|
+          j.inputs :name, :email, :comission
+        end
+      else
+        f.semantic_fields_for :partner do |j|
+          j.inputs :name, :email, :comission
+        end
+      end
+    end
+
+    f.actions
+  end
+
+
   controller do
     def new
       super do |format|

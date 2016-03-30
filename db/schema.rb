@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150826114326) do
+ActiveRecord::Schema.define(:version => 20160312012001) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -261,6 +261,14 @@ ActiveRecord::Schema.define(:version => 20150826114326) do
   add_index "participations", ["person_id"], :name => "index_participations_on_person_id"
   add_index "participations", ["role_id"], :name => "index_participations_on_role_id"
 
+  create_table "partners", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.float    "comission"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "people", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -295,6 +303,7 @@ ActiveRecord::Schema.define(:version => 20150826114326) do
     t.string   "link"
     t.string   "name"
     t.boolean  "for_traffic_origin",                               :default => false
+    t.integer  "partner_id"
   end
 
   create_table "publishers", :force => true do |t|
