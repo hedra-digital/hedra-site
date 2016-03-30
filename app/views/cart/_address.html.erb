@@ -6,7 +6,17 @@
   </div>
 
   <div class="span6">
+    <input type="text" placeholder="Bairro" name="address[district]" value='<%= @default_address.nil? ? "" : @default_address.district%>' />
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
     <input type="text" placeholder="Número" name="address[number]" value='<%= @default_address.nil? ? "" : @default_address.number%>' />
+  </div>
+
+  <div class="span6">
+    <input type="text" placeholder="Complemento" name="address[complement]" value='<%= @default_address.nil? ? "" : @default_address.complement%>' />
   </div>
 </div>
 
