@@ -51,24 +51,55 @@ module BooksHelper
 
   # only one interface
   def find_promotion(book)
-    site_promotion = Promotion.where("book_id is null and tag_id is null and category_id is null and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.publisher_id, Time.now).order("created_at").last
+    # find for a promotion available for a publisher
+    # this promotion does not constraint by book_id, tag id, category_id
+    # only verify interval available and publisher_id
+    site_promotion = Promotion.where(
+      "book_id is null and tag_id is null and category_id is null and 
+      publisher_id = ? and ? 
+      between started_at and ended_at 
+      and (slug is null or slug = '')", book.publisher_id, Time.now).order("created_at").last
     return site_promotion if site_promotion
 
+    # search for a cookie partner(current_campaing) and validates if promotion is available
     partner_promotion = find_partner_promotion(book)
     return partner_promotion if partner_promotion
-    return find_private_promotion(book) if find_private_promotion(book)
+
+   return find_private_promotion(book) if find_private_promotion(book)
+
     return find_public_promotion(book) if find_public_promotion(book)
   end
 
   private
 
+  # search for a cookie partner(current_campaing) and validates if promotion is available
   def find_partner_promotion(book)
     key_value_cookie = cookies.find { |k,v| k == 'current_campaign' }
 
     return nil unless key_value_cookie
 
     promotion_id = key_value_cookie.last.split('_').first.to_i
-    return Promotion.where('id = ? and ? between started_at and ended_at', promotion_id, Time.now).last
+    promotion = Promotion.where('id = ? and ? between started_at and ended_at', promotion_id, Time.now).last
+    
+    # verify match by book, tag, category and push
+    if promotion.book_id.present?
+      return false unless promotion.book_id == book.id
+    end
+
+    if promotion.tag_id.present?
+      return false unless book.tags.where(id: promotion.tag_id).present?
+    end
+
+    if promotion.category_id.present?
+      return false unless promotion.category_id == book.category_id
+    end
+
+    if promotion.publisher_id.present?
+      return false unless promotion.publisher_id == book.publisher_id
+    end
+
+    return promotion
+
   rescue => e
     Rails.logger.error e.message
   end
@@ -99,10 +130,10 @@ module BooksHelper
   end
 
   # promotion priority: book > tag > category
+  # @toFix slug id null? in which case it's happen?
   def find_public_promotion(book)
     book_promotion = Promotion.where("book_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.id, Time.now).order("created_at").last
     return book_promotion if book_promotion
-
     tag_promotion = Promotion.where("tag_id in (?) and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.tags.map(&:id), book.publisher_id, Time.now).order("created_at").last
     return tag_promotion if tag_promotion
     category_promotion = Promotion.where("category_id = ? and publisher_id = ? and ? between started_at and ended_at and (slug is null or slug = '')", book.category_id, book.publisher_id, Time.now).order("created_at").last
