@@ -2,6 +2,7 @@ class PaymentController < ApplicationController
   layout "application"
 
   skip_before_filter :verify_authenticity_token, :only => [:callback_9E93257460]
+  skip_before_filter :filter,                    :only => [:callback_9E93257460]
 
   def credit_card
     return if order_validation_triggered_redirect?(true)
@@ -93,10 +94,11 @@ class PaymentController < ApplicationController
   $.ajax({
    type: "POST",
    url: "/payment/callback_9E93257460",
-   data:  JSON.stringify ({"event": "invoice.status_changed", "data": {"id": "9D92C9E932574604ADD10D327C60D24E", "status": "paid"}}),
+   data:  JSON.stringify ({"event"=>"invoice.status_changed", "data"=>{"id"=>"8DF7CD0B6B9547D69B1E13418B829548", "status"=>"paid"}}),
    contentType: "application/json; charset=utf-8",
    dataType: "json"
   });
+
 =end 
   def callback_9E93257460
 
