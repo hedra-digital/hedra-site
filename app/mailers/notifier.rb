@@ -31,6 +31,7 @@ class Notifier < ActionMailer::Base
     @order = order
     publisher = @order.order_items.first.book.publisher
     mail(from: "#{publisher.name}<#{publisher.contact_email}>", to: order.user.email, subject: I18n.t('notifications.completed.subject'), bbc: "jorge@hedra.com.br")
+    PartnershipMailer.order_completed order
   end
 
   def order_failed(order)

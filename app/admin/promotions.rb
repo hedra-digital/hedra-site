@@ -26,18 +26,26 @@ ActiveAdmin.register Promotion do
       f.input :ended_at
       f.input :slug
       f.input :link
-      f.input :name
+      f.input :name, label: "Campaign name"
       f.input :for_traffic_origin
     end
 
     f.inputs "Partners" do
       if f.object.new_record?
         f.semantic_fields_for :partner_attributes do |j|
-          j.inputs :name, :email, :comission
+          j.inputs do
+            j.input :name,      label: "Partner Name"
+            j.input :email,     label: "Partner Email"
+            j.input :comission, label: "Partner Comission"
+          end
         end
       else
         f.semantic_fields_for :partner do |j|
-          j.inputs :name, :email, :comission
+          j.inputs do
+            j.input :name,      label: "Partner Name"
+            j.input :email,     label: "Partner Email"
+            j.input :comission, label: "Partner Comission"
+          end
         end
       end
     end

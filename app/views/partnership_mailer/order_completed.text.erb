@@ -1,0 +1,17 @@
+Ola, <%= @partner.name.split.map(&:capitalize).join(' ') %>.
+
+Este e-mail é enviando automáticamente a cada novo pedido através do seu link.
+
+Segue abaixo dados do pedido.
+
+<% @order.order_items.each do |item| %>
+<%= " #{item.book.title} (#{item.book.participations.map{|participation| participation.person.name }.join(', ')}) #{item.quantity} exemplares R$ #{'%.2f' % item.price}" %>
+<% end %>
+
+Total: <%= '%.2f' % @order.order_items.map{|item| item.price * item.quantity}.inject(:+) %>.
+
+Um resumo semanal é  enviado por e-mail aos domingos, e o acerto será feito ao fim do período.
+
+Atenciosamente,
+
+Editora Hedra.

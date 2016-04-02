@@ -18,9 +18,8 @@ class PaymentController < ApplicationController
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
     payment_params[:months] = params[:months] unless params[:months].blank?
     iugu_charge = Iugu::Charge.create(payment_params)
-
-    logger.info(iugu_charge.attributes)
-
+    PaymentLogger.log(iugu_charge.errors.to_s) if iugu_charge.errors.present?
+    
     @transaction = @order.transactions.last
     @transaction.customer_ip = request.remote_ip
     @transaction.payment_status = Transaction::PENDING
