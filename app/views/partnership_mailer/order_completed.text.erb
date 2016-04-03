@@ -1,16 +1,18 @@
-Ola, <%= @partner.name.split.map(&:capitalize).join(' ') %>.
+Olá, <%= @partner.name.titleize %>
 
-Este e-mail é enviando automáticamente a cada novo pedido através do seu link.
+Um cliente acaba de comprar em nosso site através de seu link especial hedra.
 
-Segue abaixo dados do pedido.
+hedra.com.br/coupon/<%=@partner.slug%>
 
+Confira abaixo as compras e a sua comissão. 
+
+----------------------------------------------------------------
 <% @order.order_items.each do |item| %>
-<%= " #{item.book.title} (#{item.book.participations.map{|participation| participation.person.name }.join(', ')}) #{item.quantity} exemplares R$ #{'%.2f' % item.price}" %>
+<%= "<b> #{item.book.title} (#{item.book.participations.map{|participation| participation.person.name }.join(', ')}) #{item.quantity} exemplares R$ #{'%.2f' % item.price} </b>" %>
 <% end %>
 
-Total: <%= '%.2f' % @order.order_items.map{|item| item.price * item.quantity}.inject(:+) %>.
-
-Um resumo semanal é  enviado por e-mail aos domingos, e o acerto será feito ao fim do período.
+----------------------------------------------------------------
+Total: <%= '%.2f' %  @total %> (comissão <%= '%.2f' %  @total_comission %>)
 
 Atenciosamente,
 

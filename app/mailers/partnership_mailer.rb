@@ -13,8 +13,10 @@ class PartnershipMailer < ActionMailer::Base
 
   def order_completed(order)
     return unless order.try(:promotion).try(:partner).try(:email).present?
-    @order = order
-    @partner = order.promotion.partner
+    @order           = order
+    @partner         = order.promotion.partner
+    @total           = order.order_items.map{|item| item.price * item.quantity}.inject(:+)
+    @total_comission = @total * partner.comission
     mail(
       to: @partner.email, 
       subject: "Hedra - Notificação de Novo Pedido", 
