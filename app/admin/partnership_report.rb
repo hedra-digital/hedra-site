@@ -74,13 +74,13 @@ ActiveAdmin.register_page "Partnership Report" do
             end
 
             column "Order Revenue" do |promotion|
-              promotion.orders.completed.map{ |order| 
+              '%.2f' % promotion.orders.completed.map{ |order| 
                 order.order_items.inject(0){ |_, order| order.price * order.quantity}
               }.inject(&:+)
             end
 
             column "Comission Due" do |promotion|
-              promotion.orders.completed.map{ |order| 
+              '%.2f' % promotion.orders.completed.map{ |order| 
                 order.order_items.inject(0){ |_, order| 
                   order.price * order.quantity * promotion.partner.comission}
               }.inject(&:+)
