@@ -9,12 +9,12 @@ Durante o período de: <%=@data[:start_date]%> até <%=@data[:end_date]%>, não 
 <% end %>
 
 <% @data[:items].each do |item| %>
-<%= " #{item[:title]} (#{item[:people].join(', ')}) #{item[:quantity]} exemplares R$ #{item[:price]}" %>
+<%= " #{item[:title]} (#{item[:people].join(', ')}) #{item[:quantity]} exemplares R$ #{'%.2f' % item[:price]}" %>
 <% end %>
 
-O total desta semana é de R$ <%= @data[:revenue_week] %>.
+O total desta semana é de R$ <%= '%.2f' % @data[:revenue_week] %>.
 
-A soma total do mês se resume a R$ <%= @data[:revenue_month] %> e será acertado no último dia do período.
+A soma total do mês se resume a R$ <%= '%.2f' % @data[:revenue_month] %> e será acertado no último dia do período.
 
 Atenciosamente,
 
