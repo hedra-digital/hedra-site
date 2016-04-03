@@ -1,4 +1,4 @@
-class PromotionReport < ActiveRecord::Base
+class PromotionReport
 	
 	def self.details_partners_promotion
 	  result = []

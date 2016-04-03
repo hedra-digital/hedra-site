@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Partnership Report" do
   
   controller do
     def index
-      @promotion = Promotion.joins(:partner,:orders).group("promotions.id")
+      @promotion = Promotion.joins(:partner, :orders).group("promotions.id")
       search params[:search]
     end
 

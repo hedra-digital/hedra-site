@@ -29,6 +29,7 @@ class Notifier < ActionMailer::Base
 
   def order_completed(order)
     @order = order
+    @order.update_attributes(completed_at: DateTime.now)
     publisher = @order.order_items.first.book.publisher
     mail(from: "#{publisher.name}<#{publisher.contact_email}>", to: order.user.email, subject: I18n.t('notifications.completed.subject'), bbc: "jorge@hedra.com.br")
   end

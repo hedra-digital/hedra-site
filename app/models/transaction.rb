@@ -31,7 +31,7 @@ class Transaction < ActiveRecord::Base
       where(end_date ? ("transactions.created_at < '#{end_date}'") : "").
       where(user_name.blank? ? "" : "users.name like '%#{user_name}%'").
       where(user_email.blank? ? "" : "users.email like '%#{user_email}%'").
-      order("transactions.user_id, transactions.created_at")
+      order("transactions.created_at desc")
   end
 
   def show_status
