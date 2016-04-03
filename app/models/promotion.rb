@@ -9,7 +9,7 @@ class Promotion < ActiveRecord::Base
 
   has_many :orders, dependent: :restrict
 
-  validates :publisher, :started_at, :ended_at, presence: true
+  validates :started_at, :ended_at, presence: true
   validates :name, presence: true, if: "for_traffic_origin"
 
   validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, if: "discount"
