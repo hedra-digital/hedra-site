@@ -1,0 +1,35 @@
+<%= form_for :dump, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f| %>
+
+
+<h3>Select a CSV File:</h3>
+
+<%f.select :attributes, @promotion.attributes.keys, {:prompt => "Please select columns"}, {:multiple => true}%>
+<div>
+  <%= f.file_field :file %>
+</div>
+<br />
+<div>
+  <%= f.submit 'Submit' %>
+</div>
+
+<%end%>
+<br />
+<hr />
+
+
+<h4> Layout expected </h4>
+
+<ol>
+  <li> column 01 - category_id        - integer </li>
+  <li> column 02 - publisher_id       - integer </li>
+  <li> column 03 - discount           - decimal </li>
+  <li> column 04 - started_at         - date    </li>
+  <li> column 05 - ended_at           - date    </li>
+  <li> column 06 - slug               - text    </li>
+  <li> column 07 - link               - text    </li>
+  <li> column 08 - for_traffic_origin - integer (0 for false,  1 for true)</li>
+  <li> column 09 - campaign_name      - text    </li>
+  <li> column 10 - partner_name       - text    </li>
+  <li> column 11 - partner_email      - text    </li>
+  <li> column 12 - partner_comission  - decimal </li>
+</ol>

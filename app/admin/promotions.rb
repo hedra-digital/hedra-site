@@ -1,5 +1,20 @@
 ActiveAdmin.register Promotion do
   menu :parent => "eCommerce"
+  
+  action_item :only => :index do
+    link_to 'Upload CSV File', :action => 'upload_csv'
+  end
+  
+  collection_action :upload_csv do
+    @promotion = Promotion.new
+    render "admin/csv/upload_csv"
+  end
+
+  collection_action :import_csv, :method => :post do
+    PromotionCsvFile.upload(params[:dump][:file])
+    flash[:notice] = "CSV imported successfully!"
+    redirect_to :action => :index
+  end
 
   index do
     column :id
@@ -11,6 +26,7 @@ ActiveAdmin.register Promotion do
       link_to(p.slug, "http://#{p.publisher.url}/coupon/#{p.slug}") unless p.slug.blank?
     end
     default_actions
+
   end
 
   form do |f|
