@@ -10,8 +10,8 @@ ActiveAdmin.register Promotion do
     render "admin/csv/upload_csv"
   end
 
-  collection_action :import_csv, :method => :post do
-    PromotionCsvFile.upload(params[:dump][:file])
+  collection_action :upload, :method => :post do
+    PromotionCsvFile.upload(params[:promotions])
     flash[:notice] = "CSV imported successfully!"
     redirect_to :action => :index
   end

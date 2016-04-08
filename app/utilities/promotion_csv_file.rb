@@ -1,9 +1,9 @@
 require 'csv'
 class PromotionCsvFile
   class << self
-    def upload(csv_data)
-      csv_file = csv_data.read
-      CSV.parse(csv_file) do |row|
+    def upload(params)
+      file = params[:file].read
+      CSV.parse(file) do |row|
         data = fetch_group_attributes row
         return if data.blank?
         partner = Partner.new(data[:partner])
@@ -11,9 +11,14 @@ class PromotionCsvFile
 
         promotion = Promotion.new(data[:promotion])
         promotion.partner_id  = partner.id
+        
         # @fixME this couldn't be hardcode, change domain, breaks all
         promotion.link = "http://hedra.com.br/categoria/#{promotion.category.slug}" if promotion.category.present?
         promotion.save!
+
+        if params[:notify].to_i == 1
+          promotion.notify_partner
+        end
       end
     end
 

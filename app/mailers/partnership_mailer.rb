@@ -6,7 +6,7 @@ class PartnershipMailer < ActionMailer::Base
   	@data = data
     mail(
       to: data[:partner_email], 
-      subject: "Hedra - Relatório Semanal Parcerias", 
+      subject: "Parceiros Hedra - Relatório Semanal Parcerias", 
       cc: 'parceiros@hedra.com.br'
     )
   end
@@ -20,7 +20,18 @@ class PartnershipMailer < ActionMailer::Base
     @total_comission = @total * @partner.comission
     mail(
       to: @partner.email, 
-      subject: "Hedra - Notificação de Novo Pedido", 
+      subject: "Parceiros Hedra - Notificação de Novo Pedido", 
+      cc: 'parceiros@hedra.com.br'
+    )
+  end
+
+  def promotion_created(promotion)
+    return unless promotion.try(:partner).try(:email).present?
+    @promotion = promotion
+    @partner = @promotion.partner
+    mail(
+      to: @partner.email, 
+      subject: "Parceiros Hedra - Link Promocional Exclusivo", 
       cc: 'parceiros@hedra.com.br'
     )
   end

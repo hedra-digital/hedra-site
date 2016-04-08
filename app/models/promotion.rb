@@ -22,6 +22,16 @@ class Promotion < ActiveRecord::Base
   attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin, :partner_id, :partner_attributes
   accepts_nested_attributes_for :partner
 
+  # run background job
+  # https://www.agileplannerapp.com/blog/building-agile-planner/rails-background-jobs-in-threads
+  # this workaround should be passed to sidekiq jobs
+
+  def notify_partner
+    if self.try(:partner).try(:email).present?
+      background { PartnershipMailer.promotion_created(self).deliver }
+    end
+  end
+  
   private
 
   def validate_price_and_discount
@@ -41,4 +51,12 @@ class Promotion < ActiveRecord::Base
   def started_at_ended_at
     errors.add(:started_at, "End time is early than start time") if started_at && ended_at && ended_at <= started_at
   end
+
+  def background(&block)
+    Thread.new do
+      yield
+      ActiveRecord::Base.connection.close
+    end
+  end
+
 end

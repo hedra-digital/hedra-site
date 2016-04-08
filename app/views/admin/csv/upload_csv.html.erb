@@ -1,9 +1,13 @@
-<%= form_for :dump, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f| %>
+<%= form_for :promotions, :url=>{:action=>"upload"}, :html => { :multipart => true } do |f| %>
 
 
 <h3>Select a CSV File:</h3>
 
 <%f.select :attributes, @promotion.attributes.keys, {:prompt => "Please select columns"}, {:multiple => true}%>
+<div>
+<%= f.check_box :notify %> Notify Partners by email?
+</div>
+<br /<
 <div>
   <%= f.file_field :file %>
 </div>

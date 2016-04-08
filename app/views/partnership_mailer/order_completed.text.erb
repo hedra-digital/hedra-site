@@ -8,7 +8,7 @@ Confira abaixo as compras e a sua comissão.
 
 ----------------------------------------------------------------
 <% @order.order_items.each do |item| %>
-<%= "<b> #{item.book.title} (#{item.book.participations.map{|participation| participation.person.name }.join(', ')}) #{item.quantity} exemplares R$ #{'%.2f' % item.price} </b>" %>
+<%= "#{item.book.title} (#{item.book.participations.map{|participation| participation.person.name }.join(', ')}) #{item.quantity} exemplares R$ #{'%.2f' % item.price}" %>
 <% end %>
 
 ----------------------------------------------------------------
