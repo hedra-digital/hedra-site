@@ -8,7 +8,7 @@
       <% end %>
     </div>
   </article>
-<% else %>
+<% elsif feature.book.present? %>
   <article class="feature-item">
     <div class="feature-cover cover">
       <%= link_to(image_tag(feature.book.cover_url.to_s), feature.book) %>

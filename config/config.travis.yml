@@ -4,3 +4,17 @@ test:
   paypal_password: "<FIXME: Fill it>"
   paypal_api_signature: "<FIXME: Fill it>"
   public_url: "<FIXME: Fill it>"
+
+development:
+  iugu_api_key: "<FIXME: Fill it>"
+  iugu_account_id: "<FIXME: Fill it>"
+  paypal_login: "<FIXME: Fill it>"
+  paypal_password: "<FIXME: Fill it>"
+  paypal_api_signature: "<FIXME: Fill it>"
+  smtp_settings:
+    address: "smtp.gmail.com"
+    port:     587
+    authentication: "plain"
+    user_name:      "snoteapp@gmail.com"
+    password:       "notesmadeeasy"
+    enable_starttls_auto: true

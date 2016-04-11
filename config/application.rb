@@ -3,6 +3,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+# Load Configuration File Settings
+APP_CONFIG = YAML.load_file("config/config.yml")[Rails.env]
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -75,13 +78,7 @@ module HedraSite
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.default :charset => "utf-8"
 
-    config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => "587",
-      :authentication => :plain,
-      :user_name => "snoteapp@gmail.com",
-      :password => "notesmadeeasy"
-    }
+    config.action_mailer.smtp_settings = APP_CONFIG["smtp_settings"].symbolize_keys
     config.action_mailer.default_url_options = {
       :host => "hedra.com.br"
     }
