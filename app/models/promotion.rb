@@ -22,6 +22,8 @@ class Promotion < ActiveRecord::Base
   attr_accessible :book_id, :category_id, :discount, :ended_at, :price, :publisher_id, :started_at, :tag_id, :slug, :link, :name, :for_traffic_origin, :partner_id, :partner_attributes
   accepts_nested_attributes_for :partner
 
+  after_save :should_notify?
+
   # run background job
   # https://www.agileplannerapp.com/blog/building-agile-planner/rails-background-jobs-in-threads
   # this workaround should be passed to sidekiq jobs
@@ -29,6 +31,12 @@ class Promotion < ActiveRecord::Base
   def notify_partner
     if self.try(:partner).try(:email).present?
       background { PartnershipMailer.promotion_created(self).deliver }
+    end
+  end
+
+  def should_notify?
+    if self.try(:partner).try(:notify).to_i == 1
+      notify_partner
     end
   end
   

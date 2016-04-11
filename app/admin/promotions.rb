@@ -10,6 +10,14 @@ ActiveAdmin.register Promotion do
     render "admin/csv/upload_csv"
   end
 
+  collection_action :notify_partner do
+    promotion = Promotion.find params["id"]
+    return redirect_to :action => :index if promotion.blank?
+    promotion.notify_partner
+    flash[:notice] = "A new email was sent to a partner"
+    redirect_to :action => :index
+  end
+
   collection_action :upload, :method => :post do
     PromotionCsvFile.upload(params[:promotions])
     flash[:notice] = "CSV imported successfully!"
@@ -25,7 +33,9 @@ ActiveAdmin.register Promotion do
     column "coupon" do |p|
       link_to(p.slug, "http://#{p.publisher.url}/coupon/#{p.slug}") unless p.slug.blank?
     end
-    default_actions
+    actions defaults: true do |p|
+      link_to 'Notify', notify_partner_admin_promotions_path(id: p.id)
+    end
 
   end
 
@@ -53,14 +63,16 @@ ActiveAdmin.register Promotion do
             j.input :name,      label: "Partner Name"
             j.input :email,     label: "Partner Email"
             j.input :comission, label: "Partner Comission"
+            j.input :notify, label: "Send a email with promotion details", :as => :boolean
           end
         end
       else
         f.semantic_fields_for :partner do |j|
           j.inputs do
-            j.input :name,      label: "Partner Name"
-            j.input :email,     label: "Partner Email"
-            j.input :comission, label: "Partner Comission"
+            j.input :name,       label: "Partner Name"
+            j.input :email,      label: "Partner Email"
+            j.input :comission,  label: "Partner Comission"
+            j.input :notify, label: "Send a email with promotion details", :as => :boolean
           end
         end
       end

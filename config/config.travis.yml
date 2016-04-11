@@ -12,9 +12,9 @@ development:
   paypal_password: "<FIXME: Fill it>"
   paypal_api_signature: "<FIXME: Fill it>"
   smtp_settings:
-    address: "smtp.gmail.com"
+    address:  smtp.gmail.com
     port:     587
-    authentication: "plain"
-    user_name:      "snoteapp@gmail.com"
-    password:       "notesmadeeasy"
+    authentication: :plain
+    user_name:      snoteapp@gmail.com
+    password:       notesmadeeasy
     enable_starttls_auto: true
