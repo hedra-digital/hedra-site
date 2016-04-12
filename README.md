@@ -27,14 +27,14 @@ $ git clone git@github.com:hedra-digital/hedra-site.git
 ### Instalar ruby
 <code>
 $ cd hedra-site
-$ rvm install ruby-1.9.3-p392
+$ rvm install ruby-2.0.0-p481
 </code>
 
 ### Criar gemset
 <code>
-$ rvm use ruby-1.9.3-p392
-$ rvm gemset create ruby-1.9.3-p392 hedra-site
-$ rvm use ruby-1.9.3-p392@hedra-site
+$ rvm use ruby-2.0.0-p481
+$ rvm gemset create ruby-2.0.0-p481 hedra-site
+$ rvm use ruby-2.0.0-p481@hedra-site
 </code>
 
 ### Instalar Gems do projeto
@@ -51,9 +51,7 @@ Configure usuário e senha de acesso ao MySQL no arquivo config/database.yml
 
 ### Criar estrutura do banco de dados da aplicação
 <code>
-$ rake db:create
-$ rake db:migrate
-$ rake db:seeds
+$ rake db:create && rake db:migrate && rake db:seed
 </code>
 
 ### Executar aplicação local
