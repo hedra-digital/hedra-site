@@ -60,7 +60,3 @@ $ rails server
 </code>
 
 Acesse a aplicação através da url http://127.0.0.1:3000
-
-##TODO:
-  - Document about config/config.yml
-
