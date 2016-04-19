@@ -1,5 +1,10 @@
 <% if feature.feature_image.present? %>
-  <article class="feature-item">
+  <!-- ga tracking for banner promotions -->
+  <article class="feature-item" 
+    data-feature-id="<%=feature.id%>"
+    data-feature-slug="<%=feature.slug%>"
+    data-feature-position="<%=feature_counter%>"
+  >
     <div class="feature-image-container">
       <% if feature.site_page.present? %>
         <%= link_to(image_tag(feature.feature_image_url(:home), :class => "feature-image"), tag_page_path(feature.site_page.tag.slug)) %>

@@ -1,5 +1,15 @@
 <div class="span3 related-list-item-holder">
-  <article class="related-list-item">
+  <article class="related-list-item"
+    data-book-target-id="<%=related_book.id%>"
+    data-book-id="<%=related_book.id%>"
+    data-book-isbn="<%=related_book.isbn%>" 
+    data-book-slug="<%=related_book.slug%>" 
+    data-book-author="<%=authors(related_book)%>"
+    data-book-title="<%=related_book.title%>"
+    data-book-category="<%=related_book.category.name%>"
+    data-book-publisher="<%=related_book.publisher.name%>"
+    data-section-type="<%=section_type%>"
+  >
     <div class="cover cover-related">
         <%= link_to(image_tag(related_book.cover_url(:big_thumb).to_s), related_book) %>
     </div>

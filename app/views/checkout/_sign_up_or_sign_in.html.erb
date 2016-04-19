@@ -2,6 +2,8 @@
   <div id='sign_up_or_sign_in'>
     <% if standalone %>
     	<h1>Login</h1>
+      <!-- avoid track ga funnel for standalone login -->
+      <span class="standalone"></span>
     <% else %>
       <h1>Primeiro passo: registro</h1>
     <% end %>
@@ -18,7 +20,7 @@
           </label>
    		  </div>
    		  <div class="row"><a href="/users/password/new">Esqueceu sua senha?</a></div>
-   		  <div class="row"><input class="btn" name="commit" type="submit" value="Acessar"></div>
+   		  <div class="row"><input class="btn submit" name="commit" type="submit" value="Acessar"></div>
    		<% end %>
 
       <%= form_tag({controller: :registrations, action: :create}, {remote: !standalone, id: "registration_form"}) do %>
@@ -31,7 +33,7 @@
         	<input name="user[password]" type="password" placeholder="Senha" />
         	<input name="user[password_confirmation]" type="password" placeholder="Confirme a sua senha" />
         </div>
-        <div class="row"><input name="commit" type="submit" value="Cadastrar-se" class="btn" /></div>
+        <div class="row"><input name="commit" type="submit" value="Cadastrar-se" class="btn submit" /></div>
       <% end %>
 
     </div>

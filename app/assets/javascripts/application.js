@@ -29,6 +29,7 @@
 //= require payment.js
 //= require card.js
 //= require blog_infinite_scroll.js
+//= require tracking/tracking_events_and_goals.js
 
 // FancyBox
 $(".fancybox").fancybox({
@@ -69,11 +70,22 @@ $(window).load(function() {
       pagination      : "#carousel-pagination",
       scroll          : {
         items         : 1,
-        duration      : 700
-      }
+        duration      : 900,
+        onAfter       : function() {
+          // ga tracking for banner impression
+          watchElementsImpression({
+            element: '#carousel-target',
+            event: 'feature:impression'
+          });
+        }
+      },
+    });
+    // ga tracking for banner impression
+    watchElementsImpression({
+      element: '#carousel-target',
+      event: 'feature:impression'
     });
   }
-
 });
 
 

@@ -1,11 +1,20 @@
-<article class="book-list-item row">
-  <div class="item-cover cover span2">
+<article class="book-list-item row"
+    data-book-target-id="<%=book.id%>"
+    data-book-id="<%=book.id%>"
+    data-book-isbn="<%=book.isbn%>" 
+    data-book-slug="<%=book.slug%>" 
+    data-book-author="<%=authors(book)%>"
+    data-book-title="<%=book.title%>"
+    data-book-category="<%=book.category.name%>"
+    data-book-publisher="<%=book.publisher.name%>"
+>
+  <div class="item-cover cover span2" data-book-id="<%=book.id%>">
     <%= link_to(image_tag(book.cover_url(:thumb).to_s), book) %>
   </div>
 
   <% if book.has_price? %>
     <div class="item-info span7">
-      <h3 class="book-title"><%= link_to book.title, book %></h3>
+      <h3 class="book-title" data-book-id="<%=book.id%>"><%= link_to book.title, book %></h3>
       <h4 class="book-authors"><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>
@@ -15,32 +24,53 @@
         <div class="list-price2">
           <ul class="buy">
             <% if book.price_print%>
-            <li>
+            <li class="item-type">
               <%= link_to add_to_cart_path(book, book_type: :print), :method => :post, :class => "btn btn-primary #{'promotion-css' if find_promotion(book)}"  do%>
               <span class="type">
-                <% if find_promotion(book) %>
-                  <%= number_to_percentage(show_discount(find_promotion(book), book), precision: 0)%> OFF
+                <% promotion = find_promotion(book) 
+                  if promotion.present?
+                %>
+                  <%= number_to_percentage(show_discount(promotion, book), precision: 0)%> OFF
                 <% else %>
                   compre
                 <% end %>
               </span>
-              <span class="price"><%= number_to_currency(show_price(book, :print))%></span>
+              <span class="price"
+                data-book-id="<%=book.id%>" 
+                data-book-type="print" 
+                data-book-price="<%=show_price(book, :print)%>"
+                data-book-promotion="<%=promotion.try(:id)%>"
+              >
+                  <%= number_to_currency(show_price(book, :print))%>
+              </span>
               <% end %>
             </li>
             <% end %>
             <% if book.price_ebook%>
-            <li>
+            <li class="item-type">
               <%= link_to add_to_cart_path(book, book_type: :ebook), :method => :post, :class => 'btn btn-primary' do%>
               <span class="type">ebook</span>
-              <span class="price"><%= number_to_currency(show_price(book, :ebook))%></span>
+              <span class="price" 
+                data-book-id="<%=book.id%>"
+                data-book-type="ebook" 
+                data-book-price="<%=show_price(book, :ebook)%>"
+              >
+                  <%= number_to_currency(show_price(book, :ebook))%>
+              </span>
               <% end %>
             </li>
             <% end %>
             <% if book.packet_discount%>
-            <li>
+            <li class="item-type">
               <%= link_to add_to_cart_path(book, book_type: :packet), :method => :post, :class => 'btn btn-primary' do%>
               <span class="type">ebook+livro</span>
-              <span class="price"><%= number_to_currency(show_price(book, :packet))%></span>
+              <span class="price" 
+                data-book-id="<%=book.id%>"
+                data-book-type="packet" 
+                data-book-price="show_price(book, :packet)"
+                >
+                  <%= number_to_currency(show_price(book, :packet))%>
+              </span>
               <% end %>
             </li>
             <% end %>
@@ -49,7 +79,9 @@
     </div>
   <% else %>
     <div class="item-info span10">
-      <h3 class="book-title"><%= link_to book.title, book %></h3>
+      <h3 class="book-title" data-book-id="<%=book.id%>">
+        <%= link_to book.title, book %>
+      </h3>
       <h4 class="book-authors"><%= authors(book) %></h4>
       <div class="item-description">
         <%= description_lead book %>

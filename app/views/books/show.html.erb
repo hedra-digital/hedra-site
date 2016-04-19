@@ -47,7 +47,11 @@
     <div class="container">
       <h2 class="heading">Livros relacionados</h2>
       <div class="related-list row">
-        <%= render :partial => 'pages/related_book', :collection => @related_books %>
+        <%= render :partial => 'pages/related_book', :collection => @related_books,
+          locals: {
+            section_type: "Relacionados"
+          } 
+        %>
       </div>
     </div>
   </div>
