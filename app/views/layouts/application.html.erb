@@ -17,6 +17,8 @@
     <%= yield :meta_tags %>
     <%= yield :og %>
     <%= render partial: 'tracking/facebook_pixel_code' %>
+    <!-- webmaster tools -->
+    <meta name="google-site-verification" content="Mw5tFlfzAzVCBC3jhg2hwHyiss4XjJKyyTX3Opujp-o" />
   </head>
   <body>
     <% if current_page?(:controller => 'books', :action => 'show') or current_page?(:controller => 'blog', :action => 'show') %>
