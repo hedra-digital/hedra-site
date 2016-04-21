@@ -12,6 +12,7 @@ PRINT_BOOK_TYPE     = :print
 DEFAULT_ORIGIN_CEP  = "05416-011"
 
 SUCCESS_CORREIOS_RESPONSE = "0"
+DEFAULT_START_SHIPPING_TIME = 3
 
 class ShipmentCalculatorService
   def self.execute(hashed_books, destination_cep, choose_type=nil)
@@ -33,7 +34,7 @@ class ShipmentCalculatorService
       shipment_info = [[choose_type, { cost: ModicoTablePrices.for(package.weight * 1000), shipping_time: 15 } ]]
     elsif choose_type
       shipment_service = frete.calcular choose_type.to_sym
-      shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega } ]]
+      shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega + DEFAULT_START_SHIPPING_TIME } ]]
     else
       #TODO: check the errors.
       shipment_services_values = []
@@ -46,7 +47,7 @@ class ShipmentCalculatorService
 
       shipment_info = shipment_services_values.map do |service_key, service_value|
         return nil unless service_value.erro == SUCCESS_CORREIOS_RESPONSE
-        [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega } ]
+        [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega + DEFAULT_START_SHIPPING_TIME } ]
       end
       shipment_info.unshift [:modico, { cost: ModicoTablePrices.for(package.weight * 1_000), shipping_time: 15 }]
     end
