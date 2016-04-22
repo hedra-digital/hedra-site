@@ -86,3 +86,4 @@ gem 'capistrano', '2.15.5'
 # To use debugger
 # gem 'debugger'
 gem 'correios-frete', '1.9.3', require: false
+gem 'correios-cep'

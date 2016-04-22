@@ -6,12 +6,8 @@
     .span3{style: "text-align:left;"}
       %label.label CEP de Endereço
     .span3
-      %input.cep_to_estimate_shipping_costs{autocomplete: "off", placeholder: "CEP", type: "text", value: cep}
-    .span3{style: "text-align: center;"}
-      %span.recalculate-shipment-cost{:onclick => "recalculateShipmentCosts(this)"}
-        = fa_icon :refresh
-        Calcular
-
+      %input.cep_to_estimate_shipping_costs{autocomplete: "off", placeholder: "CEP", type: "text", value: cep, onblur: "recalculateShipmentCosts(this)"}
+    
   #shipment-types.row
     - unless @shipment_costs
       .span12.shipping-error

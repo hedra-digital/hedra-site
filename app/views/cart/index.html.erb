@@ -109,14 +109,17 @@
         </div>
 
         <div class="row">
-          <div class="span4"><input autocomplete="off" data-iugu="expiration" placeholder="MM/AAAA" type="text" value="" /></div>
+          <div class="span4">
+            <%= select_tag("month_expiration", options_for_select((1..12).to_a), prompt: "Mês") %>
+            <%= select_tag("year_expiration", options_for_select((Time.now.year..Time.now.year + 10).to_a), prompt: "Ano") %>
+          </div>
           <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
         </div>
-
+        
         <div class="row">
           <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
         </div>
-          
+
         <input type="hidden" name="token" id="token"/>
         <div class="shipment">
           <%= render "shipment_selection", cep: @cep if includes_print_books? %>
@@ -182,10 +185,9 @@
 <script type="text/javascript">
 $('#payment_card form').card({
   container: $('.card-wrapper'),
-  numberInput: 'input[data-iugu="number"]', 
-  expiryInput: 'input[data-iugu="expiration"]',
+  numberInput: 'input[data-iugu="number"]',
+  expiryInput: 'select[name="month_expiration"], select[name="year_expiration"] ',
   cvcInput: 'input[data-iugu="verification_value"]',
   nameInput: 'input[data-iugu="full_name"]'
 })
 </script>
-
