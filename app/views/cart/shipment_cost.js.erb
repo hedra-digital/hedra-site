@@ -1,1 +1,13 @@
 $(".shipment-selection").html("<%= escape_javascript(render 'shipment_selection', cep: @cep) %>").hide().fadeIn(800);
+
+<% if @address.present? %>
+$('input[name="address[address]"').val("<%= @address[:address] %>")
+$('input[name="address[district]"').val("<%= @address[:neighborhood] %>")
+$('input[name="address[city]"').val("<%= @address[:city] %>")
+$('select[name="address[state]"').val("<%= @address[:state] %>")
+<% else %>
+$('input[name="address[address]"').val("")
+$('input[name="address[district]"').val("")
+$('input[name="address[city]"').val("")
+$('select[name="address[state]"').val("")
+<% end %>

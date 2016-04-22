@@ -70,6 +70,7 @@ class CartController < ApplicationController
   def shipment_cost
     @cep   = params[:cep]
     @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
+    @address = Correios::CEP::AddressFinder.get(@cep)
   end
 
   private
