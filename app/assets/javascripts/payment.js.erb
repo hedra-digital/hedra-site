@@ -65,7 +65,7 @@ $(document).on("submit", "#payment_card form", function(){
 
   var show_errors = function(messages_array){
     var messages_string = ""
-    
+
     $.each(messages_array, function(i, m){
       messages_string += "<li>"+ m +"</li>"
     })
@@ -84,7 +84,7 @@ $(document).on("submit", "#payment_card form", function(){
     }
   }
 
-  if(!show_errors(messages_array)){return false} 
+  if(!show_errors(messages_array)){return false}
 
   var form = $(this);
   var tokenResponseHandler = function(data) {
@@ -108,10 +108,10 @@ $(document).on("submit", "#payment_card form", function(){
       form.get(0).submit();
     }
   }
-  
+
   Iugu.createPaymentToken(this, tokenResponseHandler);
   return false;
-})  
+})
 
 
 $(document).on("submit", "#payment_slip form", function(){
@@ -181,24 +181,26 @@ function validate_form_payment_card(){
 
   var number = $('#payment_card form input[data-iugu="number"]').val()
   var full_name = $('#payment_card form input[data-iugu="full_name"]').val()
-  var expiration = $('#payment_card form input[data-iugu="expiration"]').val()
+  month = $('#payment_card form select[name="month_expiration"]').val()
+  year = $('#payment_card form select[name="year_expiration"]').val()
+  var expiration = month + ' / ' + year
   var verification_value = $('#payment_card form input[data-iugu="verification_value"]').val()
 
 
   if(!Iugu.utils.validateCreditCardNumber(number)){
-    messages_array.push("Número do Cartão é inválido.") 
+    messages_array.push("Número do Cartão é inválido.")
   }
 
   if(!validate_full_name(full_name)){
-    messages_array.push("Titular do Cartão é inválido.") 
+    messages_array.push("Titular do Cartão é inválido.")
   }
 
   if(!Iugu.utils.validateExpirationString(expiration)){
-    messages_array.push("Data de expiração é inválido.") 
+    messages_array.push("Data de expiração é inválido.")
   }
 
   if(!Iugu.utils.validateCVV(verification_value, Iugu.utils.getBrandByCreditCardNumber(number))){
-    messages_array.push("CVV é inválido.") 
+    messages_array.push("CVV é inválido.")
   }
 
   return messages_array

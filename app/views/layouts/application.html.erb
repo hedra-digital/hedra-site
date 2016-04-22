@@ -16,8 +16,21 @@
     <%= javascript_include_tag "application" %>
     <%= yield :meta_tags %>
     <%= yield :og %>
+    <%= render partial: 'tracking/facebook_pixel_code' %>
+    <!-- webmaster tools -->
+    <meta name="google-site-verification" content="Mw5tFlfzAzVCBC3jhg2hwHyiss4XjJKyyTX3Opujp-o" />
   </head>
   <body>
+    <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MHDJTF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MHDJTF');</script>
+  <!-- End Google Tag Manager -->
+
     <% if current_page?(:controller => 'books', :action => 'show') or current_page?(:controller => 'blog', :action => 'show') %>
       <div id="fb-root"></div>
       <script>(function(d, s, id) {
@@ -68,7 +81,7 @@
 
     <%= yield :page_javascripts %>
 
-    <% if current_publisher.tracking_id and Rails.env.production? %>
+    <% if current_publisher.tracking_id && Rails.env.production?  %>
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -76,6 +89,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', '<%= current_publisher.tracking_id %>', 'auto');
+        ga('require', 'ec');   // load enhanced ecommerce library
         ga('send', 'pageview');
 
       </script>

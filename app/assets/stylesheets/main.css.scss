@@ -1605,6 +1605,13 @@ html, body {
   select[name=months]{
     width: 570px;
   }
+  select[name=month_expiration]{
+    width: 90px;
+  }
+  select[name=year_expiration]{
+    margin-left: 20px;
+    width: 137px;
+  }
   input[type=submit]{
     width: 570px;
     height: 47px;
@@ -1749,7 +1756,6 @@ html, body {
 }
 
 #payment_card{
-  display: block;
   .card-wrapper{
     margin: 10px 0px 30px 0px;
   }

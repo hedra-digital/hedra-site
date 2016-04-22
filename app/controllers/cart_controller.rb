@@ -45,7 +45,7 @@ class CartController < ApplicationController
 
     flash[:info] = "<strong>Subtotal do seu pedido: #{number_to_currency(view_context.cart_total)}</strong><br>Você tem #{pluralize(session[:cart].size, 'item', 'itens')} no carrinho.<a class='btn btn-primary view-cart' href='/carrinho'>Ver carrinho</a>"
 
-    redirect_to(come_from_blog? ? cart_path : :back)
+    redirect_to cart_path
   end
 
   def update
@@ -70,6 +70,7 @@ class CartController < ApplicationController
   def shipment_cost
     @cep   = params[:cep]
     @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
+    @address = Correios::CEP::AddressFinder.get(@cep)
   end
 
   private

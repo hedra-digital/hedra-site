@@ -35,7 +35,11 @@
   <div id="new-releases" class="related">
     <div class="container">
       <div class="related-list row">
-        <%= render :partial => 'pages/related_book', :collection => @highlight %>
+        <%= render :partial => 'pages/related_book', :collection => @highlight,
+          locals: {
+            section_type: 'Destaques'
+          } 
+        %>
       </div>
     </div>
   </div>

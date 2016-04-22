@@ -10,6 +10,7 @@
 
 </div>
 
+
 <% if Rails.env.production? and @transaction and @transaction.status == Transaction::COMPLETED %>
   <!-- Google Code for book purchase Conversion Page -->
   <script type="text/javascript">
@@ -50,3 +51,45 @@
   <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6017073973769&amp;cd[value]=<%= @transaction.order.total%>&amp;cd[currency]=BRL&amp;noscript=1" /></noscript>
 
 <% end %>
+
+
+<!-- code for ga (enhanced ecommerce) -->
+<script>
+
+// I know, shame on me with this workaround =/
+
+$(function(){
+
+<% @transaction.order.order_items.each do |item| %>
+  ga('ec:addProduct',{
+    'id': "<%=item.book_id%>",
+   'name': "<%=item.book.title%>",
+   'category': "<%=item.book.category.name%>", 
+   'brand': "<%=item.book.publisher.name%>",
+   'variant': "<%=item.book_type%>",
+   'price': "<%=item.price%>",
+   'quantity': "<%=item.quantity%>"
+   });
+<% end %>
+
+var dataTrackPurchase = {
+ 'id': "<%=@transaction.id%>", 
+ 'affiliation': "Hedra",
+ 'revenue': "<%=@transaction.order.total%>", 
+ 'tax': '',
+ 'shipping': "<%=@transaction.order.shipping_cost%>",
+ 'coupon': "<%=@transaction.order.try(:promotion).try(:id)%>"
+}
+
+ga('ec:setAction', 'purchase', dataTrackPurchase);
+ 
+ga('send', 'event', 'Checkout', 'Pagamento Concluido', "<%=@transaction.payment_method%>");
+
+dataTrackPurchase['value'] = "<%=@transaction.order.total%>";
+dataTrackPurchase['currency'] = 'BRL';
+
+fbq('track', 'Purchase', dataTrackPurchase);
+
+});
+
+</script>

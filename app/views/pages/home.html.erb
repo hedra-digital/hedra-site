@@ -26,7 +26,11 @@
   <div id="new-releases" class="related">
     <div class="container">
       <div class="related-list row">
-        <%= render :partial => 'pages/related_book', :collection => @new_releases %>
+        <%= render :partial => 'pages/related_book', :collection => @new_releases, 
+          locals: {
+            section_type: 'Lançamentos'
+          } 
+        %>
       </div>
     </div>
   </div>

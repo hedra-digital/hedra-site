@@ -18,11 +18,17 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many             :publishers
   has_many                            :features_publishers  
   # Specify fields that can be accessible through mass assignment
-  attr_accessible                     :book_id, :feature_image, :page_id, :external_site_url, :publisher_ids
+  attr_accessible                     :book_id, :feature_image, :page_id, :external_site_url, :publisher_ids, :slug
 
   mount_uploader                      :feature_image, FeatureImageUploader
 
   validates                           :page_id, :presence => true, :if => Proc.new {|feature| feature.feature_image.present? && feature.external_site_url.nil?}
   validates                           :feature_image, :presence => true, :if => Proc.new {|feature| feature.page_id.present? }
   validates                           :external_site_url, :presence => true, :if => Proc.new {|feature| feature.book.nil? && feature.site_page.nil?}
+  before_save :slugify
+
+  private
+  def slugify
+    self.slug = slug.parameterize
+  end
 end

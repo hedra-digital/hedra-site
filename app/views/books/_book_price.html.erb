@@ -1,4 +1,13 @@
-<aside class="book-price span3">
+<aside class="book-price span3" 
+    data-book-target-id="<%=book.id%>"
+    data-book-id="<%=book.id%>"
+    data-book-isbn="<%=book.isbn%>" 
+    data-book-slug="<%=book.slug%>" 
+    data-book-author="<%=authors(book)%>"
+    data-book-title="<%=book.title%>"
+    data-book-category="<%=book.category.name%>"
+    data-book-publisher="<%=book.publisher.name%>"
+  >
   <div class="list-price">
     <% discount_price = show_price(book, :print) %>
     <% have_discount_price = discount_price != book.price_print %>
@@ -11,26 +20,39 @@
 
     <ul class="buy">
       <% if book.price_print%>
-        <li>
+        <li class="item-type">
           <%= link_to add_to_cart_path(book, book_type: :print, source: controller_name), :method => :post, :class => "btn btn-primary #{'promotion-css' if have_discount_price }", target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">compre</span>
-            <span class="price"><%= number_to_currency(discount_price)%></span>
+            <span class="price" 
+                data-book-id="<%=book.id%>" 
+                data-book-type="book" 
+                data-book-price="<%=show_price(book, :print)%>"
+            ><%= number_to_currency(discount_price)%></span>
           <% end %>
         </li>
       <% end %>
       <% if book.price_ebook%>
-        <li>
+        <li class="item-type">
           <%= link_to add_to_cart_path(book, book_type: :ebook, source: controller_name), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">ebook</span>
-            <span class="price"><%= number_to_currency(show_price(book, :ebook))%></span>
+            <span class="price"
+                data-book-id="<%=book.id%>" 
+                data-book-type="ebook" 
+                data-book-price="<%=show_price(book, :ebook)%>"
+                ><%= number_to_currency(show_price(book, :ebook))%></span>
           <% end %>
         </li>
       <% end %>
       <% if book.packet_discount%>
-        <li>
+        <li class="item-type">
           <%= link_to add_to_cart_path(book, book_type: :packet, source: controller_name), :method => :post, :class => 'btn btn-primary', target: "#{controller_name == 'blog' ? '_blank' : '_self'}" do%>
             <span class="type">ebook+livro</span>
-            <span class="price"><%= number_to_currency(show_price(book, :packet))%></span>
+            <span class="price"
+              data-book-id="<%=book.id%>" 
+              data-book-type="book" 
+              data-book-price="<%=show_price(book, :packet)%>"
+            >
+            <%= number_to_currency(show_price(book, :packet))%></span>
           <% end %>
         </li>
       <% end %>

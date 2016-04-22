@@ -43,6 +43,8 @@ ActiveAdmin.register Feature do
 
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
+      f.input :slug, label: "Slug (identificador)", placeholder: "ex: promocao-do-dia-1"
+
       f.inputs "Selo editorial" do
         f.input :publishers, :as => :check_boxes, :wrapper_html => { :class => "multicolumn1" }, :collection => Publisher.all
       end
