@@ -63,7 +63,7 @@
           <div class="span12">
             <nav id="secondary-nav">
               <ul class="nav nav-pills">
-                <li><%= link_to('blog', blog_path) if blog_count > 0 %>
+                <li><%= link_to('blog', blog_path, :target => '_blank') if blog_count > 0 %>
                 <li><%= link_to current_publisher.about_label, about_path %></li>
                 <li><%= link_to 'Contato', contact_path %></li>
               </ul>
