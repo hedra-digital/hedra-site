@@ -375,6 +375,7 @@ footer {
     border-right: none;
     border-left: none;
     border-radius: 3px;
+    width: 210px;
     li {
       float: left;
       & > a {
@@ -461,7 +462,7 @@ footer {
           width: 170px;
         }
         .cart-book-price {
-          margin-left: 10px;
+          margin-left: 25px;
           text-align: right;
           width: 78px;
           color: $text-blue;
@@ -685,11 +686,11 @@ footer {
 .promotion-div{
   margin-top: 10px;
 
-  text-transform: uppercase;  
+  text-transform: uppercase;
   text-align: left;
   font-size: 16.5px;
-  line-height: 1; 
-  
+  line-height: 1;
+
   span{
     color: #519fc0;
   }
@@ -716,7 +717,7 @@ a.promotion-css{
 
 .item-price{
   margin-top: 30px;
-  
+
   span.price{
     color: #519fc0;
   }
@@ -1652,7 +1653,7 @@ html, body {
 
     .btn-group-xs{
       line-height: 1;
-      
+
       .btn {
         padding: 1px 4px;
         font-size: 12px;
@@ -1719,7 +1720,7 @@ html, body {
     cursor: pointer;
     font-size: 20px
   }
-  
+
   #shipment-types {
     margin-top: 20px;
 
@@ -1770,11 +1771,11 @@ html, body {
     top: 40%;
   }
   i{
-    margin-left: 130px; 
+    margin-left: 130px;
     vertical-align: middle;
   }
   em{
-    margin-left: 45px; 
+    margin-left: 45px;
   }
 }
 
@@ -1843,7 +1844,7 @@ html, body {
 }
 
 .card-container{
-  margin: 0px 0px 0px 45px;  
+  margin: 0px 0px 0px 45px;
 }
 
 
@@ -2033,8 +2034,3 @@ input.error, select.error {
     color: #999999;
   }
 }
-
-
-
-
-
