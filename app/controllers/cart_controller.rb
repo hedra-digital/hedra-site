@@ -44,7 +44,6 @@ class CartController < ApplicationController
   end
 
   def shipment_cost
-    byebug
     @cep   = params[:cep]
     @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
     @address = Correios::CEP::AddressFinder.get(@cep)
@@ -68,7 +67,7 @@ class CartController < ApplicationController
     end
 
     @cep = @default_address.nil? ? nil : @default_address.zip_code
-    byebug
+
     if session[:cart].size > 0
       @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep) #nil when there aren't printed books.
     end
