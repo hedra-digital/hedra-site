@@ -21,17 +21,17 @@
 
             <tbody>
               <% session[:cart].each do |item| %>
-              <% 
+              <%
                 book = Book.find(item[:book_id])
                 book_type = item[:book_type]
-                quantity = item[:quantity] 
+                quantity = item[:quantity]
               %>
               <!-- ga tracking attributes -->
-                <tr class="cart-item"    
+                <tr class="cart-item"
                   data-book-target-id="<%=book.id%>"
                   data-book-id="<%=book.id%>"
-                  data-book-isbn="<%=book.isbn%>" 
-                  data-book-slug="<%=book.slug%>" 
+                  data-book-isbn="<%=book.isbn%>"
+                  data-book-slug="<%=book.slug%>"
                   data-book-author="<%=authors(book)%>"
                   data-book-title="<%=book.title%>"
                   data-book-category="<%=book.category.name%>"
@@ -61,7 +61,11 @@
               <% end %>
               <tr>
                 <td id="cart-form-total" colspan="5">
-                  <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
+                  <div class="row">
+                    <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
+                  </div>
+                  <%= link_to 'Continuar Comprando', root_path, :class => 'btn btn-primary', :id => 'continue-buying-btn'%>
+                  <%= link_to 'Finalizar Compra', cart_path, :class => 'btn btn-primary' %>
                   Total <span><%= number_to_currency(cart_total) %></span>
                 </td>
               </tr>
@@ -75,6 +79,7 @@
     </div>
   </div>
 
+  <!--
   <div id="payment_user" class="related">
     <div class="container">
       <%- if current_user %>
@@ -96,7 +101,7 @@
 
   <div id="payment_card">
     <div class="container">
-      
+
       <div class="card-wrapper"></div>
 
       <div class="alert alert-error" style="display: none;"><ul></ul></div>
@@ -115,7 +120,7 @@
           </div>
           <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
         </div>
-        
+
         <div class="row">
           <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
         </div>
@@ -178,7 +183,9 @@
       <h5><i class="fa fa-spinner fa-spin fa-3x"></i> <em>Espera...</em></h5>
     </div>
   </div>
+-->
 </div>
+
 </div>
 
 
