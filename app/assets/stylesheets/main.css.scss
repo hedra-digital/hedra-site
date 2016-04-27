@@ -1551,7 +1551,7 @@ html, body {
   text-transform: lowercase;
 }
 
-#payment_cart{
+#cart-details-container {
   z-index: 3;
   background: transparent;
   padding-top: 0px;
@@ -1679,7 +1679,7 @@ html, body {
     }
   }
 }
-#payment-method-choosing {
+#cart-container {
   h3 i, h4 i {
       margin-top: 7px;
       margin-right: 10px

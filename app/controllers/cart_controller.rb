@@ -7,28 +7,6 @@ class CartController < ApplicationController
       redirect_to "/", :alert => "Não foi possível finalizar a sua compra, pois não há itens no seu carrinho de compras."
       return
     end
-
-    @default_phone    = nil
-    @default_cpf      = nil
-    @default_address  = nil
-    @shipment_costs   = nil
-
-    if current_user
-
-      last_order = Order.where(user_id: current_user.id).order("id").last
-
-      if last_order
-        @default_phone    = last_order.telephone
-        @default_cpf      = last_order.cpf_cnpj
-        @default_address  = last_order.address
-      end
-    end
-
-    @cep = @default_address.nil? ? nil : @default_address.zip_code
-
-    if session[:cart].size > 0
-      @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep) #nil when there aren't printed books.
-    end
   end
 
   def create
@@ -66,9 +44,34 @@ class CartController < ApplicationController
   end
 
   def shipment_cost
+    byebug
     @cep   = params[:cep]
     @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep)
     @address = Correios::CEP::AddressFinder.get(@cep)
+  end
+
+  def close
+    @default_phone    = nil
+    @default_cpf      = nil
+    @default_address  = nil
+    @shipment_costs   = nil
+
+    if current_user
+
+      last_order = Order.where(user_id: current_user.id).order("id").last
+
+      if last_order
+        @default_phone    = last_order.telephone
+        @default_cpf      = last_order.cpf_cnpj
+        @default_address  = last_order.address
+      end
+    end
+
+    @cep = @default_address.nil? ? nil : @default_address.zip_code
+    byebug
+    if session[:cart].size > 0
+      @shipment_costs   = ::ShipmentCalculatorService.execute(session[:cart], @cep) #nil when there aren't printed books.
+    end
   end
 
   private
