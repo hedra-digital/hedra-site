@@ -12,15 +12,19 @@ class PaymentController < ApplicationController
     begin
       @order = create_order(current_user, params[:address], session[:cart], Transaction::CREDIT_CARD, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
     rescue ArgumentError => e
-      redirect_to cart_url, :alert => "Erro AO calcular custo do frete." and return
+      redirect_to close_cart_url, :alert => "Erro ao calcular custo do frete." and return
     end
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
     payment_params = { token: params[:token], email: current_user.email, items: @order.order_items_to_iugu }
     payment_params[:months] = params[:months] unless params[:months].blank?
-    iugu_charge = Iugu::Charge.create(payment_params)
+    begin
+      iugu_charge = Iugu::Charge.create(payment_params)
+    rescue => e
+      redirect_to close_cart_url, :alert => "Não foi possível finalizar a sua compra, #{e.message}"
+    end
     PaymentLogger.log(iugu_charge.errors.to_s) if iugu_charge.errors.present?
-    
+
     @transaction = @order.transactions.last
     @transaction.customer_ip = request.remote_ip
     @transaction.payment_status = Transaction::PENDING
@@ -32,12 +36,10 @@ class PaymentController < ApplicationController
       render :template => "checkout/review"
       return
     else
-      redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra, #{iugu_charge.message}"
+      redirect_to close_cart_url, :alert => "Não foi possível finalizar a sua compra, #{iugu_charge.message}"
       return
-    end 
-
+    end
   end
-
 
   def bank_slip
     return if order_validation_triggered_redirect?
@@ -47,23 +49,26 @@ class PaymentController < ApplicationController
     begin
       @order = create_order(current_user, params[:address], session[:cart], Transaction::BANK_SLIP, params[:cpf_cnpj], params[:telephone], params[:shipping_type])
     rescue ArgumentError => e
-      redirect_to cart_url, :alert => "Erro AO calcular custo do frete." and return
+      redirect_to close_cart_url, :alert => "Erro ao calcular custo do frete." and return
     end
 
     Iugu.api_key = APP_CONFIG["iugu_api_key"]
-
-    iugu_charge = Iugu::Charge.create({
-      method: "bank_slip",
-      email: current_user.email,
-      items: @order.order_items_to_iugu,
-      payer: {
-        cpf_cnpj: params[:cpf_cnpj],
-        name: params[:client_name],
-        phone_prefix: params[:telephone].gsub("(", "").gsub(")","").split.first,
-        phone: params[:telephone].gsub("(", "").gsub(")","").split.last,
-        email: current_user.email 
-      }
-    })
+    begin
+      iugu_charge = Iugu::Charge.create({
+        method: "bank_slip",
+        email: current_user.email,
+        items: @order.order_items_to_iugu,
+        payer: {
+          cpf_cnpj: params[:cpf_cnpj],
+          name: params[:client_name],
+          phone_prefix: params[:telephone].gsub("(", "").gsub(")","").split.first,
+          phone: params[:telephone].gsub("(", "").gsub(")","").split.last,
+          email: current_user.email
+        }
+      })
+    rescue => e
+      redirect_to close_cart_url, :alert => "Não foi possível finalizar a sua compra, #{e.message}" and return
+    end
 
     logger.info(iugu_charge.attributes)
 
@@ -81,13 +86,12 @@ class PaymentController < ApplicationController
       render :template => "checkout/review"
       return
     else
-      redirect_to cart_url, :alert => "Não foi possível finalizar a sua compra"
+      redirect_to close_cart_url, :alert => "Não foi possível finalizar a sua compra"
       return
-    end 
-
+    end
   end
 
-=begin 
+=begin
   make the name hard to guest for security
   test in dev:
   $.ajax({
@@ -98,7 +102,7 @@ class PaymentController < ApplicationController
    dataType: "json"
   });
 
-=end 
+=end
   def callback_9E93257460
 
     if params[:event] != "invoice.status_changed"
@@ -127,4 +131,3 @@ class PaymentController < ApplicationController
   end
 
 end
-

@@ -31,6 +31,7 @@ HedraSite::Application.routes.draw do
   post "/carrinho/:id"           => "cart#create", :as => :add_to_cart
   post "/carrinho/remove/:id"   => "cart#destroy", :as => :remove_from_cart
   put  "/carrinho/atualizar"     => "cart#update", :as => :update_cart
+  get  "/carrinho/close"         => "cart#close",  :as => :close_cart
   get  "/blog"                   => "blog#index", :as => :blog
   get  "/blog/:id"               => "blog#show", :as => :blog_post
   get  "/home/*other"            => redirect("/")
@@ -52,5 +53,5 @@ HedraSite::Application.routes.draw do
 
   get "post_tracking/:id" => "post_tracking#index"
 
-  get "shipment_cost/:cep" => "cart#shipment_cost"
+  get "/carrinho/shipment_cost/:cep" => "cart#shipment_cost"
   end
