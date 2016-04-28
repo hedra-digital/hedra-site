@@ -43,7 +43,6 @@ class PaymentController < ApplicationController
 
   def bank_slip
     return if order_validation_triggered_redirect?
-
     @order = nil
 
     begin

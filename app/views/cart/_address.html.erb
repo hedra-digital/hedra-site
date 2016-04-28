@@ -1,5 +1,8 @@
 <h3><i class="fa fa-home"></i> endere&ccedil;o para a entrega</h3>
 
+<input type="hidden" name="telephone" value="" />
+<input type="hidden" name="cpf_cnpj" value="" />
+
 <div class="row">
   <div class="span4">
     <input type="text" placeholder="Endereço" name="address[address]" myrequired value='<%= @default_address.nil? ? "" : @default_address.address%>'  />
