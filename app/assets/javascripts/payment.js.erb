@@ -190,8 +190,9 @@ function validate_form_payment_card(){
   var number = $('#payment_card form input[data-iugu="number"]').val()
   var full_name = $('#payment_card form input[data-iugu="full_name"]').val()
   month = $('#payment_card form select[name="month_expiration"]').val()
+  if(month.length == 1) { month = '0' + month }
   year = $('#payment_card form select[name="year_expiration"]').val()
-  var expiration = month + ' / ' + year
+  var expiration = month + '/' + year
   var verification_value = $('#payment_card form input[data-iugu="verification_value"]').val()
 
 
@@ -205,6 +206,8 @@ function validate_form_payment_card(){
 
   if(!Iugu.utils.validateExpirationString(expiration)){
     messages_array.push("Data de expiração é inválido.")
+  } else {
+    $('#payment_card form input[data-iugu="expiration"]').val(expiration)
   }
 
   if(!Iugu.utils.validateCVV(verification_value, Iugu.utils.getBrandByCreditCardNumber(number))){
