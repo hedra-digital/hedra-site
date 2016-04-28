@@ -211,5 +211,22 @@ function check_user_logined(){
   if(!USER_LOGINED){
     messages_array.push("Por favor, autentique-se primeiro.")
   }
+
+  var phone_number = $('#telephone')
+  if(phone_number.val().length == 0) {
+    phone_number.addClass("error")
+    messages_array.push("Telefone celular é inválido.")
+  } else {
+    phone_number.removeClass("error")
+  }
+
+  var cpf_cnpj = $('#cpf_cnpj')
+  if(cpf_cnpj.val().length == 0) {
+    cpf_cnpj.addClass("error")
+    messages_array.push("CPF/CNPJ é inválido.")
+  } else {
+    cpf_cnpj.removeClass("error")
+  }
+
   return messages_array
 }

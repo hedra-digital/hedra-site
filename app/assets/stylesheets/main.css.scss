@@ -1589,6 +1589,47 @@ html, body {
   padding-top: 0px;
   padding-bottom: 30px;
   margin-bottom: 12px;
+
+  div {
+    input[type=text]{
+      font-size: 20px;
+    }
+  }
+  div.phone-number {
+    margin-left: 0;
+  }
+
+  div.cpf-cnpj{
+    input[type=radio]{
+      width: 16px;
+      margin: 0px;
+    }
+    button.cpf{
+      margin-left: 12px;
+    }
+    input[type=text]{
+      margin: 0px;
+      width: 215px;
+    }
+    label{
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .btn-group-xs{
+      line-height: 1;
+
+      .btn {
+        padding: 1px 4px;
+        font-size: 12px;
+        line-height: 1.8;
+        border-radius: 3px;
+      }
+      .current, .current:hover{
+        color: black !important;
+      }
+    }
+  }
 }
 
 #link_to_payment_card, #link_to_payment_slip, #link_to_payment_paypal{
@@ -1601,7 +1642,7 @@ html, body {
   }
 }
 
-#payment_card, #payment_slip, #payment_paypal{
+#payment_card, #payment_slip, #payment_paypal {
   input, select{
     width: 250px;
     height: 35px;

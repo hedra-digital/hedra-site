@@ -1,11 +1,26 @@
 <div class='second_step checkout_step'>
   <h1>Primeiro passo: registro</h1>
   <div class='user_info'>
-    <h4>
-      <%= "Ol&aacute; #{current_user.name},".html_safe %>
-      <%= link_to "(#{t('it_is_not_me')})", destroy_user_session_path, :method => :delete, :remote => true %>
-    </h4>
+    <div class="row">
+      <h4>
+        <%= "Ol&aacute; #{current_user.name},".html_safe %>
+        <%= link_to "(#{t('it_is_not_me')})", destroy_user_session_path, :method => :delete, :remote => true %>
+      </h4>
+    </div>
+
+    <div class=row>
+      <div class="span3 phone-number">
+        <input type="text" placeholder="Telefone celular" name="telephone" id="telephone" class="phone-formatter" value="<%= @default_phone%>"/>
+      </div>
+      <div class="span4 cpf-cnpj">
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn btn-default cpf current">CPF</button>
+          <button type="button" class="btn btn-default cnpj">CNPJ</button>
+        </div>
+
+        <input type="text" placeholder="CPF" name="cpf_cnpj" id="cpf_cnpj" value="<%= @default_cpf%>"/>
+      </div>
+    </div>
   </div>
 </div>
 <script type="text/javascript">var USER_LOGINED = true</script>
-
