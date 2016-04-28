@@ -39,6 +39,7 @@
             <div class="span4">
               <%= select_tag("month_expiration", options_for_select((1..12).to_a), prompt: "Mês") %>
               <%= select_tag("year_expiration", options_for_select((Time.now.year..Time.now.year + 10).to_a), prompt: "Ano") %>
+              <input data-iugu="expiration" type="hidden" value="" />
             </div>
             <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
           </div>
