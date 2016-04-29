@@ -60,7 +60,7 @@
     <footer role="contentinfo">
       <div class="container">
         <div class="row">
-          <div class="span12">
+          <div class="span6">
             <nav id="secondary-nav">
               <ul class="nav nav-pills">
                 <li><%= link_to('blog', blog_path, :target => '_blank') if blog_count > 0 %>
@@ -69,6 +69,9 @@
               </ul>
             </nav>
             <p class="company-copyright">Copyright &copy; <%=Date.today.year%>, <%= publisher_name %>.</p>
+          </div>
+          <div class="span6 credit-cards-logo">
+            <img src="<%= image_path("cartoes.png")%>" alt="Cartões de Crédito" />
           </div>
         </div>
         <div id="company-address" class="row">
