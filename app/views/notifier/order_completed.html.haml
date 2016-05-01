@@ -61,20 +61,31 @@
                               %td{:height => "15", :width => "100"} <b>Total</b>
                               %td{:height => "15", :width => "100"}
                                 = number_to_currency @order.total
-                            %tr
-                              %td{:valign => "top", :width => "500"}
-                                %p O prazo de entrega é de até #{@order.shipping_time + 1} dias úteis a partir de hoje. A entrega será realizada no endereço abaixo:
-                            %tr
-                              %td{:valign => "top", :width => "500"}
-                                %p
-                                  = "#{@order.address.address}, #{@order.address.number} - #{@order.address.district}"
+                            - if @order.shipping_type == 'at_hand'
+                              %tr
+                                %td{:valign => "top", :width => "500"}
+                                  %p Retirar na editora no endereço abaixo:
+                              %tr
+                                %td{:valign => "top", :width => "500"}
+                                  %p
+                                    Rua Fradique Coutinho, 1139, subsolo - Vila Madalena
+                                    %br
+                                    CEP: 05416-011, São Paulo - SP
+                            -else
+                              %tr
+                                %td{:valign => "top", :width => "500"}
+                                  %p O prazo de entrega é de até #{@order.shipping_time + 1} dias úteis a partir de hoje. A entrega será realizada no endereço abaixo:
+                              %tr
+                                %td{:valign => "top", :width => "500"}
+                                  %p
+                                    = "#{@order.address.address}, #{@order.address.number} - #{@order.address.district}"
+                                    %br
+                                    = "CEP: #{@order.address.zip_code} #{@order.address.city} - #{@order.address.state}"
                                   %br
-                                  = "CEP: #{@order.address.zip_code} #{@order.address.city} - #{@order.address.state}"
-                                %br
-                            %tr
-                              %td{:valign => "top", :width => "500"}
-                                %p Enviaremos assim que possível o código de rastreamento para acompanhamento do pacote.
-                                %br
+                              %tr
+                                %td{:valign => "top", :width => "500"}
+                                  %p Enviaremos assim que possível o código de rastreamento para acompanhamento do pacote.
+                                  %br
                       %td{:width => "20"}
     %tr
       %td

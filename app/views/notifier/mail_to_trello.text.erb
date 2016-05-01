@@ -5,7 +5,7 @@ https://hedra.com.br/admin/orders/<%= @order.id%> ,Paid at **<%= @order.transact
 
 User
 -------------
-<%= @order.user.name %> , <%= @order.user.email%>  https://hedra.com.br/admin/users/<%= @order.user.id%> 
+<%= @order.user.name %> , <%= @order.user.email%>  https://hedra.com.br/admin/users/<%= @order.user.id%>
 
 
 Address
@@ -14,7 +14,7 @@ Address
 
 Shipping
 -------------
-  - Type: **<%= @order.shipping_type%>**
+  - Type: **<%= @order.shipping_type == 'at_hand' ? 'Retirar na editora' : @order.shipping_type %>**
   - Estimated time: <%= @order.shipping_time > 1 ? "#{@order.shipping_time} days" : "#{@order.shipping_time} day" %>
   - Charge: <%= number_to_currency(@order.shipping_cost)%>
 

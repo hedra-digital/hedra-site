@@ -20,6 +20,19 @@ $(document).on("click", "#link_to_payment_paypal", function(){
   $("#link_to_payment_paypal input:radio").prop("checked", true)
 })
 
+$(document).on("click", "input[type=radio][value=at_hand]", function() {
+  $('.address-container').slideUp(600)
+})
+$(document).on("click", "input[type=radio][value=sedex]", function() {
+  $('.address-container').slideDown(600)
+})
+$(document).on("click", "input[type=radio][value=pac]", function() {
+  $('.address-container').slideDown(600)
+})
+$(document).on("click", "input[type=radio][value=modico]", function() {
+  $('.address-container').slideDown(600)
+})
+
 //set defalut mask
 $(document).ready(function(){
   $("div.cpf-cnpj input").mask("999.999.999-99");
