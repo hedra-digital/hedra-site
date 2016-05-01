@@ -1846,7 +1846,6 @@ html, body {
   float: left;
   margin-top: 20px;
   form {
-    width: 50%;
     margin: 0px;
     padding: 0px;
     float: left;
@@ -1867,6 +1866,9 @@ html, body {
   input[type=checkbox]{
     margin-bottom: 8px;
   }
+  input[type=radio]{
+    margin-bottom: 8px;
+  }
   input[type=submit]{
     margin-top: 14px;
     width: 250px;
@@ -1885,13 +1887,14 @@ html, body {
   input[type=text], input[type=password]{
     width: 250px;
     height: 35px;
+  }  
+  input[type=radio]{
+    margin-bottom: 8px;
   }
   input[type=submit]{
     width: 250px;
     text-align: center;
   }
-  padding-left: 20px;
-  border-left: 2px solid #fff;
 }
 
 .card-container{
