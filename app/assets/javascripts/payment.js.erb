@@ -93,8 +93,6 @@ $(document).on("submit", "#payment_card form", function(){
       $('#payment_card form input[type="submit"]').attr('disabled','disabled')
       $("#payment-modal").modal({backdrop: true, show: true})
 
-      $('input[name="telephone"]').val($('#user_telephone').val())
-      $('input[name="cpf_cnpj"]').val($('#user_cpf_cnpj').val())
       return true
     }
   }
@@ -146,8 +144,6 @@ $(document).on("submit", "#payment_slip form", function(){
     $('#payment_slip input[type="submit"]').attr('disabled','disabled')
     $("#payment-modal").modal({backdrop: true, show: true})
 
-    $('input[name="telephone"]').val($('#user_telephone').val())
-    $('input[name="cpf_cnpj"]').val($('#user_cpf_cnpj').val())
     return true
   }
 })
@@ -170,8 +166,6 @@ $(document).on("submit", "#payment_paypal form", function(){
     $('#payment_paypal input[type="submit"]').attr('disabled','disabled')
     $("#payment-modal").modal({backdrop: true, show: true})
 
-    $('input[name="telephone"]').val($('#user_telephone').val())
-    $('input[name="cpf_cnpj"]').val($('#user_cpf_cnpj').val())
     return true
   }
 
@@ -235,22 +229,5 @@ function check_user_logined(){
   if(!USER_LOGINED){
     messages_array.push("Por favor, autentique-se primeiro.")
   }
-
-  var phone_number = $('#user_telephone')
-  if(phone_number.val().length == 0) {
-    phone_number.addClass("error")
-    messages_array.push("Telefone celular é inválido.")
-  } else {
-    phone_number.removeClass("error")
-  }
-
-  var cpf_cnpj = $('#user_cpf_cnpj')
-  if(cpf_cnpj.val().length == 0) {
-    cpf_cnpj.addClass("error")
-    messages_array.push("CPF/CNPJ é inválido.")
-  } else {
-    cpf_cnpj.removeClass("error")
-  }
-
   return messages_array
 }
