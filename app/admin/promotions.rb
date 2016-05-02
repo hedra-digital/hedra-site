@@ -31,7 +31,7 @@ ActiveAdmin.register Promotion do
     column :name
     column :for_traffic_origin
     column "coupon" do |p|
-      link_to(p.slug, "http://#{p.publisher.url}/coupon/#{p.slug}") unless p.slug.blank?
+      link_to(p.slug, "http://#{p.publisher.url}/coupon/#{p.slug}") if p.slug.present? && p.publisher.present?
     end
     actions defaults: true do |p|
       link_to 'Notify', notify_partner_admin_promotions_path(id: p.id)
