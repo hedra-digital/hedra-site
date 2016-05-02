@@ -1,7 +1,7 @@
 <% page_data :title => 'Carrinho de compras', :type => 'other' %>
 
-<div id="payment-method-choosing">
-  <div id="payment_cart" class="related">
+<div id="cart-container">
+  <div id="cart-details-container" class="related">
     <div class="container">
       <h1><img src="<%= image_path("lock_icon.png")%>" id="lock_icon" alt="conexão segura" title="Conexão Segura"> Carrinho de compras</h1>
 
@@ -21,17 +21,17 @@
 
             <tbody>
               <% session[:cart].each do |item| %>
-              <% 
+              <%
                 book = Book.find(item[:book_id])
                 book_type = item[:book_type]
-                quantity = item[:quantity] 
+                quantity = item[:quantity]
               %>
               <!-- ga tracking attributes -->
-                <tr class="cart-item"    
+                <tr class="cart-item"
                   data-book-target-id="<%=book.id%>"
                   data-book-id="<%=book.id%>"
-                  data-book-isbn="<%=book.isbn%>" 
-                  data-book-slug="<%=book.slug%>" 
+                  data-book-isbn="<%=book.isbn%>"
+                  data-book-slug="<%=book.slug%>"
                   data-book-author="<%=authors(book)%>"
                   data-book-title="<%=book.title%>"
                   data-book-category="<%=book.category.name%>"
@@ -61,7 +61,11 @@
               <% end %>
               <tr>
                 <td id="cart-form-total" colspan="5">
-                  <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
+                  <div class="row">
+                    <%= f.submit 'Atualizar carrinho', :class => 'btn-link' %>
+                  </div>
+                  <%= link_to 'Continuar Comprando', root_path, :class => 'btn btn-primary', :id => 'continue-buying-btn'%>
+                  <%= link_to 'Finalizar Compra', close_cart_path, :class => 'btn btn-primary' %>
                   Total <span><%= number_to_currency(cart_total) %></span>
                 </td>
               </tr>
@@ -74,121 +78,4 @@
       <% end %>
     </div>
   </div>
-
-  <div id="payment_user" class="related">
-    <div class="container">
-      <%- if current_user %>
-          <%= render '/checkout/second_step' %>
-      <%- else %>
-          <%= render '/checkout/sign_up_or_sign_in', standalone: false %>
-      <%- end %>
-    </div>
-  </div>
-
-  <div class="payment-type">
-  <div class="container">
-    <h1>Segundo passo: m&eacute;todo de pagamento</h1>
-  </div>
-
-  <div class="container">
-    <h4 id="link_to_payment_card" class="payment-choose"><input type="radio" /><%= fa_icon 'credit-card' %>  Cart&atilde;o de Cr&eacute;dito</h4>
-  </div>
-
-  <div id="payment_card">
-    <div class="container">
-      
-      <div class="card-wrapper"></div>
-
-      <div class="alert alert-error" style="display: none;"><ul></ul></div>
-
-      <%= form_tag({controller: :payment, action: :credit_card} ) do %>
-
-        <div class="row">
-          <div class="span4"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
-          <div class="span6"><input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" /></div>
-        </div>
-
-        <div class="row">
-          <div class="span4">
-            <%= select_tag("month_expiration", options_for_select((1..12).to_a), prompt: "Mês") %>
-            <%= select_tag("year_expiration", options_for_select((Time.now.year..Time.now.year + 10).to_a), prompt: "Ano") %>
-            <input data-iugu="expiration" type="hidden" value="" />
-          </div>
-          <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
-        </div>
-
-        <div class="row">
-          <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
-        </div>
-
-        <input type="hidden" name="token" id="token"/>
-        <div class="shipment">
-          <%= render "shipment_selection", cep: @cep if includes_print_books? %>
-          <%= render "address", :payment_method => :credit_card%>
-        </div>
-        <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
-      <% end %>
-    </div>
-  </div>
-
-  <div class="container">
-    <h4 id="link_to_payment_slip" class="payment-choose"><input type="radio" /><%= fa_icon :barcode %> Boleto Banc&aacute;rio</h4>
-  </div>
-
-  <div id="payment_slip">
-    <div class="container">
-
-      <div class="alert alert-error" style="display: none;"><ul></ul></div>
-
-      <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
-
-        <h3><i class="fa fa-user"></i> Dados Pessoais</h3>
-
-        <div class="row">
-          <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
-        </div>
-        <div class="shipment">
-          <%= render "shipment_selection", cep: @cep if includes_print_books? %>
-          <%= render "address", :payment_method => :bank_slip %>
-        </div>
-        <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
-      <% end %>
-
-    </div>
-  </div>
-
-  <div class="container">
-    <h4 id="link_to_payment_paypal" class="payment-choose"><input type="radio" /> Paypal</h4>
-  </div>
-
-  <div id="payment_paypal">
-    <div class="container">
-      <div class="alert alert-error" style="display: none;"><ul></ul></div>
-      <%= form_tag({controller: :checkout, action: :finish} ) do %>
-        <div class="shipment">
-          <%= render "shipment_selection", cep: @cep if includes_print_books?  %>
-          <%= render "address", :payment_method => :paypal%>
-        </div>
-        <input type="submit" class="btn" value="Pagar  (Paypal)" />
-      <% end %>
-    </div>
-  </div>
-
-  <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
-    <div class="modal-body">
-      <h5><i class="fa fa-spinner fa-spin fa-3x"></i> <em>Espera...</em></h5>
-    </div>
-  </div>
 </div>
-</div>
-
-
-<script type="text/javascript">
-$('#payment_card form').card({
-  container: $('.card-wrapper'),
-  numberInput: 'input[data-iugu="number"]',
-  expiryInput: 'select[name="month_expiration"], select[name="year_expiration"] ',
-  cvcInput: 'input[data-iugu="verification_value"]',
-  nameInput: 'input[data-iugu="full_name"]'
-})
-</script>

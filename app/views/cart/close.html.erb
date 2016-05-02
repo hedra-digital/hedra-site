@@ -1,0 +1,174 @@
+<% page_data :title => 'Finalizar compra', :type => 'other' %>
+
+<div id="payment-method-choosing">
+  <div id="payment_cart" class="related">
+    <div id="payment_user" class="related">
+      <div class="container">
+        <%- if current_user %>
+            <%= render '/checkout/second_step' %>
+        <%- else %>
+            <%= render '/checkout/sign_up_or_sign_in', standalone: false %>
+        <%- end %>
+      </div>
+    </div>
+
+    <div class="payment-type">
+    <div class="container">
+      <h1>Segundo passo: m&eacute;todo de pagamento</h1>
+    </div>
+
+    <div class="container">
+      <h4 id="link_to_payment_card" class="payment-choose"><input type="radio" /><%= fa_icon 'credit-card' %>  Cart&atilde;o de Cr&eacute;dito</h4>
+    </div>
+
+    <div id="payment_card">
+      <div class="container">
+
+        <div class="card-wrapper"></div>
+
+        <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+        <%= form_tag({controller: :payment, action: :credit_card} ) do %>
+
+          <div class="row">
+            <div class="span4"><input autocomplete="off" data-iugu="number" placeholder="Número do Cartão" type="text" value="" /></div>
+            <div class="span6"><input autocomplete="off" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" /></div>
+          </div>
+
+          <div class="row">
+            <div class="span4">
+              <%= select_tag("month_expiration", options_for_select((1..12).to_a), prompt: "Mês") %>
+              <%= select_tag("year_expiration", options_for_select((Time.now.year..Time.now.year + 10).to_a), prompt: "Ano") %>
+              <input data-iugu="expiration" type="hidden" value="" />
+            </div>
+            <div class="span6"><input autocomplete="off" data-iugu="verification_value" placeholder="CVV" type="text" value="" /></div>
+          </div>
+
+          <div class="row">
+            <div class="span10"><%= select_tag("months", options_for_select(options_for_installment(cart_total)), prompt: "Parcelamento")%></div>
+          </div>
+
+          <div class=row>
+            <div class="span4 phone-number">
+              <input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" value="<%= @default_phone%>" myrequired />
+            </div>
+
+            <div class="span6 cpf-cnpj">
+              <div class="btn-group btn-group-xs" role="group">
+                <button type="button" class="btn btn-default cpf current">CPF</button>
+                <button type="button" class="btn btn-default cnpj">CNPJ</button>
+              </div>
+
+              <input type="text" placeholder="CPF" name="cpf_cnpj" myrequired value="<%= @default_cpf%>"/>
+            </div>
+          </div>
+
+          <input type="hidden" name="token" id="token"/>
+          <div class="shipment">
+            <%= render "shipment_selection", cep: @cep if includes_print_books? %>
+            <div class="address-container">
+              <%= render "address", :payment_method => :credit_card%>
+            </div>
+          </div>
+          <input type="submit" class="btn" value="Pagar  (Cartão de Crédito)" />
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="link_to_payment_slip" class="payment-choose"><input type="radio" /><%= fa_icon :barcode %> Boleto Banc&aacute;rio</h4>
+    </div>
+
+    <div id="payment_slip">
+      <div class="container">
+
+        <div class="alert alert-error" style="display: none;"><ul></ul></div>
+
+        <%= form_tag({controller: :payment, action: :bank_slip} ) do %>
+
+          <h3><i class="fa fa-user"></i> Dados Pessoais</h3>
+
+          <div class="row">
+            <div class="span6"><input type="text" placeholder="Nome no boleto" name="client_name" myrequired /></div>
+          </div>
+
+          <div class=row>
+            <div class="span4 phone-number">
+              <input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" value="<%= @default_phone%>" myrequired />
+            </div>
+            <div class="span6 cpf-cnpj">
+              <div class="btn-group btn-group-xs" role="group">
+                <button type="button" class="btn btn-default cpf current">CPF</button>
+                <button type="button" class="btn btn-default cnpj">CNPJ</button>
+              </div>
+
+              <input type="text" placeholder="CPF" name="cpf_cnpj" myrequired value="<%= @default_cpf%>"/>
+            </div>
+          </div>
+
+          <div class="shipment">
+            <%= render "shipment_selection", cep: @cep if includes_print_books? %>
+            <div class="address-container">
+              <%= render "address", :payment_method => :bank_slip %>
+            </div>
+          </div>
+          <input type="submit" class="btn" value="Pagar  (Boleto Bancário)" />
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="link_to_payment_paypal" class="payment-choose"><input type="radio" /> Paypal</h4>
+    </div>
+
+    <div id="payment_paypal">
+      <div class="container">
+        <div class="alert alert-error" style="display: none;"><ul></ul></div>
+        <%= form_tag({controller: :checkout, action: :finish} ) do %>
+          <h3><i class="fa fa-user"></i> Dados Pessoais</h3>
+
+          <div class=row>
+            <div class="span4 phone-number">
+              <input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" value="<%= @default_phone%>" myrequired />
+            </div>
+
+            <div class="span6 cpf-cnpj">
+              <div class="btn-group btn-group-xs" role="group">
+                <button type="button" class="btn btn-default cpf current">CPF</button>
+                <button type="button" class="btn btn-default cnpj">CNPJ</button>
+              </div>
+
+              <input type="text" placeholder="CPF" name="cpf_cnpj" myrequired value="<%= @default_cpf%>"/>
+            </div>
+          </div>
+          
+          <div class="shipment">
+            <%= render "shipment_selection", cep: @cep if includes_print_books?  %>
+            <div class="address-container">
+              <%= render "address", :payment_method => :paypal%>
+            </div>
+          </div>
+          <input type="submit" class="btn" value="Pagar  (Paypal)" />
+        <% end %>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="payment-modal" aria-hidden="true" style="display: none;">
+      <div class="modal-body">
+        <h5><i class="fa fa-spinner fa-spin fa-3x"></i> <em>Espera...</em></h5>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+$('#payment_card form').card({
+  container: $('.card-wrapper'),
+  numberInput: 'input[data-iugu="number"]',
+  expiryInput: 'select[name="month_expiration"], select[name="year_expiration"] ',
+  cvcInput: 'input[data-iugu="verification_value"]',
+  nameInput: 'input[data-iugu="full_name"]'
+})
+</script>

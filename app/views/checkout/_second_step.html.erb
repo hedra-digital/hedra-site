@@ -1,11 +1,12 @@
 <div class='second_step checkout_step'>
   <h1>Primeiro passo: registro</h1>
   <div class='user_info'>
-    <h4>
-      <%= "Ol&aacute; #{current_user.name},".html_safe %>
-      <%= link_to "(#{t('it_is_not_me')})", destroy_user_session_path, :method => :delete, :remote => true %>
-    </h4>
+    <div class="row">
+      <h4>
+        <%= "Ol&aacute; #{current_user.name},".html_safe %>
+        <%= link_to "(#{t('it_is_not_me')})", destroy_user_session_path, :method => :delete, :remote => true %>
+      </h4>
+    </div>
   </div>
 </div>
 <script type="text/javascript">var USER_LOGINED = true</script>
-

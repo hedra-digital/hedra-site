@@ -355,6 +355,12 @@ footer {
     font-family: $altFontFamily;
   }
 
+  .credit-cards-logo {
+    width: 190px;
+    padding-top: 38px;
+    float: right;
+  }
+
   .company-copyright {
     margin-bottom: 25px;
   }
@@ -1551,7 +1557,7 @@ html, body {
   text-transform: lowercase;
 }
 
-#payment_cart{
+#cart-details-container {
   z-index: 3;
   background: transparent;
   padding-top: 0px;
@@ -1563,6 +1569,10 @@ html, body {
     text-transform: uppercase;
     span {
       font-size: 1.35em;
+    }
+
+    #continue-buying-btn {
+      float: left;
     }
   }
 
@@ -1585,6 +1595,47 @@ html, body {
   padding-top: 0px;
   padding-bottom: 30px;
   margin-bottom: 12px;
+
+  div {
+    input[type=text]{
+      font-size: 20px;
+    }
+  }
+  div.phone-number {
+    margin-left: 0;
+  }
+
+  div.cpf-cnpj{
+    input[type=radio]{
+      width: 16px;
+      margin: 0px;
+    }
+    button.cpf{
+      margin-left: 12px;
+    }
+    input[type=text]{
+      margin: 0px;
+      width: 215px;
+    }
+    label{
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .btn-group-xs{
+      line-height: 1;
+
+      .btn {
+        padding: 1px 4px;
+        font-size: 12px;
+        line-height: 1.8;
+        border-radius: 3px;
+      }
+      .current, .current:hover{
+        color: black !important;
+      }
+    }
+  }
 }
 
 #link_to_payment_card, #link_to_payment_slip, #link_to_payment_paypal{
@@ -1597,7 +1648,7 @@ html, body {
   }
 }
 
-#payment_card, #payment_slip, #payment_paypal{
+#payment_card, #payment_slip, #payment_paypal {
   input, select{
     width: 250px;
     height: 35px;
@@ -1675,7 +1726,7 @@ html, body {
     }
   }
 }
-#payment-method-choosing {
+#cart-container {
   h3 i, h4 i {
       margin-top: 7px;
       margin-right: 10px
@@ -1795,7 +1846,6 @@ html, body {
   float: left;
   margin-top: 20px;
   form {
-    width: 50%;
     margin: 0px;
     padding: 0px;
     float: left;
@@ -1816,6 +1866,9 @@ html, body {
   input[type=checkbox]{
     margin-bottom: 8px;
   }
+  input[type=radio]{
+    margin-bottom: 8px;
+  }
   input[type=submit]{
     margin-top: 14px;
     width: 250px;
@@ -1834,13 +1887,14 @@ html, body {
   input[type=text], input[type=password]{
     width: 250px;
     height: 35px;
+  }  
+  input[type=radio]{
+    margin-bottom: 8px;
   }
   input[type=submit]{
     width: 250px;
     text-align: center;
   }
-  padding-left: 20px;
-  border-left: 2px solid #fff;
 }
 
 .card-container{
