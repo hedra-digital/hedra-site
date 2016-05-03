@@ -1280,22 +1280,35 @@ article .list-price {
 
 .cart-page-book-quantity {
   text-align: center !important;
-  .control-group {
-    margin-bottom: -50px;
 
-    input {
-      width: 40px;
-      background: white;
-      text-align: center;
-      box-sizing: border-box;
-      font-size: 16px;
-      color: $textColor;
-      float: left;
+  .actions {
+    margin-left: 64px;
+
+    .quantity-sign {
+      margin-top: -5px;
+    }
+
+    .control-group {
+      input {
+        width: 40px;
+        background: white;
+        text-align: center;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: $textColor;
+        float: left;
+      }
+
+      .book-quantity {
+        margin-bottom: 0;
+      }
     }
   }
+
   a {
     font-size: 10px;
     color: $text-subtitle !important;
+    clear: left !important;
   }
 }
 

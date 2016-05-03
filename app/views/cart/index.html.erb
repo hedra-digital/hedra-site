@@ -44,14 +44,17 @@
                     <%= content_tag(:div, content_tag(:p, book.long_title(book_type), :class => 'cart-book-title') + content_tag(:p, authors(book), :class => 'cart-book-authors'), :class => 'cart-book-data') %>
                   </td>
                   <td class="cart-page-book-quantity" data-book-id="<%=book.id%>">
-                    <div class="in-dec-quant">
-                      <%= f.submit "-", :onclick => "decrease(cart_#{book.id}_#{book_type});", class: "btn-link decrease" %>
-                      <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}", class: "book-quantity"} %>
-                      <%= f.submit "+", :onclick => "increase(cart_#{book.id}_#{book_type});", class: "increase btn-link" %>
-                    </div>
-                    <div class="remove-item">
-                      <%= link_to("REMOVER ITEM", remove_from_cart_path(book.id, book_type: book_type), {:method => :post, :style=>'color:#999;'}) %>
-                    </div>
+
+                      <div class="actions">
+                        <%= f.submit "-", :onclick => "decrease(cart_#{book.id}_#{book_type});", class: "btn-link quantity-sign pull-left" %>
+                        <%= f.input "#{book.id}_#{book_type}", :label => false, :input_html => { :value => "#{quantity}", class: "book-quantity text-center"} %>
+                        <%= f.submit "+", :onclick => "increase(cart_#{book.id}_#{book_type});", class: "quantity-sign btn-link pull-right" %>
+                      </div>
+
+                      <div class="remove" style="clear: left !important;">
+                        <%= link_to("REMOVER ITEM", remove_from_cart_path(book.id, book_type: book_type), {:method => :post, :style=>'color:#999;'}) %>
+                      </div>
+
                   </td>
                   <td class="cart-page-book-price">
                     <%= number_to_currency(show_price(book, book_type).*(quantity)) %>
