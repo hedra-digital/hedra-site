@@ -32,7 +32,7 @@ class CartController < ApplicationController
         session[:cart] << {book_id: book_id.to_i, book_type: book_type.to_sym, quantity: value.to_i} if value.to_i != 0
       end
     end
-    redirect_to cart_path
+    render :partial => 'cart/cart'
   end
 
   def destroy
