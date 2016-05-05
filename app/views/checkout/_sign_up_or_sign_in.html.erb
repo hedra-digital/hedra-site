@@ -9,34 +9,54 @@
     <% end %>
     <div class='errors'></div>
     <div class='sign_up_or_sign_in_wrapper'>
+      <div class="row has_account">
+  			<%= form_tag({controller: :sessions, action: :create}, {remote: !standalone, id: "login_form"}) do%>
+     		  <h4>Se voc&ecirc; j&aacute; tem uma conta, fa&ccedil;a o login.</h4>
+     		  <div class="row"><input type="text" name="user[email]" placeholder="E-mail" /></div>
+     		  <div class="row"><input type="password" name="user[password]" placeholder="Senha" /></div>
+     		  <div class="row">
+            <label>
+              <input id="remember_me" name="remember_me" type="checkbox" value="1" />  Mantenha-me conectado
+            </label>
+     		  </div>
+     		  <div class="row"><a href="/users/password/new">Esqueceu sua senha?</a></div>
+     		  <div class="row"><input class="btn submit" name="commit" type="submit" value="Acessar"></div>
+          <div class="row">
+            <label>
+              <input id="has_not_account" type="radio" checked=false />  Ainda não tem uma conta na Hedra? Cadastre-se.
+            </label>
+          </div>
+     		<% end %>
+      </div>
 
-			<%= form_tag({controller: :sessions, action: :create}, {remote: !standalone, id: "login_form"}) do%>
-   		  <h4>Se voc&ecirc; j&aacute; tem uma conta, fa&ccedil;a o login.</h4>
-   		  <div class="row"><input type="text" name="user[email]" placeholder="E-mail" /></div>
-   		  <div class="row"><input type="password" name="user[password]" placeholder="Senha" /></div>
-   		  <div class="row">
-          <label>
-            <input id="remember_me" name="remember_me" type="checkbox" value="1" />  Mantenha-me conectado
-          </label>
-   		  </div>
-   		  <div class="row"><a href="/users/password/new">Esqueceu sua senha?</a></div>
-   		  <div class="row"><input class="btn submit" name="commit" type="submit" value="Acessar"></div>
-   		<% end %>
-
-      <%= form_tag({controller: :registrations, action: :create}, {remote: !standalone, id: "registration_form"}) do %>
-        <h4> Ainda n&atilde;o tem conta na Hedra? Cadastre-se. </h4>
-        <div class="row">
-          <input name="user[email]" type="text" placeholder="E-mail"/>
-          <input name="user[name]" type="text" placeholder="Nome"/>
-        </div>
-        <div class="row">
-        	<input name="user[password]" type="password" placeholder="Senha" />
-        	<input name="user[password_confirmation]" type="password" placeholder="Confirme a sua senha" />
-        </div>
-        <div class="row"><input name="commit" type="submit" value="Cadastrar-se" class="btn submit" /></div>
-      <% end %>
-
+      <div class="row has_not_account">
+        <%= form_tag({controller: :registrations, action: :create}, {remote: !standalone, id: "registration_form"}) do %>
+          <h4> Ainda n&atilde;o tem conta na Hedra? Cadastre-se. </h4>
+          <div class="row">
+            <input name="user[email]" type="text" placeholder="E-mail"/>
+            <input name="user[name]" type="text" placeholder="Nome"/>
+          </div>
+          <div class="row">
+          	<input name="user[password]" type="password" placeholder="Senha" />
+          	<input name="user[password_confirmation]" type="password" placeholder="Confirme a sua senha" />
+          </div>
+          <div class="row"><input name="commit" type="submit" value="Cadastrar-se" class="btn submit" /></div>
+          <div class="row">
+            <label>
+              <input id="has_account" type="radio" checked=false />  Já tem uma conta na Hedra?
+            </label>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-<script type="text/javascript">var USER_LOGINED = false</script>
+<script type="text/javascript">
+  var USER_LOGINED = false
+
+  $(document).ready( function() {
+    $('.has_not_account').hide();
+    $('#has_not_account').prop('checked', false);
+    $('#has_account').prop('checked', false);
+  });
+</script>

@@ -31,21 +31,7 @@
 </div>
 
 <div class="row">
-  <div class="span4">
+  <div class="span10">
     <input type="text" placeholder="CEP de cálculo de frete" readonly="true" name="address[zip_code]" value='<%= @default_address.nil? ? "" : @default_address.zip_code%>'/>
-    </div>
-  <div class="span4 cpf-cnpj">
-    <div class="btn-group btn-group-xs" role="group">
-      <button type="button" class="btn btn-default cpf current">CPF</button>
-      <button type="button" class="btn btn-default cnpj">CNPJ</button>
-    </div>
-
-    <input type="text" placeholder="CPF" name="cpf_cnpj" myrequired value="<%= @default_cpf%>"/>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span4">
-    <input type="text" placeholder="Telefone celular" name="telephone" class="phone-formatter" value="<%= @default_phone%>" <%= "myrequired" if payment_method == :bank_slip%> />
   </div>
 </div>

@@ -95,3 +95,14 @@ $(document).on('click', '.go_to_third_step', function(event){
   getChosenAddress()
 });
 
+$(document).on('click', '#has_not_account', function(event){
+  $('.has_not_account').slideDown(600);
+  $('.has_account').slideUp(600);
+  $('#has_account').prop('checked', false);
+});
+
+$(document).on('click', '#has_account', function(event){
+  $('.has_account').slideDown(600);
+  $('.has_not_account').slideUp(600);
+  $('#has_not_account').prop('checked', false);
+});

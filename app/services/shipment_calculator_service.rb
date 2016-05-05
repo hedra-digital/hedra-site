@@ -32,6 +32,8 @@ class ShipmentCalculatorService
 
     if choose_type and choose_type.to_sym == :modico
       shipment_info = [[choose_type, { cost: ModicoTablePrices.for(package.weight * 1000), shipping_time: 15 } ]]
+    elsif choose_type and choose_type.to_sym == :at_hand
+      shipment_info = [[choose_type, { cost: 0, shipping_time: 0 } ]]
     elsif choose_type
       shipment_service = frete.calcular choose_type.to_sym
       shipment_info = [[choose_type, { cost: shipment_service.valor, shipping_time: shipment_service.prazo_entrega + DEFAULT_START_SHIPPING_TIME } ]]
@@ -46,10 +48,13 @@ class ShipmentCalculatorService
       end
 
       shipment_info = shipment_services_values.map do |service_key, service_value|
-        return nil unless service_value.erro == SUCCESS_CORREIOS_RESPONSE
-        [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega + DEFAULT_START_SHIPPING_TIME } ]
+        return nil unless service_value.erro >= SUCCESS_CORREIOS_RESPONSE
+        if service_value.valor.present? and service_value.valor > 0 and  service_value.prazo_entrega.present? and service_value.prazo_entrega > 0
+          [service_key, { cost: service_value.valor, shipping_time: service_value.prazo_entrega + DEFAULT_START_SHIPPING_TIME } ]
+        end
       end
       shipment_info.unshift [:modico, { cost: ModicoTablePrices.for(package.weight * 1_000), shipping_time: 15 }]
+      shipment_info << [:at_hand, { cost: 0, shipping_time: 0 }]
     end
 
     Hash[shipment_info]

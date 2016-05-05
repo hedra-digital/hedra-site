@@ -7,13 +7,13 @@
       %label.label CEP de Endereço
     .span3
       %input.cep_to_estimate_shipping_costs{autocomplete: "off", placeholder: "CEP", type: "text", value: cep, onblur: "recalculateShipmentCosts(this)"}
-    
+
   #shipment-types.row
     - unless @shipment_costs
       .span12.shipping-error
         .alert.alert-error
           %ul
-            %li Erro de calcular os custos de frete.
+            %li Erro ao calcular custos de frete.
     -else
       .span6
         - @shipment_costs.each_with_index do |(name, values), index|
@@ -21,17 +21,23 @@
             %input{:name => "shipping_type", :type => "radio", :checked => index == 0, :value => name }
               - if name == :modico
                 Módico
+              - elsif name == :at_hand
+                Retirar na editora
               - else
                 #{name.to_s.capitalize}
             %span.delivery-time
               - if name == :modico
                 (Prazo de entrega: Em até 15 dias)
+              - elsif name == :at_hand
+                Rua Fradique Coutinho, 1139, Vila Madalena, São Paulo-SP
               - else
                 (Prazo de entrega: #{values[:shipping_time]} #{values[:shipping_time] == 1 ? "dia útil" : "dias úteis"})
           %br/
       .span3{style: "text-align: right"}
         - @shipment_costs.each do |name, values|
           %label.label{:style => "font-size: 18px"}
-            Custo: #{number_to_currency(values[:cost])}
-            %br/
+            - if name == :at_hand
+            - else
+              Custo: #{number_to_currency(values[:cost])}
+              %br/
           %br/
