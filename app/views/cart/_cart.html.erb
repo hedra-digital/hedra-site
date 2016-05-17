@@ -27,7 +27,7 @@
             data-book-slug="<%=book.slug%>"
             data-book-author="<%=authors(book)%>"
             data-book-title="<%=book.title%>"
-            data-book-category="<%=book.category.name%>"
+            data-book-category="<%=book.try(:category).try(:name)%>"
             data-book-publisher="<%=book.publisher.name%>"
             data-book-quantity="<%=quantity%>"
             data-book-type="<%=book_type%>"

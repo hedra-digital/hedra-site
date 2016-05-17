@@ -12,6 +12,7 @@
 
 
 <% if Rails.env.production? and @transaction and @transaction.status == Transaction::COMPLETED %>
+
   <!-- Google Code for book purchase Conversion Page -->
   <script type="text/javascript">
   /* <![CDATA[ */
@@ -64,7 +65,7 @@ $(function(){
   ga('ec:addProduct',{
     'id': "<%=item.book_id%>",
    'name': "<%=item.book.title%>",
-   'category': "<%=item.book.category.name%>", 
+   'category': "<%=item.book.try(:category).try(:name)%>", 
    'brand': "<%=item.book.publisher.name%>",
    'variant': "<%=item.book_type%>",
    'price': "<%=item.price%>",
