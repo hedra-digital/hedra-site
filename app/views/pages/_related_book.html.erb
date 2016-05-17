@@ -6,7 +6,7 @@
     data-book-slug="<%=related_book.slug%>" 
     data-book-author="<%=authors(related_book)%>"
     data-book-title="<%=related_book.title%>"
-    data-book-category="<%=related_book.category.name%>"
+    data-book-category="<%=related_book.try(:category).try(:name)%>"
     data-book-publisher="<%=related_book.publisher.name%>"
     data-section-type="<%=section_type%>"
   >
