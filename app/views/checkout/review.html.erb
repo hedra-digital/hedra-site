@@ -61,6 +61,9 @@
 
 $(function(){
 
+if (sessionStorage.getItem('sent_purchase') != null) return;
+sessionStorage.setItem('sent_purchase', true);
+
 <% @transaction.order.order_items.each do |item| %>
   ga('ec:addProduct',{
     'id': "<%=item.book_id%>",
