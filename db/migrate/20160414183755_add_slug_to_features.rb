@@ -6,7 +6,10 @@ class AddSlugToFeatures < ActiveRecord::Migration
   def up
     add_column :features, :slug, :string
     FeatureMigration.where(slug: nil).find_each do |feature|
-      image_name = File.basename feature.attributes.fetch("feature_image"), '.*'
+      image_name = SecureRamdom.hex
+      if feature.feature_image.present?
+        image_name = File.basename feature.feature_image, '.*'
+      end
       feature.slug = image_name.parameterize
       feature.save!
     end
