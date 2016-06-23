@@ -1,7 +1,21 @@
-Caro(a) <%= @partner.name.titleize %>,
+<% @partner_name = @partner.name.nil? ? 'Parceiro' : @partner.name.titleize %>
+<% @partner_comision = @partner.comission.nil? ? 0 : @partner.comission %>
+<%
+@partner_promotion_type = if !@promotion.category.nil?
+  "a categoria #{@promotion.category.name}"
+elsif !@promotion.book.nil?
+  "ao livro #{@promotion.book.title}"
+elsif !@promotion.tag.nil?
+  "a tag #{@promotion.tag.name}"
+else
+  ''
+end
+%>
+
+Caro(a) <%= @partner_name %>,
 
 Obrigado por participar do nosso programa de parceria. Implementamos nossa plataforma com as devidas ferramentas necessárias e podemos fornecer informações específicas sobre seus clientes.
-Seu link exclusivo — que é usado somente por você, em seu canal de comunicação — para venda dos livros da Hedra é http://hedra.com.br/coupon/<%= @promotion.slug %>. Ele refere a categoria "<%= @promotion.category.name %>" do nosso site, que você escolheu para ajudar a divulgar ao se inscrever em nosso formulário. 
+Seu link exclusivo — que é usado somente por você, em seu canal de comunicação — para venda dos livros da Hedra é http://hedra.com.br/coupon/<%= @promotion.slug %>. Ele refere <%= @partner_promotion_type %> do nosso site, que você escolheu para ajudar a divulgar ao se inscrever em nosso formulário.
 
 SOBRE O RELATÓRIO DE VENDAS
 Venda única:  Você receberá um e-mail quando uma venda  for consumada através de seu link.
@@ -9,7 +23,7 @@ Venda única:  Você receberá um e-mail quando uma venda  for consumada atravé
 Venda semanal: Você receberá um e-mail todos os domingos com as informações do que foi vendido na semana. Neste relatório constarão os títulos que foram vendidos, a quantidade, e sua margem em cima do valor total.
 
 SOBRE COMISSÃO E ACERTO
-O valor da sua comissão será de <%= '%.2f' % @partner.comission %>% em cima do faturamento total do que foi vendido e o dia do pagamento será sempre o primeiro dia útil do mês seguinte.
+O valor da sua comissão será de <%= '%.2f' % @partner_comision %>% em cima do faturamento total do que foi vendido e o dia do pagamento será sempre o primeiro dia útil do mês seguinte.
 
 SOBRE A LISTA DE LIVROS
 Enviaremos uma lista todo início de mês via mail-MKT com as opções de livros que você poderá escolher como presente, independentemente se for para ajudar em sua divulgação ou para uso pessoal. A resposta deverá ser enviada para parceiros@hedra.com.br, com um e-mail intitulado LIVRO ESCOLHIDO PARA ENVIO | Maio [ou o mês a que estiver se referindo].
