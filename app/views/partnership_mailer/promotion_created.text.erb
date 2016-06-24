@@ -20,10 +20,8 @@ Seu link exclusivo — que é usado somente por você, em seu canal de comunica�
 SOBRE O RELATÓRIO DE VENDAS
 Venda única:  Você receberá um e-mail quando uma venda  for consumada através de seu link.
 
-Venda semanal: Você receberá um e-mail todos os domingos com as informações do que foi vendido na semana. Neste relatório constarão os títulos que foram vendidos, a quantidade, e sua margem em cima do valor total.
-
 SOBRE COMISSÃO E ACERTO
-O valor da sua comissão será de <%= '%.2f' % @partner_comision %>% em cima do faturamento total do que foi vendido e o dia do pagamento será sempre o primeiro dia útil do mês seguinte.
+O valor da sua comissão será de <%= '%.0f' % (@partner_comision.to_f * 100) %>% em cima do faturamento total do que foi vendido e o dia do pagamento será sempre o primeiro dia útil do mês seguinte.
 
 SOBRE A LISTA DE LIVROS
 Enviaremos uma lista todo início de mês via mail-MKT com as opções de livros que você poderá escolher como presente, independentemente se for para ajudar em sua divulgação ou para uso pessoal. A resposta deverá ser enviada para parceiros@hedra.com.br, com um e-mail intitulado LIVRO ESCOLHIDO PARA ENVIO | Maio [ou o mês a que estiver se referindo].
