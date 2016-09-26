@@ -166,7 +166,7 @@ class Book < ActiveRecord::Base
   end
 
   def related(limit: 16)
-    tags.map(&:books).flatten.uniq.delete_if{|x| x.id == id}.sort_by{|x| x.title}.first(limit)
+    RelatedBookQuery.find(self, limit)
   end
 
   def self.scan_isbn
