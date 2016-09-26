@@ -89,6 +89,27 @@ class Book < ActiveRecord::Base
       order("count(books.id) desc")
   end
 
+  scope :with_participations, -> {
+    includes(:participations => [:person, :role])
+  }
+
+  scope :find_by_category, -> (category_id) {
+    joins(:category).where("categories.id = ?", category_id)
+  }
+
+  scope :find_by_term, -> (term) {
+    where(
+      "books.title LIKE :search OR
+       books.isbn LIKE :search  OR
+       books.description LIKE :search OR
+       people.name LIKE :search", search: term
+    )
+  }
+
+  scope :default_order, -> {
+    order("books.publisher_id, books.position desc, books.id desc")
+  }
+
   # CarrierWave uploader
   mount_uploader                      :cover, CoverUploader
   mount_uploader                      :ebook, EbookUploader
@@ -144,6 +165,9 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def related(limit: 16)
+    tags.map(&:books).flatten.uniq.delete_if{|x| x.id == id}.sort_by{|x| x.title}.first(limit)
+  end
 
   def self.scan_isbn
     Book.all.each do |book|

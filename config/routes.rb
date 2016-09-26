@@ -22,7 +22,7 @@ HedraSite::Application.routes.draw do
 
   get  "/sobre"                  => "pages#about", :as => :about
   get  "/authors"                => "pages#authors", :as => :authors
-  get  "/author/:name"           => "pages#author", :name => /[^\/]*/
+  get  "/author/:name"           => "pages#author", :name => /[^\/]*/, :as => :author_page
 
   get  "/contato"                => "contact#new", :as => :contact
   post "/contato"                => "contact#create", :as => :contact

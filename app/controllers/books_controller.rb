@@ -1,38 +1,28 @@
 class BooksController < ApplicationController
-  before_filter :resource, :only => :show
 
   def show
-    @related_books ||= @book.tags.map(&:books).flatten.uniq.delete_if{|x| x.id == @book.id}.sort_by{|x| x.title}.first(16)
+    @book = Book.with_participations.find(params[:id]) rescue not_found
+    @related_books ||= @book.related
   end
 
   def by_category
     @category = Category.find(params[:id])
+    books_query = Book.with_participations.find_by_category(@category.id).default_order
 
-    books_query = Book.joins(:category).includes(:participations => [:person, :role]).where("categories.id = #{@category.id}").order("books.publisher_id, books.position desc, books.id desc")
-    books_count = books_query.count
-
-    @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
-    @books = books_query.paginate(:page => params[:page], :per_page => 10, :offset => (books_count >= 6 ? 4 : 0), :total_entries => (books_count >= 6 ? books_count - 4 : books_count))
-
+    @highlight = book_highlights(books_query)
+    @books = book_paginate(books_query, per_page: 20)
   end
 
   def search
-    term = "%#{params[:term]}%"
-    
-    # match the whole name
-    author = Person.where(name: params[:term]).first
-    page = author.site_page if author
+    author = Person.find_by_name(params[:term])
 
-    if author and page
-     redirect_to url_for(controller: "pages", action: "author", name: author.name)
-     return
+    if author && author.site_page
+      redirect_to author_page_path(name: author.name)
     end
+    books_query = Book.with_participations.find_by_term("%#{params[:term]}%").default_order.uniq
 
-    books_query = Book.includes(participations: [:role, :person]).where("books.title LIKE ? OR books.isbn LIKE ? OR books.description LIKE ? OR people.name LIKE ?", term, term, term, term).order("books.publisher_id, books.position desc, books.id desc").uniq
-    books_count = books_query.count
-
-    @highlight = books_query.first(4) if books_count >= 6 and (params[:page].nil? or params[:page] == "1")
-    @books = books_query.paginate(:page => params[:page], :per_page => 5, :offset => (books_count >= 6 ? 4 : 0), :total_entries => (books_count >= 6 ? books_count - 4 : books_count))
+    @highlight = book_highlights(books_query)
+    @books = book_paginate(books_query, per_page: 5)
   end
 
   def veneta_catalog
@@ -52,7 +42,24 @@ class BooksController < ApplicationController
 
   private
 
-  def resource
-    @book = Book.includes(:participations => [:person, :role]).find(params[:id]) rescue not_found
+  def book_highlights(books)
+    books.first(4) if books.count >= 6 && first_page
+  end
+
+  def book_paginate(book, per_page: 10)
+    book.paginate(
+      page: params[:page],
+      per_page: per_page,
+      offset: default_offset(book.count),
+      total_entries: (book.count >= 6 ? book.count - 4 : book.count)
+    )
+  end
+
+  def first_page
+    params[:page].nil? || params[:page] == "1"
+  end
+
+  def default_offset(counter)
+    (counter >= 6 ? 4 : 0)
   end
 end
