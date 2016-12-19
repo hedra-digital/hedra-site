@@ -55,8 +55,8 @@ ActiveAdmin.register Order do
       books_txt.puts("")
       books_txt.puts("#{order.user.name} [#{order.id}]")
       books_txt.puts("")
-      books_txt.puts("#{order.address.address}, #{order.address.number}, #{order.address.city}")
-      books_txt.puts("#{order.address.state}, #{order.address.zip_code}")
+      books_txt.puts("#{order.address.address}, #{order.address.number}, #{order.address.complement}")
+      books_txt.puts("#{order.address.city}, #{order.address.state}, #{order.address.zip_code}")
       books_txt.puts("")
 
       order.order_items.each do |item|
